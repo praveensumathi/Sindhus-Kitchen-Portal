@@ -1,5 +1,13 @@
+import HomePageSearch from "./HomePageSearch";
+import HomePageSlicker from "./HomePageSlicker";
+
 function Home() {
-  return <div>Home</div>;
+  return (
+    <>
+      <HomePageSlicker />
+      <HomePageSearch />
+    </>
+  );
 }
 
 export default Home;
