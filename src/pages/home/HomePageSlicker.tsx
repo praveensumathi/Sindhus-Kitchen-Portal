@@ -25,6 +25,7 @@ function HomePageSlicker() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
   };
   const matches = useMediaQuery("(max-width:900px)");
   return (
