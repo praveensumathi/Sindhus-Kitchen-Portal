@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useCommonGridLayoutStyle = makeStyles(() => ({
+export const useCommonGridStyle = makeStyles(() => ({
   commonGridStyle: {
     textAlign: "center",
     display: "flex",

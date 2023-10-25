@@ -14,12 +14,15 @@ import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import { useCommonGridStyle } from "../styles/FooterStyle";
 
 function Footer() {
+    const classes = useCommonGridStyle();
+
   return (
     <Container>
       <Grid container spacing={2}>
-        <Grid container item spacing={1} className={styles.centerGridStyle}>
+        <Grid container item spacing={1} className={classes.commonGridStyle}>
           <Grid item lg={3} xs={12}>
             <Box>
               <LocationOnIcon
@@ -32,7 +35,7 @@ function Footer() {
             </Box>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item lg={3.9} xs={12} sx={centerGridStyle}>
+          <Grid item lg={3.9} xs={12} className={classes.commonGridStyle}>
             <Box>
               <ChatBubbleIcon
                 sx={{ color: "rgb(112, 83, 68)" }}
@@ -112,7 +115,7 @@ function Footer() {
           <Grid container item xs={12}>
             <TextField label="Message" fullWidth variant="outlined" />
           </Grid>
-          <Grid container item sx={centerGridStyle}>
+          <Grid container item className={classes.commonGridStyle}>
             <Button variant="contained">Submit</Button>
           </Grid>
         </Grid>
