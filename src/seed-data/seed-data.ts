@@ -90,6 +90,29 @@ export const homeSearchMenusDropDown = [
   },
 ];
 
+export const snacksMenu = [
+  {
+    menu: "All",
+  },
+  {
+    menu: "murruku",
+  },
+  {
+    menu: "laddu",
+  },
+  {
+    menu: "Athirasam",
+  },
+  {
+    menu: "Chips",
+  },
+  {
+    menu: "Mysorepak",
+  },
+  {
+    menu: "poli",
+  },
+];
 export const cateringPage: ICateringPage[] = [
   {
     id: "1",
