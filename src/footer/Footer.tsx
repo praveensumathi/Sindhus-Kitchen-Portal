@@ -16,17 +16,11 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 
 function Footer() {
-  const centerGridStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  };
   return (
     <Container>
-      <Grid container spacing={2} xs={12}>
-        <Grid container item spacing={1} xs={12}>
-          <Grid item lg={3} xs={12} sx={centerGridStyle}>
+      <Grid container spacing={2}>
+        <Grid container item spacing={1} className={styles.centerGridStyle}>
+          <Grid item lg={3} xs={12}>
             <Box>
               <LocationOnIcon
                 sx={{ color: "rgb(112, 83, 68)" }}
@@ -84,7 +78,7 @@ function Footer() {
             </Box>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item lg={2} xs={12} sx={centerGridStyle}>
+          <Grid item lg={2} xs={12}>
             <Box>
               <PhoneIcon sx={{ color: "rgb(112, 83, 68)" }}></PhoneIcon>
               <Typography>Call us </Typography>
@@ -93,7 +87,7 @@ function Footer() {
             </Box>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item lg={3} xs={12} sx={centerGridStyle}>
+          <Grid item lg={3} xs={12}>
             <Box>
               <AccessTimeFilledIcon
                 sx={{ color: "rgb(112, 83, 68)" }}
