@@ -28,7 +28,9 @@ function Footer() {
         <Grid container item spacing={1} xs={12}>
           <Grid item lg={3} xs={12} sx={centerGridStyle}>
             <Box>
-              <LocationOnIcon />
+              <LocationOnIcon
+                sx={{ color: "rgb(112, 83, 68)" }}
+              ></LocationOnIcon>
               <Typography>Our Office Address</Typography>
               <Typography>
                 sdfghj3rtyui sdfghjerthj sdfgh sdfghj sdfgh
@@ -36,9 +38,11 @@ function Footer() {
             </Box>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item lg={3.8} xs={12} sx={centerGridStyle}>
+          <Grid item lg={3.9} xs={12} sx={centerGridStyle}>
             <Box>
-              <ChatBubbleIcon></ChatBubbleIcon>
+              <ChatBubbleIcon
+                sx={{ color: "rgb(112, 83, 68)" }}
+              ></ChatBubbleIcon>
               <Typography>General Enquiries</Typography>
               <Box
                 sx={{
@@ -51,18 +55,28 @@ function Footer() {
                 <Button
                   startIcon={<EmailIcon />}
                   variant="contained"
-                  color="primary"
                   fullWidth
-                  sx={{ lineHeight: 0, backgroundColor: "#f44336" }}
+                  sx={{
+                    lineHeight: 0,
+                    backgroundColor: "#f44336",
+                    "&:hover": {
+                      backgroundColor: "#f44336",
+                    },
+                  }}
                 >
                   chat on mail
                 </Button>
                 <Button
                   startIcon={<WhatsAppIcon />}
                   variant="contained"
-                  color="primary"
                   fullWidth
-                  sx={{ lineHeight: 0, backgroundColor: "#4caf50" }}
+                  sx={{
+                    lineHeight: 0,
+                    backgroundColor: "#4caf50",
+                    "&:hover": {
+                      backgroundColor: "#4caf50",
+                    },
+                  }}
                 >
                   chat on Whatsapp
                 </Button>
@@ -70,18 +84,20 @@ function Footer() {
             </Box>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item lg={3} xs={12} sx={centerGridStyle}>
+          <Grid item lg={2} xs={12} sx={centerGridStyle}>
             <Box>
-              <PhoneIcon></PhoneIcon>
+              <PhoneIcon sx={{ color: "rgb(112, 83, 68)" }}></PhoneIcon>
               <Typography>Call us </Typography>
               <Typography>1234567890</Typography>
               <Typography>1234567890</Typography>
             </Box>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item lg={2} xs={12} sx={centerGridStyle}>
+          <Grid item lg={3} xs={12} sx={centerGridStyle}>
             <Box>
-              <AccessTimeFilledIcon></AccessTimeFilledIcon>
+              <AccessTimeFilledIcon
+                sx={{ color: "rgb(112, 83, 68)" }}
+              ></AccessTimeFilledIcon>
               <Typography>Our Timing</Typography>
               <Typography>Mon-Sun:10.00AM - 7.00AM</Typography>
             </Box>
