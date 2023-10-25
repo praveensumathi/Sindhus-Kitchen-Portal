@@ -13,12 +13,12 @@ function CateringPage() {
     <Container sx={{ mt: 2 }}>
       <Box>
         <Typography
-          variant="h4"
           sx={{
             textAlign: "center",
             color: "white",
             backgroundColor: "orange",
             m: 2,
+            fontSize: "2rem",
           }}
         >
           NORTH INDIAN SPECIAL
@@ -30,7 +30,7 @@ function CateringPage() {
                 container
                 spacing={3}
                 sx={{
-                  borderBottom: "1px solid #ccc",
+                  borderBottom: "1px solid #FFD580",
                   padding: "15px",
                 }}
               >
@@ -59,7 +59,9 @@ function CateringPage() {
                       <Typography>{item.description}</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography>Serving sizes:</Typography>
+                      <Typography>
+                        <b>Serving sizes:</b>
+                      </Typography>
                       <Typography>{item.halfTray}</Typography>
                       <Typography>{item.mediumTray}</Typography>
                       <Typography>{item.fullTray}</Typography>
@@ -67,14 +69,11 @@ function CateringPage() {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} lg={3}>
-                  <Grid
-                    container
-                    item
-                    spacing={2}
-                    sx={{ display: "flex", justifyContent: "center" }}
-                  >
+                  <Grid container item spacing={2}>
                     <Grid item>
-                      <Typography>Serving Size(s):</Typography>
+                      <Typography>
+                        <b>Serving Size(s):</b>
+                      </Typography>
                       <FormGroup>
                         <FormControlLabel
                           control={<Checkbox />}
