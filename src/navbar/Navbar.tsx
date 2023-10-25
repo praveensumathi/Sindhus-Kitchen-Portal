@@ -155,7 +155,7 @@ function NavBar() {
                           backgroundColor:
                             location.pathname === menu.linkurl
                               ? "orange"
-                              : "white",
+                              : "none",
                           color:
                             location.pathname === menu.linkurl
                               ? "white"
