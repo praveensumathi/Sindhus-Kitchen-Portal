@@ -11,13 +11,13 @@ import {
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import SearchIcon from "@mui/icons-material/Search";
 import {
   homePageSlicker,
   homeSearchCityDropDown,
   homeSearchMenusDropDown,
-} from "../../seed-data/Seed-data";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import SearchIcon from "@mui/icons-material/Search";
+} from "../../seed-data/seed-data";
 
 function HomePageSlicker() {
   const settings = {
