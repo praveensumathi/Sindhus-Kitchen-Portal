@@ -65,7 +65,7 @@ function OurServices(props: Iprops) {
   return (
     <Container>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Typography variant="h2">Our Services</Typography>
+        <Typography variant="h3">Our Services</Typography>
       </Box>
       <Grid
         container
@@ -94,7 +94,7 @@ function OurServices(props: Iprops) {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="h4">{services.title}</Typography>
+                <Typography variant="h5">{services.title}</Typography>
                 <Typography variant="body1">{services.description}</Typography>
               </Box>
             </Grid>
