@@ -21,6 +21,11 @@ function Footer() {
 
   return (
     <Box sx={{ boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)" }}>
+      <Box sx={{ display: "flex", justifyContent: "center", padding: 2 }}>
+        <Typography variant="h5" fontWeight={600}>
+          Contact Us
+        </Typography>
+      </Box>
       <Container>
         <Grid container spacing={2}>
           <Grid container item spacing={1} className={classes.commonGridStyle}>
