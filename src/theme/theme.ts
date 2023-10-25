@@ -14,7 +14,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "catamaran-semiBold",
+    //fontFamily: "catamaran-semiBold",
     button: {
       textTransform: "none",
       fontWeight: 500,

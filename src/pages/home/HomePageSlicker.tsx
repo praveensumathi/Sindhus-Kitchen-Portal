@@ -30,7 +30,7 @@ function HomePageSlicker() {
   const matches = useMediaQuery("(max-width:900px)");
   return (
     <Box sx={{ position: "relative" }}>
-      <Slider {...settings}>
+     <Slider {...settings}>
         {homePageSlicker.map((content, index) => (
           <Box style={{ display: "flex", flexDirection: "column" }} key={index}>
             <Box className="page-banner" style={{ position: "relative" }}>
@@ -72,7 +72,7 @@ function HomePageSlicker() {
             </Box>
           </Box>
         ))}
-      </Slider>
+      </Slider> 
       <Box
         sx={{
           position: "absolute",

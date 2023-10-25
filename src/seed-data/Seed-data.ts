@@ -89,3 +89,27 @@ export const homeSearchMenusDropDown = [
     name: "Idiyappam",
   },
 ];
+
+export const snacksMenu = [
+  {
+    menu: "All",
+  },
+  {
+    menu: "murruku",
+  },
+  {
+    menu: "laddu",
+  },
+  {
+    menu: "Athirasam",
+  },
+  {
+    menu: "Chips",
+  },
+  {
+    menu: "Mysorepak",
+  },
+  {
+    menu: "poli",
+  },
+];
