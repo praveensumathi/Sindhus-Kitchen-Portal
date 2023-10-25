@@ -32,22 +32,30 @@ function Footer() {
                 <LocationOnIcon
                   sx={{ color: "rgb(112, 83, 68)" }}
                 ></LocationOnIcon>
-                <Typography>Our Office Address</Typography>
+                <Typography variant="h5" my={2}>
+                  Our Office Address
+                </Typography>
                 <Typography>
                   sdfghj3rtyui sdfghjerthj sdfgh sdfghj sdfgh
                 </Typography>
               </Box>
             </Grid>
-            <Divider orientation="vertical" flexItem />
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ background: "white" }}
+            />
             <Grid item lg={3.9} xs={12} className={classes.commonGridStyle}>
               <Box>
                 <ChatBubbleIcon
                   sx={{ color: "rgb(112, 83, 68)" }}
                 ></ChatBubbleIcon>
-                <Typography>General Enquiries</Typography>
+                <Typography variant="h5" my={2}>
+                  General Enquiries
+                </Typography>
                 <Box
                   sx={{
-                    gap: "9px",
+                    gap: 2,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -84,22 +92,34 @@ function Footer() {
                 </Box>
               </Box>
             </Grid>
-            <Divider orientation="vertical" flexItem />
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ background: "white" }}
+            />
             <Grid item lg={2} xs={12}>
               <Box>
                 <PhoneIcon sx={{ color: "rgb(112, 83, 68)" }}></PhoneIcon>
-                <Typography>Call us </Typography>
+                <Typography variant="h5" my={2}>
+                  Call us{" "}
+                </Typography>
                 <Typography>1234567890</Typography>
                 <Typography>1234567890</Typography>
               </Box>
             </Grid>
-            <Divider orientation="vertical" flexItem />
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ background: "white" }}
+            />
             <Grid item lg={3} xs={12}>
               <Box>
                 <AccessTimeFilledIcon
                   sx={{ color: "rgb(112, 83, 68)" }}
                 ></AccessTimeFilledIcon>
-                <Typography>Our Timing</Typography>
+                <Typography variant="h5" my={2}>
+                  Our Timing
+                </Typography>
                 <Typography>Mon-Sun:10.00AM - 7.00PM</Typography>
               </Box>
             </Grid>
