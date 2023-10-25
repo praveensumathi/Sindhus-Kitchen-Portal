@@ -26,7 +26,7 @@ function HomePageSlicker() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const matches = useMediaQuery("(max-width:600px)");
+  const matches = useMediaQuery("(max-width:900px)");
   return (
     <Box sx={{ position: "relative" }}>
       <Slider {...settings}>
