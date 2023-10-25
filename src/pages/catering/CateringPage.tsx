@@ -7,10 +7,12 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { cateringPage } from "../../seed-data/seed-data";
+import SearchBar from "./SearchBar";
 
 function CateringPage() {
   return (
-    <Container sx={{ mt: 2 }}>
+    <Container sx={{ mt: 3 }}>
+      <SearchBar />
       <Box>
         <Typography
           sx={{
