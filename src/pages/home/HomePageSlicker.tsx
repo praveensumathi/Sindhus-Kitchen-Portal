@@ -1,23 +1,26 @@
 import {
   Autocomplete,
   Box,
+  Container,
   Divider,
   Grid,
   IconButton,
   TextField,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  homePageSlicker,
-  homeSearchCityDropDown,
-  homeSearchMenusDropDown,
-} from "../../seed-data/seed-data";
+// import {
+//   homePageSlicker,
+//   homeSearchCityDropDown,
+//   homeSearchMenusDropDown,
+// } from "../../seed-data/seed-data";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { homePageSlicker, homeSearchCityDropDown, homeSearchMenusDropDown } from "../../seed-data/Seed-data";
 
 function HomePageSlicker() {
   const settings = {
@@ -27,32 +30,37 @@ function HomePageSlicker() {
     slidesToScroll: 1,
     autoplay: true,
   };
-  const matches = useMediaQuery("(max-width:900px)");
+  const theme = useTheme();
+  const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Box sx={{ position: "relative" }}>
      <Slider {...settings}>
         {homePageSlicker.map((content, index) => (
           <Box style={{ display: "flex", flexDirection: "column" }} key={index}>
             <Box className="page-banner" style={{ position: "relative" }}>
-              <Box
-                sx={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
               <img
                 src={content.image}
                 alt={content.heading}
-                height={matches ? "400px" : "500px"}
+                height={isBelowMediumSize ? "300px" : "500px"}
                 width="100%"
-                style={{ zIndex: 1 }}
                 className="home-slicker-image"
               />
               <Box
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  background: "rgba(0, 0, 0, 0.5)", 
+                  zIndex: 1,
+                }}
+              />
+              <Container
                 sx={{
                   position: "absolute",
-                  top: "40%",
+                  top: isBelowMediumSize ? "30%" : "40%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   textAlign: "center",
@@ -61,14 +69,29 @@ function HomePageSlicker() {
                   width: "100%",
                 }}
               >
-                <Typography sx={{ fontWeight: "bolder", fontSize: "40px" }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontWeight: "bolder",
+                    fontSize: isBelowMediumSize ? "45px" : "70px",
+                  }}
+                >
                   {content.heading}
                 </Typography>
-                <Typography sx={{ fontWeight: "bolder", fontSize: "20px" }}>
+                <Typography
+                  sx={{
+                    fontWeight: "bolder",
+                    fontSize: isBelowMediumSize ? "20px" : "25px",
+                  }}
+                >
                   {content.subHeading}
                 </Typography>
-                <Typography>{content.content}</Typography>
-              </Box>
+                <Typography
+                  sx={{ fontSize: isBelowMediumSize ? "18px" : "20px" }}
+                >
+                  {content.content}
+                </Typography>
+              </Container>
             </Box>
           </Box>
         ))}
@@ -76,7 +99,7 @@ function HomePageSlicker() {
       <Box
         sx={{
           position: "absolute",
-          top: "70%",
+          top: isBelowMediumSize ? "60%" : "70%",
           width: "100%",
           display: "flex",
           justifyContent: "center",
@@ -88,7 +111,7 @@ function HomePageSlicker() {
             p: "2px 4px",
             display: "flex",
             alignItems: "center",
-            width: "70%",
+            width: isBelowMediumSize ? "70%" : "50%",
           }}
         >
           <Grid
@@ -99,10 +122,12 @@ function HomePageSlicker() {
               display: "flex",
               alignItems: "center",
               backgroundColor: "#fff",
+              borderRadius: isBelowMediumSize ? "10px" : "10px 0 0 10px",
+              height: "50px",
             }}
           >
             <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <LocationOnIcon sx={{ color: "orange" }} />
+              <RestaurantIcon sx={{ color: "orange" }} />
             </IconButton>
             <Autocomplete
               disableClearable
@@ -111,11 +136,12 @@ function HomePageSlicker() {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  placeholder="Cities"
+                  placeholder="Menus"
                   InputProps={{
                     ...params.InputProps,
                     type: "search",
                     disableUnderline: true,
+                    // sx: { padding: "15px" },
                   }}
                   fullWidth
                   variant="standard"
@@ -131,14 +157,21 @@ function HomePageSlicker() {
               display: "flex",
               alignItems: "center",
               backgroundColor: "#fff",
+              marginTop: isBelowMediumSize ? "5px" : 0,
+              borderRadius: isBelowMediumSize ? "10px" : "0 10px 10px 0",
+              height: "50px",
             }}
           >
             <Divider
-              sx={{ height: 28, m: 0.5, display: matches ? "none" : "block" }}
+              sx={{
+                height: 28,
+                m: 0.5,
+                display: isBelowMediumSize ? "none" : "block",
+              }}
               orientation="vertical"
             />
             <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon sx={{ color: "#000" }} />
+              <SearchIcon sx={{ color: "#ffa500" }} />
             </IconButton>
             <Autocomplete
               freeSolo

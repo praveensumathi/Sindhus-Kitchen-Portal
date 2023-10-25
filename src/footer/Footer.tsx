@@ -2,32 +2,30 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import {
-  Button,
-  Container,
-  Divider,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Container, Divider, Typography } from "@mui/material";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { useCommonGridStyle } from "../styles/FooterStyle";
-
+import CssTextField from "../common/component/CommonTextfeild";
 function Footer() {
   const classes = useCommonGridStyle();
 
   return (
-    <Box sx={{ boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)" }}>
-      <Box sx={{ display: "flex", justifyContent: "center", padding: 2  }}>
-        <Typography variant="h5" fontWeight={600} >
+    <Box
+      sx={{ boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)" }}
+      className={`${classes.footerContainer} ${classes.innerBox}`}
+    >
+      <Box className={classes.overlay}></Box>
+      <Box sx={{ display: "flex", justifyContent: "center", py: 5 }}>
+        <Typography variant="h4" fontWeight={600}>
           Contact Us
         </Typography>
       </Box>
       <Container>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{ gap: 3 }}>
           <Grid container item spacing={1} className={classes.commonGridStyle}>
             <Grid item lg={3} xs={12}>
               <Box>
@@ -106,20 +104,32 @@ function Footer() {
               </Box>
             </Grid>
           </Grid>
+
           <Grid container item spacing={3} xs={12}>
             <Grid item lg={4} xs={12}>
-              <TextField label="Full Name" fullWidth variant="outlined" />
+              <CssTextField
+                sx={{
+                  color: "white !important",
+                }}
+                label="Full Name"
+                fullWidth
+                variant="outlined"
+              />
             </Grid>
             <Grid item lg={4} xs={12}>
-              <TextField label="Email ID" fullWidth variant="outlined" />
+              <CssTextField label="Email ID" fullWidth variant="outlined" />
             </Grid>
             <Grid item lg={4} xs={12}>
-              <TextField label="Mobile Number" fullWidth variant="outlined" />
+              <CssTextField
+                label="Mobile Number"
+                fullWidth
+                variant="outlined"
+              />
             </Grid>
           </Grid>
           <Grid container item spacing={2} xs={12}>
             <Grid container item xs={12}>
-              <TextField label="Message" fullWidth variant="outlined" />
+              <CssTextField label="Message" fullWidth variant="outlined" />
             </Grid>
             <Grid container item className={classes.commonGridStyle}>
               <Button variant="contained">Submit</Button>
