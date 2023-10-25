@@ -22,6 +22,6 @@
 
     "noImplicitAny": false
   },
-  "include": ["src"],
+  "include": ["src", "src/seed-data/seed-data.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
