@@ -21,8 +21,8 @@ function Footer() {
 
   return (
     <Box sx={{ boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)" }}>
-      <Box sx={{ display: "flex", justifyContent: "center", padding: 2 }}>
-        <Typography variant="h5" fontWeight={600}>
+      <Box sx={{ display: "flex", justifyContent: "center", padding: 2  }}>
+        <Typography variant="h5" fontWeight={600} >
           Contact Us
         </Typography>
       </Box>
