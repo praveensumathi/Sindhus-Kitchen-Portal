@@ -63,45 +63,52 @@ function OurServices(props: Iprops) {
   const classes = useOurServicesStyles();
 
   return (
-    <Container>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Typography variant="h3">Our Services</Typography>
-      </Box>
-      <Grid
-        container
-        xs={12}
-        p={0}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          gap: isDesktop ? 16 : 0,
-        }}
-      >
-        {OurServices.map((services, index) => {
-          const matchedIcon = OurServiceslist.find(
-            (icon) => icon.id === services.iconkey
-          );
-          return (
-            <Grid item key={index}>
-              <Box className={classes.boxStyle}>
-                {matchedIcon && matchedIcon.icon}
-              </Box>
-              <Box
-                sx={{
-                  paddingTop: 13,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="h5">{services.title}</Typography>
-                <Typography variant="body1">{services.description}</Typography>
-              </Box>
-            </Grid>
-          );
-        })}
-      </Grid>
-    </Container>
+   
+      <Container>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography variant="h4" fontWeight={600}>
+            Our Services
+          </Typography>
+        </Box>
+
+        <Grid
+          container
+          xs={12}
+          p={0}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: isDesktop ? 16 : 0,
+          }}
+        >
+          {OurServices.map((services, index) => {
+            const matchedIcon = OurServiceslist.find(
+              (icon) => icon.id === services.iconkey
+            );
+            return (
+              <Grid item key={index}>
+                <Box className={classes.boxStyle}>
+                  {matchedIcon && matchedIcon.icon}
+                </Box>
+                <Box
+                  sx={{
+                    paddingTop: 13,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography variant="h5">{services.title}</Typography>
+                  <Typography variant="body1">
+                    {services.description}
+                  </Typography>
+                </Box>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Container>
+ 
   );
 }
 export default OurServices;

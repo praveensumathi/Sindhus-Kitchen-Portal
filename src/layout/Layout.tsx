@@ -12,7 +12,7 @@ function Layout() {
       <Box>
         <Outlet />
       </Box>
-      <Box mt={4}>
+      <Box>
         <Footer />
       </Box>
     </>

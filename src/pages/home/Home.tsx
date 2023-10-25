@@ -1,14 +1,16 @@
-import Container from "@mui/material/Container";
 import OurServices from "./OurServices";
-import { ourServicesData } from "../../seed-data/seed-data";
 import HomePageSlicker from "./HomePageSlicker";
+import { ourServicesData } from "../../seed-data/seed-data";
+import { Box } from "@mui/material";
+
 function Home() {
   return (
     <>
-      <HomePageSlicker/>
-    <Container>
-      <OurServices OurServices={ourServicesData} />
-    </Container></>
+      <HomePageSlicker />
+      <Box sx={{ backgroundColor: "#e6e7ee", py: 4 }}>
+        <OurServices OurServices={ourServicesData} />
+      </Box>
+    </>
   );
 }
 
