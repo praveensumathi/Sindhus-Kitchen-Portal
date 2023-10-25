@@ -13,13 +13,14 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  homePageSlicker,
-  homeSearchCityDropDown,
-  homeSearchMenusDropDown,
-} from "../../seed-data/seed-data";
+// import {
+//   homePageSlicker,
+//   homeSearchCityDropDown,
+//   homeSearchMenusDropDown,
+// } from "../../seed-data/seed-data";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { homePageSlicker, homeSearchCityDropDown, homeSearchMenusDropDown } from "../../seed-data/Seed-data";
 
 function HomePageSlicker() {
   const settings = {
@@ -34,7 +35,7 @@ function HomePageSlicker() {
 
   return (
     <Box sx={{ position: "relative" }}>
-      <Slider {...settings}>
+     <Slider {...settings}>
         {homePageSlicker.map((content, index) => (
           <Box style={{ display: "flex", flexDirection: "column" }} key={index}>
             <Box className="page-banner" style={{ position: "relative" }}>
@@ -94,8 +95,7 @@ function HomePageSlicker() {
             </Box>
           </Box>
         ))}
-      </Slider>
-
+      </Slider> 
       <Box
         sx={{
           position: "absolute",
