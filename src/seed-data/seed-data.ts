@@ -55,11 +55,11 @@ export const homePageSlicker = [
 ];
 
 export const homeSearchCityDropDown = [
-  "Chennai",
-  "Coimbatore",
-  "Salem",
-  "Madurai",
-  "Trichy",
+  "Idly",
+  "Dosa",
+  "Pongal",
+  "Vadai",
+  "Idiyappam",
 ];
 
 export const homeSearchMenusDropDown = [
