@@ -111,7 +111,7 @@ function NavBar() {
                   alt="Logo"
                   style={{
                     height: "auto",
-                    width: isBelowSMScreen ? "4rem" : "6rem",
+                    width: isBelowSMScreen ? "3rem" : "4rem",
                     borderRadius: "100%",
                     marginTop: "5px",
                   }}
