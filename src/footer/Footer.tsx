@@ -17,110 +17,112 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { useCommonGridStyle } from "../styles/FooterStyle";
 
 function Footer() {
-    const classes = useCommonGridStyle();
+  const classes = useCommonGridStyle();
 
   return (
-    <Container>
-      <Grid container spacing={2}>
-        <Grid container item spacing={1} className={classes.commonGridStyle}>
-          <Grid item lg={3} xs={12}>
-            <Box>
-              <LocationOnIcon
-                sx={{ color: "rgb(112, 83, 68)" }}
-              ></LocationOnIcon>
-              <Typography>Our Office Address</Typography>
-              <Typography>
-                sdfghj3rtyui sdfghjerthj sdfgh sdfghj sdfgh
-              </Typography>
-            </Box>
-          </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid item lg={3.9} xs={12} className={classes.commonGridStyle}>
-            <Box>
-              <ChatBubbleIcon
-                sx={{ color: "rgb(112, 83, 68)" }}
-              ></ChatBubbleIcon>
-              <Typography>General Enquiries</Typography>
-              <Box
-                sx={{
-                  gap: "9px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Button
-                  startIcon={<EmailIcon />}
-                  variant="contained"
-                  fullWidth
-                  sx={{
-                    lineHeight: 0,
-                    backgroundColor: "#f44336",
-                    "&:hover": {
-                      backgroundColor: "#f44336",
-                    },
-                  }}
-                >
-                  chat on mail
-                </Button>
-                <Button
-                  startIcon={<WhatsAppIcon />}
-                  variant="contained"
-                  fullWidth
-                  sx={{
-                    lineHeight: 0,
-                    backgroundColor: "#4caf50",
-                    "&:hover": {
-                      backgroundColor: "#4caf50",
-                    },
-                  }}
-                >
-                  chat on Whatsapp
-                </Button>
+    <Box sx={{ boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)" }}>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid container item spacing={1} className={classes.commonGridStyle}>
+            <Grid item lg={3} xs={12}>
+              <Box>
+                <LocationOnIcon
+                  sx={{ color: "rgb(112, 83, 68)" }}
+                ></LocationOnIcon>
+                <Typography>Our Office Address</Typography>
+                <Typography>
+                  sdfghj3rtyui sdfghjerthj sdfgh sdfghj sdfgh
+                </Typography>
               </Box>
-            </Box>
+            </Grid>
+            <Divider orientation="vertical" flexItem />
+            <Grid item lg={3.9} xs={12} className={classes.commonGridStyle}>
+              <Box>
+                <ChatBubbleIcon
+                  sx={{ color: "rgb(112, 83, 68)" }}
+                ></ChatBubbleIcon>
+                <Typography>General Enquiries</Typography>
+                <Box
+                  sx={{
+                    gap: "9px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button
+                    startIcon={<EmailIcon />}
+                    variant="contained"
+                    fullWidth
+                    sx={{
+                      lineHeight: 0,
+                      backgroundColor: "#f44336",
+                      "&:hover": {
+                        backgroundColor: "#f44336",
+                      },
+                    }}
+                  >
+                    chat on mail
+                  </Button>
+                  <Button
+                    startIcon={<WhatsAppIcon />}
+                    variant="contained"
+                    fullWidth
+                    sx={{
+                      lineHeight: 0,
+                      backgroundColor: "#4caf50",
+                      "&:hover": {
+                        backgroundColor: "#4caf50",
+                      },
+                    }}
+                  >
+                    chat on Whatsapp
+                  </Button>
+                </Box>
+              </Box>
+            </Grid>
+            <Divider orientation="vertical" flexItem />
+            <Grid item lg={2} xs={12}>
+              <Box>
+                <PhoneIcon sx={{ color: "rgb(112, 83, 68)" }}></PhoneIcon>
+                <Typography>Call us </Typography>
+                <Typography>1234567890</Typography>
+                <Typography>1234567890</Typography>
+              </Box>
+            </Grid>
+            <Divider orientation="vertical" flexItem />
+            <Grid item lg={3} xs={12}>
+              <Box>
+                <AccessTimeFilledIcon
+                  sx={{ color: "rgb(112, 83, 68)" }}
+                ></AccessTimeFilledIcon>
+                <Typography>Our Timing</Typography>
+                <Typography>Mon-Sun:10.00AM - 7.00PM</Typography>
+              </Box>
+            </Grid>
           </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid item lg={2} xs={12}>
-            <Box>
-              <PhoneIcon sx={{ color: "rgb(112, 83, 68)" }}></PhoneIcon>
-              <Typography>Call us </Typography>
-              <Typography>1234567890</Typography>
-              <Typography>1234567890</Typography>
-            </Box>
+          <Grid container item spacing={3} xs={12}>
+            <Grid item lg={4} xs={12}>
+              <TextField label="Full Name" fullWidth variant="outlined" />
+            </Grid>
+            <Grid item lg={4} xs={12}>
+              <TextField label="Email ID" fullWidth variant="outlined" />
+            </Grid>
+            <Grid item lg={4} xs={12}>
+              <TextField label="Mobile Number" fullWidth variant="outlined" />
+            </Grid>
           </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid item lg={3} xs={12}>
-            <Box>
-              <AccessTimeFilledIcon
-                sx={{ color: "rgb(112, 83, 68)" }}
-              ></AccessTimeFilledIcon>
-              <Typography>Our Timing</Typography>
-              <Typography>Mon-Sun:10.00AM - 7.00AM</Typography>
-            </Box>
+          <Grid container item spacing={2} xs={12}>
+            <Grid container item xs={12}>
+              <TextField label="Message" fullWidth variant="outlined" />
+            </Grid>
+            <Grid container item className={classes.commonGridStyle}>
+              <Button variant="contained">Submit</Button>
+            </Grid>
           </Grid>
         </Grid>
-        <Grid container item spacing={3} xs={12}>
-          <Grid item lg={4} xs={12}>
-            <TextField label="Full Name" fullWidth variant="outlined" />
-          </Grid>
-          <Grid item lg={4} xs={12}>
-            <TextField label="Email ID" fullWidth variant="outlined" />
-          </Grid>
-          <Grid item lg={4} xs={12}>
-            <TextField label="Mobile Number" fullWidth variant="outlined" />
-          </Grid>
-        </Grid>
-        <Grid container item spacing={2} xs={12}>
-          <Grid container item xs={12}>
-            <TextField label="Message" fullWidth variant="outlined" />
-          </Grid>
-          <Grid container item className={classes.commonGridStyle}>
-            <Button variant="contained">Submit</Button>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Box>
   );
 }
 
