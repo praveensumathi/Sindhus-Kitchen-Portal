@@ -27,7 +27,7 @@ function SearchBar() {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs>
+      <Grid item xs={12} lg={4}>
         <Autocomplete
           id="category-autocomplete"
           options={categoryOptions}
@@ -37,7 +37,7 @@ function SearchBar() {
           )}
         />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} lg={6}>
         <Autocomplete
           id="category-autocomplete"
           options={foodOptions}
@@ -47,7 +47,12 @@ function SearchBar() {
           )}
         />
       </Grid>
-      <Grid item xs sx={{ display: "flex" }}>
+      <Grid
+        item
+        xs={12}
+        lg={2}
+        sx={{ display: "flex", justifyContent: "space-around" }}
+      >
         <Button variant="outlined">Search</Button>
         <Button variant="outlined">Clear</Button>
       </Grid>
