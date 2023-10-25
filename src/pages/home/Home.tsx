@@ -1,11 +1,14 @@
-import React from "react";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
+import OurServices from "./OurServices";
+import { ourServicesData } from "../../seed-data/seed-data";
+import HomePageSlicker from "./HomePageSlicker";
 function Home() {
   return (
+    <>
+      <HomePageSlicker/>
     <Container>
-      <Box>Home</Box>
-    </Container>
+      <OurServices OurServices={ourServicesData} />
+    </Container></>
   );
 }
 
