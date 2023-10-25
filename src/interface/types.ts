@@ -1,0 +1,9 @@
+export interface ICateringPage {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  halfTray: string;
+  mediumTray: string;
+  fullTray: string;
+}
