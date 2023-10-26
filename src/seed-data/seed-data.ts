@@ -1,5 +1,9 @@
 import { OurServicesIconEnums } from "../enums/OurServicesIconEnum";
-import { ICateringPage, IOurServices } from "../interface/types";
+import {
+  ICateringPage,
+  IOurServices,
+  IProductCardList,
+} from "../interface/types";
 
 export const ourServicesData: IOurServices[] = [
   {
@@ -157,5 +161,15 @@ export const cateringPage: ICateringPage[] = [
     halfTray: "HalfTray - can eat 10 members",
     mediumTray: "MediumTray - can eat 20 members",
     fullTray: "FullTray - can eat 30 members",
+  },
+];
+
+export const productCardList: IProductCardList[] = [
+  {
+    id: 1,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
   },
 ];

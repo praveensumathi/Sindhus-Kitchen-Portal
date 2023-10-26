@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { paths } from "../routes/path";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
@@ -81,6 +82,10 @@ function NavBar() {
     };
   }, []);
 
+  const handleNavigateToHome = () => {
+    navigate(paths.HOME);
+  };
+
   return (
     <Box>
       <CssBaseline />
@@ -97,7 +102,7 @@ function NavBar() {
         component="nav"
       >
         <Container maxWidth={false}>
-          <Toolbar sx={{ p: 0 }}>
+          <Toolbar sx={{ p: 0, height: "35px" }}>
             <Box
               sx={{
                 display: "flex",
@@ -105,19 +110,22 @@ function NavBar() {
                 flexGrow: 1,
               }}
             >
-              <Link to={paths.HOME} style={{ textDecoration: "none" }}>
-                <img
-                  src="src/assets/sindhus-Logo.jpg"
-                  alt="Logo"
-                  style={{
-                    height: "auto",
-                    width: isBelowSMScreen ? "3rem" : "4rem",
-                    borderRadius: "100%",
-                    marginTop: "5px",
-                  }}
-                  loading="lazy"
-                />
-              </Link>
+              <img
+                src="assets\sindhus-logo.png"
+                alt="Logo"
+                style={{
+                  height: "auto",
+                  width: isBelowSMScreen ? "3rem" : "4rem",
+                  marginTop: "10px",
+                }}
+                loading="lazy"
+                onClick={handleNavigateToHome}
+              />
+              <Typography
+                sx={{ fontWeight: 500, color: "red", fontSize: "25px" }}
+              >
+                sindhu's
+              </Typography>
             </Box>
             {isMobile ? (
               <IconButton

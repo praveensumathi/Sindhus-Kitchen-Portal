@@ -13,3 +13,10 @@ export interface IOurServices {
   title: string;
   description: string;
 }
+export interface IProductCardList {
+  id: number;
+  title: string;
+  mrpprice: number;
+  offerprice: number;
+  imageUrl: string;
+}
