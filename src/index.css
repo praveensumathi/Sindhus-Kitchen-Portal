@@ -40,6 +40,19 @@ body {
   -moz-filter: brightness(73%);
 }
 
-.slick-prev:before, .slick-next:before {
-  color:black;
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+.category-slider {
+  display: flex;
+  align-items: center;
+}
+
+.custom-prev-arrow,
+.custom-next-arrow {
+  background-color: rgba(211, 204, 204, 0.5);
+  padding: 5px 10px;
+  border-radius: 50%;
 }
