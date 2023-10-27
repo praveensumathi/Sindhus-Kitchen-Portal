@@ -175,7 +175,12 @@ export const menuDetailPage = {
   price: "20.00",
   description:
     "Adhirasam is a traditional sweet dish which will be done for most of the festivals.",
-  servePerPlate: "5",
+  netWeight: "5",
+  servingSizes: [
+    { tray: "HalfTray", members: " Can eat 10 members" },
+    { tray: "MediumTray", members: " Can eat 20 members" },
+    { tray: "FullTray", members: " Can eat 30 members" },
+  ],
 };
 
 export const productCardList: IProductCardList[] = [

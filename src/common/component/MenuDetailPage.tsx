@@ -1,6 +1,6 @@
 import {
   Box,
-  Button,
+  // Button,
   Container,
   Divider,
   Grid,
@@ -31,16 +31,22 @@ function MenuDetailPage() {
     slidesToScroll: 1,
     arrows: true,
     // autoplay: true,
-    prevArrow: <CustomPrevArrow />, 
+    prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
   };
 
   const theme = useTheme();
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <Container>
-      <Grid container mt={4}>
-        <Grid item md={6} xs={12}>
+    <Container
+      sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+    >
+      <Grid
+        container
+        mt={4}
+        sx={{ maxWidth: isBelowMediumSize ? "100%" : "80%" }}
+      >
+        <Grid item md={5} xs={12}>
           <Slider {...settings}>
             {menuDetailPage.image.map((image, index) => (
               <Box
@@ -60,7 +66,7 @@ function MenuDetailPage() {
         </Grid>
         <Grid
           item
-          md={6}
+          md={7}
           xs={12}
           sx={{ display: "flex", alignItems: "center" }}
         >
@@ -68,8 +74,17 @@ function MenuDetailPage() {
             <Typography sx={{ fontWeight: "bolder", fontSize: "34px" }}>
               {menuDetailPage.title}
             </Typography>
-            <Typography sx={{ fontWeight: "500", fontSize: "20px" }}>
-              $ {menuDetailPage.price}
+            <Typography
+              sx={{
+                fontWeight: "500",
+                fontSize: "20px",
+                margin: "5px 0",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              $ {menuDetailPage.price} &nbsp;
+              <span style={{ fontSize: "12px" }}>(Per Piece / Plate)</span>
             </Typography>
             <Typography>
               By &nbsp;
@@ -81,21 +96,33 @@ function MenuDetailPage() {
               {menuDetailPage.description}
             </Typography>
             <Divider sx={{ margin: "10px 0" }} />
-            <Typography sx={{ fontSize: "15px", fontWeight: "500" }}>
-              Servings per plate
+            <Typography
+              sx={{ fontSize: "15px", fontWeight: "500", margin: "5px 0" }}
+            >
+              Net Weight
             </Typography>
             <Box
               sx={{
                 border: "1.5px solid",
-                padding: "5px",
                 borderRadius: "5px",
-                maxWidth: "100px",
+                maxWidth: "70px",
                 textAlign: "center",
               }}
             >
-              {menuDetailPage.servePerPlate} Persons
+              {menuDetailPage.netWeight} lb
             </Box>
-            <Box>
+            <Typography
+              sx={{ fontSize: "15px", fontWeight: "500", margin: "5px 0" }}
+            >
+              Serving Sizes
+            </Typography>
+            {menuDetailPage.servingSizes.map((size, index) => (
+              <Typography key={index} sx={{ fontSize: "small" }}>
+                {size.tray} -
+                <span style={{ fontWeight: "bolder" }}>{size.members}</span>
+              </Typography>
+            ))}
+            {/* <Box>
               <Button
                 variant="contained"
                 sx={{
@@ -110,7 +137,7 @@ function MenuDetailPage() {
               <Button variant="contained" fullWidth color="secondary">
                 BUY IT NOW
               </Button>
-            </Box>
+            </Box> */}
           </Container>
         </Grid>
       </Grid>
