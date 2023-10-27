@@ -1,5 +1,9 @@
 import { OurServicesIconEnums } from "../enums/OurServicesIconEnum";
-import { ICateringPage, IOurServices } from "../interface/types";
+import {
+  ICateringPage,
+  IOurServices,
+  IProductCardList,
+} from "../interface/types";
 
 export const ourServicesData: IOurServices[] = [
   {
@@ -173,3 +177,13 @@ export const menuDetailPage = {
     "Adhirasam is a traditional sweet dish which will be done for most of the festivals.",
   servePerPlate: "5",
 };
+
+export const productCardList: IProductCardList[] = [
+  {
+    id: 1,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
+  },
+];
