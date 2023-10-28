@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import SnacksPage from "./pages/snacks/SnacksPage";
 import CateringPage from "./pages/catering/CateringPage";
 import DiningOutPage from "./pages/diningout/DiningOutPage";
+import MenuDetailPage from "./common/component/MenuDetailPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path={paths.SNACKSPAGE} element={<SnacksPage />} />
             <Route path={paths.CATERINGPAGE} element={<CateringPage />} />
             <Route path={paths.DININGOUT} element={<DiningOutPage />} />
+            <Route path={paths.MENUDETAIL} element={<MenuDetailPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
