@@ -40,6 +40,7 @@ body {
   -moz-filter: brightness(73%);
 }
 
-.slick-prev:before, .slick-next:before {
-  color:black;
+.slick-prev:before,
+.slick-next:before {
+  color: black;
 }

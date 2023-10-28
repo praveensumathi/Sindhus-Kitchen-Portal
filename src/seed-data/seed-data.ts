@@ -99,22 +99,10 @@ export const snacksMenu = [
     menu: "All",
   },
   {
-    menu: "murruku",
+    menu: "Sweets",
   },
   {
-    menu: "laddu",
-  },
-  {
-    menu: "Athirasam",
-  },
-  {
-    menu: "Chips",
-  },
-  {
-    menu: "Mysorepak",
-  },
-  {
-    menu: "poli",
+    menu: "Savouries",
   },
 ];
 export const cateringPage: ICateringPage[] = [
@@ -167,6 +155,27 @@ export const cateringPage: ICateringPage[] = [
 export const productCardList: IProductCardList[] = [
   {
     id: 1,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
+  },
+  {
+    id: 2,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
+  },
+  {
+    id: 3,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
+  },
+  {
+    id: 4,
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
