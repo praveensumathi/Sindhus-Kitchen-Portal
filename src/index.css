@@ -40,6 +40,10 @@ body {
   -moz-filter: brightness(73%);
 }
 
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
 /* Custom slicker arrow styling */
 .custom-prev-arrow,
 .custom-next-arrow {
@@ -61,3 +65,5 @@ body {
 .custom-next-arrow {
   right: 10px;
 }
+
+
