@@ -20,7 +20,7 @@ function SnacksPage() {
             top: 0,
             left: 0,
             zIndex: -1,
-            transform: "rotate(180deg)"
+            transform: "rotate(180deg)",
           }}
         >
           <g
@@ -66,7 +66,9 @@ function SnacksPage() {
                 height: "150px",
               }}
             >
-              <Typography variant="h4" sx={{ color:"white",fontWeight:600}}>Snacks</Typography>
+              <Typography variant="h4" sx={{ color: "white", fontWeight: 600 }}>
+                Snacks
+              </Typography>
             </Grid>
             <Grid
               item

@@ -40,7 +40,7 @@ function SnacksMenuItem() {
     <Container>
       <Slider {...settings}>
         {snacksMenu.map((menuItems, index) => (
-          <Box key={index} sx={{display:"flex"}}>
+          <Box key={index} sx={{ display: "flex" }}>
             <Button
               sx={{
                 border: "1px dashed",
