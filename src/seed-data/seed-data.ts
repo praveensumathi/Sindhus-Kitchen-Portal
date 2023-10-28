@@ -152,6 +152,25 @@ export const cateringPage: ICateringPage[] = [
   },
 ];
 
+export const menuDetailPage = {
+  image: [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qcxW-LZyWSOEATmYJVrZbjw7Xli7tZ5bOA&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsTZxbbmPwLA4Pr-7joWZNVBstmb82VW8vaw&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFuVc7Vyltiev_CTlWPE4RCD4PIvFmQFyCkQ&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSEFXVzvOnwu_X4q1SQsODeLq8UNftaVCLhw&usqp=CAU",
+  ],
+  title: "Adhirasam",
+  price: "20.00",
+  description:
+    "Adhirasam is a traditional sweet dish which will be done for most of the festivals.",
+  netWeight: "5",
+  servingSizes: [
+    { tray: "HalfTray", members: " Can eat 10 members" },
+    { tray: "MediumTray", members: " Can eat 20 members" },
+    { tray: "FullTray", members: " Can eat 30 members" },
+  ],
+};
+
 export const productCardList: IProductCardList[] = [
   {
     id: 1,
