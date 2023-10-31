@@ -1,12 +1,12 @@
 export interface ICateringPage {
   id: string;
+  menuTitle?: string;
   title: string;
   description: string;
   image: string;
-  halfTray: string;
-  mediumTray: string;
-  fullTray: string;
+  trayItems: { name: string; price: string }[];
 }
+
 export interface IOurServices {
   id: number;
   iconkey: string;
