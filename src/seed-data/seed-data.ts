@@ -117,45 +117,54 @@ export const cateringPage: ICateringPage[] = [
   {
     id: "1",
     title: "Chicken briyani",
-    description:
-      "Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat",
+    description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
+      
+    Serving sizes:
+    HalfTray - can eat 10 members,
+    MediumTray - can eat 20 members,
+    FullTray - can eat 30 members
+    `,
 
     image: "/assets/food-images-2.jpg",
-    halfTray: "HalfTray - can eat 10 members",
-    mediumTray: "MediumTray - can eat 20 members",
-    fullTray: "FullTray - can eat 30 members",
+    trayItems: ["HalfTray", "MediumTray", "FullTray"],
   },
   {
     id: "2",
     title: "Veg briyani",
-    description:
-      "Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat",
-
+    description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
+      
+    Serving sizes:
+    HalfTray - can eat 10 members,
+    MediumTray - can eat 20 members,
+    FullTray - can eat 30 members
+    `,
     image: "/assets/food-img.jpg",
-    halfTray: "HalfTray - can eat 10 members",
-    mediumTray: "MediumTray - can eat 20 members",
-    fullTray: "FullTray - can eat 30 members",
+    trayItems: ["HalfTray", "MediumTray", "FullTray"],
   },
   {
     id: "3",
     title: "Mutton briyani",
-    description:
-      "Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat",
-
+    description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
+      
+    Serving sizes:
+    HalfTray - can eat 10 members,
+    MediumTray - can eat 20 members,
+    FullTray - can eat 30 members
+    `,
     image: "/assets/food-img3.jpg",
-    halfTray: "HalfTray - can eat 10 members",
-    mediumTray: "MediumTray - can eat 20 members",
-    fullTray: "FullTray - can eat 30 members",
+    trayItems: ["HalfTray", "MediumTray", "FullTray"],
   },
   {
     id: "4",
     title: "Fish Finger",
-    description:
-      "Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat",
-
+    description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
+      
+    Serving sizes:
+    HalfTray - can eat 10 members,
+    MediumTray - can eat 20 members,
+    FullTray - can eat 30 members
+    `,
     image: "/assets/food-img.jpg",
-    halfTray: "HalfTray - can eat 10 members",
-    mediumTray: "MediumTray - can eat 20 members",
-    fullTray: "FullTray - can eat 30 members",
+    trayItems: ["HalfTray", "MediumTray", "FullTray"],
   },
 ];
