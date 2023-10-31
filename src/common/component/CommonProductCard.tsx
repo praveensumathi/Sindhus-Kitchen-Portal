@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 function CommonProductCard({ title, mrpprice, imageUrl, offerprice }) {
   return (
     <Box>
-      <Card sx={{ width: "300px", boxShadow: 6 }}>
+      <Card sx={{ width: "260px", boxShadow: 6 }}>
         <CardMedia
           component="img"
           src={imageUrl}

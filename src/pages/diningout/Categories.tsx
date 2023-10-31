@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Slider from "react-slick";
 import { Card, CardMedia } from "@mui/material";
+import Container from "@mui/material/Container";
 
 const CustomPrevArrow = (props) => (
   <div {...props} className="custom-prev-arrow">
@@ -60,49 +61,74 @@ function Categories() {
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 7,
-    slidesToScroll: 7,
+    slidesToShow: 6,
+    slidesToScroll: 1,
     initialSlide: 0,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
-    <Box>
+    <Container>
       <Typography
         sx={{
-          margin: "0px 10px 0px 0px",
           fontWeight: 800,
           color: "black",
           lineHeight: 3,
-          marginTop: -1,
         }}
       >
         Categories
       </Typography>
       <Slider {...settings} className="category-slider">
         {categoriesData.map((category, index) => (
-          <Card
-            key={index}
-            sx={{
-              boxShadow: 3,
-              borderRadius: "10px",
-              maxWidth: "90%",
-            }}
-          >
-            <CardMedia
-              component="img"
-              src={category.imageSrc}
-              alt={category.title}
-              height="100"
-            />
-
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard
-            </Typography>
-          </Card>
+          <Box sx={{ padding: "10px", width: "100px" }}>
+            <Card
+              key={index}
+              sx={{
+                boxShadow: 1,
+                borderRadius: "10px",
+              }}
+            >
+              <CardMedia
+                component="img"
+                src={category.imageSrc}
+                alt={category.title}
+                height="100"
+              />
+              <Typography
+                gutterBottom
+                component="div"
+                sx={{ padding: 1, fontWeight: 600 }}
+              >
+                Lizard
+              </Typography>
+            </Card>
+          </Box>
         ))}
       </Slider>
-    </Box>
+    </Container>
   );
 }
 
