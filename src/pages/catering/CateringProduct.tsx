@@ -5,6 +5,14 @@ import Typography from "@mui/material/Typography";
 import { cateringPage } from "../../seed-data/Seed-data";
 import { useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
 function CateringProduct() {
   const [trayQuantities, setTrayQuantities] = useState({
@@ -31,21 +39,23 @@ function CateringProduct() {
 
   return (
     <Box>
-      <Typography
-        sx={{
-          textAlign: "center",
-          color: "white",
-          backgroundColor: "orange",
-          m: 2,
-          fontSize: "2rem",
-        }}
-      >
-        NORTH INDIAN SPECIAL
-      </Typography>
       {cateringPage &&
         cateringPage.length > 0 &&
         cateringPage.map((item) => (
           <>
+            <Typography
+              sx={{
+                textAlign: "center",
+                color: "white",
+                backgroundColor: "orange",
+                m: 2,
+                fontSize: "2rem",
+                width: "100%",
+              }}
+            >
+              {item.menuTitle}
+            </Typography>
+
             <Grid
               container
               spacing={3}
@@ -89,71 +99,105 @@ function CateringProduct() {
               <Grid item xs={12} lg={3}>
                 <Grid container item spacing={2}>
                   <Grid item>
-                    <Typography>
-                      <b>Serving Size(s):</b>
-                    </Typography>
-                    <ul>
-                      {item.trayItems.map((trayItem) => (
-                        <li key={trayItem}>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              m: 1,
-                            }}
-                          >
-                            <Typography variant="body1">{trayItem}</Typography>
-                            <ButtonGroup
-                              className="test"
+                    <TableContainer>
+                      <Table aria-label="simple table" sx={{ minWidth: 320 }}>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell align="center" sx={{ p: "5px" }}>
+                              <strong>Serving Size(s)</strong>
+                            </TableCell>
+                            <TableCell align="center" sx={{ p: "5px" }}>
+                              <strong>Quantity</strong>
+                            </TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {item.trayItems.map((trayItem) => (
+                            <TableRow
+                              key={trayItem.name}
                               sx={{
-                                lineHeight: 1,
-                                padding: 0,
-                                "& .MuiButtonGroup-grouped": {
-                                  minWidth: "25px",
+                                "&:last-child td, &:last-child th": {
+                                  border: 0,
                                 },
-                                marginLeft: "8px",
                               }}
-                              size="small"
-                              aria-label="small outlined button group"
                             >
-                              <Button
-                                color="primary"
+                              <TableCell
+                                component="th"
+                                scope="row"
+                                align="center"
                                 sx={{
-                                  lineHeight: 1,
-                                  padding: 0,
-                                  "& .MuiButtonGroup-grouped": {
-                                    minWidth: "32px !important",
-                                  },
-                                }}
-                                size="small"
-                                aria-label="small outlined button group"
-                                onClick={() => handleDecrement(trayItem)}
-                              >
-                                -
-                              </Button>
-                              <Button
-                                sx={{
-                                  lineHeight: 1.3,
-                                  fontWeight: 600,
-                                  color: "black !important",
-                                }}
-                                disabled
-                              >
-                                {trayQuantities[trayItem]}
-                              </Button>
-                              <Button
-                                onClick={() => handleIncrement(trayItem)}
-                                sx={{
-                                  lineHeight: 1.3,
+                                  whiteSpace: "pre-line",
                                 }}
                               >
-                                +
-                              </Button>
-                            </ButtonGroup>
-                          </Box>
-                        </li>
-                      ))}
-                    </ul>
+                                {trayItem.name}&nbsp;
+                                <b>{trayItem.price}</b>
+                              </TableCell>
+
+                              <TableCell>
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  <ButtonGroup
+                                    className="test"
+                                    sx={{
+                                      lineHeight: 1,
+                                      padding: 0,
+                                      "& .MuiButtonGroup-grouped": {
+                                        minWidth: "32px",
+                                      },
+                                      marginLeft: "8px",
+                                    }}
+                                    size="small"
+                                    aria-label="small outlined button group"
+                                  >
+                                    <Button
+                                      color="primary"
+                                      sx={{
+                                        lineHeight: 1,
+                                        padding: 0,
+                                        "& .MuiButtonGroup-grouped": {
+                                          minWidth: "32px !important",
+                                        },
+                                      }}
+                                      size="small"
+                                      aria-label="small outlined button group"
+                                      onClick={() =>
+                                        handleDecrement(trayItem.name)
+                                      }
+                                    >
+                                      -
+                                    </Button>
+                                    <Button
+                                      sx={{
+                                        lineHeight: 1.3,
+                                        fontWeight: 600,
+                                        color: "black !important",
+                                      }}
+                                      disabled
+                                    >
+                                      {trayQuantities[trayItem.name]}
+                                    </Button>
+                                    <Button
+                                      onClick={() =>
+                                        handleIncrement(trayItem.name)
+                                      }
+                                      sx={{
+                                        lineHeight: 1.3,
+                                      }}
+                                    >
+                                      +
+                                    </Button>
+                                  </ButtonGroup>
+                                </Box>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
                   </Grid>
                 </Grid>
               </Grid>

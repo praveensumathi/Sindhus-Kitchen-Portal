@@ -5,6 +5,36 @@ import {
   IProductCardList,
 } from "../interface/types";
 
+export const productCardList: IProductCardList[] = [
+  {
+    id: 1,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
+  },
+  {
+    id: 2,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
+  },
+  {
+    id: 3,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
+  },
+  {
+    id: 4,
+    title: "BoonthiLaddu",
+    mrpprice: 299,
+    offerprice: 250,
+    imageUrl: "/assets/food-img3.jpg",
+  },
+];
 export const ourServicesData: IOurServices[] = [
   {
     id: 1,
@@ -99,26 +129,43 @@ export const snacksMenu = [
     menu: "All",
   },
   {
-    menu: "Sweets",
+    menu: "murruku",
   },
   {
-    menu: "Savouries",
+    menu: "laddu",
+  },
+  {
+    menu: "Athirasam",
+  },
+  {
+    menu: "Chips",
+  },
+  {
+    menu: "Mysorepak",
+  },
+  {
+    menu: "poli",
   },
 ];
 export const cateringPage: ICateringPage[] = [
   {
     id: "1",
+    menuTitle: "Briyani",
     title: "Chicken briyani",
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    HalfTray - can eat 10 members,
-    MediumTray - can eat 20 members,
-    FullTray - can eat 30 members
+    Half Tray - can eat 10 members,
+    Medium Tray - can eat 20 members,
+    Full Tray - can eat 30 members
     `,
 
     image: "/assets/food-images-2.jpg",
-    trayItems: ["HalfTray", "MediumTray", "FullTray"],
+    trayItems: [
+      { name: "HalfTray", price: "[$50.00]" },
+      { name: "MediumTray", price: "[$100.00]" },
+      { name: "FullTray", price: "[$150.00]" },
+    ],
   },
   {
     id: "2",
@@ -126,12 +173,16 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    HalfTray - can eat 10 members,
-    MediumTray - can eat 20 members,
-    FullTray - can eat 30 members
+    Half Tray - can eat 10 members,
+    Medium Tray - can eat 20 members,
+    Full Tray - can eat 30 members
     `,
     image: "/assets/food-img.jpg",
-    trayItems: ["HalfTray", "MediumTray", "FullTray"],
+    trayItems: [
+      { name: "HalfTray", price: "[$50.00]" },
+      { name: "MediumTray", price: "[$100.00]" },
+      { name: "FullTray", price: "[$150.00]" },
+    ],
   },
   {
     id: "3",
@@ -139,25 +190,34 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    HalfTray - can eat 10 members,
-    MediumTray - can eat 20 members,
-    FullTray - can eat 30 members
+    Half Tray - can eat 10 members,
+    Medium Tray - can eat 20 members,
+    Full Tray - can eat 30 members
     `,
     image: "/assets/food-img3.jpg",
-    trayItems: ["HalfTray", "MediumTray", "FullTray"],
+    trayItems: [
+      { name: "HalfTray", price: "[$50.00]" },
+      { name: "MediumTray", price: "[$100.00]" },
+      { name: "FullTray", price: "[$150.00]" },
+    ],
   },
   {
     id: "4",
+    menuTitle: "Non-Veg",
     title: "Fish Finger",
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    HalfTray - can eat 10 members,
-    MediumTray - can eat 20 members,
-    FullTray - can eat 30 members
+    Half Tray - can eat 10 members,
+    Medium Tray - can eat 20 members,
+    Full Tray - can eat 30 members
     `,
     image: "/assets/food-img.jpg",
-    trayItems: ["HalfTray", "MediumTray", "FullTray"],
+    trayItems: [
+      { name: "HalfTray", price: "[$50.00]" },
+      { name: "MediumTray", price: "[$100.00]" },
+      { name: "FullTray", price: "[$150.00]" },
+    ],
   },
 ];
 
@@ -179,34 +239,3 @@ export const menuDetailPage = {
     { tray: "FullTray", members: " Can eat 30 members" },
   ],
 };
-
-export const productCardList: IProductCardList[] = [
-  {
-    id: 1,
-    title: "BoonthiLaddu",
-    mrpprice: 299,
-    offerprice: 250,
-    imageUrl: "/assets/food-img3.jpg",
-  },
-  {
-    id: 2,
-    title: "BoonthiLaddu",
-    mrpprice: 299,
-    offerprice: 250,
-    imageUrl: "/assets/food-img3.jpg",
-  },
-  {
-    id: 3,
-    title: "BoonthiLaddu",
-    mrpprice: 299,
-    offerprice: 250,
-    imageUrl: "/assets/food-img3.jpg",
-  },
-  {
-    id: 4,
-    title: "BoonthiLaddu",
-    mrpprice: 299,
-    offerprice: 250,
-    imageUrl: "/assets/food-img3.jpg",
-  },
-];
