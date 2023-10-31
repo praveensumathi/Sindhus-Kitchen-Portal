@@ -1,5 +1,6 @@
 import { OurServicesIconEnums } from "../enums/OurServicesIconEnum";
 import {
+  ICategoryWithProducts,
   ICateringPage,
   IOurServices,
   IProductCardList,
@@ -239,3 +240,75 @@ export const menuDetailPage = {
     { tray: "FullTray", members: " Can eat 30 members" },
   ],
 };
+export const categoryWithProducts: ICategoryWithProducts[] = [
+  {
+    _id: "1",
+    data: "Snacks",
+    image: "",
+    products: [
+      {
+        id: 1,
+        title: "Boonthi Laddu",
+        mrpprice: 299,
+        offerprice: 250,
+        imageUrl: "/assets/food-img3.jpg",
+      },
+      {
+        id: 2,
+        title: "Boonthi Laddu",
+        mrpprice: 199,
+        offerprice: 150,
+        imageUrl: "/assets/food-img3.jpg",
+      },
+      {
+        id: 3,
+        title: "Boonthi Laddu",
+        mrpprice: 199,
+        offerprice: 150,
+        imageUrl: "/assets/food-img3.jpg",
+      },
+      {
+        id: 4,
+        title: "Boonthi Laddu",
+        mrpprice: 199,
+        offerprice: 150,
+        imageUrl: "/assets/food-img3.jpg",
+      },
+    ],
+  },
+  {
+    _id: "2",
+    data: "Breakfast",
+    image: "",
+    products: [
+      {
+        id: 1,
+        title: "Idli",
+        mrpprice: 99,
+        offerprice: 75,
+        imageUrl: "/assets/images/dosa.jpg",
+      },
+      {
+        id: 2,
+        title: "Dosa",
+        mrpprice: 149,
+        offerprice: 120,
+        imageUrl: "/assets/images/dosa.jpg",
+      },
+      {
+        id: 3,
+        title: "Appam",
+        mrpprice: 149,
+        offerprice: 120,
+        imageUrl: "/assets/images/dosa.jpg",
+      },
+      {
+        id: 4,
+        title: "Dosa",
+        mrpprice: 149,
+        offerprice: 120,
+        imageUrl: "/assets/images/dosa.jpg",
+      },
+    ],
+  },
+];

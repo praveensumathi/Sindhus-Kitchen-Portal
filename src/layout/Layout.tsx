@@ -9,10 +9,10 @@ function Layout() {
       <Box>
         <NavBar />
       </Box>
-      <Box mb={2}>  
+      <Box>
         <Outlet />
       </Box>
-      <Box mt={4}>
+      <Box>
         <Footer />
       </Box>
     </>
