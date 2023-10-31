@@ -13,6 +13,14 @@ export interface IOurServices {
   title: string;
   description: string;
 }
+
+export interface ICategoryWithProducts {
+  _id: string;
+  data: string;
+  image: string;
+  products: IProductCardList[];
+}
+
 export interface IProductCardList {
   id: number;
   title: string;

@@ -96,8 +96,9 @@ function Categories() {
         sx={{
           fontWeight: 800,
           color: "black",
-          lineHeight: 3,
+          lineHeight: 2,
         }}
+        variant="h6"
       >
         Categories
       </Typography>
