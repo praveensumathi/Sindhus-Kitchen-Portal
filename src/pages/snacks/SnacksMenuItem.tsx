@@ -8,8 +8,8 @@ function SnacksMenuItem() {
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     initialSlide: 0,
     responsive: [
       {
@@ -34,14 +34,13 @@ function SnacksMenuItem() {
         },
       },
     ],
-    };
-
+  };
 
   return (
     <Container>
       <Slider {...settings}>
         {snacksMenu.map((menuItems, index) => (
-          <Box key={index}>
+          <Box key={index} sx={{ display: "flex" }}>
             <Button
               sx={{
                 border: "1px dashed",

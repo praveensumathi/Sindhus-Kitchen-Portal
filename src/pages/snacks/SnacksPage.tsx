@@ -1,30 +1,139 @@
-import React from "react";
-import Container from "@mui/material/Container";
-import { Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
+import {
+  Box,
+  // Button,
+  Container,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import CommonProductCard from "../../common/component/CommonProductCard";
 import SnacksMenuItem from "./SnacksMenuItem";
+import { productCardList } from "../../seed-data/Seed-data";
 
 function SnacksPage() {
+  const theme = useTheme();
+
+  const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Container sx={{ mt: 2 }}>
-      <Grid container spacing={3} sx={{display:"flex"}}>
-        <Grid item xs>
-          <img src="assets/images/sweets.jpg" alt="sweets" height="60px" />
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h4">Sweets And Savouries</Typography>
-        </Grid>
-        <Grid item xs>
-          <img
-            src="assets/images/savouries.jpg"
-            alt="savouries"
-            height="60px"
-          />
-        </Grid>
-      </Grid>
-      <SnacksMenuItem></SnacksMenuItem>
-    </Container>
+    <>
+      <div style={{ position: "relative" }}>
+        <Box
+          sx={{
+            mt: 3,
+          }}
+        >
+          <div
+            style={{
+              backgroundImage: "url('assets/images/sssurf3.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              transform: "rotate(180deg)",
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              zIndex: -1,
+              top: 0,
+            }}
+          ></div>
+          <Grid container spacing={3} sx={{ overflow: "hidden" }}>
+            <Grid
+              item
+              xs={3}
+              sx={{
+                position: "relative",
+                display: isBelowMediumScreen ? "none" : "block",
+              }}
+            >
+              <img
+                src="assets/images/sweets.png"
+                alt="sweets"
+                height={"140px"}
+                style={{
+                  borderRadius: "50px",
+                  position: "absolute",
+                  left: "-40px",
+                  top: 5,
+                }}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              lg={6}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                height: "150px",
+              }}
+            >
+              <Typography variant="h4" sx={{ color: "white", fontWeight: 600 }}>
+                Snacks
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={3}
+              sx={{
+                position: "relative",
+                display: isBelowMediumScreen ? "none" : "block",
+              }}
+            >
+              <img
+                src="assets/images/butter-cookies.png"
+                alt="savouries"
+                height={"150px"}
+                style={{
+                  borderRadius: "50px",
+                  position: "absolute",
+                  right: "-80px",
+                  top: 4,
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </div>
+      <Container>
+        <SnacksMenuItem></SnacksMenuItem>
+        <Box sx={{ mt: 5 }}>
+          <Grid container spacing={4}>
+            {productCardList.map((product) => (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={4}
+                key={product.id}
+                sx={{
+                  dispaly: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <CommonProductCard
+                  title={product.title}
+                  mrpprice={product.mrpprice}
+                  offerprice={product.offerprice}
+                  imageUrl={product.imageUrl}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
+      <Box
+        sx={{
+          bottom: 0,
+          height: "120px", // Adjust the height as needed
+        }}
+      >
+        <img src="assets/images/wave1.png" alt="waveimage" />
+      </Box>
+    </>
   );
 }
 
