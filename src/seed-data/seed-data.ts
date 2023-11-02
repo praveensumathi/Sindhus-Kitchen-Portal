@@ -130,22 +130,10 @@ export const snacksMenu = [
     menu: "All",
   },
   {
-    menu: "murruku",
+    menu: "Sweets",
   },
   {
-    menu: "laddu",
-  },
-  {
-    menu: "Athirasam",
-  },
-  {
-    menu: "Chips",
-  },
-  {
-    menu: "Mysorepak",
-  },
-  {
-    menu: "poli",
+    menu: "Savouries",
   },
 ];
 export const cateringPage: ICateringPage[] = [
@@ -235,16 +223,16 @@ export const menuDetailPage = {
     "Adhirasam is a traditional sweet dish which will be done for most of the festivals.",
   netWeight: "5",
   servingSizes: [
-    { tray: "HalfTray", members: " Can eat 10 members" },
-    { tray: "MediumTray", members: " Can eat 20 members" },
-    { tray: "FullTray", members: " Can eat 30 members" },
+    { tray: "Small Tray", members: " Can eat 10 members" },
+    { tray: "Medium Tray", members: " Can eat 20 members" },
+    { tray: "Large Tray", members: " Can eat 30 members" },
   ],
 };
 export const categoryWithProducts: ICategoryWithProducts[] = [
   {
     _id: "1",
     data: "Snacks",
-    image: "",
+    image: "http://localhost:5173/assets/food-img3.jpg",
     products: [
       {
         id: 1,

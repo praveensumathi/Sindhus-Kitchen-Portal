@@ -98,7 +98,7 @@ function Categories() {
           color: "black",
           lineHeight: 2,
         }}
-        variant="h6"
+        variant="h5"
       >
         Categories
       </Typography>

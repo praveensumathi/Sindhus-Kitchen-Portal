@@ -54,7 +54,7 @@ const settings = {
     {
       breakpoint: 480,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 1,
         slidesToScroll: 1,
       },
     },
@@ -63,9 +63,8 @@ const settings = {
 
   const handleClickViewAll = (categoryId: string) => {
     navigate(`/productsByCategory/${categoryId}`);
+    console.log(categoryId);
   };
-
- 
 
   return (
     category &&
@@ -85,7 +84,7 @@ const settings = {
                 color: "black",
                 lineHeight: 2,
               }}
-              variant="h6"
+              variant="h5"
             >
               {category.data}
             </Typography>
@@ -102,7 +101,7 @@ const settings = {
           </Box>
           <Slider {...settings}>
             {category.products.map((product, index) => (
-              <Box key={index}>
+              <Box key={index} >
                 <CommonProductCard
                   title={product.title}
                   mrpprice={product.mrpprice}

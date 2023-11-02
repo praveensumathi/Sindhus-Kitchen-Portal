@@ -20,7 +20,7 @@ function CommonProductCard({ title, mrpprice, imageUrl, offerprice }) {
           }}
         />
         <CardContent>
-          <Typography variant="body1" component="div">
+          <Typography variant="body1" sx={{fontWeight:600}} component="div">
             {title}
           </Typography>
           <Box sx={{ display: "flex" }}>
