@@ -107,12 +107,8 @@ function SnacksPage() {
                 sm={6}
                 md={4}
                 lg={3}
+                sx={{display:"flex",justifyContent:"center"}}
                 key={product.id}
-                sx={{
-                  dispaly: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
               >
                 <CommonProductCard
                   title={product.title}

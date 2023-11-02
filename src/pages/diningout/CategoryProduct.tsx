@@ -9,27 +9,22 @@ import StoreIcon from "@mui/icons-material/Store";
 import CommonProductCard from "../../common/component/CommonProductCard";
 import { categoryWithProducts } from "../../seed-data/Seed-data";
 import { ICategoryWithProducts } from "../../interface/types";
-
+import { useParams } from "react-router-dom";
 
 function CategoryProducts() {
-      const [previousResponseData, setPreviousResponseData] = useState<
-        ICategoryWithProducts[]
-      >([]);
+  const [previousResponseData, setPreviousResponseData] = useState<
+    ICategoryWithProducts[]
+  >([]);
 
-  
-useEffect(() => {
-  if (categoryWithProducts) {
-    if (categoryWithProducts.length > 0) {
-      setPreviousResponseData(
-        
-        categoryWithProducts
-     );
-    }
-  }
-}, [categoryWithProducts]);
+  const params = useParams();
+  // Find the category with the matching _id
+  const selectedCategory = categoryWithProducts.find(
+    (category) => category._id === params.categoryId
+  );
+
   return (
     <>
-      {previousResponseData && (
+      {selectedCategory && (
         <Box
           sx={{
             display: "flex",
@@ -51,7 +46,7 @@ useEffect(() => {
               }}
             >
               <CardMedia
-                image={previousResponseData[0]?.image || ''} 
+                image={selectedCategory?.image || ""}
                 component={"img"}
                 sx={{
                   height: "100%",
@@ -76,13 +71,28 @@ useEffect(() => {
               }}
               variant="h5"
             >
-              {previousResponseData[0]?.data||''} 
+              {selectedCategory.data || ""}
             </Typography>
           </Box>
         </Box>
       )}
       <Box>
-        {categoryWithProducts.length === 0 ? (
+        {selectedCategory && selectedCategory.products.length > 0 ? (
+          <Container sx={{ padding: "10px" }}>
+            <Grid container spacing={2}>
+              {selectedCategory.products.map((product, index) => (
+                <Grid item key={index} xs={12} sm={6} md={4} lg={3} sx={{display:"flex",justifyContent:"center"}}>
+                  <CommonProductCard
+                    title={product.title}
+                    mrpprice={product.mrpprice}
+                    offerprice={product.offerprice}
+                    imageUrl={product.imageUrl}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        ) : (
           <Box
             display="flex"
             justifyContent="center"
@@ -96,25 +106,6 @@ useEffect(() => {
             <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
             <Typography sx={{ opacity: 0.5 }}>No products available</Typography>
           </Box>
-        ) : (
-          categoryWithProducts.map((categoryData) => (
-            <Container sx={{ padding: "10px" }} key={categoryData.data}>
-              {categoryData.products && categoryData.products.length > 0 && (
-                <Grid container spacing={2}>
-                  {categoryData.products.map((product, index) => (
-                    <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-                      <CommonProductCard
-                        title={product.title}
-                        mrpprice={product.mrpprice}
-                        offerprice={product.offerprice}
-                        imageUrl={product.imageUrl}
-                      />
-                    </Grid>
-                  ))}
-                </Grid>
-              )}
-            </Container>
-          ))
         )}
       </Box>
     </>
