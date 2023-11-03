@@ -107,15 +107,10 @@ function SnacksPage() {
                 sm={6}
                 md={4}
                 lg={3}
-                sx={{display:"flex",justifyContent:"center"}}
-                key={product.id}
+                sx={{ display: "flex", justifyContent: "center" }}
+                key={product._id}
               >
-                <CommonProductCard
-                  title={product.title}
-                  mrpprice={product.mrpprice}
-                  offerprice={product.offerprice}
-                  imageUrl={product.imageUrl}
-                />
+                <CommonProductCard product={product} />
               </Grid>
             ))}
           </Grid>
@@ -126,6 +121,8 @@ function SnacksPage() {
           width: "100%",
           height: "150px",
           backgroundImage: "url(assets/images/wave1.png)",
+          backgroundRepeat: "no-repeat",
+         backgroundSize: "cover"
         }}
       ></Box>
     </>

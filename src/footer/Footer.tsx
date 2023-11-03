@@ -40,7 +40,7 @@ function Footer() {
           Contact Us
         </Typography>
       </Box>
-      <Container>
+      <Container sx={{ paddingBottom: 2 }}>
         <Grid container spacing={2} sx={{ gap: 3 }}>
           <Grid
             container
@@ -100,7 +100,7 @@ function Footer() {
                       },
                     }}
                   >
-                    chat on mail
+                    Send mail
                   </Button>
                   <Button
                     startIcon={<WhatsAppIcon />}
@@ -207,7 +207,7 @@ function Footer() {
             <Grid item lg={6} xs={12}>
               <TextField label="Type Of Event" fullWidth variant="outlined" />
             </Grid>
-            <Grid item lg={6} xs={12}>
+            <Grid item lg={3} xs={12}>
               {/* <CssTextField label="Event Date" fullWidth variant="outlined" /> */}
               <Box>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -219,7 +219,7 @@ function Footer() {
                 </LocalizationProvider>
               </Box>
             </Grid>
-            <Grid item lg={6} xs={12}>
+            <Grid item lg={3} xs={12}>
               <TextField label="Guest Count" fullWidth variant="outlined" />
             </Grid>
             <Grid item xs={12}>

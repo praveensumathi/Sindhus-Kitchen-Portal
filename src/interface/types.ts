@@ -22,7 +22,7 @@ export interface ICategoryWithProducts {
 }
 
 export interface IProductCardList {
-  id: number;
+  _id: string;
   title: string;
   mrpprice: number;
   offerprice: number;

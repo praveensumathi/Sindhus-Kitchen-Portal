@@ -16,9 +16,9 @@ import {
 
 function CateringProduct() {
   const [trayQuantities, setTrayQuantities] = useState({
-    HalfTray: 0,
+    SmallTray: 0,
     MediumTray: 0,
-    FullTray: 0,
+    LargeTray: 0,
   });
 
   const handleDecrement = (trayItem) => {
