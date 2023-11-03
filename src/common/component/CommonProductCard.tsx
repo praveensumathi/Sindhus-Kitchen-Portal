@@ -1,30 +1,46 @@
 import { Box, Card, CardMedia } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
+import { IProductCardList } from "../../interface/types";
+import { Link } from "react-router-dom";
 
-function CommonProductCard({ title, mrpprice, imageUrl, offerprice }) {
+interface IProps {
+  product: IProductCardList;
+  children?: React.ReactNode;
+}
+
+function CommonProductCard(props: IProps) {
+  const { product, children } = props;
+
   return (
     <Box>
       <Card sx={{ width: "260px", boxShadow: 4 }}>
-        <CardMedia
-          component="img"
-          src={imageUrl}
-          sx={{
-            width: "300px",
-            height: "200px",
-            cursor: "pointer",
-            transition: "transform 2s",
-            "&:hover": {
-              transform: "scale(1.1)",
-            },
+        <Link
+          to={`/menudetailpage/${product._id}`}
+          style={{
+            textDecoration: "none",
           }}
-        />
+        >
+          <CardMedia
+            component="img"
+            src={product.imageUrl}
+            sx={{
+              width: "300px",
+              height: "200px",
+              cursor: "pointer",
+              transition: "transform 2s",
+              "&:hover": {
+                transform: "scale(1.1)",
+              },
+            }}
+          />
+        </Link>
         <CardContent>
-          <Typography variant="body1" sx={{fontWeight:600}} component="div">
-            {title}
+          <Typography variant="body1" sx={{ fontWeight: 600 }} component="div">
+            {product.title}
           </Typography>
           <Box sx={{ display: "flex" }}>
-            {offerprice ? (
+            {product.offerprice ? (
               <Typography
                 variant="body2"
                 color="text.secondary"
@@ -32,16 +48,16 @@ function CommonProductCard({ title, mrpprice, imageUrl, offerprice }) {
                   textDecoration: "line-through",
                 }}
               >
-                ${mrpprice}
+                ${product.mrpprice}
               </Typography>
             ) : (
               <Typography variant="body2" color="text.secondary">
-                ${mrpprice}
+                ${product.mrpprice}
               </Typography>
             )}
-            {offerprice && (
+            {product.offerprice && (
               <Typography variant="body2" color="orange" sx={{ marginLeft: 1 }}>
-                ${offerprice}
+                ${product.offerprice}
               </Typography>
             )}
           </Box>

@@ -81,13 +81,16 @@ function CategoryProducts() {
           <Container sx={{ padding: "10px" }}>
             <Grid container spacing={2}>
               {selectedCategory.products.map((product, index) => (
-                <Grid item key={index} xs={12} sm={6} md={4} lg={3} sx={{display:"flex",justifyContent:"center"}}>
-                  <CommonProductCard
-                    title={product.title}
-                    mrpprice={product.mrpprice}
-                    offerprice={product.offerprice}
-                    imageUrl={product.imageUrl}
-                  />
+                <Grid
+                  item
+                  key={index}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  <CommonProductCard product={product} />
                 </Grid>
               ))}
             </Grid>

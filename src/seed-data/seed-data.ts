@@ -8,28 +8,28 @@ import {
 
 export const productCardList: IProductCardList[] = [
   {
-    id: 1,
+    _id: "1",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
     imageUrl: "/assets/food-img3.jpg",
   },
   {
-    id: 2,
+    _id:"2",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
     imageUrl: "/assets/food-img3.jpg",
   },
   {
-    id: 3,
+    _id:"3",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
     imageUrl: "/assets/food-img3.jpg",
   },
   {
-    id: 4,
+    _id:"4",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
@@ -144,16 +144,16 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    Half Tray - can eat 10 members,
+    Small Tray - can eat 10 members,
     Medium Tray - can eat 20 members,
-    Full Tray - can eat 30 members
+    Large Tray - can eat 30 members
     `,
 
     image: "/assets/food-images-2.jpg",
     trayItems: [
-      { name: "HalfTray", price: "[$50.00]" },
+      { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
-      { name: "FullTray", price: "[$150.00]" },
+      { name: "LargeTray", price: "[$150.00]" },
     ],
   },
   {
@@ -162,15 +162,15 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    Half Tray - can eat 10 members,
+   Small Tray - can eat 10 members,
     Medium Tray - can eat 20 members,
-    Full Tray - can eat 30 members
+   Large Tray - can eat 30 members
     `,
     image: "/assets/food-img.jpg",
     trayItems: [
-      { name: "HalfTray", price: "[$50.00]" },
+      { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
-      { name: "FullTray", price: "[$150.00]" },
+      { name: "LargeTray", price: "[$150.00]" },
     ],
   },
   {
@@ -179,15 +179,15 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    Half Tray - can eat 10 members,
+    Small Tray - can eat 10 members,
     Medium Tray - can eat 20 members,
-    Full Tray - can eat 30 members
+    Large Tray - can eat 30 members
     `,
     image: "/assets/food-img3.jpg",
     trayItems: [
-      { name: "HalfTray", price: "[$50.00]" },
+      { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
-      { name: "FullTray", price: "[$150.00]" },
+      { name: "LargeTray", price: "[$150.00]" },
     ],
   },
   {
@@ -197,15 +197,15 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    Half Tray - can eat 10 members,
+   Small Tray - can eat 10 members,
     Medium Tray - can eat 20 members,
-    Full Tray - can eat 30 members
+    Large Tray - can eat 30 members
     `,
     image: "/assets/food-img.jpg",
     trayItems: [
-      { name: "HalfTray", price: "[$50.00]" },
+      { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
-      { name: "FullTray", price: "[$150.00]" },
+      { name: "LargeTray", price: "[$150.00]" },
     ],
   },
 ];
@@ -235,28 +235,28 @@ export const categoryWithProducts: ICategoryWithProducts[] = [
     image: "http://localhost:5173/assets/food-img3.jpg",
     products: [
       {
-        id: 1,
+        _id: "1",
         title: "Boonthi Laddu",
         mrpprice: 299,
         offerprice: 250,
         imageUrl: "/assets/food-img3.jpg",
       },
       {
-        id: 2,
+        _id: "2",
         title: "Boonthi Laddu",
         mrpprice: 199,
         offerprice: 150,
         imageUrl: "/assets/food-img3.jpg",
       },
       {
-        id: 3,
+        _id:"3",
         title: "Boonthi Laddu",
         mrpprice: 199,
         offerprice: 150,
         imageUrl: "/assets/food-img3.jpg",
       },
       {
-        id: 4,
+        _id: "4",
         title: "Boonthi Laddu",
         mrpprice: 199,
         offerprice: 150,
@@ -270,28 +270,28 @@ export const categoryWithProducts: ICategoryWithProducts[] = [
     image: "",
     products: [
       {
-        id: 1,
+        _id: "1",
         title: "Idli",
         mrpprice: 99,
         offerprice: 75,
         imageUrl: "/assets/images/dosa.jpg",
       },
       {
-        id: 2,
+        _id: "2",
         title: "Dosa",
         mrpprice: 149,
         offerprice: 120,
         imageUrl: "/assets/images/dosa.jpg",
       },
       {
-        id: 3,
+        _id: "3",
         title: "Appam",
         mrpprice: 149,
         offerprice: 120,
         imageUrl: "/assets/images/dosa.jpg",
       },
       {
-        id: 4,
+        _id: "4",
         title: "Dosa",
         mrpprice: 149,
         offerprice: 120,
