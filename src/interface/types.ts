@@ -20,3 +20,11 @@ export interface IProductCardList {
   offerprice: number;
   imageUrl: string;
 }
+export interface IWhyChooseUs {
+  id: number;
+  imageicon: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
