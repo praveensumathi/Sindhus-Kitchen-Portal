@@ -2,13 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import {
-  Button,
-  Container,
-  Divider,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Container, Divider, Typography } from "@mui/material";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -16,9 +10,24 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { useCommonGridStyle } from "../styles/FooterStyle";
 import CssTextField from "../common/component/CommonTextfeild";
+import { DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs from "dayjs";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import TextField from "@mui/material/TextField";
 
 function Footer() {
   const classes = useCommonGridStyle();
+  const [date, setDate] = React.useState<string>(
+    dayjs(new Date()).format("YYYY-MM-DD")
+  );
+
+  const handleDateChange = (newDate: Date | null) => {
+    if (newDate) {
+      const formattedDate = dayjs(newDate).format("YYYY-MM-DD");
+      setDate(formattedDate);
+    }
+  };
 
   return (
     <Box
@@ -31,7 +40,7 @@ function Footer() {
           Contact Us
         </Typography>
       </Box>
-      <Container>
+      <Container sx={{ paddingBottom: 2 }}>
         <Grid container spacing={2} sx={{ gap: 3 }}>
           <Grid
             container
@@ -91,7 +100,7 @@ function Footer() {
                       },
                     }}
                   >
-                    chat on mail
+                    Send mail
                   </Button>
                   <Button
                     startIcon={<WhatsAppIcon />}
@@ -150,57 +159,71 @@ function Footer() {
               </Box>
             </Grid>
           </Grid>
-          <Grid container item spacing={3} xs={12}>
+          <Grid
+            container
+            item
+            spacing={2}
+            xs={12}
+            sx={{
+              backgroundColor: "white",
+              borderRadius: 5,
+              paddingRight: 5,
+              margin: { md: "0 4rem", xs: 0 },
+            }}
+          >
             <Grid item xs={12}>
               <Typography
                 variant="h5"
                 fontWeight={600}
-                sx={{ textAlign: "center" }}
+                sx={{ textAlign: "center", color: "black" }}
               >
                 Catering Request Form
               </Typography>
             </Grid>
             <Grid item lg={6} xs={12}>
-              <CssTextField
-                sx={{
-                  color: "white !important",
-                }}
+              <TextField
                 label="Full Name"
                 fullWidth
                 variant="outlined"
+                required
               />
             </Grid>
             <Grid item lg={6} xs={12}>
-              <CssTextField label="Email ID" fullWidth variant="outlined" />
+              <TextField
+                label="Email Id"
+                fullWidth
+                variant="outlined"
+                required
+              />
             </Grid>
             <Grid item lg={6} xs={12}>
-              <CssTextField
+              <TextField
                 label="Mobile Number"
                 fullWidth
                 variant="outlined"
+                required
               />
             </Grid>
             <Grid item lg={6} xs={12}>
-              <CssTextField
-                label="Type Of Event"
-                fullWidth
-                variant="outlined"
-              />
+              <TextField label="Type Of Event" fullWidth variant="outlined" />
             </Grid>
-            <Grid item lg={6} xs={12}>
-              <CssTextField label="Event Date" fullWidth variant="outlined" />
+            <Grid item lg={3} xs={12}>
+              {/* <CssTextField label="Event Date" fullWidth variant="outlined" /> */}
+              <Box>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    format="dd-MM-yyyy"
+                    value={new Date(date)}
+                    onChange={(date) => handleDateChange(date)}
+                  />
+                </LocalizationProvider>
+              </Box>
             </Grid>
-            <Grid item lg={6} xs={12}>
-              <CssTextField
-                label="Guest Count  "
-                fullWidth
-                variant="outlined"
-              />
+            <Grid item lg={3} xs={12}>
+              <TextField label="Guest Count" fullWidth variant="outlined" />
             </Grid>
-          </Grid>
-          <Grid container item spacing={2} xs={12}>
-            <Grid container item xs={12}>
-              <CssTextField
+            <Grid item xs={12}>
+              <TextField
                 label="Message"
                 fullWidth
                 variant="outlined"
@@ -208,8 +231,10 @@ function Footer() {
                 rows={3}
               />
             </Grid>
-            <Grid container item className={classes.commonGridStyle}>
-              <Button variant="contained">Submit Catering Request</Button>
+            <Grid item xs={12} className={classes.commonGridStyle}>
+              <Button sx={{ marginBottom: 1 }} variant="contained">
+                Submit Catering Request
+              </Button>
             </Grid>
           </Grid>
         </Grid>

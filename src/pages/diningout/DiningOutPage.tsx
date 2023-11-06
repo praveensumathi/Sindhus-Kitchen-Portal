@@ -1,10 +1,17 @@
 import React from "react";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
+import Categories from "./Categories";
+import { categoryWithProducts} from "../../seed-data/Seed-data";
+import Carousel from "../../common/component/Carousal";
+
+
 function DiningOutPage() {
   return (
     <Container>
-      <Box>DiningOutPage</Box>
+      <Categories />
+      {categoryWithProducts.map((category) => (
+        <Carousel category={category} />
+      ))}
     </Container>
   );
 }

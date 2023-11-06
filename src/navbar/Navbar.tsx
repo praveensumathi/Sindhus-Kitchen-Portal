@@ -19,9 +19,10 @@ import Typography from "@mui/material/Typography";
 
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
-  { name: "Snacks Page", linkurl: paths.SNACKSPAGE },
-  { name: "Catering Page", linkurl: paths.CATERINGPAGE },
+  { name: "Specials", linkurl: paths.SPECIALS },
   { name: "Dining Out", linkurl: paths.DININGOUT },
+  { name: "Snacks Menu", linkurl: paths.SNACKSPAGE },
+  { name: "Catering Menu", linkurl: paths.CATERINGPAGE },
 ];
 
 function NavBar() {

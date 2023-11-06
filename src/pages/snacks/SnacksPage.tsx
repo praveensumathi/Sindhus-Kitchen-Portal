@@ -18,7 +18,7 @@ function SnacksPage() {
 
   return (
     <>
-      <div style={{ position: "relative" }}>
+      <Box sx={{ position: "relative" }}>
         <Box
           sx={{
             mt: 3,
@@ -95,31 +95,22 @@ function SnacksPage() {
             </Grid>
           </Grid>
         </Box>
-      </div>
+      </Box>
       <Container>
         <SnacksMenuItem></SnacksMenuItem>
         <Box sx={{ mt: 5 }}>
-          <Grid container spacing={4}>
+          <Grid container spacing={3}>
             {productCardList.map((product) => (
               <Grid
                 item
                 xs={12}
                 sm={6}
                 md={4}
-                lg={4}
-                key={product.id}
-                sx={{
-                  dispaly: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+                lg={3}
+                sx={{ display: "flex", justifyContent: "center" }}
+                key={product._id}
               >
-                <CommonProductCard
-                  title={product.title}
-                  mrpprice={product.mrpprice}
-                  offerprice={product.offerprice}
-                  imageUrl={product.imageUrl}
-                />
+                <CommonProductCard product={product} />
               </Grid>
             ))}
           </Grid>
@@ -127,12 +118,13 @@ function SnacksPage() {
       </Container>
       <Box
         sx={{
-          bottom: 0,
-          height: "120px", // Adjust the height as needed
+          width: "100%",
+          height: "150px",
+          backgroundImage: "url(assets/images/wave1.png)",
+          backgroundRepeat: "no-repeat",
+         backgroundSize: "cover"
         }}
-      >
-        <img src="assets/images/wave1.png" alt="waveimage" />
-      </Box>
+      ></Box>
     </>
   );
 }
