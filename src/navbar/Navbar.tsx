@@ -170,7 +170,7 @@ function NavBar() {
                               ? "white"
                               : "black",
                           "&:hover": {
-                            backgroundColor: "orange",
+                            backgroundColor: theme.palette.primary.main,
                             color: "white",
                           },
                         }}
