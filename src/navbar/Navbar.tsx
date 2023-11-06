@@ -163,7 +163,7 @@ function NavBar() {
                           textTransform: "none",
                           backgroundColor:
                             location.pathname === menu.linkurl
-                              ? "orange"
+                              ? theme.palette.primary.main
                               : "none",
                           color:
                             location.pathname === menu.linkurl

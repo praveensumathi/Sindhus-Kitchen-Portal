@@ -20,7 +20,11 @@ import SearchIcon from "@mui/icons-material/Search";
 // } from "../../seed-data/seed-data";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { homePageSlicker, homeSearchCityDropDown, homeSearchMenusDropDown } from "../../seed-data/Seed-data";
+import {
+  homePageSlicker,
+  homeSearchCityDropDown,
+  homeSearchMenusDropDown,
+} from "../../seed-data/Seed-data";
 
 function HomePageSlicker() {
   const settings = {
@@ -36,7 +40,7 @@ function HomePageSlicker() {
 
   return (
     <Box sx={{ position: "relative" }}>
-     <Slider {...settings}>
+      <Slider {...settings}>
         {homePageSlicker.map((content, index) => (
           <Box style={{ display: "flex", flexDirection: "column" }} key={index}>
             <Box className="page-banner" style={{ position: "relative" }}>
@@ -96,7 +100,7 @@ function HomePageSlicker() {
             </Box>
           </Box>
         ))}
-      </Slider> 
+      </Slider>
       <Box
         sx={{
           position: "absolute",
@@ -128,7 +132,7 @@ function HomePageSlicker() {
             }}
           >
             <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <RestaurantIcon sx={{ color: "orange" }} />
+              <RestaurantIcon color="secondary" />
             </IconButton>
             <Autocomplete
               disableClearable
@@ -172,7 +176,7 @@ function HomePageSlicker() {
               orientation="vertical"
             />
             <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon sx={{ color: "#ffa500" }} />
+              <SearchIcon color="secondary" />
             </IconButton>
             <Autocomplete
               freeSolo
