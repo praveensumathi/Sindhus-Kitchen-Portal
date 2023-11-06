@@ -27,39 +27,38 @@ export const ProductsSliderSettings = {
 };
 
 function Carousel(props: IProps) {
-    const { category } = props;
-      const navigate = useNavigate();
+  const { category } = props;
+  const navigate = useNavigate();
 
-
-const settings = {
-  infinite: false,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
+  const settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
       },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
       },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
       },
-    },
-  ],
-};
+    ],
+  };
 
   const handleClickViewAll = (categoryId: string) => {
     navigate(`/productsByCategory/${categoryId}`);
@@ -101,13 +100,8 @@ const settings = {
           </Box>
           <Slider {...settings}>
             {category.products.map((product, index) => (
-              <Box key={index} >
-                <CommonProductCard
-                  title={product.title}
-                  mrpprice={product.mrpprice}
-                  offerprice={product.offerprice}
-                  imageUrl={product.imageUrl}
-                />
+              <Box key={index}>
+                <CommonProductCard product={product} />
               </Box>
             ))}
           </Slider>

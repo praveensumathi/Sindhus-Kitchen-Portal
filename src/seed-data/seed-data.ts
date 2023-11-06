@@ -4,32 +4,33 @@ import {
   ICateringPage,
   IOurServices,
   IProductCardList,
+  IWhyChooseUs,
 } from "../interface/types";
 
 export const productCardList: IProductCardList[] = [
   {
-    id: 1,
+    _id: "1",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
     imageUrl: "/assets/food-img3.jpg",
   },
   {
-    id: 2,
+    _id:"2",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
     imageUrl: "/assets/food-img3.jpg",
   },
   {
-    id: 3,
+    _id:"3",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
     imageUrl: "/assets/food-img3.jpg",
   },
   {
-    id: 4,
+    _id:"4",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
@@ -144,16 +145,16 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    Half Tray - can eat 10 members,
+    Small Tray - can eat 10 members,
     Medium Tray - can eat 20 members,
-    Full Tray - can eat 30 members
+    Large Tray - can eat 30 members
     `,
 
     image: "/assets/food-images-2.jpg",
     trayItems: [
-      { name: "HalfTray", price: "[$50.00]" },
+      { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
-      { name: "FullTray", price: "[$150.00]" },
+      { name: "LargeTray", price: "[$150.00]" },
     ],
   },
   {
@@ -162,15 +163,15 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    Half Tray - can eat 10 members,
+   Small Tray - can eat 10 members,
     Medium Tray - can eat 20 members,
-    Full Tray - can eat 30 members
+   Large Tray - can eat 30 members
     `,
     image: "/assets/food-img.jpg",
     trayItems: [
-      { name: "HalfTray", price: "[$50.00]" },
+      { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
-      { name: "FullTray", price: "[$150.00]" },
+      { name: "LargeTray", price: "[$150.00]" },
     ],
   },
   {
@@ -179,15 +180,15 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    Half Tray - can eat 10 members,
+    Small Tray - can eat 10 members,
     Medium Tray - can eat 20 members,
-    Full Tray - can eat 30 members
+    Large Tray - can eat 30 members
     `,
     image: "/assets/food-img3.jpg",
     trayItems: [
-      { name: "HalfTray", price: "[$50.00]" },
+      { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
-      { name: "FullTray", price: "[$150.00]" },
+      { name: "LargeTray", price: "[$150.00]" },
     ],
   },
   {
@@ -197,15 +198,15 @@ export const cateringPage: ICateringPage[] = [
     description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
       
     Serving sizes:
-    Half Tray - can eat 10 members,
+   Small Tray - can eat 10 members,
     Medium Tray - can eat 20 members,
-    Full Tray - can eat 30 members
+    Large Tray - can eat 30 members
     `,
     image: "/assets/food-img.jpg",
     trayItems: [
-      { name: "HalfTray", price: "[$50.00]" },
+      { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
-      { name: "FullTray", price: "[$150.00]" },
+      { name: "LargeTray", price: "[$150.00]" },
     ],
   },
 ];
@@ -235,28 +236,28 @@ export const categoryWithProducts: ICategoryWithProducts[] = [
     image: "http://localhost:5173/assets/food-img3.jpg",
     products: [
       {
-        id: 1,
+        _id: "1",
         title: "Boonthi Laddu",
         mrpprice: 299,
         offerprice: 250,
         imageUrl: "/assets/food-img3.jpg",
       },
       {
-        id: 2,
+        _id: "2",
         title: "Boonthi Laddu",
         mrpprice: 199,
         offerprice: 150,
         imageUrl: "/assets/food-img3.jpg",
       },
       {
-        id: 3,
+        _id:"3",
         title: "Boonthi Laddu",
         mrpprice: 199,
         offerprice: 150,
         imageUrl: "/assets/food-img3.jpg",
       },
       {
-        id: 4,
+        _id: "4",
         title: "Boonthi Laddu",
         mrpprice: 199,
         offerprice: 150,
@@ -270,33 +271,90 @@ export const categoryWithProducts: ICategoryWithProducts[] = [
     image: "",
     products: [
       {
-        id: 1,
+        _id: "1",
         title: "Idli",
         mrpprice: 99,
         offerprice: 75,
         imageUrl: "/assets/images/dosa.jpg",
       },
       {
-        id: 2,
+        _id: "2",
         title: "Dosa",
         mrpprice: 149,
         offerprice: 120,
         imageUrl: "/assets/images/dosa.jpg",
       },
       {
-        id: 3,
+        _id: "3",
         title: "Appam",
         mrpprice: 149,
         offerprice: 120,
         imageUrl: "/assets/images/dosa.jpg",
       },
       {
-        id: 4,
+        _id: "4",
         title: "Dosa",
         mrpprice: 149,
         offerprice: 120,
         imageUrl: "/assets/images/dosa.jpg",
       },
     ],
+  },
+];
+
+export const WhyChooseUsData: IWhyChooseUs[] = [
+  {
+    id: 1,
+    title: "Pure Beginnings",
+    description:
+      "Our culinary creations start with the purest water in all our food and snacks preparation.",
+    imageicon: "🌊",
+    image:
+      "https://img.freepik.com/free-photo/woman-holding-glass-filled-with-water_23-2148728797.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+  },
+  {
+    id: 2,
+    title: "Premium Oils",
+    description:
+      "Exclusively cold-pressed Sesame and Peanut oils enhance our dishes.",
+    imageicon: "🥜",
+    image:
+      "https://img.freepik.com/free-photo/soybean-oil-soybean-food-beverage-products-food-nutrition-concept_1150-26351.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+  },
+  {
+    id: 3,
+    title: "Sourced with Care",
+    description:
+      "We curate our dishes with premium ingredients, some specially sourced from the heart of Tamil Nadu, India.",
+    imageicon: "🌾 ",
+    image:
+      "https://img.freepik.com/free-photo/grinder-wooden-spoon-with-spices_23-2148601118.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+  },
+  {
+    id: 4,
+    title: "Unmatched Freshness",
+    description:
+      "Enjoy meals prepared on the very same day, using our own freshly made masalas and freshly cut vegetables.",
+    imageicon: "🌿",
+    image:
+      "https://img.freepik.com/free-photo/top-view-fresh-red-tomatoes-with-greens-bell-peppers-dark-background_140725-137152.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+  },
+  {
+    id: 5,
+    title: "Time-Honored Tradition",
+    description:
+      " Our commitment to traditional cooking techniques not only preserves nutrients but also enhances flavors.",
+    imageicon: "🕰️",
+    image:
+      "https://img.freepik.com/free-photo/male-hands-preparing-delicious-salad_23-2148351765.jpg?w=1060&t=st=1698917780~exp=1698918380~hmac=d96e984ab5afa02ce46aae34c43e496a0f17df5bc2564b30e95cd84c104566f0.",
+  },
+  {
+    id: 6,
+    title: "Quality Assurance",
+    description:
+      "Rest assured, we never recycle our cooking oil, maintaining the highest quality standards.",
+    imageicon: "♻️",
+    image:
+      "https://img.freepik.com/free-vector/waste-management-concept-illustration_114360-8795.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
   },
 ];
