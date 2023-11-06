@@ -12,15 +12,6 @@ const getAllMenus = async () => {
   }
 };
 
-const getAllCateringMenus = async () => {
-  try {
-    const response = await httpWithoutCredentials.get<IMenuList[]>(
-      "/menu/getAllCateringMenus"
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
 
-export { getAllMenus, getAllCateringMenus };
+
+export { getAllMenus };

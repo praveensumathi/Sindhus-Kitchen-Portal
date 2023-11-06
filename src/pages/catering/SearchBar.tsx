@@ -1,5 +1,3 @@
-import React from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -7,7 +5,9 @@ import { Button } from "@mui/material";
 import Container from "@mui/material/Container";
 import { IMenuList } from "../../interface/types";
 import { useEffect, useState } from "react";
-import { usegetAllCateringMenus } from "../../customRQHooks/Hooks";
+import { MenuType } from "../../enums/MenuTypesEnum";
+import { queryClient } from "../../App";
+import { getAllMenus } from "../../services/api";
 
 const foodOptions = [
   { label: "Food1" },
@@ -18,15 +18,29 @@ const foodOptions = [
 ];
 
 function SearchBar() {
-  const [cateringmenus, setCateringMenus] = useState<IMenuList[]>([]);
-  const { data: menuData, isLoading, isError } = usegetAllCateringMenus();
+  const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
+  const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
 
   useEffect(() => {
-    if (!isLoading && !isError) {
-      setCateringMenus(menuData);
-      console.log(menuData);
+    if (menuList) {
+      setFilteredCateringMenus(menuList);
+    } else {
+      refetchMenus();
     }
-  }, [menuData, isLoading, isError]);
+  }, [menuList]);
+
+  const refetchMenus = async () => {
+    const _menuList = await queryClient.fetchQuery(["menus"], getAllMenus);
+    setFilteredCateringMenus(_menuList);
+  };
+
+  const setFilteredCateringMenus = (menuList: IMenuList[]) => {
+    var filteredMenus = menuList.filter(
+      (menu) => menu.menuType == MenuType.OTHERS
+    );
+
+    setCateringMenus([...filteredMenus]);
+  };
 
   return (
     <Container>
@@ -34,7 +48,7 @@ function SearchBar() {
         <Grid item xs={12} lg={4}>
           <Autocomplete
             id="category-autocomplete"
-            options={cateringmenus}
+            options={cateringMenus}
             getOptionLabel={(option) => option.title}
             renderInput={(params) => (
               <TextField

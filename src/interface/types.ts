@@ -32,4 +32,14 @@ export interface IProductCardList {
 export interface IMenuList {
   _id: string;
   title: string;
+  menuType: number;
 }
+
+export interface IWhyChooseUs {
+  id: number;
+  imageicon: string;
+  title: string;
+  description: string;
+  image: string;
+}
+

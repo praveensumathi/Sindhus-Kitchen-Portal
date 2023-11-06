@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllCateringMenus, getAllMenus } from "../services/api";
+import { getAllMenus } from "../services/api";
 
 export const usegetAllMenus = () => {
   return useQuery({
@@ -10,11 +10,4 @@ export const usegetAllMenus = () => {
   });
 };
 
-export const usegetAllCateringMenus = () => {
-  return useQuery({
-    queryKey: ["cateringMenus"],
-    queryFn: getAllCateringMenus,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
-};
+
