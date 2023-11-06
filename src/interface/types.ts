@@ -28,3 +28,8 @@ export interface IProductCardList {
   offerprice: number;
   imageUrl: string;
 }
+
+export interface IMenuList {
+  _id: string;
+  title: string;
+}

@@ -5,14 +5,10 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Container from "@mui/material/Container";
+import { IMenuList } from "../../interface/types";
+import { useEffect, useState } from "react";
+import { usegetAllCateringMenus } from "../../customRQHooks/Hooks";
 
-const categoryOptions = [
-  { label: "Snacks" },
-  { label: "BreakFast" },
-  { label: "Veg Main Course" },
-  { label: "Non-Veg Main Course" },
-  { label: "Deserts" },
-];
 const foodOptions = [
   { label: "Food1" },
   { label: "Food2" },
@@ -22,14 +18,24 @@ const foodOptions = [
 ];
 
 function SearchBar() {
+  const [cateringmenus, setCateringMenus] = useState<IMenuList[]>([]);
+  const { data: menuData, isLoading, isError } = usegetAllCateringMenus();
+
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      setCateringMenus(menuData);
+      console.log(menuData);
+    }
+  }, [menuData, isLoading, isError]);
+
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={4}>
           <Autocomplete
             id="category-autocomplete"
-            options={categoryOptions}
-            getOptionLabel={(option) => option.label}
+            options={cateringmenus}
+            getOptionLabel={(option) => option.title}
             renderInput={(params) => (
               <TextField
                 {...params}
