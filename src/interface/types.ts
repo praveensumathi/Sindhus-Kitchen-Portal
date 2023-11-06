@@ -28,6 +28,13 @@ export interface IProductCardList {
   offerprice: number;
   imageUrl: string;
 }
+
+export interface IMenuList {
+  _id: string;
+  title: string;
+  menuType: number;
+}
+
 export interface IWhyChooseUs {
   id: number;
   imageicon: string;

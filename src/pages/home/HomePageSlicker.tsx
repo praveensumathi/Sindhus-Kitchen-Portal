@@ -21,6 +21,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { homePageSlicker, homeSearchCityDropDown, homeSearchMenusDropDown } from "../../seed-data/Seed-data";
+// import { usegetAllMenus } from "../../customRQHooks/Hooks";
+import { IMenuList } from "../../interface/types";
+import { useEffect, useState } from "react";
+import { usegetAllMenus } from "../../customRQHooks/Hooks";
+
 
 function HomePageSlicker() {
   const settings = {
@@ -33,10 +38,22 @@ function HomePageSlicker() {
   };
   const theme = useTheme();
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
+  const [menus, setMenus] = useState<IMenuList[]>([]);
+
+
+
+    const { data: menuData, isLoading, isError,} = usegetAllMenus();
+
+   useEffect(() => {
+     if (!isLoading && !isError) {
+       setMenus(menuData);
+       console.log(menuData)
+     }
+   }, [menuData, isLoading, isError]);
 
   return (
     <Box sx={{ position: "relative" }}>
-     <Slider {...settings}>
+      <Slider {...settings}>
         {homePageSlicker.map((content, index) => (
           <Box style={{ display: "flex", flexDirection: "column" }} key={index}>
             <Box className="page-banner" style={{ position: "relative" }}>
@@ -96,7 +113,7 @@ function HomePageSlicker() {
             </Box>
           </Box>
         ))}
-      </Slider> 
+      </Slider>
       <Box
         sx={{
           position: "absolute",
@@ -133,7 +150,7 @@ function HomePageSlicker() {
             <Autocomplete
               disableClearable
               sx={{ width: "100%" }}
-              options={homeSearchCityDropDown.map((option) => option)}
+              options={menus.map((option) => option.title)}
               renderInput={(params) => (
                 <TextField
                   {...params}
