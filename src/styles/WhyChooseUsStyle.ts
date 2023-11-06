@@ -25,6 +25,7 @@ export const whyChooseUsSytle = makeStyles(() => ({
     textAlign: "center",
     transition: "transform 0.4s",
     transformStyle: "preserve-3d",
+   
   },
   flipCardFront: {
     position: "absolute",
@@ -39,6 +40,7 @@ export const whyChooseUsSytle = makeStyles(() => ({
     color: "white",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
+  
   },
   flipCardBack: {
     position: "absolute",

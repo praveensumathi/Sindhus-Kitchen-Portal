@@ -14,7 +14,7 @@ function WhyChooseUs(props: Iprops) {
     <Container>
       <Box sx={{ display: "flex", justifyContent: "center", p: 5 }}>
         <Typography variant="h4" fontWeight={600}>
-          Why Choose Us
+          Why Sindhu's Kitchen?
         </Typography>
       </Box>
       <Grid container spacing={3} sx={{ justifyContent: "center" }}>
@@ -29,7 +29,7 @@ function WhyChooseUs(props: Iprops) {
                 }}
                 elevation={0}
               >
-                <Box className={`${classes.flipCardInner}  `}>
+                <Box className={`${classes.flipCardInner} `}>
                   <Box
                     className={`${classes.flipCardFront} `}
                     style={{
@@ -40,7 +40,9 @@ function WhyChooseUs(props: Iprops) {
                       className={`${classes.overlay} ${classes.centerImage}`}
                     >
                       <Box
-                        sx={{ fontSize: "60px" }}
+                        sx={{
+                          fontSize: "60px",
+                        }}
                         className={`${classes.imageWithBorder}  `}
                       >
                         {whychoose.imageicon}
@@ -50,7 +52,7 @@ function WhyChooseUs(props: Iprops) {
                         {whychoose.title}
                       </Typography>
                     </Box>
-                  </Box>
+                          </Box>
                   <Typography className={` ${classes.flipCardBack}`}>
                     {whychoose.description}
                   </Typography>
