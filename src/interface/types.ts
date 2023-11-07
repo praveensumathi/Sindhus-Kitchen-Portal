@@ -43,3 +43,33 @@ export interface IWhyChooseUs {
   image: string;
 }
 
+export interface IProductDetail {
+  product: IProduct;
+}
+
+export interface IProduct {
+  menu: IMenu;
+  _id: string;
+  title: string;
+  price: null;
+  images: any[];
+  servingSizesWithPrice: IServingSizesWithPrice[];
+  description: string;
+  netWeight: number;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}
+
+export interface IMenu {
+  mainMenuIds: string[];
+  subMenuIds: any[];
+}
+
+export interface IServingSizesWithPrice {
+  size: string;
+  price: number;
+  quantity: number;
+  _id: string;
+}
+
