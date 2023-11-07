@@ -236,21 +236,21 @@ export const categoryWithProducts: ICategoryWithProducts[] = [
     image: "http://localhost:5173/assets/food-img3.jpg",
     products: [
       {
-        _id: "1",
+        _id: "654887cda8c6272a22e7334a",
         title: "Boonthi Laddu",
         mrpprice: 299,
         offerprice: 250,
         imageUrl: "/assets/food-img3.jpg",
       },
       {
-        _id: "2",
+        _id: "654887cda8c6272a22e7334a",
         title: "Boonthi Laddu",
         mrpprice: 199,
         offerprice: 150,
         imageUrl: "/assets/food-img3.jpg",
       },
       {
-        _id:"3",
+        _id: "3",
         title: "Boonthi Laddu",
         mrpprice: 199,
         offerprice: 150,

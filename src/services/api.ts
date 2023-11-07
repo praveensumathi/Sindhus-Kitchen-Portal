@@ -12,10 +12,10 @@ const getAllMenus = async () => {
   }
 };
 
-const fetchProductsById = async () => {
+const fetchProductById = async (productId: string | undefined) => {
   try {
     const response = await httpWithoutCredentials.get<IProductDetail>(
-      "product/fetchProductsById/654887cda8c6272a22e7334a"
+      `product/fetchProductById/${productId}`
     );
     return response;
   } catch (error) {
@@ -23,4 +23,4 @@ const fetchProductsById = async () => {
   }
 };
 
-export { getAllMenus, fetchProductsById };
+export { getAllMenus, fetchProductById };

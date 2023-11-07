@@ -58,7 +58,6 @@ export interface IProduct {
   netWeight: number;
   createdAt: Date;
   updatedAt: Date;
-  __v: number;
 }
 
 export interface IMenu {
