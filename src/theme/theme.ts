@@ -19,6 +19,7 @@ const theme = createTheme({
       textTransform: "none",
       fontWeight: 500,
       textDecoration: "none",
+      color: "#fff",
     },
   },
 });

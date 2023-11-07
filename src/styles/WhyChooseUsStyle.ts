@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import theme from "../theme/theme";
 export const whyChooseUsSytle = makeStyles(() => ({
   centerImage: {
     display: "flex",
@@ -25,7 +26,6 @@ export const whyChooseUsSytle = makeStyles(() => ({
     textAlign: "center",
     transition: "transform 0.4s",
     transformStyle: "preserve-3d",
-   
   },
   flipCardFront: {
     position: "absolute",
@@ -40,7 +40,6 @@ export const whyChooseUsSytle = makeStyles(() => ({
     color: "white",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-  
   },
   flipCardBack: {
     position: "absolute",
@@ -52,9 +51,10 @@ export const whyChooseUsSytle = makeStyles(() => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#2980b9",
+    backgroundColor: theme.palette.primary.main,
     color: "white",
     transform: "rotateY(180deg)",
+    fontWeight: "bolder",
   },
   flipcard: {
     maxWidth: 300,
