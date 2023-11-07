@@ -1,18 +1,14 @@
-import React from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Container from "@mui/material/Container";
+import { IMenuList } from "../../interface/types";
+import { useEffect, useState } from "react";
+import { MenuType } from "../../enums/MenuTypesEnum";
+import { queryClient } from "../../App";
+import { getAllMenus } from "../../services/api";
 
-const categoryOptions = [
-  { label: "Snacks" },
-  { label: "BreakFast" },
-  { label: "Veg Main Course" },
-  { label: "Non-Veg Main Course" },
-  { label: "Deserts" },
-];
 const foodOptions = [
   { label: "Food1" },
   { label: "Food2" },
@@ -22,14 +18,38 @@ const foodOptions = [
 ];
 
 function SearchBar() {
+  const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
+  const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
+
+  useEffect(() => {
+    if (menuList) {
+      setFilteredCateringMenus(menuList);
+    } else {
+      refetchMenus();
+    }
+  }, [menuList]);
+
+  const refetchMenus = async () => {
+    const _menuList = await queryClient.fetchQuery(["menus"], getAllMenus);
+    setFilteredCateringMenus(_menuList);
+  };
+
+  const setFilteredCateringMenus = (menuList: IMenuList[]) => {
+    var filteredMenus = menuList.filter(
+      (menu) => menu.menuType == MenuType.OTHERS
+    );
+
+    setCateringMenus([...filteredMenus]);
+  };
+
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={4}>
           <Autocomplete
             id="category-autocomplete"
-            options={categoryOptions}
-            getOptionLabel={(option) => option.label}
+            options={cateringMenus}
+            getOptionLabel={(option) => option.title}
             renderInput={(params) => (
               <TextField
                 {...params}

@@ -10,7 +10,7 @@ function CateringPage() {
       <Box sx={{ height: "200px", position: "relative" }}>
         <Box
           style={{
-            backgroundImage: "url('assets/images/sssurf3.png')",
+            backgroundImage: "url('assets/images/sssurf7.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             transform: "rotate(180deg)",
