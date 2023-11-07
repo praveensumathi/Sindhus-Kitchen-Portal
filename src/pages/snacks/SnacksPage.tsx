@@ -19,14 +19,10 @@ function SnacksPage() {
   return (
     <>
       <Box sx={{ position: "relative" }}>
-        <Box
-          sx={{
-            mt: 3,
-          }}
-        >
+        <Box>
           <div
             style={{
-              backgroundImage: "url('assets/images/sssurf3.png')",
+              backgroundImage: "url('assets/images/sssurf7.png')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               transform: "rotate(180deg)",
@@ -34,7 +30,7 @@ function SnacksPage() {
               width: "100%",
               height: "100%",
               zIndex: -1,
-              top: 0,
+              top: "24px",
             }}
           ></div>
           <Grid container spacing={3} sx={{ overflow: "hidden" }}>
@@ -69,7 +65,10 @@ function SnacksPage() {
                 height: "150px",
               }}
             >
-              <Typography variant="h4" sx={{ color: "white", fontWeight: 600 }}>
+              <Typography
+                variant="h4"
+                sx={{ mt: 2, color: "white", fontWeight: 600 }}
+              >
                 Snacks
               </Typography>
             </Grid>
@@ -119,10 +118,10 @@ function SnacksPage() {
       <Box
         sx={{
           width: "100%",
-          height: "150px",
-          backgroundImage: "url(assets/images/wave1.png)",
+          height: "220px",
+          backgroundImage: "url(assets/images/wave2.png)",
           backgroundRepeat: "no-repeat",
-         backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       ></Box>
     </>
