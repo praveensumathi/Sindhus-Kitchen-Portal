@@ -13,28 +13,28 @@ export const productCardList: IProductCardList[] = [
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
-    imageUrl: "/assets/food-img3.jpg",
+    imageUrl: "assets/food-img3.jpg",
   },
   {
-    _id:"2",
+    _id: "2",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
-    imageUrl: "/assets/food-img3.jpg",
+    imageUrl: "assets/food-img3.jpg",
   },
   {
-    _id:"3",
+    _id: "3",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
-    imageUrl: "/assets/food-img3.jpg",
+    imageUrl: "assets/food-img3.jpg",
   },
   {
-    _id:"4",
+    _id: "4",
     title: "BoonthiLaddu",
     mrpprice: 299,
     offerprice: 250,
-    imageUrl: "/assets/food-img3.jpg",
+    imageUrl: "assets/food-img3.jpg",
   },
 ];
 export const ourServicesData: IOurServices[] = [
@@ -150,7 +150,7 @@ export const cateringPage: ICateringPage[] = [
     Large Tray - can eat 30 members
     `,
 
-    image: "/assets/food-images-2.jpg",
+    image: "assets/food-images-2.jpg",
     trayItems: [
       { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
@@ -167,7 +167,7 @@ export const cateringPage: ICateringPage[] = [
     Medium Tray - can eat 20 members,
    Large Tray - can eat 30 members
     `,
-    image: "/assets/food-img.jpg",
+    image: "assets/food-img.jpg",
     trayItems: [
       { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
@@ -184,7 +184,7 @@ export const cateringPage: ICateringPage[] = [
     Medium Tray - can eat 20 members,
     Large Tray - can eat 30 members
     `,
-    image: "/assets/food-img3.jpg",
+    image: "assets/food-img3.jpg",
     trayItems: [
       { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
@@ -202,7 +202,7 @@ export const cateringPage: ICateringPage[] = [
     Medium Tray - can eat 20 members,
     Large Tray - can eat 30 members
     `,
-    image: "/assets/food-img.jpg",
+    image: "assets/food-img.jpg",
     trayItems: [
       { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
