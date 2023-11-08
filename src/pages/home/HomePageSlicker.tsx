@@ -20,12 +20,14 @@ import SearchIcon from "@mui/icons-material/Search";
 // } from "../../seed-data/seed-data";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { homePageSlicker, homeSearchCityDropDown, homeSearchMenusDropDown } from "../../seed-data/Seed-data";
+import {
+  homePageSlicker,
+  homeSearchMenusDropDown,
+} from "../../seed-data/Seed-data";
 // import { usegetAllMenus } from "../../customRQHooks/Hooks";
 import { IMenuList } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { usegetAllMenus } from "../../customRQHooks/Hooks";
-
 
 function HomePageSlicker() {
   const settings = {
@@ -40,16 +42,14 @@ function HomePageSlicker() {
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
   const [menus, setMenus] = useState<IMenuList[]>([]);
 
+  const { data: menuData, isLoading, isError } = usegetAllMenus();
 
-
-    const { data: menuData, isLoading, isError,} = usegetAllMenus();
-
-   useEffect(() => {
-     if (!isLoading && !isError) {
-       setMenus(menuData);
-       console.log(menuData)
-     }
-   }, [menuData, isLoading, isError]);
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      setMenus(menuData);
+      console.log(menuData);
+    }
+  }, [menuData, isLoading, isError]);
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -145,7 +145,7 @@ function HomePageSlicker() {
             }}
           >
             <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <RestaurantIcon sx={{ color: "orange" }} />
+              <RestaurantIcon color="secondary" />
             </IconButton>
             <Autocomplete
               disableClearable
@@ -189,7 +189,7 @@ function HomePageSlicker() {
               orientation="vertical"
             />
             <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon sx={{ color: "#ffa500" }} />
+              <SearchIcon color="secondary" />
             </IconButton>
             <Autocomplete
               freeSolo

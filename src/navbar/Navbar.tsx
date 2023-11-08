@@ -163,14 +163,14 @@ function NavBar() {
                           textTransform: "none",
                           backgroundColor:
                             location.pathname === menu.linkurl
-                              ? "orange"
+                              ? theme.palette.primary.main
                               : "none",
                           color:
                             location.pathname === menu.linkurl
                               ? "white"
                               : "black",
                           "&:hover": {
-                            backgroundColor: "orange",
+                            backgroundColor: theme.palette.primary.main,
                             color: "white",
                           },
                         }}

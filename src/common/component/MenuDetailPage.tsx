@@ -1,6 +1,5 @@
 import {
   Box,
-  // Button,
   Container,
   Divider,
   Grid,
@@ -9,8 +8,11 @@ import {
   useTheme,
 } from "@mui/material";
 import Slider from "react-slick";
-import { menuDetailPage, productCardList } from "../../seed-data/Seed-data";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchProductById } from "../../services/api";
+import { IProductDetail } from "../../interface/types";
+import { useSnackBar } from "../../context/SnackBarContext";
 
 const CustomPrevArrow = (props) => (
   <div {...props} className="custom-prev-arrow">
@@ -30,22 +32,35 @@ function MenuDetailPage() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
-    // autoplay: true,
+    arrows: false,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
   };
 
   const theme = useTheme();
   const { productId } = useParams();
-
-  const menuItem = productCardList.find((item) => item._id === productId);
-
-  // const selectedCategory = categoryWithProducts.find(
-  //   (category) => category._id === params.categoryId
-  // );
+  const { updateSnackBarState } = useSnackBar();
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
+
+  const [menuDetail, setMenuDetail] = useState<IProductDetail>();
+
+  const fetchProductDetail = async () => {
+    try {
+      const response = await fetchProductById(productId);
+      setMenuDetail(response.data);
+    } catch (error: any) {
+      if (error.response && error.response.data) {
+        console.log(error.response.data);
+        updateSnackBarState(true, error.response.data.message, "error");
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchProductDetail();
+  }, []);
+
   return (
     <Container
       sx={{ width: "100%", display: "flex", justifyContent: "center" }}
@@ -57,17 +72,23 @@ function MenuDetailPage() {
       >
         <Grid item md={5} xs={12}>
           <Slider {...settings}>
-            {/* {menuDetailPage.image.map((image, index) => ( */}
-            <Box sx={{ height: isBelowMediumSize ? "50vh" : "75vh" }}>
-              <img
-                src={menuItem?.imageUrl}
-                alt="sindhus-menu"
-                height="100%"
-                width="100%"
-                className="menuDetail-slickerImage"
-              />
-            </Box>
-            {/* ))} */}
+            {menuDetail?.product.images &&
+              menuDetail.product.images.length > 0 &&
+              menuDetail.product.images.map((image, index) => (
+                <Box
+                  sx={{
+                    height: isBelowMediumSize ? "50vh" : "75vh",
+                  }}
+                  key={index}
+                >
+                  <img
+                    src={image}
+                    alt="sindhus-menu"
+                    height="100%"
+                    width="100%"
+                  />
+                </Box>
+              ))}
           </Slider>
         </Grid>
         <Grid
@@ -77,10 +98,10 @@ function MenuDetailPage() {
           sx={{ display: "flex", alignItems: "center" }}
         >
           <Container>
-            {menuItem && (
+            {menuDetail && (
               <>
                 <Typography sx={{ fontWeight: "bolder", fontSize: "34px" }}>
-                  {menuItem.title}
+                  {menuDetail.product.title}
                 </Typography>
                 <Typography
                   sx={{
@@ -91,7 +112,7 @@ function MenuDetailPage() {
                     alignItems: "center",
                   }}
                 >
-                  $ {menuItem.mrpprice} &nbsp;
+                  $ {menuDetail.product.price} &nbsp;
                   <span style={{ fontSize: "12px" }}>(Per Piece / Plate)</span>
                 </Typography>
                 <Typography>
@@ -101,8 +122,7 @@ function MenuDetailPage() {
                   </span>
                 </Typography>
                 <Typography sx={{ fontSize: "small" }}>
-                  {/* {menuItem.description} */}
-                  some description
+                  {menuDetail.product.description}
                 </Typography>
                 <Divider sx={{ margin: "10px 0" }} />
                 <Typography
@@ -118,22 +138,27 @@ function MenuDetailPage() {
                     textAlign: "center",
                   }}
                 >
-                  {/* {menuItem.netWeight} lb */}
-                  5lb
+                  {menuDetail.product.netWeight} lb
                 </Box>
                 <Typography
                   sx={{ fontSize: "15px", fontWeight: "500", margin: "5px 0" }}
                 >
                   Serving Sizes
                 </Typography>
-                {/* {menuItem.servingSizes.map((size, index) => ( */}
-                <Typography sx={{ fontSize: "small", display: "flex" }}>
-                  SmallTray-[ $50.00 ] <br></br>
-                  MediumTray-[ $150.00 ]<br></br> LargeTray-[ $150.00 ]
-                  {/* {size.tray} -
-                    <span style={{ fontWeight: "bolder" }}>{size.members}</span> */}
-                </Typography>
-                {/* )} */}
+                {menuDetail.product.servingSizesWithPrice.length > 0 &&
+                  menuDetail.product.servingSizesWithPrice.map(
+                    (size, index) => (
+                      <Typography
+                        sx={{ fontSize: "small", display: "flex" }}
+                        key={index}
+                      >
+                        {size.size} -
+                        <span style={{ fontWeight: "bolder" }}>
+                          &nbsp; [${size.price}]
+                        </span>
+                      </Typography>
+                    )
+                  )}
               </>
             )}
           </Container>
