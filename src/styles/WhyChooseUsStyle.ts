@@ -1,6 +1,7 @@
+import { Theme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import theme from "../theme/theme";
-export const whyChooseUsSytle = makeStyles(() => ({
+
+export const whyChooseUsSytle = makeStyles((theme: Theme) => ({
   centerImage: {
     display: "flex",
     flexDirection: "column",

@@ -13,21 +13,15 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SearchIcon from "@mui/icons-material/Search";
-// import {
-//   homePageSlicker,
-//   homeSearchCityDropDown,
-//   homeSearchMenusDropDown,
-// } from "../../seed-data/seed-data";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {
-  homePageSlicker,
-  homeSearchMenusDropDown,
-} from "../../seed-data/Seed-data";
-// import { usegetAllMenus } from "../../customRQHooks/Hooks";
 import { IMenuList } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { usegetAllMenus } from "../../customRQHooks/Hooks";
+import {
+  homePageSlicker,
+  homeSearchMenusDropDown,
+} from "../../seed-data/seed-data";
 
 function HomePageSlicker() {
   const settings = {

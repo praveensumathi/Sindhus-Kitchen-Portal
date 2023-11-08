@@ -14,12 +14,23 @@ const theme = createTheme({
     },
   },
   typography: {
-    //fontFamily: "catamaran-semiBold",
     button: {
       textTransform: "none",
       fontWeight: 500,
       textDecoration: "none",
       color: "#fff",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        outlined: {
+          color: "#57ccb5",
+        },
+        contained: {
+          color: "white",
+        },
+      },
     },
   },
 });
