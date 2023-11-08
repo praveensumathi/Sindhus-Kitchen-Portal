@@ -1,8 +1,6 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-
-import { cateringPage } from "../../seed-data/Seed-data";
 import { useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import {
@@ -13,6 +11,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { cateringPage } from "../../seed-data/seed-data";
 
 function CateringProduct() {
   const [trayQuantities, setTrayQuantities] = useState({
@@ -50,7 +49,6 @@ function CateringProduct() {
                 backgroundColor: "orange",
                 m: 2,
                 fontSize: "2rem",
-                width: "100%",
               }}
             >
               {item.menuTitle}

@@ -18,6 +18,7 @@ import theme from "../theme/theme";
 
 function Footer() {
   const classes = useCommonGridStyle();
+
   const [date, setDate] = React.useState<string>(
     dayjs(new Date()).format("YYYY-MM-DD")
   );
@@ -126,7 +127,9 @@ function Footer() {
             />
             <Grid item lg={2.9} xs={12} className={classes.commonGridStyle}>
               <Box>
-                <PhoneIcon sx={{ color: theme.palette.secondary.main }}></PhoneIcon>
+                <PhoneIcon
+                  sx={{ color: theme.palette.secondary.main }}
+                ></PhoneIcon>
                 <Typography variant="h5" my={2}>
                   Call us
                 </Typography>
@@ -189,12 +192,7 @@ function Footer() {
               />
             </Grid>
             <Grid item lg={6} xs={12}>
-              <TextField
-                label="Email Id"
-                fullWidth
-                variant="outlined"
-                required
-              />
+              <TextField label="Email" fullWidth variant="outlined" required />
             </Grid>
             <Grid item lg={6} xs={12}>
               <TextField
