@@ -1,7 +1,6 @@
-import { Box, Typography, Container, Grid, Card } from "@mui/material";
+import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import { IWhyChooseUs } from "../../interface/types";
 import { whyChooseUsSytle } from "../../styles/WhyChooseUsStyle";
-import { useTheme } from "@mui/material/styles";
 
 interface Iprops {
   whyChooseUs: IWhyChooseUs[];
@@ -11,7 +10,6 @@ function WhyChooseUs(props: Iprops) {
   const { whyChooseUs } = props;
 
   const classes = whyChooseUsSytle();
-  const theme = useTheme();
 
   return (
     <Container>

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export const axiosInstanceWithCredential = axios.create({
   baseURL: import.meta.env.VITE_AXIOS_BASE_URL,
@@ -87,10 +87,6 @@ const withCredentialsConfig = {
   withCredentials: true,
 } as AxiosRequestConfig;
 
-const withoutCredentialsConfig = {
-  withCredentials: false,
-} as AxiosRequestConfig;
-
 const httpWithCredentials = {
   get: <T>(
     url: string,
@@ -158,6 +154,6 @@ httpWithMultipartFormData.defaults.withCredentials = true;
 
 export {
   httpWithCredentials,
-  httpWithoutCredentials,
   httpWithMultipartFormData,
+  httpWithoutCredentials,
 };

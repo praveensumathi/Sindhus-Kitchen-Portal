@@ -1,14 +1,6 @@
-import React from "react";
 import { ICategoryWithProducts } from "../../interface/types";
 import { useNavigate } from "react-router-dom";
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import Slider from "react-slick";
 import CommonProductCard from "./CommonProductCard";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";

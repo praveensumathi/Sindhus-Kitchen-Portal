@@ -1,7 +1,6 @@
-import React from "react";
+import { Button, Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import Slider from "react-slick";
-import { Button, Container } from "@mui/material";
 import { snacksMenu } from "../../seed-data/seed-data";
 
 function SnacksMenuItem() {
