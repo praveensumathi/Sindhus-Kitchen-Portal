@@ -42,4 +42,8 @@ export interface IWhyChooseUs {
   description: string;
   image: string;
 }
-
+export interface IProductList{
+  _id: string;
+  title: string;
+  image: string;
+}

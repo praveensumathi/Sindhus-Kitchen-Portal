@@ -20,12 +20,16 @@ import SearchIcon from "@mui/icons-material/Search";
 // } from "../../seed-data/seed-data";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { homePageSlicker, homeSearchCityDropDown, homeSearchMenusDropDown } from "../../seed-data/Seed-data";
+import {
+  homePageSlicker,
+  homeSearchCityDropDown,
+  homeSearchMenusDropDown,
+} from "../../seed-data/Seed-data";
 // import { usegetAllMenus } from "../../customRQHooks/Hooks";
-import { IMenuList } from "../../interface/types";
+import { IMenuList, IProductList } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { usegetAllMenus } from "../../customRQHooks/Hooks";
-
+import { httpWithoutCredentials } from "../../services/http";
 
 function HomePageSlicker() {
   const settings = {
@@ -39,17 +43,53 @@ function HomePageSlicker() {
   const theme = useTheme();
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
   const [menus, setMenus] = useState<IMenuList[]>([]);
+  const { data: menuData, isLoading, isError } = usegetAllMenus();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [products, setProducts] = useState<IProductList[]>([]);
+  const [selectedMenuId, setSelectedMenuId] = useState("");
 
 
+  // const { data: productData } = usefetchProductData();
 
-    const { data: menuData, isLoading, isError,} = usegetAllMenus();
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      setMenus(menuData);
+      console.log(menuData);
+    }
+  }, [menuData, isLoading, isError]);
 
-   useEffect(() => {
-     if (!isLoading && !isError) {
-       setMenus(menuData);
-       console.log(menuData)
-     }
-   }, [menuData, isLoading, isError]);
+  const fetchProductData = async () => {
+    debugger
+    try {
+      const response = await httpWithoutCredentials.get<IProductList[]>(
+        `/product/searchProduct/${selectedMenuId}?searchTerm=${searchTerm}`,
+        // {
+        //   params: {
+        //     searchTerm: searchTerm,
+        //   },
+        // }
+      );
+      console.log(response.data);
+      if (response && response.data.length > 0) {
+        setProducts(response.data || []);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleSearchTermChange = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm);
+  };
+
+  useEffect(() => {
+    if (searchTerm && searchTerm.trim() !== "") {
+      fetchProductData();
+
+      // setProducts(response.data);
+    }
+  }, [searchTerm]);
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -151,6 +191,14 @@ function HomePageSlicker() {
               disableClearable
               sx={{ width: "100%" }}
               options={menus.map((option) => option.title)}
+              onChange={(event, newValue) => {
+                const selectedMenu = menus.find(
+                  (menu) => menu.title === newValue
+                );
+                if (selectedMenu) {
+                  setSelectedMenuId(selectedMenu._id);
+                }
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -159,7 +207,6 @@ function HomePageSlicker() {
                     ...params.InputProps,
                     type: "search",
                     disableUnderline: true,
-                    // sx: { padding: "15px" },
                   }}
                   fullWidth
                   variant="standard"
@@ -195,11 +242,12 @@ function HomePageSlicker() {
               freeSolo
               disableClearable
               sx={{ width: "100%" }}
-              options={homeSearchMenusDropDown}
-              getOptionLabel={(option: any) => option.name}
+              value={searchTerm}
+              onChange={handleSearchTermChange}
+              options={products.map((product) => product.title)}
               renderOption={(props, option) => (
                 <li {...props} style={{ margin: "5px 0" }}>
-                  <img
+                  {/* <img
                     src={option.image}
                     alt={option.name}
                     style={{
@@ -208,10 +256,10 @@ function HomePageSlicker() {
                       borderRadius: "50%",
                       marginRight: "8px",
                     }}
-                  />
-                  <Typography sx={{ fontWeight: "bolder" }}>
-                    {option.name}
-                  </Typography>
+                  /> */}
+                  {/* <Typography sx={{ fontWeight: "bolder" }}>
+                    {option.title}
+                  </Typography> */}
                 </li>
               )}
               renderInput={(params) => (

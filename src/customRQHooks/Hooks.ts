@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllMenus } from "../services/api";
+import {  getAllMenus} from "../services/api";
 
 export const usegetAllMenus = () => {
   return useQuery({
@@ -11,3 +11,11 @@ export const usegetAllMenus = () => {
 };
 
 
+// export const usefetchProductData = () => {
+//   return useQuery({
+//     queryKey: ["searchTerm"],
+//     queryFn: fetchProductData,
+//     refetchOnWindowFocus: false,
+//     refetchOnMount: false,
+//   });
+// };

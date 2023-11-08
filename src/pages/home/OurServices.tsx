@@ -86,7 +86,7 @@ function OurServices(props: Iprops) {
               (icon) => icon.id === services.iconkey
             );
             return (
-              <Grid item key={index}>
+              <Grid item key={index} xs={12} lg={2}>
                 <Box className={classes.boxStyle}>
                   {matchedIcon && matchedIcon.icon}
                 </Box>
