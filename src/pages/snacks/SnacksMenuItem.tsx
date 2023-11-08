@@ -1,8 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Slider from "react-slick";
-import { snacksMenu } from "../../seed-data/Seed-data";
 import { Button, Container } from "@mui/material";
+import { snacksMenu } from "../../seed-data/seed-data";
 
 function SnacksMenuItem() {
   const settings = {

@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Slider from "react-slick";
 import CommonProductCard from "./CommonProductCard";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 interface IProps {
   category: ICategoryWithProducts;
@@ -96,6 +97,7 @@ function Carousel(props: IProps) {
               onClick={() => handleClickViewAll(category._id)}
             >
               View All
+              <ArrowForwardIcon sx={{ fontSize: "18px" }} />
             </Button>
           </Box>
           <Slider {...settings}>

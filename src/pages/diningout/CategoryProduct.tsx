@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -7,14 +6,10 @@ import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import StoreIcon from "@mui/icons-material/Store";
 import CommonProductCard from "../../common/component/CommonProductCard";
-import { categoryWithProducts } from "../../seed-data/Seed-data";
-import { ICategoryWithProducts } from "../../interface/types";
 import { useParams } from "react-router-dom";
+import { categoryWithProducts } from "../../seed-data/seed-data";
 
 function CategoryProducts() {
-  const [previousResponseData, setPreviousResponseData] = useState<
-    ICategoryWithProducts[]
-  >([]);
 
   const params = useParams();
   // Find the category with the matching _id
