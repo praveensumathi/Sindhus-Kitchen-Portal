@@ -16,6 +16,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import TextField from "@mui/material/TextField";
 import theme from "../theme/theme";
 
+
 function Footer() {
   const classes = useCommonGridStyle();
 
@@ -36,13 +37,13 @@ function Footer() {
       className={`${classes.footerContainer} ${classes.innerBox}`}
     >
       <Box className={classes.overlay}></Box>
-      <Box sx={{ display: "flex", justifyContent: "center", py: 5 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", py: 3 }}>
         <Typography variant="h4" fontWeight={600}>
           Contact Us
         </Typography>
       </Box>
       <Container sx={{ paddingBottom: 2 }}>
-        <Grid container spacing={2} sx={{ gap: 3 }}>
+        <Grid container sx={{ gap: 3 }}>
           <Grid
             container
             item
@@ -53,14 +54,18 @@ function Footer() {
               justifyContent: "center",
             }}
           >
-            <Grid item lg={3} xs={12} className={classes.commonGridStyle}>
+            <Grid
+              item
+              lg={3}
+              xs={12}
+              className={classes.commonGridStyle}
+              sx={{ mb: 2 }}
+            >
               <Box>
                 <LocationOnIcon
                   sx={{ color: theme.palette.secondary.main }}
                 ></LocationOnIcon>
-                <Typography variant="h5" my={2}>
-                  Our Office Address
-                </Typography>
+                <Typography variant="h5">Our Office Address</Typography>
                 <Typography>
                   2700 E Eldorado Pkwy, #203,
                   <br /> Little Elm, Texas - 75068
@@ -72,15 +77,19 @@ function Footer() {
               flexItem
               sx={{ background: "white" }}
             />
-            <Grid item lg={3} xs={12} className={classes.commonGridStyle}>
+            <Grid
+              item
+              lg={3}
+              xs={12}
+              className={classes.commonGridStyle}
+              sx={{ mb: 2 }}
+            >
               <Box>
                 <ChatBubbleIcon
                   sx={{ color: theme.palette.secondary.main }}
                 ></ChatBubbleIcon>
-                <Typography variant="h5" my={2}>
-                  General Enquiries
-                </Typography>
-                <Typography my={2}>skvbalaji@gmail.com</Typography>
+                <Typography variant="h5">General Enquiries</Typography>
+                <Typography my={1}>skvbalaji@gmail.com</Typography>
                 <Box
                   sx={{
                     gap: 2,
@@ -125,14 +134,18 @@ function Footer() {
               flexItem
               sx={{ background: "white" }}
             />
-            <Grid item lg={2.9} xs={12} className={classes.commonGridStyle}>
+            <Grid
+              item
+              lg={2.9}
+              xs={12}
+              className={classes.commonGridStyle}
+              sx={{ mb: 2 }}
+            >
               <Box>
                 <PhoneIcon
                   sx={{ color: theme.palette.secondary.main }}
                 ></PhoneIcon>
-                <Typography variant="h5" my={2}>
-                  Call us
-                </Typography>
+                <Typography variant="h5">Call us</Typography>
                 <Typography>+1.9402792536</Typography>
                 <Typography>1234567890</Typography>
               </Box>
@@ -142,14 +155,18 @@ function Footer() {
               flexItem
               sx={{ background: "white" }}
             />
-            <Grid item lg={3} xs={12} className={classes.commonGridStyle}>
+            <Grid
+              item
+              lg={3}
+              xs={12}
+              className={classes.commonGridStyle}
+              sx={{ mb: 2 }}
+            >
               <Box>
                 <AccessTimeFilledIcon
                   sx={{ color: theme.palette.secondary.main }}
                 ></AccessTimeFilledIcon>
-                <Typography variant="h5" my={2}>
-                  Our Timing
-                </Typography>
+                <Typography variant="h5">Our Timing</Typography>
                 <Typography>
                   Monday 11AM-9PM
                   <br /> Tuesday Closed
@@ -206,16 +223,14 @@ function Footer() {
               <TextField label="Type Of Event" fullWidth variant="outlined" />
             </Grid>
             <Grid item lg={3} xs={12}>
-              {/* <CssTextField label="Event Date" fullWidth variant="outlined" /> */}
-              <Box>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    format="dd-MM-yyyy"
-                    value={new Date(date)}
-                    onChange={(date) => handleDateChange(date)}
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  format="dd-MM-yyyy"
+                  sx={{ width: "100%" }}
+                  value={new Date(date)}
+                  onChange={(date) => handleDateChange(date)}
                   />
-                </LocalizationProvider>
-              </Box>
+              </LocalizationProvider>
             </Grid>
             <Grid item lg={3} xs={12}>
               <TextField label="Guest Count" fullWidth variant="outlined" />
