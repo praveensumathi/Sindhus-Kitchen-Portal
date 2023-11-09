@@ -9,15 +9,16 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { useCommonGridStyle } from "../styles/FooterStyle";
-import CssTextField from "../common/component/CommonTextfeild";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import TextField from "@mui/material/TextField";
+import theme from "../theme/theme";
 
 function Footer() {
   const classes = useCommonGridStyle();
+
   const [date, setDate] = React.useState<string>(
     dayjs(new Date()).format("YYYY-MM-DD")
   );
@@ -55,7 +56,7 @@ function Footer() {
             <Grid item lg={3} xs={12} className={classes.commonGridStyle}>
               <Box>
                 <LocationOnIcon
-                  sx={{ color: "rgb(112, 83, 68)" }}
+                  sx={{ color: theme.palette.secondary.main }}
                 ></LocationOnIcon>
                 <Typography variant="h5" my={2}>
                   Our Office Address
@@ -74,7 +75,7 @@ function Footer() {
             <Grid item lg={3} xs={12} className={classes.commonGridStyle}>
               <Box>
                 <ChatBubbleIcon
-                  sx={{ color: "rgb(112, 83, 68)" }}
+                  sx={{ color: theme.palette.secondary.main }}
                 ></ChatBubbleIcon>
                 <Typography variant="h5" my={2}>
                   General Enquiries
@@ -126,7 +127,9 @@ function Footer() {
             />
             <Grid item lg={2.9} xs={12} className={classes.commonGridStyle}>
               <Box>
-                <PhoneIcon sx={{ color: "rgb(112, 83, 68)" }}></PhoneIcon>
+                <PhoneIcon
+                  sx={{ color: theme.palette.secondary.main }}
+                ></PhoneIcon>
                 <Typography variant="h5" my={2}>
                   Call us
                 </Typography>
@@ -142,7 +145,7 @@ function Footer() {
             <Grid item lg={3} xs={12} className={classes.commonGridStyle}>
               <Box>
                 <AccessTimeFilledIcon
-                  sx={{ color: "rgb(112, 83, 68)" }}
+                  sx={{ color: theme.palette.secondary.main }}
                 ></AccessTimeFilledIcon>
                 <Typography variant="h5" my={2}>
                   Our Timing
@@ -189,12 +192,7 @@ function Footer() {
               />
             </Grid>
             <Grid item lg={6} xs={12}>
-              <TextField
-                label="Email Id"
-                fullWidth
-                variant="outlined"
-                required
-              />
+              <TextField label="Email" fullWidth variant="outlined" required />
             </Grid>
             <Grid item lg={6} xs={12}>
               <TextField

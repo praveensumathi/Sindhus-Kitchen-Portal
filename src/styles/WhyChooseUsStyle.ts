@@ -1,5 +1,7 @@
+import { Theme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-export const whyChooseUsSytle = makeStyles(() => ({
+
+export const whyChooseUsSytle = makeStyles((theme: Theme) => ({
   centerImage: {
     display: "flex",
     flexDirection: "column",
@@ -10,8 +12,8 @@ export const whyChooseUsSytle = makeStyles(() => ({
   imageWithBorder: {
     borderRadius: "50%",
     backgroundColor: "white",
-    width: "6rem",
-    height: "6rem",
+    width: "10rem",
+    height: "10rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -25,7 +27,6 @@ export const whyChooseUsSytle = makeStyles(() => ({
     textAlign: "center",
     transition: "transform 0.4s",
     transformStyle: "preserve-3d",
-   
   },
   flipCardFront: {
     position: "absolute",
@@ -40,7 +41,6 @@ export const whyChooseUsSytle = makeStyles(() => ({
     color: "white",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-  
   },
   flipCardBack: {
     position: "absolute",
@@ -52,12 +52,13 @@ export const whyChooseUsSytle = makeStyles(() => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#2980b9",
+    backgroundColor: theme.palette.primary.main,
     color: "white",
     transform: "rotateY(180deg)",
+    fontWeight: "bolder",
   },
   flipcard: {
-    maxWidth: 300,
+    minWidth: 250,
     height: 300,
     position: "relative",
     borderRadius: "20px !important",
@@ -75,6 +76,6 @@ export const whyChooseUsSytle = makeStyles(() => ({
     left: 0,
     width: "100%",
     height: "100%",
-    background: "rgba(0, 0, 0, 0.5)",
+    background: "rgba(0, 0, 0, 0.65)",
   },
 }));

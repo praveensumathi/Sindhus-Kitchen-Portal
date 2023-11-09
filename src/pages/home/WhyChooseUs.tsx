@@ -1,37 +1,65 @@
-import { Box, Typography, Container, Grid, Card } from "@mui/material";
+import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import { IWhyChooseUs } from "../../interface/types";
 import { whyChooseUsSytle } from "../../styles/WhyChooseUsStyle";
 
 interface Iprops {
-  WhyChooseUs: IWhyChooseUs[];
+  whyChooseUs: IWhyChooseUs[];
 }
 
 function WhyChooseUs(props: Iprops) {
-  const { WhyChooseUs } = props;
+  const { whyChooseUs } = props;
+
   const classes = whyChooseUsSytle();
 
   return (
     <Container>
-      <Box sx={{ display: "flex", justifyContent: "center", p: 5 }}>
-        <Typography variant="h4" fontWeight={600}>
-          Why Sindhu's Kitchen?
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          p: 3,
+          textAlign: "center",
+        }}
+      >
+        <Typography variant="h4" fontWeight={"bold"} color={"primary"}>
+          WHY SINDHU'S KITCHEN?
+        </Typography>
+        <Typography
+          variant="h5"
+          fontWeight={"bold"}
+          sx={{ opacity: 0.7 }}
+          mt={2}
+        >
+          We make our food as if we are cooking for our family because that is
+          exactly what we are doing !
+          <br />
+          <Box
+            component={"span"}
+            sx={{
+              color: `orange`,
+              opacity: 1,
+            }}
+          >
+            Welcome to Sindhu’s Kitchen
+          </Box>
         </Typography>
       </Box>
-      <Grid container spacing={3} sx={{ justifyContent: "center" }}>
-        {WhyChooseUs.map((whychoose, index) => {
+      <Grid container spacing={6} justifyContent="center" alignItems="center">
+        {whyChooseUs.map((whychoose, index) => {
           return (
-            <Grid item key={index} xs={12} sm={6} md={4} py={2}>
+            <Grid item key={index} xs={12} sm={6} md={4} py={1}>
               <Card
-                className={`${classes.flipcard}  `}
+                className={classes.flipcard}
                 sx={{
                   boxShadow:
                     "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                 }}
                 elevation={0}
               >
-                <Box className={`${classes.flipCardInner} `}>
+                <Box className={classes.flipCardInner}>
                   <Box
-                    className={`${classes.flipCardFront} `}
+                    className={classes.flipCardFront}
                     style={{
                       backgroundImage: `url(${whychoose.image})`,
                     }}
@@ -41,9 +69,9 @@ function WhyChooseUs(props: Iprops) {
                     >
                       <Box
                         sx={{
-                          fontSize: "60px",
+                          fontSize: "6rem",
                         }}
-                        className={`${classes.imageWithBorder}  `}
+                        className={classes.imageWithBorder}
                       >
                         {whychoose.imageicon}
                       </Box>
@@ -52,8 +80,12 @@ function WhyChooseUs(props: Iprops) {
                         {whychoose.title}
                       </Typography>
                     </Box>
-                          </Box>
-                  <Typography className={` ${classes.flipCardBack}`}>
+                  </Box>
+                  <Typography
+                    variant="h5"
+                    p={2}
+                    className={classes.flipCardBack}
+                  >
                     {whychoose.description}
                   </Typography>
                 </Box>

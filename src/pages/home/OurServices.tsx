@@ -1,4 +1,4 @@
-import { Grid, Box, Typography, Container, useMediaQuery } from "@mui/material";
+import { Grid, Box, Typography, Container } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SoupKitchenIcon from "@mui/icons-material/SoupKitchen";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
@@ -7,108 +7,106 @@ import { OurServicesIconEnums } from "../../enums/OurServicesIconEnum";
 import { IOurServices } from "../../interface/types";
 import { useOurServicesStyles } from "../../styles/OurServicesStyles";
 
-const OurServiceslist = [
-  {
-    id: OurServicesIconEnums.RESTAURANT,
-    icon: (
-      <RestaurantIcon
-        fontSize="large"
-        style={{
-          transform: "rotate(-45deg)",
-          fontSize: "5em",
-          color: "purple",
-        }}
-      />
-    ),
-  },
-  {
-    id: OurServicesIconEnums.SOUPKITCHENICON,
-    icon: (
-      <SoupKitchenIcon
-        fontSize="large"
-        style={{
-          transform: "rotate(-45deg)",
-          fontSize: "5em",
-          color: "orange",
-        }}
-      />
-    ),
-  },
-  {
-    id: OurServicesIconEnums.RESTAURANTMENUICON,
-    icon: (
-      <RestaurantMenuIcon
-        style={{ transform: "rotate(-45deg)", fontSize: "5em", color: "blue" }}
-      />
-    ),
-  },
-  {
-    id: OurServicesIconEnums.RAMENDININGICON,
-    icon: (
-      <RamenDiningIcon
-        fontSize="large"
-        style={{ transform: "rotate(-45deg)", fontSize: "5em", color: "red" }}
-      />
-    ),
-  },
-];
-
 interface Iprops {
   OurServices: IOurServices[];
 }
 
 function OurServices(props: Iprops) {
   const { OurServices } = props;
-  const isDesktop = useMediaQuery("(min-width: 960px)");
   const classes = useOurServicesStyles();
 
-  return (
-   
-      <Container>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Typography variant="h4" fontWeight={600}>
-            Our Services
-          </Typography>
-        </Box>
-
-        <Grid
-          container
-          xs={12}
-          p={0}
+  const OurServiceslist = [
+    {
+      id: OurServicesIconEnums.RESTAURANT,
+      icon: (
+        <RestaurantIcon
+          className={classes.boxStyle}
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            gap: isDesktop ? 16 : 0,
+            fontSize: "12rem",
+            color: "purple",
+            p: 4,
           }}
-        >
-          {OurServices.map((services, index) => {
-            const matchedIcon = OurServiceslist.find(
-              (icon) => icon.id === services.iconkey
-            );
-            return (
-              <Grid item key={index} xs={12} lg={2}>
-                <Box className={classes.boxStyle}>
-                  {matchedIcon && matchedIcon.icon}
-                </Box>
-                <Box
-                  sx={{
-                    paddingTop: 13,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography variant="h5">{services.title}</Typography>
-                  <Typography variant="body1">
-                    {services.description}
-                  </Typography>
-                </Box>
-              </Grid>
-            );
-          })}
+        />
+      ),
+    },
+    {
+      id: OurServicesIconEnums.SOUPKITCHENICON,
+      icon: (
+        <SoupKitchenIcon
+          className={classes.boxStyle}
+          sx={{
+            fontSize: "12rem",
+            color: "red",
+            p: 4,
+          }}
+        />
+      ),
+    },
+    {
+      id: OurServicesIconEnums.RESTAURANTMENUICON,
+      icon: (
+        <RestaurantMenuIcon
+          className={classes.boxStyle}
+          sx={{ fontSize: "12rem", color: "orange", p: 4 }}
+        />
+      ),
+    },
+    {
+      id: OurServicesIconEnums.RAMENDININGICON,
+      icon: (
+        <RamenDiningIcon
+          className={classes.boxStyle}
+          sx={{
+            fontSize: "12rem",
+            color: "green",
+            p: 4,
+          }}
+        />
+      ),
+    },
+  ];
+
+  return (
+    <Container>
+      <Grid container>
+        <Grid item xs={12}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography variant="h4" fontWeight={600}>
+              Our Services
+            </Typography>
+          </Box>
         </Grid>
-      </Container>
- 
+        {OurServices.map((services, index) => {
+          const matchedIcon = OurServiceslist.find(
+            (icon) => icon.id === services.iconkey
+          );
+          return (
+            <Grid
+              item
+              key={index}
+              xs={12}
+              md={3}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: 5,
+                alignItems: "center",
+                mt: 6,
+              }}
+            >
+              <Box>{matchedIcon && matchedIcon.icon}</Box>
+              <Box sx={{ textAlign: "center" }}>
+                <Typography variant="h5" fontWeight={"bold"}>
+                  {services.title}
+                </Typography>
+                <Typography variant="body1">{services.description}</Typography>
+              </Box>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Container>
   );
 }
 export default OurServices;

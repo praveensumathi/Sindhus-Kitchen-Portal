@@ -1,8 +1,7 @@
-import React from "react";
-import Container from "@mui/material/Container";
-import SearchBar from "./SearchBar";
-import CateringProduct from "./CateringProduct";
 import { Box, Typography } from "@mui/material";
+import Container from "@mui/material/Container";
+import CateringProduct from "./CateringProduct";
+import SearchBar from "./SearchBar";
 
 function CateringPage() {
   return (

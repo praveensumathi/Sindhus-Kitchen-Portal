@@ -1,21 +1,20 @@
-import * as React from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
+import { CssBaseline } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
 import Toolbar from "@mui/material/Toolbar";
-import CloseIcon from "@mui/icons-material/Close";
-import { CssBaseline } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { paths } from "../routes/path";
-import { useLocation } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import * as React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { paths } from "../routes/path";
 
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
@@ -33,8 +32,6 @@ function NavBar() {
   const theme = useTheme();
   const isBelowSMScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-
-  const [selectedMenu, setSelectedMenu] = React.useState<string | null>(null);
 
   const isMobile = matches;
 
@@ -63,7 +60,6 @@ function NavBar() {
         {
           navigate(menu.linkurl);
           handleDrawerClose();
-          setSelectedMenu(menu.name);
         }
       }
     }
@@ -163,14 +159,14 @@ function NavBar() {
                           textTransform: "none",
                           backgroundColor:
                             location.pathname === menu.linkurl
-                              ? "orange"
+                              ? theme.palette.primary.main
                               : "none",
                           color:
                             location.pathname === menu.linkurl
                               ? "white"
                               : "black",
                           "&:hover": {
-                            backgroundColor: "orange",
+                            backgroundColor: theme.palette.primary.main,
                             color: "white",
                           },
                         }}
