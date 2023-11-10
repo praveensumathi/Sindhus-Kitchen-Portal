@@ -72,3 +72,13 @@ export interface IServingSizesWithPrice {
   _id: string;
 }
 
+export interface ICateringEnquiries {
+  _id?: string;
+  fullName: string;
+  email: string;
+  typeOfEvent?: string;
+  guestCount?: number;
+  mobileNumber: string;
+  message?: string;
+  createdAt?: string;
+}
