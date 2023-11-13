@@ -8,8 +8,8 @@ import {
   useTheme,
 } from "@mui/material";
 import CommonProductCard from "../../common/component/CommonProductCard";
+import { productCardList } from "../../seed-data/seed-data";
 import SnacksMenuItem from "./SnacksMenuItem";
-import { productCardList } from "../../seed-data/Seed-data";
 
 function SnacksPage() {
   const theme = useTheme();
@@ -19,7 +19,11 @@ function SnacksPage() {
   return (
     <>
       <Box sx={{ position: "relative" }}>
-        <Box>
+        <Box
+          sx={{
+            mt: 3,
+          }}
+        >
           <div
             style={{
               backgroundImage: "url('assets/images/sssurf7.png')",
@@ -30,7 +34,7 @@ function SnacksPage() {
               width: "100%",
               height: "100%",
               zIndex: -1,
-              top: "24px",
+              top: 0,
             }}
           ></div>
           <Grid container spacing={3} sx={{ overflow: "hidden" }}>
@@ -65,10 +69,7 @@ function SnacksPage() {
                 height: "150px",
               }}
             >
-              <Typography
-                variant="h4"
-                sx={{ mt: 2, color: "white", fontWeight: 600 }}
-              >
+              <Typography variant="h4" sx={{ color: "white", fontWeight: 600 }}>
                 Snacks
               </Typography>
             </Grid>
@@ -118,8 +119,8 @@ function SnacksPage() {
       <Box
         sx={{
           width: "100%",
-          height: "220px",
-          backgroundImage: "url(assets/images/wave2.png)",
+          height: "140px",
+          backgroundImage: "url(assets/images/wave4.png)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}

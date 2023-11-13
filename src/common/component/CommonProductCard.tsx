@@ -10,7 +10,7 @@ interface IProps {
 }
 
 function CommonProductCard(props: IProps) {
-  const { product, children } = props;
+  const { product } = props;
 
   return (
     <Box>
