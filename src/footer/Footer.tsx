@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -13,8 +12,6 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-
 import TextField from "@mui/material/TextField";
 import theme from "../theme/theme";
 import * as yup from "yup";
@@ -44,10 +41,9 @@ const schema = yup.object().shape({
 function Footer() {
   const classes = useCommonGridStyle();
   const { updateSnackBarState } = useSnackBar();
-  const [date, setDate] = React.useState<string>(
+  const [date, setDate] = useState<string>(
     dayjs(new Date()).format("YYYY-MM-DD")
   );
-  const [selectedDate, setSelectedDate] = useState<null | Date>(null);
 
   const {
     handleSubmit,
@@ -60,39 +56,6 @@ function Footer() {
     mode: "all",
     defaultValues: EnquiryFormInitialValue,
   });
-
-  // const handleDateChange = (newDate: Date | null) => {
-  //   if (newDate) {
-  //     const formattedDate = dayjs(newDate).format("YYYY-MM-DD");
-  //     setDate(formattedDate);
-  //   }
-  // };
-  const handleDateChange = (date) => {
-    console.log(date);
-    setSelectedDate(date);
-  };
-
-  //   const onSubmitCateringEnquiry = async (data: ICateringEnquiries) => {
-  //     try {
-  //       const response = await createCateringEnquiry(data);
-  // updateSnackBarState(
-  //   true,
-  //   "Error while submitting the form",
-  //   SnackbarSeverityEnum.ERROR
-  // );
-  //        console.log(
-  //          "Snackbar (Success): submitted successfully"
-  //        );
-  //       console.log("Response:", response);
-  //       reset();
-  //     } catch (error) {
-  //       updateSnackBarState(
-  //         true,
-  //         "Error while submitting the form",
-  //         SnackbarSeverityEnum.ERROR
-  //       );
-  //     }
-  //   };
 
   const onSubmitCateringEnquiry = async (data: ICateringEnquiries) => {
     try {
@@ -276,7 +239,6 @@ function Footer() {
                     label="Full Name"
                     fullWidth
                     variant="outlined"
-                    required
                     {...register("fullName")}
                     error={!!errors.fullName}
                     helperText={errors.fullName ? errors.fullName.message : ""}
@@ -287,7 +249,6 @@ function Footer() {
                     label="Email Id"
                     fullWidth
                     variant="outlined"
-                    required
                     {...register("email")}
                     error={!!errors.email}
                     helperText={errors.email ? errors.email.message : ""}
@@ -298,7 +259,6 @@ function Footer() {
                     label="Mobile Number"
                     fullWidth
                     variant="outlined"
-                    required
                     {...register("mobileNumber")}
                     error={!!errors.mobileNumber}
                     helperText={
@@ -315,18 +275,9 @@ function Footer() {
                   />
                 </Grid>
                 <Grid item lg={3} xs={12}>
-                  {/* <CssTextField label="Event Date" fullWidth variant="outlined" /> */}
                   <Box>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    label="Event Date"
-                    format="dd-MM-yyyy"
-                    value={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
-                  />
-                </LocalizationProvider> */}
                     <Controller
-                      name="createdAt"
+                      name="eventDate"
                       control={control}
                       defaultValue={date}
                       render={({ field }) => (
@@ -341,24 +292,6 @@ function Footer() {
                         </LocalizationProvider>
                       )}
                     />
-
-                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                       label="Event Date"
-                        disablePast={true}
-                        sx={{ width: "100%", backgroundColor: "white" }}
-                        format="DD-MM-YYYY"
-                        value={selectedDate}
-                        onChange={(date) => setSelectedDate(date)}
-                      />
-                    </LocalizationProvider> */}
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        format="dd-MM-yyyy"
-                        value={new Date(date)}
-                        onChange={(date) => handleDateChange(date)}
-                      />
-                    </LocalizationProvider>
                   </Box>
                 </Grid>
                 <Grid item lg={3} xs={12}>
@@ -380,7 +313,6 @@ function Footer() {
                   />
                 </Grid>
                 <Grid item xs={12} className={classes.commonGridStyle}>
-                  {/* <form onSubmit={handleSubmit(onSubmitCateringEnquiry)}> */}
                   <Button
                     type="submit"
                     sx={{ marginBottom: 1 }}
@@ -388,7 +320,6 @@ function Footer() {
                   >
                     Submit Catering Request
                   </Button>
-                  {/* </form> */}
                 </Grid>
               </Grid>
             </form>

@@ -7,5 +7,5 @@ export const EnquiryFormInitialValue: ICateringEnquiries = {
   guestCount: 0,
   mobileNumber: "",
   message: "",
-  createdAt: "",
+  eventDate: "",
 };

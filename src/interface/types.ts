@@ -80,5 +80,5 @@ export interface ICateringEnquiries {
   guestCount?: number;
   mobileNumber: string;
   message?: string;
-  createdAt?: string;
+  eventDate?: string;
 }
