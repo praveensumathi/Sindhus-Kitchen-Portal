@@ -73,7 +73,6 @@ function HomePageSlicker() {
       setIsMenuSelected(true);
     }
   };
- 
 
   useEffect(() => {
     if (!isLoading && !isError) {

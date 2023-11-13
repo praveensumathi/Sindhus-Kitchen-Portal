@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { MenuType } from "../../enums/MenuTypesEnum";
 import { queryClient } from "../../App";
 import { getAllMenus } from "../../services/api";
-import { usefetchProductData } from "../../customRQHooks/Hooks";
+import { usecateringfetchProductData } from "../../customRQHooks/Hooks";
 
 function SearchBar() {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
@@ -17,6 +17,7 @@ function SearchBar() {
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [productTitles, setProductTitles] = useState<string[]>([]);
   const [isMenuSelected, setIsMenuSelected] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState("");
 
   useEffect(() => {
     if (menuList) {
@@ -40,29 +41,39 @@ function SearchBar() {
   };
 
   const { data: productData, refetch: refetchProductData } =
-    usefetchProductData(selectedMenuId, searchTerm);
+    usecateringfetchProductData(selectedMenuId, selectedProduct);
 
   useEffect(() => {
-    if ((isMenuSelected || searchTerm.trim() !== "") && selectedMenuId) {
-      refetchProductData();
-    }
-    if (productData) {
-      const titles = productData.map((product) => product.title);
-      setProductTitles(titles);
-    }
+    const fetchData = async () => {
+      if ((isMenuSelected || searchTerm.trim() !== "") && selectedMenuId) {
+        refetchProductData();
+      }
+      if (productData) {
+        const titles = productData.map((product) => product.title);
+        setProductTitles(titles);
+      }
+    };
+    fetchData();
   }, [searchTerm, selectedMenuId, isMenuSelected, productData]);
 
   const handleSearchTermChange = (event) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm || "");
     setIsMenuSelected(false);
+    // Set the selected product when the search term changes
+    setSelectedProduct(newSearchTerm);
   };
 
-  const handleMenuChange = async (newValue) => {
-    const selectedMenu = cateringMenus.find((menu) => menu.title === newValue);
-    if (selectedMenu) {
-      setSelectedMenuId(selectedMenu._id);
-      setIsMenuSelected(true);
+  const handleMenuChange = (event, newValue) => {
+    if (newValue) {
+      const selectedMenu = cateringMenus.find(
+        (menu) => menu.title === newValue
+      );
+      if (selectedMenu) {
+        setSelectedMenuId(selectedMenu._id);
+        setIsMenuSelected(true);
+        setSelectedProduct("");
+      }
     }
   };
 
@@ -74,7 +85,7 @@ function SearchBar() {
             id="category-autocomplete"
             options={cateringMenus.map((option) => option.title)}
             onChange={(event, newValue) => {
-              handleMenuChange(newValue);
+              handleMenuChange(event, newValue);
             }}
             renderInput={(params) => (
               <TextField

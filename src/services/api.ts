@@ -23,6 +23,18 @@ const fetchProductData = async (menuId, searchterm) => {
   }
 };
 
+const cateringfetchProductData = async (menuId, searchterm) => {
+  try {
+    const response = await httpWithoutCredentials.get<IProductList[]>(
+      `/product/searchProduct/${menuId}?searchTerm=${searchterm}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+
 const fetchProductById = async (productId: string | undefined) => {
   try {
     const response = await httpWithoutCredentials.get<IProductDetail>(
@@ -35,5 +47,10 @@ const fetchProductById = async (productId: string | undefined) => {
 };
 
 
-export { getAllMenus, fetchProductData, fetchProductById };
+export {
+  getAllMenus,
+  fetchProductData,
+  fetchProductById,
+  cateringfetchProductData,
+};
 
