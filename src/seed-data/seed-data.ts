@@ -150,7 +150,7 @@ export const cateringPage: ICateringPage[] = [
     Large Tray - can eat 30 members
     `,
 
-    image: "assets/food-images-2.jpg",
+    image: "assets/food-img.jpg",
     trayItems: [
       { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },

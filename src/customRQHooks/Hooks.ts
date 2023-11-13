@@ -1,5 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import {   cateringfetchProductData, fetchProductData, getAllMenus} from "../services/api";
+import {
+  cateringfetchProductData,
+  fetchProductData,
+  getAllMenus,
+} from "../services/api";
 
 export const usegetAllMenus = () => {
   return useQuery({
@@ -10,21 +14,20 @@ export const usegetAllMenus = () => {
   });
 };
 
-
-export const usefetchProductData = (menuId: string,term) => {
+export const usefetchProductData = (menuId: string, term: string) => {
   return useQuery({
     queryKey: ["fetchProduct"],
-    queryFn: () => fetchProductData(menuId,term),
+    queryFn: () => fetchProductData(menuId, term),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
 };
-export const usecateringfetchProductData = (menuId: string, term) => {
+
+export const usecateringfetchProductData = (menuId: string, term:string) => {
   return useQuery({
-    queryKey: ["fetchProduct"],
+    queryKey: ["fetchProducts"],
     queryFn: () => cateringfetchProductData(menuId, term),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
 };
-

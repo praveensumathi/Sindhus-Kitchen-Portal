@@ -16,8 +16,6 @@ function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [productTitles, setProductTitles] = useState<string[]>([]);
-  const [isMenuSelected, setIsMenuSelected] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState("");
 
   useEffect(() => {
     if (menuList) {
@@ -40,43 +38,35 @@ function SearchBar() {
     setCateringMenus([...filteredMenus]);
   };
 
-  const { data: productData, refetch: refetchProductData } =
-    usecateringfetchProductData(selectedMenuId, selectedProduct);
+  const { data: cateringData, refetch: refetchProductData } =
+    usecateringfetchProductData(selectedMenuId, searchTerm);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if ((isMenuSelected || searchTerm.trim() !== "") && selectedMenuId) {
-        refetchProductData();
-      }
-      if (productData) {
-        const titles = productData.map((product) => product.title);
-        setProductTitles(titles);
-      }
-    };
-    fetchData();
-  }, [searchTerm, selectedMenuId, isMenuSelected, productData]);
+    if (selectedMenuId) {
+      refetchProductData();
+    }
+  }, [selectedMenuId]);
 
-  const handleSearchTermChange = (event) => {
+  useEffect(() => {
+    if (cateringData && cateringData.length > 0) {
+      const titles = cateringData.map((product) => product.title);
+      setProductTitles(titles);
+    } else {
+      setProductTitles([]);
+    }
+  }, [cateringData]);
+
+  const handleProductSearch = (event) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm || "");
-    setIsMenuSelected(false);
-    // Set the selected product when the search term changes
-    setSelectedProduct(newSearchTerm);
   };
 
-  const handleMenuChange = (event, newValue) => {
-    if (newValue) {
-      const selectedMenu = cateringMenus.find(
-        (menu) => menu.title === newValue
-      );
-      if (selectedMenu) {
-        setSelectedMenuId(selectedMenu._id);
-        setIsMenuSelected(true);
-        setSelectedProduct("");
-      }
+  const handleMenuChange = async (event, newValue) => {
+    const selectedMenu = cateringMenus.find((menu) => menu.title === newValue);
+    if (selectedMenu) {
+      setSelectedMenuId(selectedMenu._id);
     }
   };
-
   return (
     <Container>
       <Grid container spacing={3}>
@@ -100,7 +90,7 @@ function SearchBar() {
           <Autocomplete
             id="food-autocomplete"
             value={searchTerm}
-            onChange={handleSearchTermChange}
+            onChange={handleProductSearch}
             options={productTitles}
             renderInput={(params) => (
               <TextField {...params} label="Select Food" variant="outlined" />

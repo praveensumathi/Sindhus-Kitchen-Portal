@@ -20,8 +20,7 @@ import { useEffect, useState } from "react";
 import { usefetchProductData, usegetAllMenus } from "../../customRQHooks/Hooks";
 import {
   homePageSlicker,
-  homeSearchMenusDropDown,
-} from "../../seed-data/seed-data";
+  } from "../../seed-data/seed-data";
 
 function HomePageSlicker() {
   const settings = {
@@ -39,7 +38,6 @@ function HomePageSlicker() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [productTitles, setProductTitles] = useState<string[]>([]);
-  const [isMenuSelected, setIsMenuSelected] = useState(false);
 
   useEffect(() => {
     if (!isLoading && !isError) {
@@ -51,33 +49,35 @@ function HomePageSlicker() {
     usefetchProductData(selectedMenuId, searchTerm);
 
   useEffect(() => {
-    if ((isMenuSelected || searchTerm.trim() !== "") && selectedMenuId) {
+    if (selectedMenuId) {
       refetchProductData();
     }
-    if (productData) {
+  }, [selectedMenuId]);
+
+  useEffect(() => {
+    if (productData && productData.length > 0) {
       const titles = productData.map((product) => product.title);
       setProductTitles(titles);
+    } else {
+      setProductTitles([]);
     }
-  }, [searchTerm, selectedMenuId, isMenuSelected, productData]);
+  }, [productData]);
 
-  const handleSearchTermChange = (event) => {
+  const handleProductSearch = (event) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm || "");
-    setIsMenuSelected(false);
   };
 
   const handleMenuChange = async (event, newValue) => {
     const selectedMenu = menus.find((menu) => menu.title === newValue);
     if (selectedMenu) {
       setSelectedMenuId(selectedMenu._id);
-      setIsMenuSelected(true);
     }
   };
 
   useEffect(() => {
-    if (!isLoading && !isError) {
+    if (!selectedMenuId && !isLoading && !isError) {
       setMenus(menuData);
-      console.log(menuData);
     }
   }, [menuData, isLoading, isError]);
 
@@ -228,7 +228,7 @@ function HomePageSlicker() {
               disableClearable
               sx={{ width: "100%" }}
               value={searchTerm}
-              onChange={handleSearchTermChange}
+              onChange={handleProductSearch}
               options={productTitles}
               renderOption={(props, option) => (
                 <li {...props} style={{ margin: "5px 0" }}>
