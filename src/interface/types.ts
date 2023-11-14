@@ -71,6 +71,17 @@ export interface IPrice {
   _id: string;
 }
 
+
+export interface ICateringEnquiry {
+  _id?: string;
+  fullName: string;
+  email: string;
+  typeOfEvent?: string;
+  guestCount?: number;
+  mobileNumber: string;
+  message?: string;
+  eventDate: string;
+}
 // export interface IMenu {
 //   mainMenuIds: string[];
 //   subMenuIds: any[];
@@ -105,6 +116,5 @@ export interface IProductDinnigOut {
 export interface ICommonResponse<T> {
   data: T;
   statusCode: number;
-  success:boolean
- 
+  success: boolean;
 }
