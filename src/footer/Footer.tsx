@@ -10,7 +10,6 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { useCommonGridStyle } from "../styles/FooterStyle";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "@mui/material/TextField";
 import theme from "../theme/theme";
@@ -20,7 +19,6 @@ import { createCateringEnquiry } from "../services/api";
 import { EnquiryFormInitialValue } from "../constants/InitialValues";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
 import { useSnackBar } from "../context/SnackBarContext";
 import { SnackbarSeverityEnum } from "../enums/SnackbarSeverityEnum";
 import FormControl from "@mui/material/FormControl";
@@ -30,7 +28,6 @@ import Zoom from "react-reveal/Zoom";
 
 const schema = yup.object().shape({
   fullName: yup.string().required("Name is required"),
-
   email: yup
     .string()
     .email("Invalid email address")
@@ -46,9 +43,6 @@ const schema = yup.object().shape({
 function Footer() {
   const classes = useCommonGridStyle();
   const { updateSnackBarState } = useSnackBar();
-  const [date, setDate] = useState<string>(
-    dayjs(new Date()).format("YYYY-MM-DD")
-  );
 
   const {
     handleSubmit,
@@ -64,7 +58,7 @@ function Footer() {
 
   const onSubmitCateringEnquiry = async (data: ICateringEnquiry) => {
     try {
-      const response = await createCateringEnquiry(data);
+      await createCateringEnquiry(data);
       updateSnackBarState(
         true,
         "Form submitted successfully",
@@ -94,7 +88,7 @@ function Footer() {
         </Box>
       </Fade>
       <Container sx={{ paddingBottom: 2 }}>
-        <Grid container spacing={2} sx={{ gap: 3 }}>
+        <Grid container sx={{ gap: 3 }}>
           <Grid
             container
             item
@@ -229,12 +223,10 @@ function Footer() {
                   container
                   item
                   spacing={2}
-                  xs={12}
                   sx={{
                     backgroundColor: "white",
                     borderRadius: 5,
-                    paddingRight: 5,
-                    margin: { md: "0 4rem", xs: 0 },
+                    p: 2,
                   }}
                 >
                   <Grid item xs={12}>
@@ -291,7 +283,7 @@ function Footer() {
                   </Grid>
 
                   <Grid item lg={3} xs={12}>
-                    <FormControl fullWidth error={!!errors?.eventDate?.message}>
+                    <FormControl fullWidth error={!!errors.eventDate}>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <Controller
                           name="eventDate"

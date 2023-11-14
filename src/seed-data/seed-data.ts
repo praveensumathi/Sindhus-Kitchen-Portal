@@ -164,7 +164,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     title: "Sourced with Care",
     description:
       "We curate our dishes with premium ingredients, some specially sourced from the heart of Tamil Nadu, India.",
-    imageicon: "🌾 ",
+    imageicon: "🌾",
     image:
       "https://img.freepik.com/free-photo/grinder-wooden-spoon-with-spices_23-2148601118.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
   },

@@ -36,6 +36,11 @@ export interface IWhyChooseUs {
   description: string;
   image: string;
 }
+export interface IProductDropDownData {
+  _id: string;
+  title: string;
+  posterURL: string;
+}
 
 export interface IProductDetail {
   product: IProduct;
@@ -59,6 +64,7 @@ export interface IPrice {
   quantity: number;
   _id: string;
 }
+
 
 export interface ICateringEnquiry {
   _id?: string;

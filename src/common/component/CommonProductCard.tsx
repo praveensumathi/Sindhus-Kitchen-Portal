@@ -55,9 +55,9 @@ function CommonProductCard(props: IProps) {
                   ${product.mrpprice}
                 </Typography>
               )} */}
-            {product.price && product.price.length > 0 && (
+            {product.price && (
               <Typography variant="body2" color="orange" sx={{ marginLeft: 1 }}>
-                ${product.price[0].price}
+                ${product.price}
               </Typography>
             )}
           </Box>

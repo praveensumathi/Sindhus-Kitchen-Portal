@@ -1,11 +1,12 @@
+import { ICateringEnquiry } from "./../interface/types";
 import {
   ICategory,
-  ICateringEnquiry,
   ICategoryWithProducts,
   ICommonResponse,
   IMenuDatas,
   IMenuList,
   IProduct,
+  IProductDropDownData,
 } from "../interface/types";
 import { httpWithoutCredentials } from "./http";
 
@@ -20,6 +21,18 @@ const getAllMenus = async () => {
   }
 };
 
+const cateringfetchProductData = async (menuId, searchterm = "") => {
+  try {
+    if (menuId) {
+      const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
+        `/product/searchProduct/${menuId}?searchTerm=${searchterm}`
+      );
+      return response.data;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 const fetchProductById = async (productId: string | undefined) => {
   try {
     const response = await httpWithoutCredentials.get<
@@ -75,12 +88,36 @@ const getfetchProductsByMenuId = async (menuId: string) => {
     throw error;
   }
 };
+const getProductsByMenuIdWithSearchTerm = async (
+  selectedMenuId,
+  searchTerm,
+  setProducts
+) => {
+  try {
+    const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
+      `/product/searchProduct/${selectedMenuId}?searchTerm=${searchTerm}`
+    );
+    if (response && response.data.length > 0) {
+      const products: IProductDropDownData[] = response.data.map((product) => ({
+        _id: product._id,
+        title: product.title,
+        posterURL: product.posterURL,
+      }));
+
+      setProducts(products);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 export {
   getAllMenus,
   fetchProductById,
+  cateringfetchProductData,
   getAllDiningOutMenuDatas,
   getAllDiningOutProducts,
   getfetchProductsByMenuId,
   createCateringEnquiry,
+  getProductsByMenuIdWithSearchTerm,
 };

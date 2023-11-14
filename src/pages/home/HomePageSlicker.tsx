@@ -15,11 +15,13 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { IMenuList } from "../../interface/types";
+import { IMenuList, IProductDropDownData } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { usegetAllMenus } from "../../customRQHooks/Hooks";
 import { homePageSlicker } from "../../seed-data/seed-data";
 import Fade from "react-reveal/Fade";
+import { getProductsByMenuIdWithSearchTerm } from "../../services/api";
+import { Link } from "react-router-dom";
 
 function HomePageSlicker() {
   const settings = {
@@ -30,14 +32,47 @@ function HomePageSlicker() {
     autoplay: true,
     arrows: false,
   };
+
   const theme = useTheme();
+
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
   const [menus, setMenus] = useState<IMenuList[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedMenuId, setSelectedMenuId] = useState("");
+  const [products, setProducts] = useState<IProductDropDownData[]>([]);
 
   const { data: menuData, isLoading, isError } = usegetAllMenus();
 
   useEffect(() => {
     if (!isLoading && !isError) {
+      setMenus(menuData);
+    }
+  }, [menuData, isLoading, isError]);
+
+  useEffect(() => {
+    if (selectedMenuId) {
+      getProductsByMenuIdWithSearchTerm(
+        selectedMenuId,
+        searchTerm,
+        setProducts
+      );
+    }
+  }, [selectedMenuId]);
+
+  const handleProductSearch = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm || "");
+  };
+
+  const handleMenuChange = (_event, newValue: string) => {
+    const selectedMenu = menus.find((menu) => menu.title === newValue);
+    if (selectedMenu) {
+      setSelectedMenuId(selectedMenu._id);
+    }
+  };
+
+  useEffect(() => {
+    if (!selectedMenuId && !isLoading && !isError) {
       setMenus(menuData);
     }
   }, [menuData, isLoading, isError]);
@@ -66,7 +101,6 @@ function HomePageSlicker() {
                   zIndex: 1,
                 }}
               />
-
               <Container
                 sx={{
                   position: "absolute",
@@ -108,7 +142,6 @@ function HomePageSlicker() {
           </Box>
         ))}
       </Slider>
-
       <Box
         sx={{
           position: "absolute",
@@ -142,11 +175,13 @@ function HomePageSlicker() {
             <IconButton sx={{ p: "10px" }} aria-label="menu">
               <RestaurantIcon color="secondary" />
             </IconButton>
-
             <Autocomplete
               disableClearable
               sx={{ width: "100%" }}
               options={menus.map((option) => option.title)}
+              onChange={(event, newValue) => {
+                handleMenuChange(event, newValue);
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -190,24 +225,43 @@ function HomePageSlicker() {
               freeSolo
               disableClearable
               sx={{ width: "100%" }}
-              options={[]}
-              getOptionLabel={(option: any) => option.name}
+              value={searchTerm}
+              onChange={handleProductSearch}
+              options={products}
               renderOption={(props, option) => (
-                <li {...props} style={{ margin: "5px 0" }}>
-                  <img
-                    src={option.image}
-                    alt={option.name}
+                <Link
+                  to={`/detail/${option._id}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                  }}
+                >
+                  <li
+                    {...props}
                     style={{
-                      width: "50px",
-                      height: "50px",
-                      borderRadius: "50%",
-                      marginRight: "8px",
+                      margin: "5px 0",
+                      display: "flex",
+                      alignItems: "center",
                     }}
-                  />
-                  <Typography sx={{ fontWeight: "bolder" }}>
-                    {option.name}
-                  </Typography>
-                </li>
+                  >
+                    <img
+                      src={option.posterURL ?? ""}
+                      style={{
+                        width: "4rem",
+                        height: "4rem",
+                        borderRadius: "50%",
+                        marginRight: "10px",
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {option.title}
+                    </Typography>
+                  </li>
+                </Link>
               )}
               renderInput={(params) => (
                 <TextField
