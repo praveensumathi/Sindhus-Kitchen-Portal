@@ -4,6 +4,7 @@ import {
   ICateringPage,
   IOurServices,
   IProductCardList,
+  ISpeicals,
   IWhyChooseUs,
 } from "../interface/types";
 
@@ -356,5 +357,20 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     imageicon: "♻️",
     image:
       "https://img.freepik.com/free-vector/waste-management-concept-illustration_114360-8795.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+  },
+];
+
+export const SpeicalsData: ISpeicals[] = [
+  {
+    id: 1,
+    image: "/assets/images/mysorepak.png",
+  },
+  {
+    id: 1,
+    image: "/assets/images/mysorepak.png",
+  },
+  {
+    id: 1,
+    image: "/assets/images/mysorepak.png",
   },
 ];

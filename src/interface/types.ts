@@ -71,4 +71,8 @@ export interface IServingSizesWithPrice {
   quantity: number;
   _id: string;
 }
+export interface ISpeicals{
+  id: number;
+  image: String;
+}
 
