@@ -1,4 +1,4 @@
-import {  IProductList } from "../interface/types";
+import {  IProductDropDownData} from "../interface/types";
 import { IMenuList, IProductDetail } from "../interface/types";
 import { httpWithoutCredentials } from "./http";
 
@@ -13,23 +13,11 @@ const getAllMenus = async () => {
   }
 };
 
-const fetchProductData = async (menuId, searchterm = "") => {
-  try {
-    if (menuId) {
-      const response = await httpWithoutCredentials.get<IProductList[]>(
-        `/product/searchProduct/${menuId}?searchTerm=${searchterm}`
-      );
-      return response.data; 
-    }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
 
 const cateringfetchProductData = async (menuId, searchterm = "") => {
   try {
     if (menuId) {
-      const response = await httpWithoutCredentials.get<IProductList[]>(
+      const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
         `/product/searchProduct/${menuId}?searchTerm=${searchterm}`
       );
       return response.data;
@@ -52,7 +40,7 @@ const fetchProductById = async (productId: string | undefined) => {
 
 export {
   getAllMenus,
-  fetchProductData,
+ 
   fetchProductById,
   cateringfetchProductData,
 };

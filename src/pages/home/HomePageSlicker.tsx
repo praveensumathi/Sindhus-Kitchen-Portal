@@ -15,12 +15,11 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { IMenuList } from "../../interface/types";
+import { IMenuList, IProductDropDownData } from "../../interface/types";
 import { useEffect, useState } from "react";
-import { usefetchProductData, usegetAllMenus } from "../../customRQHooks/Hooks";
-import {
-  homePageSlicker,
-  } from "../../seed-data/seed-data";
+import { usegetAllMenus } from "../../customRQHooks/Hooks";
+import { homePageSlicker } from "../../seed-data/seed-data";
+import { httpWithoutCredentials } from "../../services/http";
 
 function HomePageSlicker() {
   const settings = {
@@ -37,7 +36,8 @@ function HomePageSlicker() {
   const { data: menuData, isLoading, isError } = usegetAllMenus();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMenuId, setSelectedMenuId] = useState("");
-  const [productTitles, setProductTitles] = useState<string[]>([]);
+  const [productNames, setProductNames] = useState<IProductDropDownData[]>([]);
+  const [products, setProducts] = useState<IProductDropDownData[]>([]);
 
   useEffect(() => {
     if (!isLoading && !isError) {
@@ -45,23 +45,34 @@ function HomePageSlicker() {
     }
   }, [menuData, isLoading, isError]);
 
-  const { data: productData, refetch: refetchProductData } =
-    usefetchProductData(selectedMenuId, searchTerm);
+  const getProductsByMenuIdWithSearchTerm = async () => {
+    try {
+      console.log("searchTerm", searchTerm);
+      const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
+        `/product/searchProduct/${selectedMenuId}?searchTerm=${searchTerm}`
+      );
+      if (response && response.data.length > 0) {
+        setProducts(response.data || []);
+
+        const products: IProductDropDownData[] = response.data.map(
+          (product) => ({
+            _id: "",
+            title: product.title,
+            posterURL: product.posterURL,
+          })
+        );
+        setProductNames(products);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   useEffect(() => {
     if (selectedMenuId) {
-      refetchProductData();
+      getProductsByMenuIdWithSearchTerm();
     }
   }, [selectedMenuId]);
-
-  useEffect(() => {
-    if (productData && productData.length > 0) {
-      const titles = productData.map((product) => product.title);
-      setProductTitles(titles);
-    } else {
-      setProductTitles([]);
-    }
-  }, [productData]);
 
   const handleProductSearch = (event) => {
     const newSearchTerm = event.target.value;
@@ -80,6 +91,9 @@ function HomePageSlicker() {
       setMenus(menuData);
     }
   }, [menuData, isLoading, isError]);
+
+  const getProducts = (title) =>
+    products.find((product) => product.title === title)?.posterURL || "";
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -229,10 +243,32 @@ function HomePageSlicker() {
               sx={{ width: "100%" }}
               value={searchTerm}
               onChange={handleProductSearch}
-              options={productTitles}
+              options={products.map((product) => product.title)}
               renderOption={(props, option) => (
-                <li {...props} style={{ margin: "5px 0" }}>
-                  {option}
+                <li
+                  {...props}
+                  style={{
+                    margin: "5px 0",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={getProducts(option)}
+                    style={{
+                      width: "4rem",
+                      height: "4rem",
+                      borderRadius: "50%",
+                      marginRight: "10px",
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {option}
+                  </Typography>
                 </li>
               )}
               renderInput={(params) => (

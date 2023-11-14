@@ -42,10 +42,10 @@ export interface IWhyChooseUs {
   description: string;
   image: string;
 }
-export interface IProductList{
+export interface IProductDropDownData {
   _id: string;
   title: string;
-  image: string;
+  posterURL: string;
 }
 
 export interface IProductDetail {
@@ -76,4 +76,5 @@ export interface IServingSizesWithPrice {
   quantity: number;
   _id: string;
 }
+
 
