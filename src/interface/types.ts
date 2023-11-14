@@ -14,19 +14,19 @@ export interface IOurServices {
   description: string;
 }
 
-export interface ICategoryWithProducts {
-  _id: string;
-  data: string;
-  image: string;
-  products: IProductCardList[];
-}
+// export interface ICategoryWithProducts {
+//   _id: string;
+//   title: string;
+//   products: IProductCardList[];
+// }
 
 export interface IProductCardList {
   _id: string;
   title: string;
-  mrpprice: number;
-  offerprice: number;
-  imageUrl: string;
+  posterURL: string;
+  description: string;
+  netWeight: number;
+  price: IPrice[];
 }
 
 export interface IMenuList {
@@ -48,27 +48,57 @@ export interface IProductDetail {
 }
 
 export interface IProduct {
-  menu: IMenu;
   _id: string;
   title: string;
   price: null;
-  images: any[];
-  servingSizesWithPrice: IServingSizesWithPrice[];
+  images: string[];
+  servingSizesWithPrice: IPrice[];
   description: string;
   netWeight: number;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface IMenu {
-  mainMenuIds: string[];
-  subMenuIds: any[];
-}
-
-export interface IServingSizesWithPrice {
+export interface IPrice {
   size: string;
   price: number;
   quantity: number;
   _id: string;
 }
 
+// export interface IMenu {
+//   mainMenuIds: string[];
+//   subMenuIds: any[];
+// }
+
+export interface ICategory {
+  _id: string;
+  title: string;
+  image: string;
+}
+
+export interface ICategoryWithProducts{
+  menuDatas: IMenuDatas;
+}
+
+export interface IMenuDatas {
+  _id: string;
+  title: string;
+  image: string;
+  products: IProductDinnigOut[];
+}
+
+export interface IProductDinnigOut {
+  _id: string;
+  title: string;
+  posterURL: string;
+  description: string;
+  netWeight: number;
+  price: IPrice[];
+}
+
+export interface ICommonResponse<T> {
+  data: T;
+  statusCode: number;
+  success:boolean
+}

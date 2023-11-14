@@ -5,7 +5,7 @@ import Home from "./pages/home/Home";
 import SnacksPage from "./pages/snacks/SnacksPage";
 import CateringPage from "./pages/catering/CateringPage";
 import DiningOutPage from "./pages/diningout/DiningOutPage";
-import MenuDetailPage from "./common/component/MenuDetailPage";
+import ProductDetail from "./common/component/ProductDetail";
 import CategoryProducts from "./pages/diningout/CategoryProduct";
 import Specials from "./pages/specials/Specials";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -26,7 +26,7 @@ function App() {
               <Route path={paths.SNACKSPAGE} element={<SnacksPage />} />
               <Route path={paths.CATERINGPAGE} element={<CateringPage />} />
               <Route path={paths.DININGOUT} element={<DiningOutPage />} />
-              <Route path={paths.MENUDETAIL} element={<MenuDetailPage />} />
+              <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
               <Route
                 path={paths.PRODUCTSBYCATEGORY}
                 element={<CategoryProducts />}
