@@ -22,6 +22,8 @@ import {
   homePageSlicker,
   homeSearchMenusDropDown,
 } from "../../seed-data/seed-data";
+import Zoom from "react-reveal/Zoom";
+import Fade from "react-reveal/Fade";
 
 function HomePageSlicker() {
   const settings = {
@@ -68,6 +70,7 @@ function HomePageSlicker() {
                   zIndex: 1,
                 }}
               />
+
               <Container
                 sx={{
                   position: "absolute",
@@ -80,150 +83,154 @@ function HomePageSlicker() {
                   width: "100%",
                 }}
               >
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontWeight: "bolder",
-                    fontSize: isBelowMediumSize ? "45px" : "70px",
-                  }}
-                >
-                  {content.heading}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontWeight: "bolder",
-                    fontSize: isBelowMediumSize ? "20px" : "25px",
-                  }}
-                >
-                  {content.subHeading}
-                </Typography>
-                <Typography
-                  sx={{ fontSize: isBelowMediumSize ? "18px" : "20px" }}
-                >
-                  {content.content}
-                </Typography>
+                <Fade top>
+                  <Typography
+                    variant="h1"
+                    sx={{
+                      fontWeight: "bolder",
+                      fontSize: isBelowMediumSize ? "45px" : "70px",
+                    }}
+                  >
+                    {content.heading}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: "bolder",
+                      fontSize: isBelowMediumSize ? "20px" : "25px",
+                    }}
+                  >
+                    {content.subHeading}
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: isBelowMediumSize ? "18px" : "20px" }}
+                  >
+                    {content.content}
+                  </Typography>
+                </Fade>
               </Container>
             </Box>
           </Box>
         ))}
       </Slider>
-      <Box
-        sx={{
-          position: "absolute",
-          top: isBelowMediumSize ? "60%" : "70%",
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Grid
-          container
+ 
+        <Box
           sx={{
-            p: "2px 4px",
+            position: "absolute",
+            top: isBelowMediumSize ? "60%" : "70%",
+            width: "100%",
             display: "flex",
-            alignItems: "center",
-            width: isBelowMediumSize ? "70%" : "50%",
+            justifyContent: "center",
           }}
         >
           <Grid
-            item
-            md={4}
-            xs={12}
+            container
             sx={{
+              p: "2px 4px",
               display: "flex",
               alignItems: "center",
-              backgroundColor: "#fff",
-              borderRadius: isBelowMediumSize ? "10px" : "10px 0 0 10px",
-              height: "50px",
+              width: isBelowMediumSize ? "70%" : "50%",
             }}
           >
-            <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <RestaurantIcon color="secondary" />
-            </IconButton>
-            <Autocomplete
-              disableClearable
-              sx={{ width: "100%" }}
-              options={menus.map((option) => option.title)}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  placeholder="Menus"
-                  InputProps={{
-                    ...params.InputProps,
-                    type: "search",
-                    disableUnderline: true,
-                    // sx: { padding: "15px" },
-                  }}
-                  fullWidth
-                  variant="standard"
-                />
-              )}
-            />
-          </Grid>
-          <Grid
-            item
-            md={8}
-            xs={12}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "#fff",
-              marginTop: isBelowMediumSize ? "5px" : 0,
-              borderRadius: isBelowMediumSize ? "10px" : "0 10px 10px 0",
-              height: "50px",
-            }}
-          >
-            <Divider
+            <Grid
+              item
+              md={4}
+              xs={12}
               sx={{
-                height: 28,
-                m: 0.5,
-                display: isBelowMediumSize ? "none" : "block",
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                borderRadius: isBelowMediumSize ? "10px" : "10px 0 0 10px",
+                height: "50px",
               }}
-              orientation="vertical"
-            />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon color="secondary" />
-            </IconButton>
-            <Autocomplete
-              freeSolo
-              disableClearable
-              sx={{ width: "100%" }}
-              options={homeSearchMenusDropDown}
-              getOptionLabel={(option: any) => option.name}
-              renderOption={(props, option) => (
-                <li {...props} style={{ margin: "5px 0" }}>
-                  <img
-                    src={option.image}
-                    alt={option.name}
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      borderRadius: "50%",
-                      marginRight: "8px",
+            >
+              <IconButton sx={{ p: "10px" }} aria-label="menu">
+                <RestaurantIcon color="secondary" />
+              </IconButton>
+
+              <Autocomplete
+                disableClearable
+                sx={{ width: "100%" }}
+                options={menus.map((option) => option.title)}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder="Menus"
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                      disableUnderline: true,
+                      // sx: { padding: "15px" },
                     }}
+                    fullWidth
+                    variant="standard"
                   />
-                  <Typography sx={{ fontWeight: "bolder" }}>
-                    {option.name}
-                  </Typography>
-                </li>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  placeholder="Search Your favorite snacks, food, etc..."
-                  InputProps={{
-                    ...params.InputProps,
-                    type: "search",
-                    disableUnderline: true,
-                  }}
-                  fullWidth
-                  variant="standard"
-                />
-              )}
-            />
+                )}
+              />
+            </Grid>
+            <Grid
+              item
+              md={8}
+              xs={12}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                marginTop: isBelowMediumSize ? "5px" : 0,
+                borderRadius: isBelowMediumSize ? "10px" : "0 10px 10px 0",
+                height: "50px",
+              }}
+            >
+              <Divider
+                sx={{
+                  height: 28,
+                  m: 0.5,
+                  display: isBelowMediumSize ? "none" : "block",
+                }}
+                orientation="vertical"
+              />
+              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+                <SearchIcon color="secondary" />
+              </IconButton>
+              <Autocomplete
+                freeSolo
+                disableClearable
+                sx={{ width: "100%" }}
+                options={homeSearchMenusDropDown}
+                getOptionLabel={(option: any) => option.name}
+                renderOption={(props, option) => (
+                  <li {...props} style={{ margin: "5px 0" }}>
+                    <img
+                      src={option.image}
+                      alt={option.name}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                        marginRight: "8px",
+                      }}
+                    />
+                    <Typography sx={{ fontWeight: "bolder" }}>
+                      {option.name}
+                    </Typography>
+                  </li>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder="Search Your favorite snacks, food, etc..."
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                      disableUnderline: true,
+                    }}
+                    fullWidth
+                    variant="standard"
+                  />
+                )}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
     </Box>
   );
 }
