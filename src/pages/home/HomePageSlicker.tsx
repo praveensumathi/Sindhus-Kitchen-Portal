@@ -21,6 +21,7 @@ import { usegetAllMenus } from "../../customRQHooks/Hooks";
 import { homePageSlicker } from "../../seed-data/seed-data";
 import Fade from "react-reveal/Fade";
 import { getProductsByMenuIdWithSearchTerm } from "../../services/api";
+import { Link } from "react-router-dom";
 
 function HomePageSlicker() {
   const settings = {
@@ -229,33 +230,41 @@ function HomePageSlicker() {
               sx={{ width: "100%" }}
               value={searchTerm}
               onChange={handleProductSearch}
-              options={products.map((product) => product.title)}
+              options={products}
               renderOption={(props, option) => (
-                <li
-                  {...props}
+                <Link
+                  to={`/detail/${option._id}`}
                   style={{
-                    margin: "5px 0",
-                    display: "flex",
-                    alignItems: "center",
+                    textDecoration: "none",
+                    color: "black",
                   }}
                 >
-                  <img
-                    src={getProducts(option)}
+                  <li
+                    {...props}
                     style={{
-                      width: "4rem",
-                      height: "4rem",
-                      borderRadius: "50%",
-                      marginRight: "10px",
-                    }}
-                  />
-                  <Typography
-                    sx={{
-                      fontWeight: "bold",
+                      margin: "5px 0",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
-                    {option}
-                  </Typography>
-                </li>
+                    <img
+                      src={option.posterURL}
+                      style={{
+                        width: "4rem",
+                        height: "4rem",
+                        borderRadius: "50%",
+                        marginRight: "10px",
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {option.title}
+                    </Typography>
+                  </li>
+                </Link>
               )}
               renderInput={(params) => (
                 <TextField
