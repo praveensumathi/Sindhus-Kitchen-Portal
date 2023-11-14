@@ -1,4 +1,12 @@
-import { ICategory, ICategoryWithProducts, ICommonResponse, IMenuDatas, IMenuList, IProduct, IProductDetail } from "../interface/types";
+import {
+  ICategory,
+  ICateringEnquiry,
+  ICategoryWithProducts,
+  ICommonResponse,
+  IMenuDatas,
+  IMenuList,
+  IProduct,
+} from "../interface/types";
 import { httpWithoutCredentials } from "./http";
 
 const getAllMenus = async () => {
@@ -14,9 +22,9 @@ const getAllMenus = async () => {
 
 const fetchProductById = async (productId: string | undefined) => {
   try {
-    const response = await httpWithoutCredentials.get<ICommonResponse<IProduct>>(
-      `product/fetchProductById/${productId}`
-    );
+    const response = await httpWithoutCredentials.get<
+      ICommonResponse<IProduct>
+    >(`product/fetchProductById/${productId}`);
     return response;
   } catch (error) {
     throw error;
@@ -33,6 +41,18 @@ const getAllDiningOutMenuDatas = async () => {
   }
 };
 
+const createCateringEnquiry = async (data: ICateringEnquiry) => {
+  try {
+    const response = await httpWithoutCredentials.post(
+      "enquiry/createEnquiry",
+      data
+    );
+    console.log("this is response", response.data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 const getAllDiningOutProducts = async () => {
   try {
     const response = await httpWithoutCredentials.get<ICategoryWithProducts[]>(
@@ -62,4 +82,5 @@ export {
   getAllDiningOutMenuDatas,
   getAllDiningOutProducts,
   getfetchProductsByMenuId,
+  createCateringEnquiry,
 };
