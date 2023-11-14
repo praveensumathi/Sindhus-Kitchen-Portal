@@ -88,6 +88,28 @@ const getfetchProductsByMenuId = async (menuId: string) => {
     throw error;
   }
 };
+const getProductsByMenuIdWithSearchTerm = async (
+  selectedMenuId,
+  searchTerm,
+  setProducts
+) => {
+  try {
+    const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
+      `/product/searchProduct/${selectedMenuId}?searchTerm=${searchTerm}`
+    );
+    if (response && response.data.length > 0) {
+      const products: IProductDropDownData[] = response.data.map((product) => ({
+        _id: product._id,
+        title: product.title,
+        posterURL: product.posterURL,
+      }));
+
+      setProducts(products);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 export {
   getAllMenus,
@@ -97,4 +119,5 @@ export {
   getAllDiningOutProducts,
   getfetchProductsByMenuId,
   createCateringEnquiry,
+  getProductsByMenuIdWithSearchTerm,
 };

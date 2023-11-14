@@ -98,33 +98,6 @@ export const homeSearchCityDropDown = [
   "Idiyappam",
 ];
 
-export const homeSearchMenusDropDown = [
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOtAcGDzRUa-KAAgpdBNZAKXLP2nrFqu-pIQ&usqp=CAU",
-    name: "Idly",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtcDQzWe9QIT243NTVG9mDD6IMZf6TiLvPhg&usqp=CAU",
-    name: "Dosa",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrUZ2VdF2AWExggj3I_9W4eFA41aBz4xEKSw&usqp=CAU",
-    name: "Pongal",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMg2rqiS6bbwjGBZtSH7Rj36lKoDutmUeb6A&usqp=CAU",
-    name: "Vadai",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkaKWflnOW4iWdbSifBVmutTj6ouDi1tj23g&usqp=CAU",
-    name: "Idiyappam",
-  },
-];
 
 export const snacksMenu = [
   {
@@ -137,6 +110,8 @@ export const snacksMenu = [
     menu: "Savouries",
   },
 ];
+
+
 export const cateringPage: ICateringPage[] = [
   {
     id: "1",
@@ -150,7 +125,7 @@ export const cateringPage: ICateringPage[] = [
     Large Tray - can eat 30 members
     `,
 
-    image: "assets/food-img.jpg",
+    image: "assets/food-images-2.jpg",
     trayItems: [
       { name: "SmallTray", price: "[$50.00]" },
       { name: "MediumTray", price: "[$100.00]" },
@@ -210,6 +185,7 @@ export const cateringPage: ICateringPage[] = [
     ],
   },
 ];
+
 
 export const menuDetailPage = {
   image: [

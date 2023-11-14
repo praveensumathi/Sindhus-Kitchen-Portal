@@ -19,8 +19,8 @@ import { IMenuList, IProductDropDownData } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { usegetAllMenus } from "../../customRQHooks/Hooks";
 import { homePageSlicker } from "../../seed-data/seed-data";
-import { httpWithoutCredentials } from "../../services/http";
 import Fade from "react-reveal/Fade";
+import { getProductsByMenuIdWithSearchTerm } from "../../services/api";
 
 function HomePageSlicker() {
   const settings = {
@@ -37,7 +37,6 @@ function HomePageSlicker() {
   const { data: menuData, isLoading, isError } = usegetAllMenus();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMenuId, setSelectedMenuId] = useState("");
-  const [productNames, setProductNames] = useState<IProductDropDownData[]>([]);
   const [products, setProducts] = useState<IProductDropDownData[]>([]);
 
   useEffect(() => {
@@ -46,32 +45,13 @@ function HomePageSlicker() {
     }
   }, [menuData, isLoading, isError]);
 
-  const getProductsByMenuIdWithSearchTerm = async () => {
-    try {
-     
-      const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
-        `/product/searchProduct/${selectedMenuId}?searchTerm=${searchTerm}`
-      );
-      if (response && response.data.length > 0) {
-        setProducts(response.data || []);
-
-        const products: IProductDropDownData[] = response.data.map(
-          (product) => ({
-            _id: "",
-            title: product.title,
-            posterURL: product.posterURL,
-          })
-        );
-        setProductNames(products);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   useEffect(() => {
     if (selectedMenuId) {
-      getProductsByMenuIdWithSearchTerm();
+      getProductsByMenuIdWithSearchTerm(
+        selectedMenuId,
+        searchTerm,
+        setProducts
+      );
     }
   }, [selectedMenuId]);
 
@@ -80,7 +60,7 @@ function HomePageSlicker() {
     setSearchTerm(newSearchTerm || "");
   };
 
-  const handleMenuChange = async (event, newValue) => {
+  const handleMenuChange = (event, newValue) => {
     const selectedMenu = menus.find((menu) => menu.title === newValue);
     if (selectedMenu) {
       setSelectedMenuId(selectedMenu._id);
@@ -93,10 +73,8 @@ function HomePageSlicker() {
     }
   }, [menuData, isLoading, isError]);
 
-  
   const getProducts = (title: string): string =>
     products.find((product) => product.title === title)?.posterURL || "";
-
 
   return (
     <Box sx={{ position: "relative" }}>
