@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export interface ICateringPage {
   id: string;
   menuTitle?: string;
@@ -72,7 +74,7 @@ export interface IServingSizesWithPrice {
   _id: string;
 }
 
-export interface ICateringEnquiries {
+export interface ICateringEnquiry {
   _id?: string;
   fullName: string;
   email: string;
@@ -80,5 +82,5 @@ export interface ICateringEnquiries {
   guestCount?: number;
   mobileNumber: string;
   message?: string;
-  eventDate?: string;
+  eventDate: string;
 }

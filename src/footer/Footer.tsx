@@ -15,7 +15,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "@mui/material/TextField";
 import theme from "../theme/theme";
 import * as yup from "yup";
-import { ICateringEnquiries } from "../interface/types";
+import { ICateringEnquiry } from "../interface/types";
 import { createCateringEnquiry } from "../services/api";
 import { EnquiryFormInitialValue } from "../constants/InitialValues";
 import { Controller, useForm } from "react-hook-form";
@@ -23,6 +23,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useSnackBar } from "../context/SnackBarContext";
 import { SnackbarSeverityEnum } from "../enums/SnackbarSeverityEnum";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 
 const schema = yup.object().shape({
   fullName: yup.string().required("Name is required"),
@@ -36,6 +38,7 @@ const schema = yup.object().shape({
     .required()
     .typeError("Please enter the MobileNumber")
     .matches(/^[0-9]{10}$/, "Please enter a valid MobileNumber"),
+  eventDate: yup.string().required("Event date is required"),
 });
 
 function Footer() {
@@ -51,17 +54,15 @@ function Footer() {
     register,
     reset,
     control,
-  } = useForm<ICateringEnquiries>({
+  } = useForm<ICateringEnquiry>({
     resolver: yupResolver(schema),
     mode: "all",
     defaultValues: EnquiryFormInitialValue,
   });
 
-  const onSubmitCateringEnquiry = async (data: ICateringEnquiries) => {
+  const onSubmitCateringEnquiry = async (data: ICateringEnquiry) => {
     try {
       const response = await createCateringEnquiry(data);
-      console.log("Snackbar (Success): submitted successfully");
-      console.log("Response:", response);
       updateSnackBarState(
         true,
         "Form submitted successfully",
@@ -69,7 +70,6 @@ function Footer() {
       );
       reset();
     } catch (error) {
-      console.error("Error while submitting the form", error);
       updateSnackBarState(
         true,
         "Error while submitting the form",
@@ -236,7 +236,7 @@ function Footer() {
 
                 <Grid item lg={6} xs={12}>
                   <TextField
-                    label="Full Name"
+                    label="Full Name *"
                     fullWidth
                     variant="outlined"
                     {...register("fullName")}
@@ -246,7 +246,7 @@ function Footer() {
                 </Grid>
                 <Grid item lg={6} xs={12}>
                   <TextField
-                    label="Email Id"
+                    label="Email *"
                     fullWidth
                     variant="outlined"
                     {...register("email")}
@@ -256,7 +256,7 @@ function Footer() {
                 </Grid>
                 <Grid item lg={6} xs={12}>
                   <TextField
-                    label="Mobile Number"
+                    label="Mobile Number *"
                     fullWidth
                     variant="outlined"
                     {...register("mobileNumber")}
@@ -274,31 +274,41 @@ function Footer() {
                     {...register("typeOfEvent")}
                   />
                 </Grid>
+
                 <Grid item lg={3} xs={12}>
-                  <Box>
-                    <Controller
-                      name="eventDate"
-                      control={control}
-                      defaultValue={date}
-                      render={({ field }) => (
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <FormControl fullWidth error={!!errors?.eventDate?.message}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Controller
+                        name="eventDate"
+                        control={control}
+                        render={({ field }) => (
                           <DatePicker
-                            value={field.value || null}
-                            label="Event Date"
+                            {...field}
+                            label="Event Date *"
                             onChange={(date) => field.onChange(date)}
-                            sx={{ width: "100%", backgroundColor: "white" }}
+                            sx={{
+                              width: "100%",
+                              backgroundColor: "white",
+                            }}
                             format="DD-MM-YYYY"
                           />
-                        </LocalizationProvider>
-                      )}
-                    />
-                  </Box>
+                        )}
+                      />
+                    </LocalizationProvider>
+                    {!!errors.eventDate && (
+                      <FormHelperText>
+                        {errors.eventDate.message}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
                 </Grid>
+
                 <Grid item lg={3} xs={12}>
                   <TextField
                     label="Guest Count"
                     fullWidth
                     variant="outlined"
+                    type="number"
                     {...register("guestCount")}
                   />
                 </Grid>
@@ -318,7 +328,7 @@ function Footer() {
                     sx={{ marginBottom: 1 }}
                     variant="contained"
                   >
-                    Submit Catering Request
+                    Send Request
                   </Button>
                 </Grid>
               </Grid>

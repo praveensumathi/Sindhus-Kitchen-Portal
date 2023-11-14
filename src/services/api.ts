@@ -1,4 +1,8 @@
-import { ICateringEnquiries, IMenuList, IProductDetail } from "../interface/types";
+import {
+  ICateringEnquiry,
+  IMenuList,
+  IProductDetail,
+} from "../interface/types";
 import { httpWithoutCredentials } from "./http";
 
 const getAllMenus = async () => {
@@ -23,7 +27,7 @@ const fetchProductById = async (productId: string | undefined) => {
   }
 };
 
-const createCateringEnquiry = async (data: ICateringEnquiries) => {
+const createCateringEnquiry = async (data: ICateringEnquiry) => {
   try {
     const response = await httpWithoutCredentials.post(
       "enquiry/createEnquiry",

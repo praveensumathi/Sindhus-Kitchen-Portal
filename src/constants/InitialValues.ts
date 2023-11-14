@@ -1,6 +1,6 @@
-import { ICateringEnquiries } from "../interface/types";
+import { ICateringEnquiry } from "../interface/types";
 
-export const EnquiryFormInitialValue: ICateringEnquiries = {
+export const EnquiryFormInitialValue: ICateringEnquiry = {
   fullName: "",
   email: " ",
   typeOfEvent: "",
