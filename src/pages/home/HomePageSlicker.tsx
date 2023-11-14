@@ -41,7 +41,6 @@ function HomePageSlicker() {
   useEffect(() => {
     if (!isLoading && !isError) {
       setMenus(menuData);
-      console.log(menuData);
     }
   }, [menuData, isLoading, isError]);
 

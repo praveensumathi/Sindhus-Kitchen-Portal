@@ -1,4 +1,4 @@
-import { ICategory, ICategoryWithProducts, IMenuDatas, IMenuList, IProductDetail } from "../interface/types";
+import { ICategory, ICategoryWithProducts, ICommonResponse, IMenuDatas, IMenuList, IProduct, IProductDetail } from "../interface/types";
 import { httpWithoutCredentials } from "./http";
 
 const getAllMenus = async () => {
@@ -14,7 +14,7 @@ const getAllMenus = async () => {
 
 const fetchProductById = async (productId: string | undefined) => {
   try {
-    const response = await httpWithoutCredentials.get<IProductDetail>(
+    const response = await httpWithoutCredentials.get<ICommonResponse<IProduct>>(
       `product/fetchProductById/${productId}`
     );
     return response;

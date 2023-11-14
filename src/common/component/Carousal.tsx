@@ -97,7 +97,7 @@ function Carousel(props: IProps) {
           <Slider {...settings}>
             {category.menuDatas.products.length>0 &&
               category.menuDatas.products.map((product, productIndex) => (
-                <Box key={productIndex}>
+                <Box key={productIndex} sx={{display:"flex",justifyContent:"flex-start"}}>
                   <CommonProductCard product={product} />
                 </Box>
               ))}

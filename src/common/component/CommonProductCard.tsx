@@ -16,7 +16,7 @@ function CommonProductCard(props: IProps) {
     <Box>
       <Card sx={{ width: "260px", boxShadow: 4 }}>
         <Link
-          to={`/menudetailpage/${product._id}`}
+          to={`/detail/${product._id}`}
           style={{
             textDecoration: "none",
           }}

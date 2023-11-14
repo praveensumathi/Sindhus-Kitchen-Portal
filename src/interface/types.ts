@@ -51,7 +51,7 @@ export interface IProduct {
   _id: string;
   title: string;
   price: null;
-  images: any[];
+  images: string[];
   servingSizesWithPrice: IPrice[];
   description: string;
   netWeight: number;
@@ -87,6 +87,7 @@ export interface IMenuDatas {
   image: string;
   products: IProductDinnigOut[];
 }
+
 export interface IProductDinnigOut {
   _id: string;
   title: string;
@@ -94,4 +95,10 @@ export interface IProductDinnigOut {
   description: string;
   netWeight: number;
   price: IPrice[];
+}
+
+export interface ICommonResponse<T> {
+  data: T;
+  statusCode: number;
+  success:boolean
 }

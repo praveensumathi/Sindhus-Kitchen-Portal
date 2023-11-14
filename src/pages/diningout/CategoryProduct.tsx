@@ -88,7 +88,7 @@ function CategoryProducts() {
                   sm={6}
                   md={4}
                   lg={3}
-                  sx={{ display: "flex",justifyContent:"center"}}
+                  sx={{ display: "flex",justifyContent:"center",}}
                 >
                   <CommonProductCard product={product} />
                 </Grid>

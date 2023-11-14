@@ -12,7 +12,7 @@ import Slider from "react-slick";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchProductById } from "../../services/api";
-import { IProductDetail } from "../../interface/types";
+import { IProduct, IProductDetail } from "../../interface/types";
 import { useSnackBar } from "../../context/SnackBarContext";
 
 const CustomPrevArrow = (props) => (
@@ -27,7 +27,7 @@ const CustomNextArrow = (props) => (
   </div>
 );
 
-function MenuDetailPage() {
+function ProductDetail() {
   const settings = {
     infinite: true,
     speed: 500,
@@ -44,12 +44,12 @@ function MenuDetailPage() {
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [menuDetail, setMenuDetail] = useState<IProductDetail>();
+  const [menuDetail, setMenuDetail] = useState<IProduct>();
 
   const fetchProductDetail = async () => {
     try {
       const response = await fetchProductById(productId);
-      setMenuDetail(response.data);
+      setMenuDetail(response.data.data);
     } catch (error: any) {
       if (error.response && error.response.data) {
         console.log(error.response.data);
@@ -73,9 +73,9 @@ function MenuDetailPage() {
       >
         <Grid item md={5} xs={12}>
           <Slider {...settings}>
-            {menuDetail?.product.images &&
-              menuDetail.product.images.length > 0 &&
-              menuDetail.product.images.map((image, index) => (
+            {menuDetail?.images &&
+              menuDetail.images.length > 0 &&
+              menuDetail.images.map((image, index) => (
                 <Box
                   sx={{
                     height: isBelowMediumSize ? "50vh" : "75vh",
@@ -102,7 +102,7 @@ function MenuDetailPage() {
             {menuDetail && (
               <>
                 <Typography sx={{ fontWeight: "bolder", fontSize: "34px" }}>
-                  {menuDetail.product.title}
+                  {menuDetail.title}
                 </Typography>
                 <Typography
                   sx={{
@@ -113,7 +113,7 @@ function MenuDetailPage() {
                     alignItems: "center",
                   }}
                 >
-                  $ {menuDetail.product.price} &nbsp;
+                  $ {menuDetail.price} &nbsp;
                   <span style={{ fontSize: "12px" }}>(Per Piece / Plate)</span>
                 </Typography>
                 <Typography>
@@ -123,7 +123,7 @@ function MenuDetailPage() {
                   </span>
                 </Typography>
                 <Typography sx={{ fontSize: "small" }}>
-                  {menuDetail.product.description}
+                  {menuDetail.description}
                 </Typography>
                 <Divider sx={{ margin: "10px 0" }} />
                 <Typography
@@ -139,28 +139,26 @@ function MenuDetailPage() {
                     textAlign: "center",
                   }}
                 >
-                  {menuDetail.product.netWeight} lb
+                  {menuDetail.netWeight} lb
                 </Box>
                 <Typography
                   sx={{ fontSize: "15px", fontWeight: "500", margin: "5px 0" }}
                 >
                   Serving Sizes
                 </Typography>
-                {menuDetail.product.servingSizesWithPrice &&
-                  menuDetail.product.servingSizesWithPrice.length > 0 &&
-                  menuDetail.product.servingSizesWithPrice.map(
-                    (size, index) => (
-                      <Typography
-                        sx={{ fontSize: "small", display: "flex" }}
-                        key={index}
-                      >
-                        {size.size} -
-                        <span style={{ fontWeight: "bolder" }}>
-                          &nbsp; [${size.price}]
-                        </span>
-                      </Typography>
-                    )
-                  )}
+                {menuDetail.servingSizesWithPrice &&
+                  menuDetail.servingSizesWithPrice.length > 0 &&
+                  menuDetail.servingSizesWithPrice.map((size, index) => (
+                    <Typography
+                      sx={{ fontSize: "small", display: "flex" }}
+                      key={index}
+                    >
+                      {size.size} -
+                      <span style={{ fontWeight: "bolder" }}>
+                        &nbsp; [${size.price}]
+                      </span>
+                    </Typography>
+                  ))}
               </>
             )}
           </Container>
@@ -170,4 +168,4 @@ function MenuDetailPage() {
   );
 }
 
-export default MenuDetailPage;
+export default ProductDetail;

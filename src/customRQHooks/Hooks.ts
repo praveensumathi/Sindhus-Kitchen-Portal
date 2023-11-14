@@ -20,7 +20,6 @@ export const usegetAllDiningOutMenuDatas = () => {
     queryKey: ["diningOutMenuDatas"],
     queryFn: getAllDiningOutMenuDatas,
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 };
 
