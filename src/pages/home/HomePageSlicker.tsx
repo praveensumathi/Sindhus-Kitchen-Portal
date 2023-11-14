@@ -63,7 +63,7 @@ function HomePageSlicker() {
     setSearchTerm(newSearchTerm || "");
   };
 
-  const handleMenuChange = (event, newValue) => {
+  const handleMenuChange = (_event, newValue: string) => {
     const selectedMenu = menus.find((menu) => menu.title === newValue);
     if (selectedMenu) {
       setSelectedMenuId(selectedMenu._id);

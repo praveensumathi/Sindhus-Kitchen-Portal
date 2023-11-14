@@ -10,7 +10,6 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { useCommonGridStyle } from "../styles/FooterStyle";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "@mui/material/TextField";
 import theme from "../theme/theme";
@@ -20,7 +19,6 @@ import { createCateringEnquiry } from "../services/api";
 import { EnquiryFormInitialValue } from "../constants/InitialValues";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
 import { useSnackBar } from "../context/SnackBarContext";
 import { SnackbarSeverityEnum } from "../enums/SnackbarSeverityEnum";
 import FormControl from "@mui/material/FormControl";
@@ -45,9 +43,6 @@ const schema = yup.object().shape({
 function Footer() {
   const classes = useCommonGridStyle();
   const { updateSnackBarState } = useSnackBar();
-  const [date, setDate] = useState<string>(
-    dayjs(new Date()).format("YYYY-MM-DD")
-  );
 
   const {
     handleSubmit,
@@ -63,7 +58,7 @@ function Footer() {
 
   const onSubmitCateringEnquiry = async (data: ICateringEnquiry) => {
     try {
-      const response = await createCateringEnquiry(data);
+      await createCateringEnquiry(data);
       updateSnackBarState(
         true,
         "Form submitted successfully",
