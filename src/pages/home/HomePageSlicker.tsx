@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { usegetAllMenus } from "../../customRQHooks/Hooks";
 import { homePageSlicker } from "../../seed-data/seed-data";
 import { httpWithoutCredentials } from "../../services/http";
+import Fade from "react-reveal/Fade";
 
 function HomePageSlicker() {
   const settings = {
@@ -47,7 +48,7 @@ function HomePageSlicker() {
 
   const getProductsByMenuIdWithSearchTerm = async () => {
     try {
-      console.log("searchTerm", searchTerm);
+     
       const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
         `/product/searchProduct/${selectedMenuId}?searchTerm=${searchTerm}`
       );
@@ -92,8 +93,10 @@ function HomePageSlicker() {
     }
   }, [menuData, isLoading, isError]);
 
-  const getProducts = (title) =>
+  
+  const getProducts = (title: string): string =>
     products.find((product) => product.title === title)?.posterURL || "";
+
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -131,28 +134,30 @@ function HomePageSlicker() {
                   width: "100%",
                 }}
               >
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontWeight: "bolder",
-                    fontSize: isBelowMediumSize ? "45px" : "70px",
-                  }}
-                >
-                  {content.heading}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontWeight: "bolder",
-                    fontSize: isBelowMediumSize ? "20px" : "25px",
-                  }}
-                >
-                  {content.subHeading}
-                </Typography>
-                <Typography
-                  sx={{ fontSize: isBelowMediumSize ? "18px" : "20px" }}
-                >
-                  {content.content}
-                </Typography>
+                <Fade top>
+                  <Typography
+                    variant="h1"
+                    sx={{
+                      fontWeight: "bolder",
+                      fontSize: isBelowMediumSize ? "45px" : "70px",
+                    }}
+                  >
+                    {content.heading}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: "bolder",
+                      fontSize: isBelowMediumSize ? "20px" : "25px",
+                    }}
+                  >
+                    {content.subHeading}
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: isBelowMediumSize ? "18px" : "20px" }}
+                  >
+                    {content.content}
+                  </Typography>
+                </Fade>
               </Container>
             </Box>
           </Box>

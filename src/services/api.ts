@@ -1,3 +1,4 @@
+import { ICommonResponse, IProduct, ICategory, ICategoryWithProducts, IMenuDatas } from './../interface/types';
 import {  IProductDropDownData} from "../interface/types";
 import { IMenuList, IProductDetail } from "../interface/types";
 import { httpWithoutCredentials } from "./http";
@@ -28,7 +29,7 @@ const cateringfetchProductData = async (menuId, searchterm = "") => {
 };
 const fetchProductById = async (productId: string | undefined) => {
   try {
-    const response = await httpWithoutCredentials.get<IProductDetail>(
+    const response = await httpWithoutCredentials.get<ICommonResponse<IProduct>>(
       `product/fetchProductById/${productId}`
     );
     return response;
@@ -36,12 +37,47 @@ const fetchProductById = async (productId: string | undefined) => {
     throw error;
   }
 };
+const getAllDiningOutMenuDatas = async () => {
+  try {
+    const response = await httpWithoutCredentials.get<ICategory[]>(
+      "http://localhost:3000/diningOut/getAllDiningOutMenuDatas"
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
+
+
+const getAllDiningOutProducts = async () => {
+  try {
+    const response = await httpWithoutCredentials.get<ICategoryWithProducts[]>(
+      "/diningOut/getAllDiningOutProducts"
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getfetchProductsByMenuId = async (menuId: string) => {
+  try {
+    const response = await httpWithoutCredentials.get<IMenuDatas>(
+      `http://localhost:3000/diningOut/fetchProductsByMenuId/${menuId}`
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export {
   getAllMenus,
- 
   fetchProductById,
   cateringfetchProductData,
+  getAllDiningOutMenuDatas,
+  getAllDiningOutProducts,
+  getfetchProductsByMenuId,
 };
-

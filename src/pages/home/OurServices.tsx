@@ -6,6 +6,8 @@ import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { OurServicesIconEnums } from "../../enums/OurServicesIconEnum";
 import { IOurServices } from "../../interface/types";
 import { useOurServicesStyles } from "../../styles/OurServicesStyles";
+import Fade from "react-reveal/Fade";
+import Bounce from "react-reveal/Bounce";
 
 interface Iprops {
   OurServices: IOurServices[];
@@ -14,7 +16,6 @@ interface Iprops {
 function OurServices(props: Iprops) {
   const { OurServices } = props;
   const classes = useOurServicesStyles();
-
   const OurServiceslist = [
     {
       id: OurServicesIconEnums.RESTAURANT,
@@ -70,11 +71,13 @@ function OurServices(props: Iprops) {
     <Container>
       <Grid container>
         <Grid item xs={12}>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Typography variant="h4" fontWeight={600}>
-              Our Services
-            </Typography>
-          </Box>
+          <Fade left>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Typography variant="h4" fontWeight={600}>
+                Our Services
+              </Typography>
+            </Box>
+          </Fade>
         </Grid>
         {OurServices.map((services, index) => {
           const matchedIcon = OurServiceslist.find(
@@ -95,13 +98,17 @@ function OurServices(props: Iprops) {
                 mt: 6,
               }}
             >
-              <Box>{matchedIcon && matchedIcon.icon}</Box>
-              <Box sx={{ textAlign: "center" }}>
-                <Typography variant="h5" fontWeight={"bold"}>
-                  {services.title}
-                </Typography>
-                <Typography variant="body1">{services.description}</Typography>
-              </Box>
+              <Bounce bottom duration={1000} delay={index * 300}>
+                <Box>{matchedIcon && matchedIcon.icon}</Box>
+                <Box sx={{ textAlign: "center" }}>
+                  <Typography variant="h5" fontWeight={"bold"}>
+                    {services.title}
+                  </Typography>
+                  <Typography variant="body1">
+                    {services.description}
+                  </Typography>
+                </Box>
+              </Bounce>
             </Grid>
           );
         })}

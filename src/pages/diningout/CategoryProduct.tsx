@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,19 +8,20 @@ import Grid from "@mui/material/Grid";
 import StoreIcon from "@mui/icons-material/Store";
 import CommonProductCard from "../../common/component/CommonProductCard";
 import { useParams } from "react-router-dom";
-import { categoryWithProducts } from "../../seed-data/seed-data";
+import { usegetfetchProductsByMenuId } from "../../customRQHooks/Hooks";
 
 function CategoryProducts() {
 
-  const params = useParams();
-  // Find the category with the matching _id
-  const selectedCategory = categoryWithProducts.find(
-    (category) => category._id === params.categoryId
-  );
+
+  const { menuId } = useParams();
+
+  const selectedCategory = usegetfetchProductsByMenuId(menuId ?? "");
+  console.log("selectedCategory", selectedCategory);
+
 
   return (
     <>
-      {selectedCategory && (
+      {selectedCategory && selectedCategory.data && (
         <Box
           sx={{
             display: "flex",
@@ -41,7 +43,7 @@ function CategoryProducts() {
               }}
             >
               <CardMedia
-                image={selectedCategory?.image || ""}
+                image={selectedCategory.data.image || ""}
                 component={"img"}
                 sx={{
                   height: "100%",
@@ -66,16 +68,19 @@ function CategoryProducts() {
               }}
               variant="h5"
             >
-              {selectedCategory.data || ""}
+              {selectedCategory.data.title || ""}
             </Typography>
           </Box>
         </Box>
       )}
       <Box>
-        {selectedCategory && selectedCategory.products.length > 0 ? (
+        {
+        selectedCategory.data &&
+        selectedCategory.data.products &&
+        selectedCategory.data.products.length > 0 ? (
           <Container sx={{ padding: "10px" }}>
             <Grid container spacing={2}>
-              {selectedCategory.products.map((product, index) => (
+              {selectedCategory.data.products.map((product, index) => (
                 <Grid
                   item
                   key={index}
@@ -83,7 +88,7 @@ function CategoryProducts() {
                   sm={6}
                   md={4}
                   lg={3}
-                  sx={{ display: "flex", justifyContent: "center" }}
+                  sx={{ display: "flex",justifyContent:"center",}}
                 >
                   <CommonProductCard product={product} />
                 </Grid>
