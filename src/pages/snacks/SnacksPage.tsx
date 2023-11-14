@@ -8,8 +8,8 @@ import {
   useTheme,
 } from "@mui/material";
 import CommonProductCard from "../../common/component/CommonProductCard";
-import SnacksMenuItem from "./SnacksMenuItem";
 import { productCardList } from "../../seed-data/seed-data";
+import SnacksMenuItem from "./SnacksMenuItem";
 
 function SnacksPage() {
   const theme = useTheme();
@@ -69,10 +69,7 @@ function SnacksPage() {
                 height: "150px",
               }}
             >
-              <Typography
-                variant="h4"
-                sx={{ color: "white", fontWeight: 600 }}
-              >
+              <Typography variant="h4" sx={{ color: "white", fontWeight: 600 }}>
                 Snacks
               </Typography>
             </Grid>

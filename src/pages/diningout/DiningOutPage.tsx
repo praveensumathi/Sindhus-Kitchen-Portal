@@ -1,8 +1,7 @@
 import Container from "@mui/material/Container";
 import Categories from "./Categories";
-import { categoryWithProducts} from "../../seed-data/Seed-data";
+import { categoryWithProducts } from "../../seed-data/seed-data";
 import Carousel from "../../common/component/Carousal";
-
 
 function DiningOutPage() {
   return (
