@@ -5,6 +5,9 @@ import {
   Divider,
   Grid,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   TextField,
   Typography,
 } from "@mui/material";
@@ -64,8 +67,8 @@ function HomePageSlicker() {
     setSearchTerm(newSearchTerm || "");
   };
 
-  const handleMenuChange = (_event, newValue: string) => {
-    const selectedMenu = menus.find((menu) => menu.title === newValue);
+  const handleMenuChange = (_event, newValue: IMenuList) => {
+    const selectedMenu = menus.find((menu) => menu._id === newValue._id);
     if (selectedMenu) {
       setSelectedMenuId(selectedMenu._id);
     }
@@ -162,7 +165,7 @@ function HomePageSlicker() {
         >
           <Grid
             item
-            md={4}
+            md={5}
             xs={12}
             sx={{
               display: "flex",
@@ -176,11 +179,14 @@ function HomePageSlicker() {
               <RestaurantIcon color="secondary" />
             </IconButton>
             <Autocomplete
-              disableClearable
+              disablePortal
               sx={{ width: "100%" }}
-              options={menus.map((option) => option.title)}
+              options={menus.map((item) => ({
+                ...item,
+                label: item.title,
+              }))}
               onChange={(event, newValue) => {
-                handleMenuChange(event, newValue);
+                handleMenuChange(event, newValue!);
               }}
               renderInput={(params) => (
                 <TextField
@@ -188,18 +194,24 @@ function HomePageSlicker() {
                   placeholder="Menus"
                   InputProps={{
                     ...params.InputProps,
-                    type: "search",
                     disableUnderline: true,
                   }}
                   fullWidth
                   variant="standard"
                 />
               )}
+              renderOption={(props, option) => (
+                <List component={"li"} {...props}>
+                  <ListItem disablePadding>
+                    <ListItemText>{option.title}</ListItemText>
+                  </ListItem>
+                </List>
+              )}
             />
           </Grid>
           <Grid
             item
-            md={8}
+            md={7}
             xs={12}
             sx={{
               display: "flex",
@@ -222,12 +234,12 @@ function HomePageSlicker() {
               <SearchIcon color="secondary" />
             </IconButton>
             <Autocomplete
-              freeSolo
-              disableClearable
               sx={{ width: "100%" }}
-              value={searchTerm}
               onChange={handleProductSearch}
-              options={products}
+              options={products.map((item) => ({
+                ...item,
+                label: item.title,
+              }))}
               renderOption={(props, option) => (
                 <Link
                   to={`/detail/${option._id}`}
@@ -269,7 +281,6 @@ function HomePageSlicker() {
                   placeholder="Search Your favorite snacks, food, etc..."
                   InputProps={{
                     ...params.InputProps,
-                    type: "search",
                     disableUnderline: true,
                   }}
                   fullWidth
