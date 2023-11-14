@@ -14,19 +14,13 @@ export interface IOurServices {
   description: string;
 }
 
-// export interface ICategoryWithProducts {
-//   _id: string;
-//   title: string;
-//   products: IProductCardList[];
-// }
-
 export interface IProductCardList {
   _id: string;
   title: string;
   posterURL: string;
   description: string;
   netWeight: number;
-  price: IPrice[];
+  price: number;
 }
 
 export interface IMenuList {

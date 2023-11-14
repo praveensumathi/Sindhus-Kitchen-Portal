@@ -8,11 +8,14 @@ import {
   useTheme,
 } from "@mui/material";
 import CommonProductCard from "../../common/component/CommonProductCard";
-import { productCardList } from "../../seed-data/seed-data";
 import SnacksMenuItem from "./SnacksMenuItem";
+import { IProductCardList } from "../../interface/types";
+import { useState } from "react";
 
 function SnacksPage() {
   const theme = useTheme();
+
+  const [products, setProducts] = useState<IProductCardList[]>([]);
 
   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -100,7 +103,7 @@ function SnacksPage() {
         <SnacksMenuItem></SnacksMenuItem>
         <Box sx={{ mt: 5 }}>
           <Grid container spacing={3}>
-            {productCardList.map((product) => (
+            {products.map((product) => (
               <Grid
                 item
                 xs={12}
