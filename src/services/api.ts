@@ -9,8 +9,6 @@ import {
 } from "../interface/types";
 import { httpWithoutCredentials } from "./http";
 
-
-
 const getAllMenus = async () => {
   try {
     const response = await httpWithoutCredentials.get<IMenuList[]>(
