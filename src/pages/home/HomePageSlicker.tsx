@@ -31,13 +31,16 @@ function HomePageSlicker() {
     autoplay: true,
     arrows: false,
   };
+
   const theme = useTheme();
+
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
   const [menus, setMenus] = useState<IMenuList[]>([]);
-  const { data: menuData, isLoading, isError } = usegetAllMenus();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [products, setProducts] = useState<IProductDropDownData[]>([]);
+
+  const { data: menuData, isLoading, isError } = usegetAllMenus();
 
   useEffect(() => {
     if (!isLoading && !isError) {

@@ -30,7 +30,6 @@ import Zoom from "react-reveal/Zoom";
 
 const schema = yup.object().shape({
   fullName: yup.string().required("Name is required"),
-
   email: yup
     .string()
     .email("Invalid email address")
@@ -94,7 +93,7 @@ function Footer() {
         </Box>
       </Fade>
       <Container sx={{ paddingBottom: 2 }}>
-        <Grid container spacing={2} sx={{ gap: 3 }}>
+        <Grid container sx={{ gap: 3 }}>
           <Grid
             container
             item
@@ -229,12 +228,10 @@ function Footer() {
                   container
                   item
                   spacing={2}
-                  xs={12}
                   sx={{
                     backgroundColor: "white",
                     borderRadius: 5,
-                    paddingRight: 5,
-                    margin: { md: "0 4rem", xs: 0 },
+                    p: 2,
                   }}
                 >
                   <Grid item xs={12}>
@@ -291,7 +288,7 @@ function Footer() {
                   </Grid>
 
                   <Grid item lg={3} xs={12}>
-                    <FormControl fullWidth error={!!errors?.eventDate?.message}>
+                    <FormControl fullWidth error={!!errors.eventDate}>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <Controller
                           name="eventDate"

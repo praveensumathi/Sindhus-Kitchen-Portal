@@ -1,42 +1,6 @@
 import { OurServicesIconEnums } from "../enums/OurServicesIconEnum";
-import {
-  ICategoryWithProducts,
-  ICateringPage,
-  IOurServices,
-  IProductCardList,
-  IWhyChooseUs,
-} from "../interface/types";
+import { ICateringPage, IOurServices, IWhyChooseUs } from "../interface/types";
 
-export const productCardList: IProductCardList[] = [
-  {
-    _id: "1",
-    title: "BoonthiLaddu",
-    mrpprice: 299,
-    offerprice: 250,
-    imageUrl: "assets/food-img3.jpg",
-  },
-  {
-    _id: "2",
-    title: "BoonthiLaddu",
-    mrpprice: 299,
-    offerprice: 250,
-    imageUrl: "assets/food-img3.jpg",
-  },
-  {
-    _id: "3",
-    title: "BoonthiLaddu",
-    mrpprice: 299,
-    offerprice: 250,
-    imageUrl: "assets/food-img3.jpg",
-  },
-  {
-    _id: "4",
-    title: "BoonthiLaddu",
-    mrpprice: 299,
-    offerprice: 250,
-    imageUrl: "assets/food-img3.jpg",
-  },
-];
 export const ourServicesData: IOurServices[] = [
   {
     id: 1,
@@ -90,15 +54,6 @@ export const homePageSlicker = [
   },
 ];
 
-export const homeSearchCityDropDown = [
-  "Idly",
-  "Dosa",
-  "Pongal",
-  "Vadai",
-  "Idiyappam",
-];
-
-
 export const snacksMenu = [
   {
     menu: "All",
@@ -110,7 +65,6 @@ export const snacksMenu = [
     menu: "Savouries",
   },
 ];
-
 
 export const cateringPage: ICateringPage[] = [
   {
@@ -186,98 +140,6 @@ export const cateringPage: ICateringPage[] = [
   },
 ];
 
-
-export const menuDetailPage = {
-  image: [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qcxW-LZyWSOEATmYJVrZbjw7Xli7tZ5bOA&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsTZxbbmPwLA4Pr-7joWZNVBstmb82VW8vaw&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFuVc7Vyltiev_CTlWPE4RCD4PIvFmQFyCkQ&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSEFXVzvOnwu_X4q1SQsODeLq8UNftaVCLhw&usqp=CAU",
-  ],
-  title: "Adhirasam",
-  price: "20.00",
-  description:
-    "Adhirasam is a traditional sweet dish which will be done for most of the festivals.",
-  netWeight: "5",
-  servingSizes: [
-    { tray: "Small Tray", members: " Can eat 10 members" },
-    { tray: "Medium Tray", members: " Can eat 20 members" },
-    { tray: "Large Tray", members: " Can eat 30 members" },
-  ],
-};
-export const categoryWithProducts: ICategoryWithProducts[] = [
-  {
-    _id: "1",
-    data: "Snacks",
-    image: "http://localhost:5173/assets/food-img3.jpg",
-    products: [
-      {
-        _id: "654887cda8c6272a22e7334a",
-        title: "Boonthi Laddu",
-        mrpprice: 299,
-        offerprice: 250,
-        imageUrl: "/assets/food-img3.jpg",
-      },
-      {
-        _id: "654887cda8c6272a22e7334a",
-        title: "Boonthi Laddu",
-        mrpprice: 199,
-        offerprice: 150,
-        imageUrl: "/assets/food-img3.jpg",
-      },
-      {
-        _id: "3",
-        title: "Boonthi Laddu",
-        mrpprice: 199,
-        offerprice: 150,
-        imageUrl: "/assets/food-img3.jpg",
-      },
-      {
-        _id: "4",
-        title: "Boonthi Laddu",
-        mrpprice: 199,
-        offerprice: 150,
-        imageUrl: "/assets/food-img3.jpg",
-      },
-    ],
-  },
-  {
-    _id: "2",
-    data: "Breakfast",
-    image: "",
-    products: [
-      {
-        _id: "1",
-        title: "Idli",
-        mrpprice: 99,
-        offerprice: 75,
-        imageUrl: "/assets/images/dosa.jpg",
-      },
-      {
-        _id: "2",
-        title: "Dosa",
-        mrpprice: 149,
-        offerprice: 120,
-        imageUrl: "/assets/images/dosa.jpg",
-      },
-      {
-        _id: "3",
-        title: "Appam",
-        mrpprice: 149,
-        offerprice: 120,
-        imageUrl: "/assets/images/dosa.jpg",
-      },
-      {
-        _id: "4",
-        title: "Dosa",
-        mrpprice: 149,
-        offerprice: 120,
-        imageUrl: "/assets/images/dosa.jpg",
-      },
-    ],
-  },
-];
-
 export const WhyChooseUsData: IWhyChooseUs[] = [
   {
     id: 1,
@@ -302,7 +164,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     title: "Sourced with Care",
     description:
       "We curate our dishes with premium ingredients, some specially sourced from the heart of Tamil Nadu, India.",
-    imageicon: "🌾 ",
+    imageicon: "🌾",
     image:
       "https://img.freepik.com/free-photo/grinder-wooden-spoon-with-spices_23-2148601118.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
   },
