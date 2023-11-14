@@ -20,7 +20,9 @@ export const ProductsSliderSettings = {
 };
 
 function Carousel(props: IProps) {
+
   const { category } = props;
+
   const navigate = useNavigate();
 
   const settings = {
@@ -53,14 +55,13 @@ function Carousel(props: IProps) {
     ],
   };
 
-  const handleClickViewAll = (categoryId: string) => {
-    navigate(`/productsByCategory/${categoryId}`);
-    console.log(categoryId);
+  const handleClickViewAll = (menuId: string) => {
+    navigate(`/productsByCategory/${menuId}`);
   };
 
   return (
     category &&
-    category.products.length > 0 && (
+    category.menuDatas && (
       <Container>
         <Box marginTop={1.8}>
           <Box
@@ -78,7 +79,7 @@ function Carousel(props: IProps) {
               }}
               variant="h5"
             >
-              {category.data}
+              {category.menuDatas.title}
             </Typography>
             <Button
               variant="contained"
@@ -86,23 +87,26 @@ function Carousel(props: IProps) {
               sx={{
                 padding: 0.5,
               }}
-              onClick={() => handleClickViewAll(category._id)}
+              onClick={() => handleClickViewAll(category.menuDatas._id)}
             >
               View All
               <ArrowForwardIcon sx={{ fontSize: "18px" }} />
             </Button>
           </Box>
+
           <Slider {...settings}>
-            {category.products.map((product, index) => (
-              <Box key={index}>
-                <CommonProductCard product={product} />
-              </Box>
-            ))}
+            {category.menuDatas.products.length>0 &&
+              category.menuDatas.products.map((product, productIndex) => (
+                <Box key={productIndex}>
+                  <CommonProductCard product={product} />
+                </Box>
+              ))}
           </Slider>
         </Box>
       </Container>
     )
   );
+   
 }
 
 export default Carousel;

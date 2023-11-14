@@ -3,6 +3,7 @@ import {
   Container,
   Divider,
   Grid,
+  ImageList,
   Typography,
   useMediaQuery,
   useTheme,
@@ -145,7 +146,8 @@ function MenuDetailPage() {
                 >
                   Serving Sizes
                 </Typography>
-                {menuDetail.product.servingSizesWithPrice.length > 0 &&
+                {menuDetail.product.servingSizesWithPrice &&
+                  menuDetail.product.servingSizesWithPrice.length > 0 &&
                   menuDetail.product.servingSizesWithPrice.map(
                     (size, index) => (
                       <Typography

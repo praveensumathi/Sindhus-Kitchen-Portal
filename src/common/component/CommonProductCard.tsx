@@ -23,7 +23,7 @@ function CommonProductCard(props: IProps) {
         >
           <CardMedia
             component="img"
-            src={product.imageUrl}
+            src={product.posterURL}
             sx={{
               width: "300px",
               height: "200px",
@@ -40,24 +40,24 @@ function CommonProductCard(props: IProps) {
             {product.title}
           </Typography>
           <Box sx={{ display: "flex" }}>
-            {product.offerprice ? (
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{
-                  textDecoration: "line-through",
-                }}
-              >
-                ${product.mrpprice}
-              </Typography>
-            ) : (
-              <Typography variant="body2" color="text.secondary">
-                ${product.mrpprice}
-              </Typography>
-            )}
-            {product.offerprice && (
+            {/* {product.offerprice ? (
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    textDecoration: "line-through",
+                  }}
+                >
+                  ${product.mrpprice}
+                </Typography>
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  ${product.mrpprice}
+                </Typography>
+              )} */}
+            {product.price && product.price.length > 0 && (
               <Typography variant="body2" color="orange" sx={{ marginLeft: 1 }}>
-                ${product.offerprice}
+                ${product.price[0].price}
               </Typography>
             )}
           </Box>

@@ -6,5 +6,5 @@ export enum paths {
   CATERINGPAGE = "/cateringpage",
   DININGOUT = "/diningout",
   MENUDETAIL = "/menudetailpage/:productId",
-  PRODUCTSBYCATEGORY = "productsByCategory/:categoryId",
+  PRODUCTSBYCATEGORY = "/productsByCategory/:menuId",
 }
