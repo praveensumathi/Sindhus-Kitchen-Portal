@@ -77,9 +77,6 @@ function HomePageSlicker() {
     }
   }, [menuData, isLoading, isError]);
 
-  const getProducts = (title: string): string =>
-    products.find((product) => product.title === title)?.posterURL || "";
-
   return (
     <Box sx={{ position: "relative" }}>
       <Slider {...settings}>
@@ -248,7 +245,7 @@ function HomePageSlicker() {
                     }}
                   >
                     <img
-                      src={option.posterURL}
+                      src={option.posterURL ?? ""}
                       style={{
                         width: "4rem",
                         height: "4rem",
