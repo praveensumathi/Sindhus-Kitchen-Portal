@@ -92,7 +92,6 @@ function NavBar() {
           backdropFilter: "blur(15px)",
           borderStyle: "solid",
           borderWidth: 0,
-          borderBottomWidth: "thin",
           backgroundColor: "rgba(255,255,255,0.7)",
           position: appBarPosition,
         }}
