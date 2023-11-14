@@ -71,7 +71,6 @@ export interface IPrice {
   _id: string;
 }
 
-
 // export interface IMenu {
 //   mainMenuIds: string[];
 //   subMenuIds: any[];
@@ -83,7 +82,7 @@ export interface ICategory {
   image: string;
 }
 
-export interface ICategoryWithProducts{
+export interface ICategoryWithProducts {
   menuDatas: IMenuDatas;
 }
 
@@ -107,4 +106,5 @@ export interface ICommonResponse<T> {
   data: T;
   statusCode: number;
   success:boolean
+ 
 }
