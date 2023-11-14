@@ -16,7 +16,6 @@ interface Iprops {
 function OurServices(props: Iprops) {
   const { OurServices } = props;
   const classes = useOurServicesStyles();
-  const delay = OurServices.map(() => Math.random() * 800);
   const OurServiceslist = [
     {
       id: OurServicesIconEnums.RESTAURANT,
@@ -99,7 +98,7 @@ function OurServices(props: Iprops) {
                 mt: 6,
               }}
             >
-              <Bounce bottom duration={1000} delay={delay[index]}>
+              <Bounce bottom duration={1000} delay={index * 300}>
                 <Box>{matchedIcon && matchedIcon.icon}</Box>
                 <Box sx={{ textAlign: "center" }}>
                   <Typography variant="h5" fontWeight={"bold"}>
