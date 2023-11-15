@@ -64,6 +64,10 @@ export interface IPrice {
   quantity: number;
   _id: string;
 }
+export interface ISpecials {
+  id: number;
+  image: string;
+}
 
 
 export interface ICateringEnquiry {

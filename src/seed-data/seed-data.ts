@@ -1,5 +1,10 @@
 import { OurServicesIconEnums } from "../enums/OurServicesIconEnum";
-import { ICateringPage, IOurServices, IWhyChooseUs } from "../interface/types";
+import {
+  ICateringPage,
+  IOurServices,
+  ISpecials,
+  IWhyChooseUs,
+} from "../interface/types";
 
 export const ourServicesData: IOurServices[] = [
   {
@@ -157,7 +162,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
       "Exclusively cold-pressed Sesame and Peanut oils enhance our dishes.",
     imageicon: "🥜",
     image:
-      "https://img.freepik.com/free-photo/soybean-oil-soybean-food-beverage-products-food-nutrition-concept_1150-26351.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+      "https://img.freepik.com/premium-photo/peanut-oil-with-peanuts-isolated-white-surface_252965-909.jpg?w=996",
   },
   {
     id: 3,
@@ -194,5 +199,20 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     imageicon: "♻️",
     image:
       "https://img.freepik.com/free-vector/waste-management-concept-illustration_114360-8795.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+  },
+];
+
+export const SpeicalsData: ISpecials[] = [
+  {
+    id: 1,
+    image: "/assets/images/mysorepak.png",
+  },
+  {
+    id: 2,
+    image: "/assets/images/sweetsandsavories.png",
+  },
+  {
+    id: 3,
+    image: "/assets/images/diwaliposter1.png",
   },
 ];
