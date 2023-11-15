@@ -4,7 +4,7 @@ import {
   ICateringPage,
   IOurServices,
   IProductCardList,
-  ISpeicals,
+  ISpecials,
   IWhyChooseUs,
 } from "../interface/types";
 
@@ -320,7 +320,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
       "Exclusively cold-pressed Sesame and Peanut oils enhance our dishes.",
     imageicon: "🥜",
     image:
-      "https://img.freepik.com/free-photo/soybean-oil-soybean-food-beverage-products-food-nutrition-concept_1150-26351.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+      "https://img.freepik.com/premium-photo/peanut-oil-with-peanuts-isolated-white-surface_252965-909.jpg?w=996",
   },
   {
     id: 3,
@@ -360,17 +360,17 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
   },
 ];
 
-export const SpeicalsData: ISpeicals[] = [
+export const SpeicalsData: ISpecials[] = [
   {
     id: 1,
     image: "/assets/images/mysorepak.png",
   },
   {
-    id: 1,
-    image: "/assets/images/mysorepak.png",
+    id: 2,
+    image: "/assets/images/sweetsandsavories.png",
   },
   {
-    id: 1,
-    image: "/assets/images/mysorepak.png",
+    id: 3,
+    image: "/assets/images/diwaliposter1.png",
   },
 ];
