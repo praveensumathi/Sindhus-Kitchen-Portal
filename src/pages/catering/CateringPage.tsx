@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import CateringProduct from "./CateringProduct";
 import SearchBar from "./SearchBar";
+import Fade from "react-reveal/Fade";
 
 function CateringPage() {
   return (
@@ -21,19 +22,21 @@ function CateringPage() {
           }}
         ></Box>
         <Box>
-          <Typography
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "flex-start",
-              color: "white",
-              fontWeight: 600,
-              fontSize: "2rem",
-              pt: 3,
-            }}
-          >
-            Catering Menu
-          </Typography>
+          <Fade top>
+            <Typography
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                color: "white",
+                fontWeight: 600,
+                fontSize: "2rem",
+                pt: 3,
+              }}
+            >
+              Catering Menu
+            </Typography>
+          </Fade>
         </Box>
       </Box>
       <Container sx={{ mt: 1 }}>
