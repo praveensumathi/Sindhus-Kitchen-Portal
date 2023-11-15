@@ -12,10 +12,11 @@ import theme from "../theme/theme";
 import Fade from "react-reveal/Fade";
 import CateringEnquiryForm from "../common/component/CateringEnquiryForm";
 import { useLocation } from "react-router";
+import { paths } from "../routes/path";
 
 function Footer() {
   const location = useLocation();
-  const isCateringMenuPage = location.pathname === "/cateringpage";
+  const isCateringMenuPage = location.pathname === paths.CATERING;
   const classes = useCommonGridStyle();
 
   return (
