@@ -8,18 +8,14 @@ import { useEffect, useState } from "react";
 import { MenuType } from "../../enums/MenuTypesEnum";
 import { queryClient } from "../../App";
 import { getAllMenus } from "../../services/api";
-
-const foodOptions = [
-  { label: "Food1" },
-  { label: "Food2" },
-  { label: "Food3" },
-  { label: "Food4" },
-  { label: "Food5" },
-];
+import { usecateringfetchProductData } from "../../customRQHooks/Hooks";
 
 function SearchBar() {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedMenuId, setSelectedMenuId] = useState("");
+  const [productTitles, setProductTitles] = useState<string[]>([]);
 
   useEffect(() => {
     if (menuList) {
@@ -42,14 +38,45 @@ function SearchBar() {
     setCateringMenus([...filteredMenus]);
   };
 
+  const { data: cateringData, refetch: refetchProductData } =
+    usecateringfetchProductData(selectedMenuId, searchTerm);
+
+  useEffect(() => {
+    if (selectedMenuId) {
+      refetchProductData();
+    }
+  }, [selectedMenuId]);
+
+  useEffect(() => {
+    if (cateringData && cateringData.length > 0) {
+      const titles = cateringData.map((product) => product.title);
+      setProductTitles(titles);
+    } else {
+      setProductTitles([]);
+    }
+  }, [cateringData]);
+
+  const handleProductSearch = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm || "");
+  };
+
+  const handleMenuChange = async (event, newValue) => {
+    const selectedMenu = cateringMenus.find((menu) => menu.title === newValue);
+    if (selectedMenu) {
+      setSelectedMenuId(selectedMenu._id);
+    }
+  };
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={4}>
           <Autocomplete
             id="category-autocomplete"
-            options={cateringMenus}
-            getOptionLabel={(option) => option.title}
+            options={cateringMenus.map((option) => option.title)}
+            onChange={(event, newValue) => {
+              handleMenuChange(event, newValue);
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -61,9 +88,10 @@ function SearchBar() {
         </Grid>
         <Grid item xs={12} lg={5}>
           <Autocomplete
-            id="category-autocomplete"
-            options={foodOptions}
-            getOptionLabel={(option) => option.label}
+            id="food-autocomplete"
+            value={searchTerm}
+            onChange={handleProductSearch}
+            options={productTitles}
             renderInput={(params) => (
               <TextField {...params} label="Select Food" variant="outlined" />
             )}

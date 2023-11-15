@@ -5,6 +5,9 @@ import {
   Divider,
   Grid,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   TextField,
   Typography,
 } from "@mui/material";
@@ -15,15 +18,13 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { IMenuList } from "../../interface/types";
+import { IMenuList, IProductDropDownData } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { usegetAllMenus } from "../../customRQHooks/Hooks";
-import {
-  homePageSlicker,
-  homeSearchMenusDropDown,
-} from "../../seed-data/seed-data";
-import Zoom from "react-reveal/Zoom";
+import { homePageSlicker } from "../../seed-data/seed-data";
 import Fade from "react-reveal/Fade";
+import { getProductsByMenuIdWithSearchTerm } from "../../services/api";
+import { Link } from "react-router-dom";
 
 function HomePageSlicker() {
   const settings = {
@@ -34,16 +35,48 @@ function HomePageSlicker() {
     autoplay: true,
     arrows: false,
   };
+
   const theme = useTheme();
+
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
   const [menus, setMenus] = useState<IMenuList[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedMenuId, setSelectedMenuId] = useState("");
+  const [products, setProducts] = useState<IProductDropDownData[]>([]);
 
   const { data: menuData, isLoading, isError } = usegetAllMenus();
 
   useEffect(() => {
     if (!isLoading && !isError) {
       setMenus(menuData);
-      console.log(menuData);
+    }
+  }, [menuData, isLoading, isError]);
+
+  useEffect(() => {
+    if (selectedMenuId) {
+      getProductsByMenuIdWithSearchTerm(
+        selectedMenuId,
+        searchTerm,
+        setProducts
+      );
+    }
+  }, [selectedMenuId]);
+
+  const handleProductSearch = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm || "");
+  };
+
+  const handleMenuChange = (_event, newValue: IMenuList) => {
+    const selectedMenu = menus.find((menu) => menu._id === newValue._id);
+    if (selectedMenu) {
+      setSelectedMenuId(selectedMenu._id);
+    }
+  };
+
+  useEffect(() => {
+    if (!selectedMenuId && !isLoading && !isError) {
+      setMenus(menuData);
     }
   }, [menuData, isLoading, isError]);
 
@@ -71,7 +104,6 @@ function HomePageSlicker() {
                   zIndex: 1,
                 }}
               />
-
               <Container
                 sx={{
                   position: "absolute",
@@ -113,125 +145,152 @@ function HomePageSlicker() {
           </Box>
         ))}
       </Slider>
- 
-        <Box
+      <Box
+        sx={{
+          position: "absolute",
+          top: isBelowMediumSize ? "60%" : "70%",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Grid
+          container
           sx={{
-            position: "absolute",
-            top: isBelowMediumSize ? "60%" : "70%",
-            width: "100%",
+            p: "2px 4px",
             display: "flex",
-            justifyContent: "center",
+            alignItems: "center",
+            width: isBelowMediumSize ? "70%" : "50%",
           }}
         >
           <Grid
-            container
+            item
+            md={5}
+            xs={12}
             sx={{
-              p: "2px 4px",
               display: "flex",
               alignItems: "center",
-              width: isBelowMediumSize ? "70%" : "50%",
+              backgroundColor: "#fff",
+              borderRadius: isBelowMediumSize ? "10px" : "10px 0 0 10px",
+              height: "50px",
             }}
           >
-            <Grid
-              item
-              md={4}
-              xs={12}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                backgroundColor: "#fff",
-                borderRadius: isBelowMediumSize ? "10px" : "10px 0 0 10px",
-                height: "50px",
+            <IconButton sx={{ p: "10px" }} aria-label="menu">
+              <RestaurantIcon color="secondary" />
+            </IconButton>
+            <Autocomplete
+              disablePortal
+              sx={{ width: "100%" }}
+              options={menus.map((item) => ({
+                ...item,
+                label: item.title,
+              }))}
+              onChange={(event, newValue) => {
+                handleMenuChange(event, newValue!);
               }}
-            >
-              <IconButton sx={{ p: "10px" }} aria-label="menu">
-                <RestaurantIcon color="secondary" />
-              </IconButton>
-
-              <Autocomplete
-                disableClearable
-                sx={{ width: "100%" }}
-                options={menus.map((option) => option.title)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    placeholder="Menus"
-                    InputProps={{
-                      ...params.InputProps,
-                      type: "search",
-                      disableUnderline: true,
-                      // sx: { padding: "15px" },
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  placeholder="Menus"
+                  InputProps={{
+                    ...params.InputProps,
+                    disableUnderline: true,
+                  }}
+                  fullWidth
+                  variant="standard"
+                />
+              )}
+              renderOption={(props, option) => (
+                <List component={"li"} {...props}>
+                  <ListItem disablePadding>
+                    <ListItemText>{option.title}</ListItemText>
+                  </ListItem>
+                </List>
+              )}
+            />
+          </Grid>
+          <Grid
+            item
+            md={7}
+            xs={12}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#fff",
+              marginTop: isBelowMediumSize ? "5px" : 0,
+              borderRadius: isBelowMediumSize ? "10px" : "0 10px 10px 0",
+              height: "50px",
+            }}
+          >
+            <Divider
+              sx={{
+                height: 28,
+                m: 0.5,
+                display: isBelowMediumSize ? "none" : "block",
+              }}
+              orientation="vertical"
+            />
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <SearchIcon color="secondary" />
+            </IconButton>
+            <Autocomplete
+              sx={{ width: "100%" }}
+              onChange={handleProductSearch}
+              options={products.map((item) => ({
+                ...item,
+                label: item.title,
+              }))}
+              renderOption={(props, option) => (
+                <Link
+                  to={`/detail/${option._id}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                  }}
+                >
+                  <li
+                    {...props}
+                    style={{
+                      margin: "5px 0",
+                      display: "flex",
+                      alignItems: "center",
                     }}
-                    fullWidth
-                    variant="standard"
-                  />
-                )}
-              />
-            </Grid>
-            <Grid
-              item
-              md={8}
-              xs={12}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                backgroundColor: "#fff",
-                marginTop: isBelowMediumSize ? "5px" : 0,
-                borderRadius: isBelowMediumSize ? "10px" : "0 10px 10px 0",
-                height: "50px",
-              }}
-            >
-              <Divider
-                sx={{
-                  height: 28,
-                  m: 0.5,
-                  display: isBelowMediumSize ? "none" : "block",
-                }}
-                orientation="vertical"
-              />
-              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon color="secondary" />
-              </IconButton>
-              <Autocomplete
-                freeSolo
-                disableClearable
-                sx={{ width: "100%" }}
-                options={homeSearchMenusDropDown}
-                getOptionLabel={(option: any) => option.name}
-                renderOption={(props, option) => (
-                  <li {...props} style={{ margin: "5px 0" }}>
+                  >
                     <img
-                      src={option.image}
-                      alt={option.name}
+                      src={option.posterURL ?? ""}
                       style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "4rem",
+                        height: "4rem",
                         borderRadius: "50%",
-                        marginRight: "8px",
+                        marginRight: "10px",
                       }}
                     />
-                    <Typography sx={{ fontWeight: "bolder" }}>
-                      {option.name}
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {option.title}
                     </Typography>
                   </li>
-                )}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    placeholder="Search Your favorite snacks, food, etc..."
-                    InputProps={{
-                      ...params.InputProps,
-                      type: "search",
-                      disableUnderline: true,
-                    }}
-                    fullWidth
-                    variant="standard"
-                  />
-                )}
-              />
-            </Grid>
+                </Link>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  placeholder="Search Your favorite snacks, food, etc..."
+                  InputProps={{
+                    ...params.InputProps,
+                    disableUnderline: true,
+                  }}
+                  fullWidth
+                  variant="standard"
+                />
+              )}
+            />
           </Grid>
-        </Box>
+        </Grid>
+      </Box>
     </Box>
   );
 }
