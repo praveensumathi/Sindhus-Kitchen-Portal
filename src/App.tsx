@@ -23,8 +23,8 @@ function App() {
               <Route index element={<Home />} />
               <Route path={paths.HOME} element={<Home />} />
               <Route path={paths.SPECIALS} element={<Specials />} />
-              <Route path={paths.SNACKSPAGE} element={<SnacksPage />} />
-              <Route path={paths.CATERINGPAGE} element={<CateringPage />} />
+              <Route path={paths.SNACKS} element={<SnacksPage />} />
+              <Route path={paths.CATERING} element={<CateringPage />} />
               <Route path={paths.DININGOUT} element={<DiningOutPage />} />
               <Route path={paths.PRODUCTDETAIL} element={<ProductDetail />} />
               <Route
