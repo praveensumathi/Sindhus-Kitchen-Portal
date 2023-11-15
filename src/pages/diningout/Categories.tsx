@@ -6,11 +6,14 @@ import Container from "@mui/material/Container";
 import { usegetAllDiningOutMenuDatas } from "../../customRQHooks/Hooks";
 import { useEffect, useState } from "react";
 import { ICategory } from "../../interface/types";
+import { useNavigate } from "react-router-dom";
 
 function Categories() {
   const [categories, setCategories] = useState<ICategory[]>([]);
 
   const { data } = usegetAllDiningOutMenuDatas();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data) {
@@ -28,25 +31,29 @@ function Categories() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 3.2,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 1.5,
           slidesToScroll: 2,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1.2,
           slidesToScroll: 1,
         },
       },
     ],
+  };
+
+  const handleClickProduct = (menuId: string) => {
+    navigate(`/productsByCategory/${menuId}`);
   };
 
   return (
@@ -71,6 +78,7 @@ function Categories() {
                   height: "9rem",
                   width: "14rem !important",
                 }}
+                onClick={() => handleClickProduct(category._id)}
               >
                 <Card
                   sx={{
