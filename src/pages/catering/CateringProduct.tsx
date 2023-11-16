@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import {
   Table,
@@ -12,8 +12,12 @@ import {
   TableRow,
 } from "@mui/material";
 import { cateringPage } from "../../seed-data/seed-data";
+import { fetchProductByCateringMenu } from "../../services/api";
+import { ICateringMenu } from "../../interface/types";
 
-function CateringProduct() {
+function CateringProduct({ selectedMenuId }) {
+  const [cateringData, setCateringData] = useState<ICateringMenu[]>([]);
+
   const [trayQuantities, setTrayQuantities] = useState({
     SmallTray: 0,
     MediumTray: 0,
@@ -36,12 +40,27 @@ function CateringProduct() {
     });
   };
 
+ const fetchProductsByCateingMenu = async (menuId, productId) => {
+   try {
+     const data = await fetchProductByCateringMenu(menuId, productId);
+     setCateringData(data);
+   } catch (error) {
+     console.error("Error fetching data:", error);
+   }
+ };
+
+
+  useEffect(() => {
+    if (selectedMenuId) {
+      fetchProductsByCateingMenu(selectedMenuId);
+    }
+  }, [selectedMenuId]);
   return (
     <Box>
-      {cateringPage &&
-        cateringPage.length > 0 &&
-        cateringPage.map((item) => (
-          <>
+      {cateringData &&
+        cateringData.length > 0 &&
+        cateringData.map((data) => (
+          <Box key={data._id}>
             <Typography
               sx={{
                 textAlign: "center",
@@ -51,7 +70,7 @@ function CateringProduct() {
                 fontSize: "2rem",
               }}
             >
-              {item.menuTitle}
+              {data.menuTitle}
             </Typography>
 
             <Grid
@@ -62,41 +81,62 @@ function CateringProduct() {
                 padding: "15px",
               }}
             >
-              <Grid
-                item
-                xs={12}
-                lg={3}
-                key={item.id}
-                sx={{ textAlign: "center" }}
-              >
-                <img
-                  alt={item.title}
-                  src={item.image}
-                  width={230}
-                  height={230}
-                ></img>
-              </Grid>
-              <Grid item xs={12} lg={6}>
-                <Grid container item direction="column" spacing={2}>
-                  <Grid item>
-                    <Typography variant="h5">
-                      <b>{item.title}</b>
-                    </Typography>
+              {cateringData[0].products.map((product) => (
+                <Grid container item key={product._id}>
+                  <Grid
+                    item
+                    xs={12}
+                    lg={3}
+                    sx={{
+                      // borderBottom: "1px solid #FFD580",
+                      padding: "15px",
+                    }}
+                  >
+                    <img
+                      src={product.posterURL}
+                      width={150}
+                      height={150}
+                      alt={product.title}
+                    />
                   </Grid>
-                  <Grid item>
+                  <Grid
+                    item
+                    xs={12}
+                    lg={5}
+                    sx={{
+                      // borderBottom: "1px solid #FFD580",
+                      padding: "15px",
+                    }}
+                  >
+                    <Typography sx={{ fontWeight: "600" }}>
+                      {product.title}
+                    </Typography>
                     <Typography
                       sx={{
                         whiteSpace: "pre-line",
                       }}
                     >
-                      {item.description}
+                      {product.description}
+                      <br />
+                      <br />
+                      Serving sizes:
+                      <br />
+                      Small Tray - can eat 10 members,
+                      <br />
+                      Medium Tray - can eat 20 members,
+                      <br />
+                      Large Tray - can eat 30 members
                     </Typography>
                   </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={12} lg={3}>
-                <Grid container item spacing={2}>
-                  <Grid item>
+                  <Grid
+                    item
+                    xs={12}
+                    lg={4}
+                    sx={{
+                      // borderBottom: "1px solid #FFD580",
+                      padding: "15px",
+                    }}
+                  >
                     <TableContainer>
                       <Table aria-label="simple table" sx={{ minWidth: 320 }}>
                         <TableHead>
@@ -110,9 +150,9 @@ function CateringProduct() {
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {item.trayItems.map((trayItem) => (
+                          {product.servingSizesWithPrice.map((trayItem) => (
                             <TableRow
-                              key={trayItem.name}
+                              key={trayItem.size}
                               sx={{
                                 "&:last-child td, &:last-child th": {
                                   border: 0,
@@ -127,8 +167,8 @@ function CateringProduct() {
                                   whiteSpace: "pre-line",
                                 }}
                               >
-                                {trayItem.name}&nbsp;
-                                <b>{trayItem.price}</b>
+                                {trayItem.size}&nbsp;
+                                <b>[${trayItem.price}]</b>
                               </TableCell>
 
                               <TableCell>
@@ -163,7 +203,7 @@ function CateringProduct() {
                                       size="small"
                                       aria-label="small outlined button group"
                                       onClick={() =>
-                                        handleDecrement(trayItem.name)
+                                        handleDecrement(trayItem.size)
                                       }
                                     >
                                       -
@@ -176,11 +216,11 @@ function CateringProduct() {
                                       }}
                                       disabled
                                     >
-                                      {trayQuantities[trayItem.name]}
+                                      {trayQuantities[trayItem.size]}
                                     </Button>
                                     <Button
                                       onClick={() =>
-                                        handleIncrement(trayItem.name)
+                                        handleIncrement(trayItem.size)
                                       }
                                       sx={{
                                         lineHeight: 1.3,
@@ -198,9 +238,9 @@ function CateringProduct() {
                     </TableContainer>
                   </Grid>
                 </Grid>
-              </Grid>
+              ))}
             </Grid>
-          </>
+          </Box>
         ))}
     </Box>
   );

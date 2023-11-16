@@ -10,7 +10,7 @@ import { queryClient } from "../../App";
 import { getAllMenus } from "../../services/api";
 import { usecateringfetchProductData } from "../../customRQHooks/Hooks";
 
-function SearchBar() {
+function SearchBar({ onSelectMenu }) {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,6 +65,8 @@ function SearchBar() {
     const selectedMenu = cateringMenus.find((menu) => menu.title === newValue);
     if (selectedMenu) {
       setSelectedMenuId(selectedMenu._id);
+      // Pass the selected menu ID to the parent component
+      onSelectMenu(selectedMenu._id);
     }
   };
   return (

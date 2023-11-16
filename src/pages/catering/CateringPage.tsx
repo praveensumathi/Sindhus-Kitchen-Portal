@@ -3,8 +3,15 @@ import Container from "@mui/material/Container";
 import CateringProduct from "./CateringProduct";
 import SearchBar from "./SearchBar";
 import Fade from "react-reveal/Fade";
+import { useState } from "react";
 
 function CateringPage() {
+  const [selectedMenuId, setSelectedMenuId] = useState("");
+  const [selectedProductId, setSelectedProductId] = useState("");
+
+  const handleSelectMenu = (menuId) => {
+    setSelectedMenuId(menuId);
+  };
   return (
     <>
       <Box sx={{ height: "200px", position: "relative" }}>
@@ -40,8 +47,8 @@ function CateringPage() {
         </Box>
       </Box>
       <Container sx={{ mt: 1 }}>
-        <SearchBar />
-        <CateringProduct />
+        <SearchBar onSelectMenu={handleSelectMenu} />
+        <CateringProduct selectedMenuId={selectedMenuId} />
       </Container>
     </>
   );
