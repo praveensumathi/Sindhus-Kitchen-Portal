@@ -1,4 +1,3 @@
-
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -15,30 +14,29 @@ import {
 import { fetchProductByCateringMenu } from "../../services/api";
 import { IMenu } from "../../interface/types";
 
-function CateringProduct() {
+function CateringProduct({selectedMenuId}) {
   const [trayQuantities, setTrayQuantities] = useState({
     SmallTray: 0,
     MediumTray: 0,
     LargeTray: 0,
   });
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedMenuId, setSelectedMenuId] = useState("");
-  const [product, setProducts] = useState<IMenu[]>([]);
+ 
+
   const [cateringData, setCateringData] = useState<IMenu[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (selectedMenuId) {
+          console.log("seleect",selectedMenuId)
           const productsForSelectedMenu = await fetchProductByCateringMenu(
-            selectedMenuId,""
-           
+            selectedMenuId,
+            ""
           );
-           console.log("products",selectedMenuId );
-          setProducts(productsForSelectedMenu);
-          console.log("products",setProducts)
+
+          setCateringData(productsForSelectedMenu);
         } else {
-     
           const fetchedProducts = await fetchProductByCateringMenu("", "");
           setCateringData(fetchedProducts);
         }
@@ -49,7 +47,6 @@ function CateringProduct() {
 
     fetchData();
   }, [selectedMenuId, searchTerm]);
-
 
   const handleDecrement = (trayItem) => {
     if (trayQuantities[trayItem] > 0) {
@@ -259,4 +256,3 @@ function CateringProduct() {
 }
 
 export default CateringProduct;
-

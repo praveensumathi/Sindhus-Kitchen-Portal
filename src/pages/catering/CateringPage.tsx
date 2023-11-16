@@ -2,8 +2,10 @@ import { Box, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import CateringProduct from "./CateringProduct";
 import SearchBar from "./SearchBar";
+import { useState } from "react";
 
 function CateringPage() {
+  const [selectedMenuId, setSelectedMenuId] = useState("");
   return (
     <>
       <Box sx={{ height: "200px", position: "relative" }}>
@@ -38,7 +40,7 @@ function CateringPage() {
       </Box>
       <Container sx={{ mt: 1 }}>
         <SearchBar />
-        <CateringProduct />
+        <CateringProduct setSelectedMenuId={setSelectedMenuId} />
       </Container>
     </>
   );

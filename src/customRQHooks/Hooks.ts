@@ -23,8 +23,7 @@ export const usefetchProductByCateringMenu = (menuId?: string, productId?: strin
     queryFn: () => fetchProductByCateringMenu(menuId, productId),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    select: (data) => data?.products || [],
-  });
+     });
 };
 
 export const usegetAllDiningOutMenuDatas = () => {

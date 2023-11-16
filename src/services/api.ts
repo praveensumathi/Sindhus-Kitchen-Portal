@@ -1,4 +1,4 @@
-import { ICateringEnquiry } from "./../interface/types";
+import { ICateringEnquiry, IMenu } from "./../interface/types";
 import {
   ICategory,
   ICategoryWithProducts,
@@ -21,40 +21,13 @@ const getAllMenus = async () => {
   }
 };
 
-// const cateringfetchProductData = async (menuId, searchterm = "") => {
-//   try {
-//     if (menuId) {
-//       const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
-//         `/product/searchProduct/${menuId}?searchTerm=${searchterm}`
-//       );
-//       return response.data;
-//     }
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
-// const fetchProductByCateringMenu = async (
-//   menuId: string | undefined,
-//   productId: string | undefined
-// ) => {
-
-//   try {
-//     const response = await httpWithoutCredentials.get<any>(
-//       `/product/fetchProductsByCateringMenu/${menuId}/${productId}`
-//     );
-//     return response.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
 
 const fetchProductByCateringMenu = async (
   menuId: string | undefined,
-  
   productId: string | undefined
 ) => {
   try {
-    var cateringMenus = "/product/fetchProductsByCateringMenu";
+    var cateringMenus = `/product/fetchProductsByCateringMenu`;
 
     if (menuId && productId) {
       cateringMenus += `/${menuId}/${productId}`;
@@ -62,7 +35,7 @@ const fetchProductByCateringMenu = async (
       cateringMenus += `/${menuId}`;
     }
 
-       const response = await httpWithoutCredentials.get<any>(cateringMenus);
+    const response = await httpWithoutCredentials.get<IMenu[]>(cateringMenus);
     console.log("API Response:", response.data);
 
     return response.data;
@@ -71,8 +44,6 @@ const fetchProductByCateringMenu = async (
     throw error;
   }
 };
-
-
 
 const fetchProductById = async (productId: string | undefined) => {
   try {
@@ -155,7 +126,7 @@ const getProductsByMenuIdWithSearchTerm = async (
 export {
   getAllMenus,
   fetchProductById,
- fetchProductByCateringMenu,
+  fetchProductByCateringMenu,
   getAllDiningOutMenuDatas,
   getAllDiningOutProducts,
   getfetchProductsByMenuId,
