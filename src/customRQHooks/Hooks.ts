@@ -5,6 +5,7 @@ import {
   getAllDiningOutMenuDatas,
   getAllDiningOutProducts,
   getfetchProductsByMenuId,
+  getAllSnacksProductsWithSubMenu,
 } from "../services/api";
 
 export const usegetAllMenus = () => {
@@ -48,6 +49,26 @@ export const usegetfetchProductsByMenuId = (menuId: string) => {
     queryFn: () => {
       return getfetchProductsByMenuId(menuId);
     },
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
+};
+
+// export const usegetSnacksProductsBySubMenuId = (subMenuId: string) => {
+//   return useQuery({
+//     queryKey: ["fetchSnacksProductsBySubMenuId"],
+//     queryFn: () => {
+//       return getAllSnacksProductsWithSubMenu(subMenuId);
+//     },
+//     refetchOnWindowFocus: false,
+//     refetchOnMount: false,
+//   });
+// };
+
+export const usegetSnacksProductsBySubMenuId = () => {
+  return useQuery({
+    queryKey: ["fetchSnacksProductsBySubMenuId"],
+    queryFn: getAllSnacksProductsWithSubMenu,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });

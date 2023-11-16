@@ -2,8 +2,18 @@ import { Button, Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import Slider from "react-slick";
 import { snacksMenu } from "../../seed-data/seed-data";
+import { usegetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
+import { useParams } from "react-router";
+import { ISnacksPage } from "../../interface/types";
+import { UseQueryResult } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 function SnacksMenuItem() {
+  const { subMenuId } = useParams();
+  const selectedCategory: UseQueryResult<ISnacksPage | undefined, unknown> =
+    usegetSnacksProductsBySubMenuId();
+  console.log(selectedCategory, "value");
+
   const settings = {
     infinite: false,
     speed: 500,
@@ -35,10 +45,14 @@ function SnacksMenuItem() {
     ],
   };
 
+  useEffect(() => {
+    selectedCategory.refetch();
+  }, []);
+
   return (
     <Container>
       <Slider {...settings}>
-        {snacksMenu.map((menuItems, index) => (
+        {selectedCategory.data?.subMenus?.map((subMenu, index) => (
           <Box key={index} sx={{ display: "flex" }}>
             <Button
               sx={{
@@ -48,7 +62,7 @@ function SnacksMenuItem() {
               }}
               variant="outlined"
             >
-              {menuItems.menu}
+              {subMenu.title}
             </Button>
           </Box>
         ))}

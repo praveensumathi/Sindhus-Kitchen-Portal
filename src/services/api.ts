@@ -1,4 +1,4 @@
-import { ICateringEnquiry } from "./../interface/types";
+import { ICateringEnquiry, ISnacksPage } from "./../interface/types";
 import {
   ICategory,
   ICategoryWithProducts,
@@ -111,6 +111,30 @@ const getProductsByMenuIdWithSearchTerm = async (
   }
 };
 
+// const getAllSnacksProductsWithSubMenu = async (subMenuId) => {
+//   try {
+//     if (subMenuId) {
+//       const response = await httpWithoutCredentials.get<ISnacksPage>(
+//         `/product/getAllSnacksMenu/${subMenuId}`
+//       );
+//       return response.data;
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
+
+const getAllSnacksProductsWithSubMenu = async () => {
+  try {
+    const response = await httpWithoutCredentials.get<ISnacksPage>(
+      `/product/getAllSnacksMenu`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 export {
   getAllMenus,
   fetchProductById,
@@ -120,4 +144,5 @@ export {
   getfetchProductsByMenuId,
   createCateringEnquiry,
   getProductsByMenuIdWithSearchTerm,
+  getAllSnacksProductsWithSubMenu
 };

@@ -1,5 +1,37 @@
 import { OurServicesIconEnums } from "../enums/OurServicesIconEnum";
-import { ICateringPage, IOurServices, IWhyChooseUs } from "../interface/types";
+import {
+  ICateringPage,
+  IOurServices,
+  IProductCardList,
+  IWhyChooseUs,
+} from "../interface/types";
+
+export const productCardList: IProductCardList[] = [
+  {
+    _id: "1",
+    title: "BoonthiLaddu",
+    price: 250,
+    posterURL: "assets/food-img3.jpg",
+  },
+  {
+    _id: "2",
+    title: "BoonthiLaddu",
+    price: 250,
+    posterURL: "assets/food-img3.jpg",
+  },
+  {
+    _id: "3",
+    title: "BoonthiLaddu",
+    price: 250,
+    posterURL: "assets/food-img3.jpg",
+  },
+  {
+    _id: "4",
+    title: "BoonthiLaddu",
+    price: 250,
+    posterURL: "assets/food-img3.jpg",
+  },
+];
 
 export const ourServicesData: IOurServices[] = [
   {

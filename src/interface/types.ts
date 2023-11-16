@@ -18,8 +18,8 @@ export interface IProductCardList {
   _id: string;
   title: string;
   posterURL: string;
-  description: string;
-  netWeight: number;
+  description?: string;
+  netWeight?: number;
   price: number;
 }
 
@@ -111,4 +111,21 @@ export interface ICommonResponse<T> {
   data: T;
   statusCode: number;
   success: boolean;
+}
+
+export interface ISnacksPage {
+  subMenus: SubMenu[];
+  products: Product[];
+}
+
+export interface Product {
+  _id: string;
+  title: string;
+  posterUrl: string;
+  price: number | null;
+}
+
+export interface SubMenu {
+  _id: string;
+  title: string;
 }

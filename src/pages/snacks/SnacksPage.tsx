@@ -8,14 +8,17 @@ import {
   useTheme,
 } from "@mui/material";
 import CommonProductCard from "../../common/component/CommonProductCard";
+import { productCardList } from "../../seed-data/seed-data";
 import SnacksMenuItem from "./SnacksMenuItem";
-import { IProductCardList } from "../../interface/types";
-import { useState } from "react";
+import { UseQueryResult } from "@tanstack/react-query";
+import { ISnacksPage } from "../../interface/types";
+import { usegetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
 
 function SnacksPage() {
   const theme = useTheme();
 
-  const [products, setProducts] = useState<IProductCardList[]>([]);
+  const selectedCategory: UseQueryResult<ISnacksPage | undefined, unknown> =
+    usegetSnacksProductsBySubMenuId();
 
   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -103,7 +106,7 @@ function SnacksPage() {
         <SnacksMenuItem></SnacksMenuItem>
         <Box sx={{ mt: 5 }}>
           <Grid container spacing={3}>
-            {products.map((product) => (
+            {productCardList.map((product) => (
               <Grid
                 item
                 xs={12}
