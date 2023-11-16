@@ -112,3 +112,23 @@ export interface ICommonResponse<T> {
   statusCode: number;
   success: boolean;
 }
+export interface IServingSizeWithPrice {
+  size: string;
+  price: number;
+  quantity: number;
+  _id: string;
+}
+
+export interface IProducts {
+  _id: string;
+  title: string;
+  description: string;
+  posterURL?: string; 
+  servingSizesWithPrice: IServingSizeWithPrice[];
+}
+
+export interface IMenu {
+  _id: string;
+  menuTitle: string;
+  products: IProducts[];
+}

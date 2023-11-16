@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  cateringfetchProductData,
+  
   getAllMenus,
   getAllDiningOutMenuDatas,
   getAllDiningOutProducts,
   getfetchProductsByMenuId,
+  fetchProductByCateringMenu,
 } from "../services/api";
 
 export const usegetAllMenus = () => {
@@ -16,12 +17,13 @@ export const usegetAllMenus = () => {
   });
 };
 
-export const usecateringfetchProductData = (menuId: string, term: string) => {
+export const usefetchProductByCateringMenu = (menuId?: string, productId?: string) => {
   return useQuery({
-    queryKey: ["fetchProducts"],
-    queryFn: () => cateringfetchProductData(menuId, term),
+    queryKey: ["fetchProducts", menuId],
+    queryFn: () => fetchProductByCateringMenu(menuId, productId),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    select: (data) => data?.products || [],
   });
 };
 

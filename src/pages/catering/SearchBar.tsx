@@ -1,23 +1,26 @@
+
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Button ,Typography} from "@mui/material";
 import Container from "@mui/material/Container";
-import { IMenuList } from "../../interface/types";
-import { useEffect, useState } from "react";
+import { IMenu, IMenuList, IPrice, IProduct } from "../../interface/types";
 import { MenuType } from "../../enums/MenuTypesEnum";
 import { queryClient } from "../../App";
-import { getAllMenus } from "../../services/api";
-import { usecateringfetchProductData } from "../../customRQHooks/Hooks";
+import { fetchProductByCateringMenu, getAllMenus } from "../../services/api";
+
 
 function SearchBar() {
-  const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
+  const [cateringMenus, setCateringMenus] = React.useState<IMenuList[]>([]);
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedMenuId, setSelectedMenuId] = useState("");
-  const [productTitles, setProductTitles] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [selectedMenuId, setSelectedMenuId] = React.useState("");
+  
+const [cateringData, setCateringData] = React.useState<IMenu[]>([]);
 
-  useEffect(() => {
+
+  React.useEffect(() => {
     if (menuList) {
       setFilteredCateringMenus(menuList);
     } else {
@@ -31,49 +34,67 @@ function SearchBar() {
   };
 
   const setFilteredCateringMenus = (menuList: IMenuList[]) => {
-    var filteredMenus = menuList.filter(
-      (menu) => menu.menuType == MenuType.OTHERS
+    const filteredMenus = menuList.filter(
+      (menu) => menu.menuType === MenuType.OTHERS
     );
 
     setCateringMenus([...filteredMenus]);
   };
 
-  const { data: cateringData, refetch: refetchProductData } =
-    usecateringfetchProductData(selectedMenuId, searchTerm);
+  const handleMenuChange = (_event, newValue) => {
+    if (newValue) {
+      setSelectedMenuId(newValue._id);
+    }
+  };
 
-  useEffect(() => {
+
+const handleProductSearch = async (_event, newValue) => {
+  try {
     if (selectedMenuId) {
-      refetchProductData();
+      const products = await fetchProductByCateringMenu(
+        selectedMenuId,
+        newValue
+      );
+      console.log("Fetched products:", products); // Add this line
+      setCateringData(products);
     }
-  }, [selectedMenuId]);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
+};
+
+
+useEffect(() => {
+  const fetchProducts = async () => {
+    if (selectedMenuId) {
+      try {
+        const products = await fetchProductByCateringMenu(
+          selectedMenuId,
+          searchTerm
+        );
+       
+        setCateringData(products);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    }
+  };
+
+  fetchProducts();
+}, [selectedMenuId, searchTerm]);
 
   useEffect(() => {
-    if (cateringData && cateringData.length > 0) {
-      const titles = cateringData.map((product) => product.title);
-      setProductTitles(titles);
-    } else {
-      setProductTitles([]);
-    }
+    console.log("Fetched Products:", cateringData);
   }, [cateringData]);
 
-  const handleProductSearch = (event) => {
-    const newSearchTerm = event.target.value;
-    setSearchTerm(newSearchTerm || "");
-  };
-
-  const handleMenuChange = async (event, newValue) => {
-    const selectedMenu = cateringMenus.find((menu) => menu.title === newValue);
-    if (selectedMenu) {
-      setSelectedMenuId(selectedMenu._id);
-    }
-  };
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={4}>
           <Autocomplete
             id="category-autocomplete"
-            options={cateringMenus.map((option) => option.title)}
+            options={cateringMenus}
+            getOptionLabel={(option) => option.title}
             onChange={(event, newValue) => {
               handleMenuChange(event, newValue);
             }}
@@ -89,11 +110,53 @@ function SearchBar() {
         <Grid item xs={12} lg={5}>
           <Autocomplete
             id="food-autocomplete"
-            value={searchTerm}
             onChange={handleProductSearch}
-            options={productTitles}
+            options={cateringData.flatMap((menu) =>
+              menu.products.map((product) => ({
+                title: product.title,
+                _id: product._id,
+                posterURL:product.posterURL
+              }))
+            )}
+            // getOptionLabel={(product) => product.title}
+            renderOption={(props, option) => (
+              <li
+                {...props}
+                style={{
+                  margin: "5px 0",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src={option.posterURL ?? ""}
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    borderRadius: "50%",
+                    marginRight: "10px",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  {option.title}
+                </Typography>
+              </li>
+            )}
             renderInput={(params) => (
-              <TextField {...params} label="Select Food" variant="outlined" />
+              <TextField
+                {...params}
+                placeholder="Search food"
+                InputProps={{
+                  ...params.InputProps,
+                  disableUnderline: true,
+                }}
+                fullWidth
+                variant="outlined"
+              />
             )}
           />
         </Grid>
@@ -120,3 +183,4 @@ function SearchBar() {
 }
 
 export default SearchBar;
+
