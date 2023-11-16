@@ -135,9 +135,11 @@ const fetchProductByCateringMenu = async (
   }
 };
 
-// const fetchProductByCateringMenu = async () => {
+// const fetchProductByCateringMenu = async ( menuId?: string | undefined,
+
+//   productId?: string | undefined) => {
 //   try {
-//     var cateringMenus = `/product/fetchProductsByCateringMenu`;
+//     var cateringMenus = `/product/fetchProductsByCateringMenu/${menuId}/${productId}`;
 
 //     const response = await httpWithoutCredentials.get<ICateringMenu[]>(
 //       cateringMenus

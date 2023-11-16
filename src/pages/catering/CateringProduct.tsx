@@ -11,11 +11,10 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { cateringPage } from "../../seed-data/seed-data";
 import { fetchProductByCateringMenu } from "../../services/api";
 import { ICateringMenu } from "../../interface/types";
 
-function CateringProduct({ selectedMenuId }) {
+function CateringProduct({ selectedMenuId, selectedProductId }) {
   const [cateringData, setCateringData] = useState<ICateringMenu[]>([]);
 
   const [trayQuantities, setTrayQuantities] = useState({
@@ -40,21 +39,64 @@ function CateringProduct({ selectedMenuId }) {
     });
   };
 
- const fetchProductsByCateingMenu = async (menuId, productId) => {
-   try {
-     const data = await fetchProductByCateringMenu(menuId, productId);
-     setCateringData(data);
-   } catch (error) {
-     console.error("Error fetching data:", error);
-   }
- };
-
-
   useEffect(() => {
+    const fetchProductsByCateingMenu = async (menuId, productId) => {
+      try {
+        const data = await fetchProductByCateringMenu(menuId, productId);
+        setCateringData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    const fetchAllProducts = async () => {
+      try {
+        // Fetch all products
+        const allProducts = await fetchProductByCateringMenu();
+        setCateringData(allProducts);
+      } catch (error) {
+        console.error("Error fetching all products:", error);
+      }
+    };
+
     if (selectedMenuId) {
-      fetchProductsByCateingMenu(selectedMenuId);
+      if (selectedProductId) {
+        fetchProductsByCateingMenu(selectedMenuId, selectedProductId);
+      } else {
+        fetchProductsByCateingMenu(selectedMenuId);
+      }
+    } else {
+      // If no selectedMenuId, fetch all products
+      fetchAllProducts();
     }
-  }, [selectedMenuId]);
+  }, [selectedMenuId, selectedProductId]);
+
+  // const fetchAllProducts = async () => {
+  //   try {
+  //     const allProducts = await fetchProductByCateringMenu();
+  //     setCateringData(allProducts);
+  //   } catch (error) {
+  //     console.error("Error fetching all products:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const fetchProductsByCateingMenu = async (menuId, productId) => {
+  //     try {
+  //       const data = await fetchProductByCateringMenu(menuId, productId);
+  //       setCateringData(data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   if (selectedMenuId && selectedFood) {
+  //     fetchProductsByCateingMenu(selectedMenuId, selectedFood._id);
+  //   } else {
+  //     fetchAllProducts();
+  //   }
+  // }, [selectedMenuId, selectedFood]);
+
   return (
     <Box>
       {cateringData &&

@@ -10,7 +10,7 @@ import { queryClient } from "../../App";
 import { getAllMenus } from "../../services/api";
 import { usecateringfetchProductData } from "../../customRQHooks/Hooks";
 
-function SearchBar({ onSelectMenu }) {
+function SearchBar({ onSelectMenu, onSelectProduct }) {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,19 +56,40 @@ function SearchBar({ onSelectMenu }) {
     }
   }, [cateringData]);
 
-  const handleProductSearch = (event) => {
-    const newSearchTerm = event.target.value;
-    setSearchTerm(newSearchTerm || "");
+  // const handleProductSearch = (event) => {
+  //   const newSearchTerm = event.target.value;
+  //   setSearchTerm(newSearchTerm || "");
+  //   onSelectProduct(newSearchTerm);
+  // };
+
+  const handleProductSearch = (event, newValue) => {
+    if (cateringData && cateringData.length > 0) {
+      console.log("cateringData:", cateringData);
+
+      const selectedProduct = cateringData.find(
+        (product) => product.title === newValue
+      );
+
+      if (selectedProduct) {
+        console.log("Selected Product:", selectedProduct);
+
+        onSelectProduct(selectedProduct._id);
+      } else {
+        console.warn("Selected product not found in cateringData.");
+      }
+    } else {
+      console.warn("cateringData is not defined or is empty.");
+    }
   };
 
   const handleMenuChange = async (event, newValue) => {
     const selectedMenu = cateringMenus.find((menu) => menu.title === newValue);
     if (selectedMenu) {
       setSelectedMenuId(selectedMenu._id);
-      // Pass the selected menu ID to the parent component
       onSelectMenu(selectedMenu._id);
     }
   };
+
   return (
     <Container>
       <Grid container spacing={3}>
