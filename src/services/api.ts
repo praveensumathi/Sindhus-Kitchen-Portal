@@ -125,8 +125,8 @@ const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
 };
 
 const fetchProductByCateringMenu = async (
-  menuId?: string | undefined,
-  productId?: string | undefined
+  menuId?: string,
+  productId?: string
 ) => {
   try {
     var cateringMenus = "/product/fetchProductsByCateringMenu";
