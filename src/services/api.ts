@@ -113,7 +113,6 @@ const getProductsByMenuIdWithSearchTerm = async (
 
 const fetchProductByCateringMenu = async (
   menuId?: string | undefined,
-
   productId?: string | undefined
 ) => {
   try {
@@ -126,7 +125,6 @@ const fetchProductByCateringMenu = async (
     }
 
     const response = await httpWithoutCredentials.get<any>(cateringMenus);
-    console.log("API Response:", response.data);
 
     return response.data;
   } catch (error) {
@@ -134,24 +132,6 @@ const fetchProductByCateringMenu = async (
     throw error;
   }
 };
-
-// const fetchProductByCateringMenu = async ( menuId?: string | undefined,
-
-//   productId?: string | undefined) => {
-//   try {
-//     var cateringMenus = `/product/fetchProductsByCateringMenu/${menuId}/${productId}`;
-
-//     const response = await httpWithoutCredentials.get<ICateringMenu[]>(
-//       cateringMenus
-//     );
-//     console.log("API Response:", response.data);
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("API Error:", error);
-//     throw error;
-//   }
-// };
 
 export {
   getAllMenus,
