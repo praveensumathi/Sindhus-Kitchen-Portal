@@ -14,11 +14,20 @@ import {
 import { fetchProductByCateringMenu } from "../../services/api";
 import { ICateringMenu } from "../../interface/types";
 
-function CateringProduct({ selectedMenuId, selectedProductId }) {
+interface IProps {
+  selectedMenuId: string;
+  selectedProductId: string;
+}
+
+function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   const [cateringData, setCateringData] = useState<ICateringMenu[]>([]);
   const [productQuantities, setProductQuantities] = useState<{
     [productId: string]: { [trayItem: string]: number };
   }>({});
+
+  useEffect(() => {
+    fetchProductsByCateingMenu(selectedMenuId, selectedProductId);
+  }, [selectedMenuId, selectedProductId]);
 
   const handleDecrement = (productId, trayItem) => {
     setProductQuantities((prevQuantities) => ({
@@ -43,7 +52,10 @@ function CateringProduct({ selectedMenuId, selectedProductId }) {
     }));
   };
 
-  const fetchProductsByCateingMenu = async (menuId: any, productId?: any) => {
+  const fetchProductsByCateingMenu = async (
+    menuId: string,
+    productId: string
+  ) => {
     try {
       const selectedProduct = await fetchProductByCateringMenu(
         menuId,
@@ -54,27 +66,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }) {
       console.error("Error fetching data:", error);
     }
   };
-
-  const fetchAllCateringProducts = async () => {
-    try {
-      const allProducts = await fetchProductByCateringMenu();
-      setCateringData(allProducts);
-    } catch (error) {
-      console.error("Error fetching all products:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (selectedMenuId) {
-      if (selectedProductId) {
-        fetchProductsByCateingMenu(selectedMenuId, selectedProductId);
-      } else {
-        fetchProductsByCateingMenu(selectedMenuId);
-      }
-    } else {
-      fetchAllCateringProducts();
-    }
-  }, [selectedMenuId, selectedProductId]);
 
   return (
     <Box>

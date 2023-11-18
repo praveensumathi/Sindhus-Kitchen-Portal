@@ -16,7 +16,7 @@ export const usegetAllMenus = () => {
   });
 };
 
-export const usecateringfetchProductData = (menuId: string, term: string) => {
+export const useCateringfetchProductData = (menuId: string, term: string) => {
   return useQuery({
     queryKey: ["fetchProducts"],
     queryFn: () => cateringfetchProductData(menuId, term),

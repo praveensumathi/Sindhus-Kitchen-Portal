@@ -9,14 +9,6 @@ function CateringPage() {
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [selectedProductId, setSelectedProductId] = useState("");
 
-  const handleSelectMenu = (menuId) => {
-    setSelectedMenuId(menuId);
-  };
-
-  const handleSelectProduct = (productId) => {
-    setSelectedProductId(productId);
-  };
-
   return (
     <>
       <Box sx={{ height: "200px", position: "relative" }}>
@@ -53,8 +45,10 @@ function CateringPage() {
       </Box>
       <Container sx={{ mt: 1 }}>
         <SearchBar
-          onSelectMenu={handleSelectMenu}
-          onSelectProduct={handleSelectProduct}
+          onSelectMenu={(menuId: string) => setSelectedMenuId(menuId)}
+          onSelectProduct={(productId: string) =>
+            setSelectedProductId(productId)
+          }
         />
         <CateringProduct
           selectedMenuId={selectedMenuId}

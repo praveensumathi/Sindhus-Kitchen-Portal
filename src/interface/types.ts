@@ -36,6 +36,7 @@ export interface IWhyChooseUs {
   description: string;
   image: string;
 }
+
 export interface IProductDropDownData {
   _id: string;
   title: string;
@@ -68,7 +69,6 @@ export interface ISpecials {
   id: number;
   image: string;
 }
-
 
 export interface ICateringEnquiry {
   _id?: string;
@@ -136,4 +136,18 @@ export interface ServingSizesWithPrice {
   price: number;
   quantity: number;
   _id: string;
+}
+
+export interface IMenuAutoComplete {
+  _id: string;
+  title: string;
+  menuType: number;
+  label: string;
+}
+
+export interface IProductAutoComplete {
+  _id: string;
+  title: string;
+  posterURL: string;
+  label: string;
 }

@@ -21,7 +21,7 @@ const getAllMenus = async () => {
   }
 };
 
-const cateringfetchProductData = async (menuId, searchterm = "") => {
+const cateringfetchProductData = async (menuId = "", searchterm = "") => {
   try {
     if (menuId) {
       const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
@@ -29,6 +29,8 @@ const cateringfetchProductData = async (menuId, searchterm = "") => {
       );
       return response.data;
     }
+
+    return [];
   } catch (error) {
     console.error("Error:", error);
   }
