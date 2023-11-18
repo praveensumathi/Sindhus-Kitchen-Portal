@@ -1,6 +1,5 @@
 import {
   Box,
-  // Button,
   Container,
   Grid,
   Typography,
@@ -10,37 +9,24 @@ import {
 import CommonProductCard from "../../common/component/CommonProductCard";
 import SnacksMenuItem from "./SnacksMenuItem";
 import { usegetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
-import { useParams } from "react-router";
 import { useState, useEffect } from "react";
+
 function SnacksPage() {
-  const [selectedSubMenuId, setSelectedSubMenuId] = useState<string | null>(
-    null
-  );
+  const [selectedSubMenuId, setSelectedSubMenuId] = useState<string>("");
+
   const theme = useTheme();
-  const { subMenuId } = useParams();
   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const snacksProductQuery = usegetSnacksProductsBySubMenuId(selectedSubMenuId);
+  const { data: snacksPageData, refetch: refetchSnacks } =
+    usegetSnacksProductsBySubMenuId(selectedSubMenuId);
 
-  const snacksPageData = snacksProductQuery.data || { products: [] };
-  const snacksProducts = snacksPageData ? snacksPageData.products : [];
   useEffect(() => {
-    if (subMenuId) {
-      setSelectedSubMenuId(subMenuId);
-    }
-  }, [subMenuId]);
+    refetchSnacks();
+  }, [selectedSubMenuId]);
 
-  const handleSubMenuClick = (clickedSubMenuId) => {
-    setSelectedSubMenuId(clickedSubMenuId);
-    // snacksProductQuery.refetch();
+  const handleSubMenuClick = (subMenuId: string) => {
+    setSelectedSubMenuId(subMenuId);
   };
-
-  const snacksProductLists = snacksProducts.map((product) => ({
-    _id: product._id,
-    title: product.title,
-    posterURL: product.posterUrl,
-    price: product.price,
-  }));
 
   return (
     <>
@@ -109,7 +95,7 @@ function SnacksPage() {
             >
               <img
                 src="assets/images/butter-cookies.png"
-                alt="savouries"
+                alt="snacks"
                 height={"150px"}
                 style={{
                   borderRadius: "50px",
@@ -122,29 +108,34 @@ function SnacksPage() {
           </Grid>
         </Box>
       </Box>
-      <Container>
+      <Container sx={{ mb: 2 }}>
         <SnacksMenuItem
-          handleSubMenuClick={handleSubMenuClick}
+          onSubMenuClick={handleSubMenuClick}
+          snacksSubMenus={snacksPageData?.subMenus ?? []}
+          selectedSubMenuId={selectedSubMenuId}
         ></SnacksMenuItem>
         <Box sx={{ mt: 5 }}>
           <Grid container spacing={3}>
-            {snacksProductLists.map((product) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                sx={{ display: "flex", justifyContent: "center" }}
-                key={product._id}
-              >
-                <CommonProductCard product={product} />
-              </Grid>
-            ))}
+            {snacksPageData &&
+              snacksPageData.products &&
+              snacksPageData.products.length > 0 &&
+              snacksPageData.products.map((product) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  sx={{ display: "flex", justifyContent: "center" }}
+                  key={product._id}
+                >
+                  <CommonProductCard product={product} />
+                </Grid>
+              ))}
           </Grid>
         </Box>
       </Container>
-      <Box
+      {/* <Box
         sx={{
           width: "100%",
           height: "140px",
@@ -152,7 +143,7 @@ function SnacksPage() {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
-      ></Box>
+      ></Box> */}
     </>
   );
 }

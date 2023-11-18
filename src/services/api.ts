@@ -89,32 +89,24 @@ const getfetchProductsByMenuId = async (menuId: string) => {
   }
 };
 const getProductsByMenuIdWithSearchTerm = async (
-  selectedMenuId,
-  searchTerm,
-  setProducts
+  selectedMenuId: string,
+  searchTerm: string
 ) => {
   try {
     const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
       `/product/searchProduct/${selectedMenuId}?searchTerm=${searchTerm}`
     );
-    if (response && response.data.length > 0) {
-      const products: IProductDropDownData[] = response.data.map((product) => ({
-        _id: product._id,
-        title: product.title,
-        posterURL: product.posterURL,
-      }));
 
-      setProducts(products);
-    }
+    return response;
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
-const getAllSnacksProductsWithSubMenu = async (subMenuId) => {
+const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
   try {
     const response = await httpWithoutCredentials.get<ISnacksPage>(
-      `/product/getAllSnacksMenu?subMenuId${subMenuId}`
+      `/product/getAllSnacksMenu/${subMenuId}`
     );
     return response.data;
   } catch (error) {

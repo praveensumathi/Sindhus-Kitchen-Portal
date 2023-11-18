@@ -65,7 +65,6 @@ export interface IPrice {
   _id: string;
 }
 
-
 export interface ICateringEnquiry {
   _id?: string;
   fullName: string;
@@ -114,19 +113,19 @@ export interface ICommonResponse<T> {
 }
 
 export interface ISnacksPage {
-  subMenus: SubMenu[];
-  products: Product[];
+  subMenus: ISubMenu[];
+  products: ISnackProduct[];
 }
 
-export interface Product {
+export interface ISnackProduct {
   _id: string;
   title: string;
-  posterUrl: string;
+  posterURL: string;
   price: number | null;
   subMenuId: string;
 }
 
-export interface SubMenu {
+export interface ISubMenu {
   _id: string;
   title: string;
 }

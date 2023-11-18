@@ -46,9 +46,7 @@ export const usegetAllDiningOutProducts = () => {
 export const usegetfetchProductsByMenuId = (menuId: string) => {
   return useQuery({
     queryKey: ["fetchProductsByMenuId", menuId],
-    queryFn: () => {
-      return getfetchProductsByMenuId(menuId);
-    },
+    queryFn: () => getfetchProductsByMenuId(menuId),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
@@ -67,10 +65,8 @@ export const usegetfetchProductsByMenuId = (menuId: string) => {
 
 export const usegetSnacksProductsBySubMenuId = (subMenuId) => {
   return useQuery({
-    queryKey: ["fetchSnacksProductsBySubMenuId", subMenuId],
-    queryFn: () => {
-      return getAllSnacksProductsWithSubMenu(subMenuId);
-    },
+    queryKey: ["fetchSnacksProductsBySubMenuId"],
+    queryFn: () => getAllSnacksProductsWithSubMenu(subMenuId),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });

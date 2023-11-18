@@ -1,18 +1,19 @@
 import { Button, Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import Slider from "react-slick";
-import { usegetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
-import { useParams } from "react-router";
-import { ISnacksPage } from "../../interface/types";
-import { UseQueryResult } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { ISubMenu } from "../../interface/types";
 
-function SnacksMenuItem({ handleSubMenuClick }) {
-  const { subMenuId } = useParams();
+interface IProps {
+  onSubMenuClick(submenuId: string): void;
+  snacksSubMenus: ISubMenu[];
+  selectedSubMenuId: string;
+}
 
-  const selectedSubMenu: UseQueryResult<ISnacksPage | undefined, unknown> =
-    usegetSnacksProductsBySubMenuId(subMenuId);
-
+function SnacksMenuItem({
+  onSubMenuClick,
+  snacksSubMenus,
+  selectedSubMenuId,
+}: IProps) {
   const settings = {
     infinite: false,
     speed: 500,
@@ -44,28 +45,40 @@ function SnacksMenuItem({ handleSubMenuClick }) {
     ],
   };
 
-  useEffect(() => {
-    selectedSubMenu.refetch();
-  }, []);
-
   return (
     <Container>
       <Slider {...settings}>
-        {selectedSubMenu.data?.subMenus?.map((subMenu, index) => (
-          <Box key={index} sx={{ display: "flex" }}>
-            <Button
-              onClick={() => handleSubMenuClick(subMenu._id)}
-              sx={{
-                border: "1px dashed",
-                borderRadius: "15px",
-                width: "130px",
-              }}
-              variant="outlined"
-            >
-              {subMenu.title}
-            </Button>
-          </Box>
-        ))}
+        <Box>
+          <Button
+            onClick={() => onSubMenuClick("")}
+            sx={{
+              border: "1px dashed",
+              borderRadius: "15px",
+              width: "130px",
+            }}
+            variant={!selectedSubMenuId ? "contained" : "outlined"}
+          >
+            All
+          </Button>
+        </Box>
+        {snacksSubMenus.length > 0 &&
+          snacksSubMenus.map((subMenu, index) => (
+            <Box key={index} sx={{ display: "flex" }}>
+              <Button
+                onClick={() => onSubMenuClick(subMenu._id)}
+                sx={{
+                  border: "1px dashed",
+                  borderRadius: "15px",
+                  width: "130px",
+                }}
+                variant={
+                  selectedSubMenuId == subMenu._id ? "contained" : "outlined"
+                }
+              >
+                {subMenu.title}
+              </Button>
+            </Box>
+          ))}
       </Slider>
     </Container>
   );

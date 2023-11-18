@@ -5,7 +5,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  List,
   ListItem,
   ListItemText,
   TextField,
@@ -54,16 +53,26 @@ function HomePageSlicker() {
 
   useEffect(() => {
     if (selectedMenuId) {
-      getProductsByMenuIdWithSearchTerm(
-        selectedMenuId,
-        searchTerm,
-        setProducts
+      getProductsByMenuIdWithSearchTerm(selectedMenuId, searchTerm).then(
+        (response) => {
+          if (response && response.data.length > 0) {
+            const products: IProductDropDownData[] = response.data.map(
+              (product) => ({
+                _id: product._id,
+                title: product.title,
+                posterURL: product.posterURL,
+              })
+            );
+
+            setProducts(products);
+          }
+        }
       );
     }
   }, [selectedMenuId]);
 
-  const handleProductSearch = (event) => {
-    const newSearchTerm = event.target.value;
+  const handleProductSearch = (_event) => {
+    const newSearchTerm = _event.target.value;
     setSearchTerm(newSearchTerm || "");
   };
 
@@ -201,11 +210,14 @@ function HomePageSlicker() {
                 />
               )}
               renderOption={(props, option) => (
-                <List component={"li"} {...props}>
-                  <ListItem disablePadding>
-                    <ListItemText>{option.title}</ListItemText>
-                  </ListItem>
-                </List>
+                <ListItem
+                  disablePadding
+                  component={"li"}
+                  {...props}
+                  key={option._id}
+                >
+                  <ListItemText>{option.title}</ListItemText>
+                </ListItem>
               )}
             />
           </Grid>
@@ -247,6 +259,7 @@ function HomePageSlicker() {
                     textDecoration: "none",
                     color: "black",
                   }}
+                  key={option._id}
                 >
                   <li
                     {...props}

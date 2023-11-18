@@ -12,6 +12,8 @@ interface IProps {
 function CommonProductCard(props: IProps) {
   const { product } = props;
 
+  console.log(product);
+
   return (
     <Box>
       <Card sx={{ width: "260px", boxShadow: 4 }}>
