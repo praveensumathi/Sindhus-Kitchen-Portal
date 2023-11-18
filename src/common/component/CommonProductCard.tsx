@@ -12,8 +12,6 @@ interface IProps {
 function CommonProductCard(props: IProps) {
   const { product } = props;
 
-  console.log(product);
-
   return (
     <Box>
       <Card sx={{ width: "260px", boxShadow: 4 }}>
@@ -42,21 +40,6 @@ function CommonProductCard(props: IProps) {
             {product.title}
           </Typography>
           <Box sx={{ display: "flex" }}>
-            {/* {product.offerprice ? (
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{
-                    textDecoration: "line-through",
-                  }}
-                >
-                  ${product.mrpprice}
-                </Typography>
-              ) : (
-                <Typography variant="body2" color="text.secondary">
-                  ${product.mrpprice}
-                </Typography>
-              )} */}
             {product.price && (
               <Typography variant="body2" color="orange" sx={{ marginLeft: 1 }}>
                 ${product.price}
