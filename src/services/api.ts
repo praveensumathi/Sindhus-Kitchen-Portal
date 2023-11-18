@@ -1,4 +1,4 @@
-import { ICateringEnquiry } from "./../interface/types";
+import { ICateringEnquiry, ICateringMenu } from "./../interface/types";
 import {
   ICategory,
   ICategoryWithProducts,
@@ -21,7 +21,7 @@ const getAllMenus = async () => {
   }
 };
 
-const cateringfetchProductData = async (menuId, searchterm = "") => {
+const cateringfetchProductData = async (menuId = "", searchterm = "") => {
   try {
     if (menuId) {
       const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
@@ -29,6 +29,8 @@ const cateringfetchProductData = async (menuId, searchterm = "") => {
       );
       return response.data;
     }
+
+    return [];
   } catch (error) {
     console.error("Error:", error);
   }
@@ -111,6 +113,28 @@ const getProductsByMenuIdWithSearchTerm = async (
   }
 };
 
+const fetchProductByCateringMenu = async (
+  menuId?: string | undefined,
+  productId?: string | undefined
+) => {
+  try {
+    var cateringMenus = "/product/fetchProductsByCateringMenu";
+
+    if (menuId && productId) {
+      cateringMenus += `/${menuId}/${productId}`;
+    } else if (menuId) {
+      cateringMenus += `/${menuId}`;
+    }
+
+    const response = await httpWithoutCredentials.get<any>(cateringMenus);
+
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error;
+  }
+};
+
 export {
   getAllMenus,
   fetchProductById,
@@ -120,4 +144,5 @@ export {
   getfetchProductsByMenuId,
   createCateringEnquiry,
   getProductsByMenuIdWithSearchTerm,
+  fetchProductByCateringMenu,
 };
