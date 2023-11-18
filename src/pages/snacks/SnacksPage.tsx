@@ -1,6 +1,5 @@
 import {
   Box,
-  // Button,
   Container,
   Grid,
   Typography,
@@ -9,17 +8,27 @@ import {
 } from "@mui/material";
 import CommonProductCard from "../../common/component/CommonProductCard";
 import SnacksMenuItem from "./SnacksMenuItem";
+import { useGetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
+import { useState, useEffect } from "react";
 import Rotate from "react-reveal/Rotate";
-import Fade from 'react-reveal/Fade';
-import { IProductCardList } from "../../interface/types";
-import { useState } from "react";
+import Fade from "react-reveal/Fade";
 
 function SnacksPage() {
+  const [selectedSubMenuId, setSelectedSubMenuId] = useState<string>("");
+
   const theme = useTheme();
-
-  const [products, setProducts] = useState<IProductCardList[]>([]);
-
   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  const { data: snacksPageData, refetch: refetchSnacks } =
+    useGetSnacksProductsBySubMenuId(selectedSubMenuId);
+
+  useEffect(() => {
+    refetchSnacks();
+  }, [selectedSubMenuId]);
+
+  const handleSubMenuClick = (subMenuId: string) => {
+    setSelectedSubMenuId(subMenuId);
+  };
 
   return (
     <>
@@ -29,7 +38,6 @@ function SnacksPage() {
             mt: 3,
           }}
         >
-        
           <div
             style={{
               backgroundImage: "url('assets/images/sssurf7.png')",
@@ -43,7 +51,6 @@ function SnacksPage() {
               top: 0,
             }}
           ></div>
-        
 
           <Grid container spacing={3} sx={{ overflow: "hidden" }}>
             <Grid
@@ -113,27 +120,34 @@ function SnacksPage() {
           </Grid>
         </Box>
       </Box>
-      <Container>
-        <SnacksMenuItem></SnacksMenuItem>
+      <Container sx={{ mb: 2 }}>
+        <SnacksMenuItem
+          onSubMenuClick={handleSubMenuClick}
+          snacksSubMenus={snacksPageData?.subMenus ?? []}
+          selectedSubMenuId={selectedSubMenuId}
+        ></SnacksMenuItem>
         <Box sx={{ mt: 5 }}>
           <Grid container spacing={3}>
-            {products.map((product) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                sx={{ display: "flex", justifyContent: "center" }}
-                key={product._id}
-              >
-                <CommonProductCard product={product} />
-              </Grid>
-            ))}
+            {snacksPageData &&
+              snacksPageData.products &&
+              snacksPageData.products.length > 0 &&
+              snacksPageData.products.map((product) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  sx={{ display: "flex", justifyContent: "center" }}
+                  key={product._id}
+                >
+                  <CommonProductCard product={product} />
+                </Grid>
+              ))}
           </Grid>
         </Box>
       </Container>
-      <Box
+      {/* <Box
         sx={{
           width: "100%",
           height: "140px",
@@ -141,7 +155,7 @@ function SnacksPage() {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
-      ></Box>
+      ></Box> */}
     </>
   );
 }

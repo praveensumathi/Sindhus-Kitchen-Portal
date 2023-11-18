@@ -18,9 +18,9 @@ export interface IProductCardList {
   _id: string;
   title: string;
   posterURL: string;
-  description: string;
-  netWeight: number;
-  price: number;
+  description?: string;
+  netWeight?: number;
+  price: number | null;
 }
 
 export interface IMenuList {
@@ -65,6 +65,7 @@ export interface IPrice {
   quantity: number;
   _id: string;
 }
+
 export interface ISpecials {
   id: number;
   image: string;
@@ -115,6 +116,24 @@ export interface ICommonResponse<T> {
   data: T;
   statusCode: number;
   success: boolean;
+}
+
+export interface ISnacksPage {
+  subMenus: ISubMenu[];
+  products: ISnackProduct[];
+}
+
+export interface ISnackProduct {
+  _id: string;
+  title: string;
+  posterURL: string;
+  price: number | null;
+  subMenuId: string;
+}
+
+export interface ISubMenu {
+  _id: string;
+  title: string;
 }
 
 export interface ICateringMenu {
