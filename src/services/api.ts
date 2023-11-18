@@ -54,7 +54,7 @@ const fetchProductById = async (productId: string | undefined) => {
 const getAllDiningOutMenuDatas = async () => {
   try {
     const response = await httpWithoutCredentials.get<ICategory[]>(
-      "http://localhost:3000/diningOut/getAllDiningOutMenuDatas"
+      "diningOut/getAllDiningOutMenuDatas"
     );
     return response.data;
   } catch (error) {
@@ -89,7 +89,7 @@ const getAllDiningOutProducts = async () => {
 const getfetchProductsByMenuId = async (menuId: string) => {
   try {
     const response = await httpWithoutCredentials.get<IMenuDatas>(
-      `http://localhost:3000/diningOut/fetchProductsByMenuId/${menuId}`
+      `diningOut/fetchProductsByMenuId/${menuId}`
     );
 
     return response.data;
