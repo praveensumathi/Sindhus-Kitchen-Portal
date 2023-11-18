@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import CommonProductCard from "../../common/component/CommonProductCard";
 import SnacksMenuItem from "./SnacksMenuItem";
-import { usegetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
+import { useGetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
 import { useState, useEffect } from "react";
 import Rotate from "react-reveal/Rotate";
 import Fade from "react-reveal/Fade";
@@ -20,7 +20,7 @@ function SnacksPage() {
   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const { data: snacksPageData, refetch: refetchSnacks } =
-    usegetSnacksProductsBySubMenuId(selectedSubMenuId);
+    useGetSnacksProductsBySubMenuId(selectedSubMenuId);
 
   useEffect(() => {
     refetchSnacks();

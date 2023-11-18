@@ -8,12 +8,11 @@ import {
   getAllSnacksProductsWithSubMenu,
 } from "../services/api";
 
-export const usegetAllMenus = () => {
+export const useGetAllMenus = () => {
   return useQuery({
     queryKey: ["menus"],
     queryFn: getAllMenus,
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 };
 
@@ -22,11 +21,10 @@ export const useCateringfetchProductData = (menuId: string, term: string) => {
     queryKey: ["fetchProducts"],
     queryFn: () => cateringfetchProductData(menuId, term),
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 };
 
-export const usegetAllDiningOutMenuDatas = () => {
+export const useGetAllDiningOutMenuDatas = () => {
   return useQuery({
     queryKey: ["diningOutMenuDatas"],
     queryFn: getAllDiningOutMenuDatas,
@@ -34,40 +32,26 @@ export const usegetAllDiningOutMenuDatas = () => {
   });
 };
 
-export const usegetAllDiningOutProducts = () => {
+export const useGetAllDiningOutProducts = () => {
   return useQuery({
     queryKey: ["diningOutProduct"],
     queryFn: getAllDiningOutProducts,
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 };
 
-export const usegetfetchProductsByMenuId = (menuId: string) => {
+export const useGetFetchProductsByMenuId = (menuId: string) => {
   return useQuery({
-    queryKey: ["fetchProductsByMenuId", menuId],
+    queryKey: ["fetchProductsByMenuId"],
     queryFn: () => getfetchProductsByMenuId(menuId),
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 };
 
-// export const usegetSnacksProductsBySubMenuId = (subMenuId: string) => {
-//   return useQuery({
-//     queryKey: ["fetchSnacksProductsBySubMenuId"],
-//     queryFn: () => {
-//       return getAllSnacksProductsWithSubMenu(subMenuId);
-//     },
-//     refetchOnWindowFocus: false,
-//     refetchOnMount: false,
-//   });
-// };
-
-export const usegetSnacksProductsBySubMenuId = (subMenuId) => {
+export const useGetSnacksProductsBySubMenuId = (subMenuId: string) => {
   return useQuery({
     queryKey: ["fetchSnacksProductsBySubMenuId"],
     queryFn: () => getAllSnacksProductsWithSubMenu(subMenuId),
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 };
