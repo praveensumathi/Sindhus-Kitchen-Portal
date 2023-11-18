@@ -111,11 +111,22 @@ const getProductsByMenuIdWithSearchTerm = async (
   }
 };
 
+const getAllSnacksProductsWithSubMenu = async (subMenuId) => {
+  try {
+    const response = await httpWithoutCredentials.get<ISnacksPage>(
+      `/product/getAllSnacksMenu?subMenuId${subMenuId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 // const getAllSnacksProductsWithSubMenu = async (subMenuId) => {
 //   try {
 //     if (subMenuId) {
 //       const response = await httpWithoutCredentials.get<ISnacksPage>(
-//         `/product/getAllSnacksMenu/${subMenuId}`
+//         `/product/getAllSnacksMenu/${subMenuId}?subMenuId=${subMenuId}`
 //       );
 //       return response.data;
 //     }
@@ -123,17 +134,6 @@ const getProductsByMenuIdWithSearchTerm = async (
 //     console.error("Error:", error);
 //   }
 // };
-
-const getAllSnacksProductsWithSubMenu = async () => {
-  try {
-    const response = await httpWithoutCredentials.get<ISnacksPage>(
-      `/product/getAllSnacksMenu`
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
 
 export {
   getAllMenus,
@@ -144,5 +144,5 @@ export {
   getfetchProductsByMenuId,
   createCateringEnquiry,
   getProductsByMenuIdWithSearchTerm,
-  getAllSnacksProductsWithSubMenu
+  getAllSnacksProductsWithSubMenu,
 };

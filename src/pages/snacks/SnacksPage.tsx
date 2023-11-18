@@ -8,19 +8,39 @@ import {
   useTheme,
 } from "@mui/material";
 import CommonProductCard from "../../common/component/CommonProductCard";
-import { productCardList } from "../../seed-data/seed-data";
 import SnacksMenuItem from "./SnacksMenuItem";
-import { UseQueryResult } from "@tanstack/react-query";
-import { ISnacksPage } from "../../interface/types";
 import { usegetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
-
+import { useParams } from "react-router";
+import { useState, useEffect } from "react";
 function SnacksPage() {
+  const [selectedSubMenuId, setSelectedSubMenuId] = useState<string | null>(
+    null
+  );
   const theme = useTheme();
-
-  const selectedCategory: UseQueryResult<ISnacksPage | undefined, unknown> =
-    usegetSnacksProductsBySubMenuId();
-
+  const { subMenuId } = useParams();
   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  const snacksProductQuery = usegetSnacksProductsBySubMenuId(selectedSubMenuId);
+
+  const snacksPageData = snacksProductQuery.data || { products: [] };
+  const snacksProducts = snacksPageData ? snacksPageData.products : [];
+  useEffect(() => {
+    if (subMenuId) {
+      setSelectedSubMenuId(subMenuId);
+    }
+  }, [subMenuId]);
+
+  const handleSubMenuClick = (clickedSubMenuId) => {
+    setSelectedSubMenuId(clickedSubMenuId);
+    // snacksProductQuery.refetch();
+  };
+
+  const snacksProductLists = snacksProducts.map((product) => ({
+    _id: product._id,
+    title: product.title,
+    posterURL: product.posterUrl,
+    price: product.price,
+  }));
 
   return (
     <>
@@ -103,10 +123,12 @@ function SnacksPage() {
         </Box>
       </Box>
       <Container>
-        <SnacksMenuItem></SnacksMenuItem>
+        <SnacksMenuItem
+          handleSubMenuClick={handleSubMenuClick}
+        ></SnacksMenuItem>
         <Box sx={{ mt: 5 }}>
           <Grid container spacing={3}>
-            {productCardList.map((product) => (
+            {snacksProductLists.map((product) => (
               <Grid
                 item
                 xs={12}

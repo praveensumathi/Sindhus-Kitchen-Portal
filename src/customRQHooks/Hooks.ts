@@ -65,10 +65,12 @@ export const usegetfetchProductsByMenuId = (menuId: string) => {
 //   });
 // };
 
-export const usegetSnacksProductsBySubMenuId = () => {
+export const usegetSnacksProductsBySubMenuId = (subMenuId) => {
   return useQuery({
-    queryKey: ["fetchSnacksProductsBySubMenuId"],
-    queryFn: getAllSnacksProductsWithSubMenu,
+    queryKey: ["fetchSnacksProductsBySubMenuId", subMenuId],
+    queryFn: () => {
+      return getAllSnacksProductsWithSubMenu(subMenuId);
+    },
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });

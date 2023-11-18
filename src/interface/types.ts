@@ -20,7 +20,7 @@ export interface IProductCardList {
   posterURL: string;
   description?: string;
   netWeight?: number;
-  price: number;
+  price: number | null;
 }
 
 export interface IMenuList {
@@ -123,6 +123,7 @@ export interface Product {
   title: string;
   posterUrl: string;
   price: number | null;
+  subMenuId: string;
 }
 
 export interface SubMenu {

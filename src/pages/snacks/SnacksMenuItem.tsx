@@ -1,18 +1,17 @@
 import { Button, Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import Slider from "react-slick";
-import { snacksMenu } from "../../seed-data/seed-data";
 import { usegetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
 import { useParams } from "react-router";
 import { ISnacksPage } from "../../interface/types";
 import { UseQueryResult } from "@tanstack/react-query";
 import { useEffect } from "react";
 
-function SnacksMenuItem() {
+function SnacksMenuItem({ handleSubMenuClick }) {
   const { subMenuId } = useParams();
-  const selectedCategory: UseQueryResult<ISnacksPage | undefined, unknown> =
-    usegetSnacksProductsBySubMenuId();
-  console.log(selectedCategory, "value");
+
+  const selectedSubMenu: UseQueryResult<ISnacksPage | undefined, unknown> =
+    usegetSnacksProductsBySubMenuId(subMenuId);
 
   const settings = {
     infinite: false,
@@ -46,15 +45,16 @@ function SnacksMenuItem() {
   };
 
   useEffect(() => {
-    selectedCategory.refetch();
+    selectedSubMenu.refetch();
   }, []);
 
   return (
     <Container>
       <Slider {...settings}>
-        {selectedCategory.data?.subMenus?.map((subMenu, index) => (
+        {selectedSubMenu.data?.subMenus?.map((subMenu, index) => (
           <Box key={index} sx={{ display: "flex" }}>
             <Button
+              onClick={() => handleSubMenuClick(subMenu._id)}
               sx={{
                 border: "1px dashed",
                 borderRadius: "15px",
