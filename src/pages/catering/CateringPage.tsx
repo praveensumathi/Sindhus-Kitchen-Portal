@@ -11,12 +11,10 @@ function CateringPage() {
 
   const handleSelectMenu = (menuId) => {
     setSelectedMenuId(menuId);
-   
   };
 
   const handleSelectProduct = (productId) => {
     setSelectedProductId(productId);
-      console.log("Selected product title:", productId);
   };
 
   return (

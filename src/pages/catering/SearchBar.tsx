@@ -7,7 +7,7 @@ import { IMenuList } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { MenuType } from "../../enums/MenuTypesEnum";
 import { queryClient } from "../../App";
-import { getAllMenus } from "../../services/api";
+import { fetchProductByCateringMenu, getAllMenus } from "../../services/api";
 import { usecateringfetchProductData } from "../../customRQHooks/Hooks";
 
 function SearchBar({ onSelectMenu, onSelectProduct }) {
@@ -16,6 +16,25 @@ function SearchBar({ onSelectMenu, onSelectProduct }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [productTitles, setProductTitles] = useState<string[]>([]);
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    null
+  );
+
+  const clearSearch = async () => {
+    setSelectedMenuId("");
+    setSearchTerm("");
+    setSelectedProductId(null);
+    // await fetchAllProducts();
+  };
+
+  const fetchAllProducts = async () => {
+    try {
+      const allProducts = await fetchProductByCateringMenu();
+      setCateringMenus(allProducts);
+    } catch (error) {
+      console.error("Error fetching all products:", error);
+    }
+  };
 
   useEffect(() => {
     if (menuList) {
@@ -38,7 +57,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }) {
     setCateringMenus([...filteredMenus]);
   };
 
-  const { data: cateringData, refetch: refetchProductData } =
+  const { data: cateringData = [], refetch: refetchProductData } =
     usecateringfetchProductData(selectedMenuId, searchTerm);
 
   useEffect(() => {
@@ -56,29 +75,14 @@ function SearchBar({ onSelectMenu, onSelectProduct }) {
     }
   }, [cateringData]);
 
-  // const handleProductSearch = (event) => {
-  //   const newSearchTerm = event.target.value;
-  //   setSearchTerm(newSearchTerm || "");
-  //   onSelectProduct(newSearchTerm);
-  // };
-
   const handleProductSearch = (event, newValue) => {
     if (cateringData && cateringData.length > 0) {
-      console.log("cateringData:", cateringData);
-
       const selectedProduct = cateringData.find(
         (product) => product.title === newValue
       );
-
       if (selectedProduct) {
-        console.log("Selected Product:", selectedProduct);
-
         onSelectProduct(selectedProduct._id);
-      } else {
-        console.warn("Selected product not found in cateringData.");
       }
-    } else {
-      console.warn("cateringData is not defined or is empty.");
     }
   };
 
@@ -97,24 +101,46 @@ function SearchBar({ onSelectMenu, onSelectProduct }) {
           <Autocomplete
             id="category-autocomplete"
             options={cateringMenus.map((option) => option.title)}
+            value={
+              cateringMenus.find((menu) => menu._id === selectedMenuId)
+                ?.title || ""
+            }
             onChange={(event, newValue) => {
               handleMenuChange(event, newValue);
             }}
+            // getOptionLabel={(option) => option}
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Select Category"
-                variant="outlined"
-              />
+              <TextField {...params} label="Select Menu" variant="outlined" />
             )}
           />
         </Grid>
         <Grid item xs={12} lg={5}>
           <Autocomplete
             id="food-autocomplete"
-            value={searchTerm}
+            value={selectedProductId || ""}
             onChange={handleProductSearch}
             options={productTitles}
+            // getOptionLabel={(option) => option}
+            renderOption={(props, option) => (
+              <li {...props}>
+                <img
+                  src={
+                    (
+                      cateringData.find(
+                        (product) => product.title === option
+                      ) || {}
+                    ).posterURL ?? ""
+                  }
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    borderRadius: "50%",
+                    marginRight: "10px",
+                  }}
+                />
+                {option}
+              </li>
+            )}
             renderInput={(params) => (
               <TextField {...params} label="Select Food" variant="outlined" />
             )}
@@ -130,10 +156,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }) {
             gap: "1rem",
           }}
         >
-          <Button fullWidth variant="contained">
-            Search
-          </Button>
-          <Button fullWidth variant="outlined">
+          <Button variant="contained" onClick={clearSearch}>
             Clear Search
           </Button>
         </Grid>

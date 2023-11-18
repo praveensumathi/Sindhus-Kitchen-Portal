@@ -16,49 +16,55 @@ import { ICateringMenu } from "../../interface/types";
 
 function CateringProduct({ selectedMenuId, selectedProductId }) {
   const [cateringData, setCateringData] = useState<ICateringMenu[]>([]);
+  const [productQuantities, setProductQuantities] = useState<{
+    [productId: string]: { [trayItem: string]: number };
+  }>({});
 
-  const [trayQuantities, setTrayQuantities] = useState({
-    SmallTray: 0,
-    MediumTray: 0,
-    LargeTray: 0,
-  });
+  const handleDecrement = (productId, trayItem) => {
+    setProductQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: {
+        ...prevQuantities[productId],
+        [trayItem]: Math.max(
+          (prevQuantities[productId]?.[trayItem] || 0) - 1,
+          0
+        ),
+      },
+    }));
+  };
 
-  const handleDecrement = (trayItem) => {
-    if (trayQuantities[trayItem] > 0) {
-      setTrayQuantities({
-        ...trayQuantities,
-        [trayItem]: trayQuantities[trayItem] - 1,
-      });
+  const handleIncrement = (productId, trayItem) => {
+    setProductQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: {
+        ...prevQuantities[productId],
+        [trayItem]: (prevQuantities[productId]?.[trayItem] || 0) + 1,
+      },
+    }));
+  };
+
+  const fetchProductsByCateingMenu = async (menuId: any, productId?: any) => {
+    try {
+      const selectedProduct = await fetchProductByCateringMenu(
+        menuId,
+        productId
+      );
+      setCateringData(selectedProduct);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
-  const handleIncrement = (trayItem) => {
-    setTrayQuantities({
-      ...trayQuantities,
-      [trayItem]: trayQuantities[trayItem] + 1,
-    });
+  const fetchAllCateringProducts = async () => {
+    try {
+      const allProducts = await fetchProductByCateringMenu();
+      setCateringData(allProducts);
+    } catch (error) {
+      console.error("Error fetching all products:", error);
+    }
   };
 
   useEffect(() => {
-    const fetchProductsByCateingMenu = async (menuId, productId) => {
-      try {
-        const data = await fetchProductByCateringMenu(menuId, productId);
-        setCateringData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    const fetchAllProducts = async () => {
-      try {
-        // Fetch all products
-        const allProducts = await fetchProductByCateringMenu();
-        setCateringData(allProducts);
-      } catch (error) {
-        console.error("Error fetching all products:", error);
-      }
-    };
-
     if (selectedMenuId) {
       if (selectedProductId) {
         fetchProductsByCateingMenu(selectedMenuId, selectedProductId);
@@ -66,36 +72,9 @@ function CateringProduct({ selectedMenuId, selectedProductId }) {
         fetchProductsByCateingMenu(selectedMenuId);
       }
     } else {
-      // If no selectedMenuId, fetch all products
-      fetchAllProducts();
+      fetchAllCateringProducts();
     }
   }, [selectedMenuId, selectedProductId]);
-
-  // const fetchAllProducts = async () => {
-  //   try {
-  //     const allProducts = await fetchProductByCateringMenu();
-  //     setCateringData(allProducts);
-  //   } catch (error) {
-  //     console.error("Error fetching all products:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const fetchProductsByCateingMenu = async (menuId, productId) => {
-  //     try {
-  //       const data = await fetchProductByCateringMenu(menuId, productId);
-  //       setCateringData(data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   if (selectedMenuId && selectedFood) {
-  //     fetchProductsByCateingMenu(selectedMenuId, selectedFood._id);
-  //   } else {
-  //     fetchAllProducts();
-  //   }
-  // }, [selectedMenuId, selectedFood]);
 
   return (
     <Box>
@@ -123,14 +102,13 @@ function CateringProduct({ selectedMenuId, selectedProductId }) {
                 padding: "15px",
               }}
             >
-              {cateringData[0].products.map((product) => (
+              {data.products.map((product) => (
                 <Grid container item key={product._id}>
                   <Grid
                     item
                     xs={12}
                     lg={3}
                     sx={{
-                      // borderBottom: "1px solid #FFD580",
                       padding: "15px",
                     }}
                   >
@@ -146,7 +124,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }) {
                     xs={12}
                     lg={5}
                     sx={{
-                      // borderBottom: "1px solid #FFD580",
                       padding: "15px",
                     }}
                   >
@@ -175,7 +152,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }) {
                     xs={12}
                     lg={4}
                     sx={{
-                      // borderBottom: "1px solid #FFD580",
                       padding: "15px",
                     }}
                   >
@@ -245,7 +221,10 @@ function CateringProduct({ selectedMenuId, selectedProductId }) {
                                       size="small"
                                       aria-label="small outlined button group"
                                       onClick={() =>
-                                        handleDecrement(trayItem.size)
+                                        handleDecrement(
+                                          product._id,
+                                          trayItem.size
+                                        )
                                       }
                                     >
                                       -
@@ -258,11 +237,16 @@ function CateringProduct({ selectedMenuId, selectedProductId }) {
                                       }}
                                       disabled
                                     >
-                                      {trayQuantities[trayItem.size]}
+                                      {productQuantities[product._id]?.[
+                                        trayItem.size
+                                      ] || 0}
                                     </Button>
                                     <Button
                                       onClick={() =>
-                                        handleIncrement(trayItem.size)
+                                        handleIncrement(
+                                          product._id,
+                                          trayItem.size
+                                        )
                                       }
                                       sx={{
                                         lineHeight: 1.3,
