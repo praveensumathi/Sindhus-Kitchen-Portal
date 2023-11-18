@@ -70,6 +70,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   ) => {
     if (selectedProduct) {
       onSelectProduct(selectedProduct._id);
+      setProductValue(selectedProduct);
     }
   };
 
@@ -81,6 +82,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
       }
       setSelectedMenuId(selectedMenu._id);
       onSelectMenu(selectedMenu._id);
+      setMenuValue(selectedMenu);
     }
   };
 
@@ -100,6 +102,15 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                 } as IMenuAutoComplete)
             )}
             onChange={(_event, value) => handleMenuChange(value)}
+            onInputChange={(_event, newInputValue) => {
+              if (!newInputValue.trim()) {
+                setMenuValue(null);
+                onSelectMenu("");
+              }
+            }}
+            isOptionEqualToValue={(option, value) =>
+              option.title == value.title
+            }
             renderInput={(params) => (
               <TextField {...params} label="Select Menu" variant="outlined" />
             )}
@@ -110,6 +121,9 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
             id="food-autocomplete"
             value={productValue}
             getOptionLabel={(option) => option.label}
+            isOptionEqualToValue={(option, value) =>
+              option.title == value.title
+            }
             onChange={(_event, value) => handleProductSearch(value)}
             options={cateringProducts.map(
               (item) =>
@@ -118,6 +132,12 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                   label: item.title,
                 } as IProductAutoComplete)
             )}
+            onInputChange={(_event, newInputValue) => {
+              if (!newInputValue.trim()) {
+                setProductValue(null);
+                onSelectProduct("");
+              }
+            }}
             renderOption={(props, option) => (
               <li {...props}>
                 <img
