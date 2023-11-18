@@ -10,6 +10,8 @@ import CommonProductCard from "../../common/component/CommonProductCard";
 import SnacksMenuItem from "./SnacksMenuItem";
 import { usegetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
 import { useState, useEffect } from "react";
+import Rotate from "react-reveal/Rotate";
+import Fade from "react-reveal/Fade";
 
 function SnacksPage() {
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<string>("");
@@ -49,6 +51,7 @@ function SnacksPage() {
               top: 0,
             }}
           ></div>
+
           <Grid container spacing={3} sx={{ overflow: "hidden" }}>
             <Grid
               item
@@ -58,17 +61,19 @@ function SnacksPage() {
                 display: isBelowMediumScreen ? "none" : "block",
               }}
             >
-              <img
-                src="assets/images/sweets.png"
-                alt="sweets"
-                height={"140px"}
-                style={{
-                  borderRadius: "50px",
-                  position: "absolute",
-                  left: "-40px",
-                  top: 5,
-                }}
-              />
+              <Rotate top left>
+                <img
+                  src="assets/images/sweets.png"
+                  alt="sweets"
+                  height={"140px"}
+                  style={{
+                    borderRadius: "50px",
+                    position: "absolute",
+                    left: "-40px",
+                    top: 5,
+                  }}
+                />
+              </Rotate>
             </Grid>
             <Grid
               item
@@ -81,9 +86,14 @@ function SnacksPage() {
                 height: "150px",
               }}
             >
-              <Typography variant="h4" sx={{ color: "white", fontWeight: 600 }}>
-                Snacks
-              </Typography>
+              <Fade top>
+                <Typography
+                  variant="h4"
+                  sx={{ color: "white", fontWeight: 600 }}
+                >
+                  Snacks
+                </Typography>
+              </Fade>
             </Grid>
             <Grid
               item
@@ -93,17 +103,19 @@ function SnacksPage() {
                 display: isBelowMediumScreen ? "none" : "block",
               }}
             >
-              <img
-                src="assets/images/butter-cookies.png"
-                alt="snacks"
-                height={"150px"}
-                style={{
-                  borderRadius: "50px",
-                  position: "absolute",
-                  right: "-80px",
-                  top: 4,
-                }}
-              />
+              <Rotate top right>
+                <img
+                  src="assets/images/butter-cookies.png"
+                  alt="savouries"
+                  height={"150px"}
+                  style={{
+                    borderRadius: "50px",
+                    position: "absolute",
+                    right: "-80px",
+                    top: 4,
+                  }}
+                />
+              </Rotate>
             </Grid>
           </Grid>
         </Box>

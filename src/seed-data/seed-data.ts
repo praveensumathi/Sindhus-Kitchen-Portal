@@ -1,37 +1,5 @@
 import { OurServicesIconEnums } from "../enums/OurServicesIconEnum";
-import {
-  ICateringPage,
-  IOurServices,
-  IProductCardList,
-  IWhyChooseUs,
-} from "../interface/types";
-
-export const productCardList: IProductCardList[] = [
-  {
-    _id: "1",
-    title: "BoonthiLaddu",
-    price: 250,
-    posterURL: "assets/food-img3.jpg",
-  },
-  {
-    _id: "2",
-    title: "BoonthiLaddu",
-    price: 250,
-    posterURL: "assets/food-img3.jpg",
-  },
-  {
-    _id: "3",
-    title: "BoonthiLaddu",
-    price: 250,
-    posterURL: "assets/food-img3.jpg",
-  },
-  {
-    _id: "4",
-    title: "BoonthiLaddu",
-    price: 250,
-    posterURL: "assets/food-img3.jpg",
-  },
-];
+import { IOurServices, ISpecials, IWhyChooseUs } from "../interface/types";
 
 export const ourServicesData: IOurServices[] = [
   {
@@ -86,92 +54,6 @@ export const homePageSlicker = [
   },
 ];
 
-export const snacksMenu = [
-  {
-    menu: "All",
-  },
-  {
-    menu: "Sweets",
-  },
-  {
-    menu: "Savouries",
-  },
-];
-
-export const cateringPage: ICateringPage[] = [
-  {
-    id: "1",
-    menuTitle: "Briyani",
-    title: "Chicken briyani",
-    description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
-      
-    Serving sizes:
-    Small Tray - can eat 10 members,
-    Medium Tray - can eat 20 members,
-    Large Tray - can eat 30 members
-    `,
-
-    image: "assets/food-images-2.jpg",
-    trayItems: [
-      { name: "SmallTray", price: "[$50.00]" },
-      { name: "MediumTray", price: "[$100.00]" },
-      { name: "LargeTray", price: "[$150.00]" },
-    ],
-  },
-  {
-    id: "2",
-    title: "Veg briyani",
-    description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
-      
-    Serving sizes:
-   Small Tray - can eat 10 members,
-    Medium Tray - can eat 20 members,
-   Large Tray - can eat 30 members
-    `,
-    image: "assets/food-img.jpg",
-    trayItems: [
-      { name: "SmallTray", price: "[$50.00]" },
-      { name: "MediumTray", price: "[$100.00]" },
-      { name: "LargeTray", price: "[$150.00]" },
-    ],
-  },
-  {
-    id: "3",
-    title: "Mutton briyani",
-    description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
-      
-    Serving sizes:
-    Small Tray - can eat 10 members,
-    Medium Tray - can eat 20 members,
-    Large Tray - can eat 30 members
-    `,
-    image: "assets/food-img3.jpg",
-    trayItems: [
-      { name: "SmallTray", price: "[$50.00]" },
-      { name: "MediumTray", price: "[$100.00]" },
-      { name: "LargeTray", price: "[$150.00]" },
-    ],
-  },
-  {
-    id: "4",
-    menuTitle: "Non-Veg",
-    title: "Fish Finger",
-    description: ` Biryani is a mixed rice dish originating among the Muslims of South Asia. It is made with spices, vegetables, rice, and usually some type of meat.    
-      
-    Serving sizes:
-   Small Tray - can eat 10 members,
-    Medium Tray - can eat 20 members,
-    Large Tray - can eat 30 members
-    `,
-    image: "assets/food-img.jpg",
-    trayItems: [
-      { name: "SmallTray", price: "[$50.00]" },
-      { name: "MediumTray", price: "[$100.00]" },
-      { name: "LargeTray", price: "[$150.00]" },
-    ],
-  },
-];
-
 export const WhyChooseUsData: IWhyChooseUs[] = [
   {
     id: 1,
@@ -189,7 +71,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
       "Exclusively cold-pressed Sesame and Peanut oils enhance our dishes.",
     imageicon: "🥜",
     image:
-      "https://img.freepik.com/free-photo/soybean-oil-soybean-food-beverage-products-food-nutrition-concept_1150-26351.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+      "https://img.freepik.com/premium-photo/peanut-oil-with-peanuts-isolated-white-surface_252965-909.jpg?w=996",
   },
   {
     id: 3,
@@ -226,5 +108,20 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     imageicon: "♻️",
     image:
       "https://img.freepik.com/free-vector/waste-management-concept-illustration_114360-8795.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+  },
+];
+
+export const SpeicalsData: ISpecials[] = [
+  {
+    id: 1,
+    image: "/assets/images/mysorepak.png",
+  },
+  {
+    id: 2,
+    image: "/assets/images/sweetsandsavories.png",
+  },
+  {
+    id: 3,
+    image: "/assets/images/diwaliposter1.png",
   },
 ];

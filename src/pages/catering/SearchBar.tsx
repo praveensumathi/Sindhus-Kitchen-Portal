@@ -3,19 +3,40 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Container from "@mui/material/Container";
-import { IMenuList } from "../../interface/types";
+import {
+  IMenuAutoComplete,
+  IMenuList,
+  IProductAutoComplete,
+} from "../../interface/types";
 import { useEffect, useState } from "react";
 import { MenuType } from "../../enums/MenuTypesEnum";
 import { queryClient } from "../../App";
 import { getAllMenus } from "../../services/api";
-import { usecateringfetchProductData } from "../../customRQHooks/Hooks";
+import { useCateringfetchProductData } from "../../customRQHooks/Hooks";
 
-function SearchBar() {
+interface IProps {
+  onSelectMenu(menuId: string): void;
+  onSelectProduct(productId: string): void;
+}
+
+function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
-  const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [productValue, setProductValue] = useState<IProductAutoComplete | null>(
+    null
+  );
+  const [menuValue, setMenuValue] = useState<IMenuAutoComplete | null>(null);
   const [selectedMenuId, setSelectedMenuId] = useState("");
-  const [productTitles, setProductTitles] = useState<string[]>([]);
+
+  const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
+  const { data: cateringProducts = [], refetch: refetchProductData } =
+    useCateringfetchProductData(selectedMenuId, productValue?.title ?? "");
+
+  const clearSearch = async () => {
+    onSelectMenu("");
+    onSelectProduct("");
+    setMenuValue(null);
+    setProductValue(null);
+  };
 
   useEffect(() => {
     if (menuList) {
@@ -38,60 +59,99 @@ function SearchBar() {
     setCateringMenus([...filteredMenus]);
   };
 
-  const { data: cateringData, refetch: refetchProductData } =
-    usecateringfetchProductData(selectedMenuId, searchTerm);
-
   useEffect(() => {
     if (selectedMenuId) {
       refetchProductData();
     }
   }, [selectedMenuId]);
 
-  useEffect(() => {
-    if (cateringData && cateringData.length > 0) {
-      const titles = cateringData.map((product) => product.title);
-      setProductTitles(titles);
-    } else {
-      setProductTitles([]);
+  const handleProductSearch = (
+    selectedProduct: IProductAutoComplete | null
+  ) => {
+    if (selectedProduct) {
+      onSelectProduct(selectedProduct._id);
+      setProductValue(selectedProduct);
     }
-  }, [cateringData]);
-
-  const handleProductSearch = (event) => {
-    const newSearchTerm = event.target.value;
-    setSearchTerm(newSearchTerm || "");
   };
 
-  const handleMenuChange = async (event, newValue) => {
-    const selectedMenu = cateringMenus.find((menu) => menu.title === newValue);
+  const handleMenuChange = (selectedMenu: IMenuAutoComplete | null) => {
     if (selectedMenu) {
+      if (menuValue?._id != selectedMenu._id) {
+        setProductValue(null);
+        onSelectProduct("");
+      }
       setSelectedMenuId(selectedMenu._id);
+      onSelectMenu(selectedMenu._id);
+      setMenuValue(selectedMenu);
     }
   };
+
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={4}>
           <Autocomplete
             id="category-autocomplete"
-            options={cateringMenus.map((option) => option.title)}
-            onChange={(event, newValue) => {
-              handleMenuChange(event, newValue);
+            value={menuValue}
+            getOptionLabel={(option) => option.label}
+            options={cateringMenus.map(
+              (item) =>
+                ({
+                  ...item,
+                  label: item.title,
+                } as IMenuAutoComplete)
+            )}
+            onChange={(_event, value) => handleMenuChange(value)}
+            onInputChange={(_event, newInputValue) => {
+              if (!newInputValue.trim()) {
+                setMenuValue(null);
+                onSelectMenu("");
+              }
             }}
+            isOptionEqualToValue={(option, value) =>
+              option.title == value.title
+            }
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Select Category"
-                variant="outlined"
-              />
+              <TextField {...params} label="Select Menu" variant="outlined" />
             )}
           />
         </Grid>
         <Grid item xs={12} lg={5}>
           <Autocomplete
             id="food-autocomplete"
-            value={searchTerm}
-            onChange={handleProductSearch}
-            options={productTitles}
+            value={productValue}
+            getOptionLabel={(option) => option.label}
+            isOptionEqualToValue={(option, value) =>
+              option.title == value.title
+            }
+            onChange={(_event, value) => handleProductSearch(value)}
+            options={cateringProducts.map(
+              (item) =>
+                ({
+                  ...item,
+                  label: item.title,
+                } as IProductAutoComplete)
+            )}
+            onInputChange={(_event, newInputValue) => {
+              if (!newInputValue.trim()) {
+                setProductValue(null);
+                onSelectProduct("");
+              }
+            }}
+            renderOption={(props, option) => (
+              <li {...props}>
+                <img
+                  src={option.posterURL ?? ""}
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    borderRadius: "50%",
+                    marginRight: "10px",
+                  }}
+                />
+                {option.title}
+              </li>
+            )}
             renderInput={(params) => (
               <TextField {...params} label="Select Food" variant="outlined" />
             )}
@@ -107,10 +167,7 @@ function SearchBar() {
             gap: "1rem",
           }}
         >
-          <Button fullWidth variant="contained">
-            Search
-          </Button>
-          <Button fullWidth variant="outlined">
+          <Button variant="contained" onClick={clearSearch}>
             Clear Search
           </Button>
         </Grid>
