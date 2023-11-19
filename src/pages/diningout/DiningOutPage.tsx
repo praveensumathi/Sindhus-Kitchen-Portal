@@ -1,14 +1,12 @@
 import Container from "@mui/material/Container";
 import Categories from "./Categories";
 import Carousel from "../../common/component/Carousal";
-import { usegetAllDiningOutProducts } from "../../customRQHooks/Hooks";
+import { useGetAllDiningOutProducts } from "../../customRQHooks/Hooks";
 import Box from "@mui/material/Box";
 
-
 function DiningOutPage() {
+  const categoryWithProducts = useGetAllDiningOutProducts();
 
-  const categoryWithProducts = usegetAllDiningOutProducts();
-  
   return (
     <Container>
       <Categories />

@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 import Slider from "react-slick";
 import { Card, CardMedia } from "@mui/material";
 import Container from "@mui/material/Container";
-import { usegetAllDiningOutMenuDatas } from "../../customRQHooks/Hooks";
+import { useGetAllDiningOutMenuDatas } from "../../customRQHooks/Hooks";
 import { useEffect, useState } from "react";
 import { ICategory } from "../../interface/types";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 function Categories() {
   const [categories, setCategories] = useState<ICategory[]>([]);
 
-  const { data } = usegetAllDiningOutMenuDatas();
+  const { data } = useGetAllDiningOutMenuDatas();
 
   const navigate = useNavigate();
 

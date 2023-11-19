@@ -20,8 +20,8 @@ const navMenus = [
   { name: "Home", linkurl: paths.HOME },
   { name: "Specials", linkurl: paths.SPECIALS },
   { name: "Dining Out", linkurl: paths.DININGOUT },
-  { name: "Snacks Menu", linkurl: paths.SNACKS },
-  { name: "Catering Menu", linkurl: paths.CATERING },
+  { name: "Snacks", linkurl: paths.SNACKS },
+  { name: "Catering", linkurl: paths.CATERING },
 ];
 
 function NavBar() {

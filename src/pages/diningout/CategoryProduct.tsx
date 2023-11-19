@@ -8,16 +8,13 @@ import Grid from "@mui/material/Grid";
 import StoreIcon from "@mui/icons-material/Store";
 import CommonProductCard from "../../common/component/CommonProductCard";
 import { useParams } from "react-router-dom";
-import { usegetfetchProductsByMenuId } from "../../customRQHooks/Hooks";
+import { useGetFetchProductsByMenuId } from "../../customRQHooks/Hooks";
 
 function CategoryProducts() {
-
-
   const { menuId } = useParams();
 
-  const selectedCategory = usegetfetchProductsByMenuId(menuId ?? "");
+  const selectedCategory = useGetFetchProductsByMenuId(menuId ?? "");
   console.log("selectedCategory", selectedCategory);
-
 
   return (
     <>
@@ -74,8 +71,7 @@ function CategoryProducts() {
         </Box>
       )}
       <Box>
-        {
-        selectedCategory.data &&
+        {selectedCategory.data &&
         selectedCategory.data.products &&
         selectedCategory.data.products.length > 0 ? (
           <Container sx={{ padding: "10px" }}>
@@ -88,7 +84,7 @@ function CategoryProducts() {
                   sm={6}
                   md={4}
                   lg={3}
-                  sx={{ display: "flex",justifyContent:"center",}}
+                  sx={{ display: "flex", justifyContent: "center" }}
                 >
                   <CommonProductCard product={product} />
                 </Grid>
