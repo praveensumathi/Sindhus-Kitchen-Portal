@@ -151,3 +151,13 @@ export interface IProductAutoComplete {
   posterURL: string;
   label: string;
 }
+
+export interface IServingSizeWithQuantity {
+  productId: string;
+  sizes: ISize[];
+}
+
+export interface ISize {
+  TrayItem: string;
+  qty: number;
+}
