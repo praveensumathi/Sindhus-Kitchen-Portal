@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
+import StoreIcon from "@mui/icons-material/Store";
 import {
   Table,
   TableBody,
@@ -26,7 +27,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   }>({});
 
   useEffect(() => {
-    fetchProductsByCateingMenu(selectedMenuId, selectedProductId);
+    fetchProductsByCateringMenu(selectedMenuId, selectedProductId);
   }, [selectedMenuId, selectedProductId]);
 
   const handleDecrement = (productId, trayItem) => {
@@ -52,7 +53,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     }));
   };
 
-  const fetchProductsByCateingMenu = async (
+  const fetchProductsByCateringMenu = async (
     menuId: string,
     productId: string
   ) => {
@@ -69,7 +70,22 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
 
   return (
     <Box>
-      {cateringData &&
+      {cateringData.length === 0 ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          sx={{
+            height: "60vh",
+            overflow: "hidden",
+          }}
+        >
+          <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
+          <Typography sx={{ opacity: 0.5 }}>No products available</Typography>
+        </Box>
+      ) : (
+        cateringData &&
         cateringData.length > 0 &&
         cateringData.map((data) => (
           <Box key={data._id}>
@@ -258,7 +274,8 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
               ))}
             </Grid>
           </Box>
-        ))}
+        ))
+      )}
     </Box>
   );
 }
