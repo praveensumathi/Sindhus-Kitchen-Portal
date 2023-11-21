@@ -177,6 +177,6 @@ export interface IServingSizeWithQuantity {
 }
 
 export interface ISize {
-  TrayItem: string;
+  size: string;
   qty: number;
 }

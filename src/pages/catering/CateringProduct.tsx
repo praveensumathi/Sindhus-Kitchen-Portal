@@ -39,16 +39,16 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
       if (productIndex === -1) {
         updatedQuantities.push({
           productId,
-          sizes: [{ TrayItem: trayItem, qty: Math.max(0, 0) }],
+          sizes: [{ size: trayItem, qty: Math.max(0, 0) }],
         });
       } else {
         const existingSizes = updatedQuantities[productIndex].sizes;
         const sizeIndex = existingSizes.findIndex(
-          (size) => size.TrayItem === trayItem
+          (size) => size.size === trayItem
         );
 
         if (sizeIndex === -1) {
-          existingSizes.push({ TrayItem: trayItem, qty: Math.max(0, 0) });
+          existingSizes.push({ size: trayItem, qty: Math.max(0, 0) });
         } else {
           existingSizes[sizeIndex].qty = Math.max(
             existingSizes[sizeIndex].qty - 1,
@@ -71,16 +71,16 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
       if (productIndex === -1) {
         updatedQuantities.push({
           productId,
-          sizes: [{ TrayItem: trayItem, qty: 1 }],
+          sizes: [{ size: trayItem, qty: 1 }],
         });
       } else {
         const existingSizes = updatedQuantities[productIndex].sizes;
         const sizeIndex = existingSizes.findIndex(
-          (size) => size.TrayItem === trayItem
+          (size) => size.size === trayItem
         );
 
         if (sizeIndex === -1) {
-          existingSizes.push({ TrayItem: trayItem, qty: 1 });
+          existingSizes.push({ size: trayItem, qty: 1 });
         } else {
           existingSizes[sizeIndex].qty = existingSizes[sizeIndex].qty + 1;
         }
@@ -99,20 +99,18 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
         menuId,
         productId
       );
-      setCateringData(selectedProduct);
+      const updatedCateringData = Array.isArray(selectedProduct)
+        ? selectedProduct
+        : [selectedProduct];
+
+      setCateringData(updatedCateringData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  const count = () => {
-    console.log(productQuantities);
-  };
 
   return (
     <Box>
-      <Button variant="contained" onClick={count}>
-        count
-      </Button>
       {cateringData &&
         cateringData.length > 0 &&
         cateringData.map((data) => (
@@ -272,15 +270,18 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                                       }}
                                       disabled
                                     >
-                                      {productQuantities
-                                        .find(
-                                          (item) =>
-                                            item.productId === product._id
-                                        )
-                                        ?.sizes.find(
-                                          (size) =>
-                                            size.TrayItem === trayItem.size
-                                        )?.qty || 0}
+                                      {(productQuantities &&
+                                        productQuantities.length > 0 &&
+                                        productQuantities
+                                          .find(
+                                            (item) =>
+                                              item.productId === product._id
+                                          )
+                                          ?.sizes.find(
+                                            (size) =>
+                                              size.size === trayItem.size
+                                          )?.qty) ||
+                                        0}
                                     </Button>
                                     <Button
                                       onClick={() =>
