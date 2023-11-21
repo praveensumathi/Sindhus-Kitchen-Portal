@@ -201,17 +201,17 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                     xs={12}
                     lg={4}
                     sx={{
-                      padding: "15px",
+                      padding: "12px",
                     }}
                   >
                     <TableContainer>
-                      <Table aria-label="simple table" sx={{ minWidth: 320 }}>
+                      <Table aria-label="simple table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center" sx={{ p: "5px" }}>
+                            <TableCell align="center" >
                               <strong>Serving Size(s)</strong>
                             </TableCell>
-                            <TableCell align="center" sx={{ p: "5px" }}>
+                            <TableCell align="center">
                               <strong>Quantity</strong>
                             </TableCell>
                           </TableRow>

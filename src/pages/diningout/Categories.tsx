@@ -66,7 +66,7 @@ function Categories() {
         }}
         variant="h5"
       >
-        Categories
+        Menus
       </Typography>
       {categories && (
         <Slider {...settings}>

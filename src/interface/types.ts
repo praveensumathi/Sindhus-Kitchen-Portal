@@ -109,7 +109,7 @@ export interface IProductDinnigOut {
   posterURL: string;
   description: string;
   netWeight: number;
-  price: IPrice[];
+  price: number;
 }
 
 export interface ICommonResponse<T> {

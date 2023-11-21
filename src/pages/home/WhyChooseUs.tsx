@@ -38,16 +38,6 @@ function WhyChooseUs(props: Iprops) {
           >
             We make our food as if we are cooking for our family because that is
             exactly what we are doing !
-            <br />
-            <Box
-              component={"span"}
-              sx={{
-                color: `orange`,
-                opacity: 1,
-              }}
-            >
-              Welcome to Sindhu’s Kitchen
-            </Box>
           </Typography>
         </Fade>
       </Box>
@@ -57,10 +47,7 @@ function WhyChooseUs(props: Iprops) {
           return (
             <Grid item key={index} xs={12} sm={6} md={4} py={1}>
               <Bounce bottom>
-                <Card
-                  className={classes.flipcard}
-                  elevation={0}
-                >
+                <Card className={classes.flipcard} elevation={0}>
                   <Box className={classes.flipCardInner}>
                     <Box
                       className={classes.flipCardFront}

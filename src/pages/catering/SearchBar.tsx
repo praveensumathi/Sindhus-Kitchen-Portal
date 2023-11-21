@@ -160,14 +160,14 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
         <Grid
           item
           xs={12}
-          lg={3}
+          lg={2}
           sx={{
             display: "flex",
             alignItems: "center",
             gap: "1rem",
           }}
         >
-          <Button variant="contained" onClick={clearSearch}>
+          <Button variant="contained" fullWidth onClick={clearSearch} >
             Clear Search
           </Button>
         </Grid>
