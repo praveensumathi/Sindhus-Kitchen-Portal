@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { fetchProductByCateringMenu } from "../../services/api";
-import { ICateringMenu } from "../../interface/types";
+import { ICateringMenu, IServingSizeWithQuantity } from "../../interface/types";
 
 interface IProps {
   selectedMenuId: string;
@@ -22,35 +22,73 @@ interface IProps {
 
 function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   const [cateringData, setCateringData] = useState<ICateringMenu[]>([]);
-  const [productQuantities, setProductQuantities] = useState<{
-    [productId: string]: { [trayItem: string]: number };
-  }>({});
+  const [productQuantities, setProductQuantities] = useState<
+    IServingSizeWithQuantity[]
+  >([]);
 
   useEffect(() => {
     fetchProductsByCateringMenu(selectedMenuId, selectedProductId);
   }, [selectedMenuId, selectedProductId]);
 
   const handleDecrement = (productId, trayItem) => {
-    setProductQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: {
-        ...prevQuantities[productId],
-        [trayItem]: Math.max(
-          (prevQuantities[productId]?.[trayItem] || 0) - 1,
-          0
-        ),
-      },
-    }));
+    setProductQuantities((prevQuantities) => {
+      const updatedQuantities = [...prevQuantities];
+      const productIndex = updatedQuantities.findIndex(
+        (item) => item.productId === productId
+      );
+
+      if (productIndex === -1) {
+        updatedQuantities.push({
+          productId,
+          sizes: [{ size: trayItem, qty: Math.max(0, 0) }],
+        });
+      } else {
+        const existingSizes = updatedQuantities[productIndex].sizes;
+        const sizeIndex = existingSizes.findIndex(
+          (size) => size.size === trayItem
+        );
+
+        if (sizeIndex === -1) {
+          existingSizes.push({ size: trayItem, qty: Math.max(0, 0) });
+        } else {
+          existingSizes[sizeIndex].qty = Math.max(
+            existingSizes[sizeIndex].qty - 1,
+            0
+          );
+        }
+      }
+
+      return updatedQuantities;
+    });
   };
 
   const handleIncrement = (productId, trayItem) => {
-    setProductQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: {
-        ...prevQuantities[productId],
-        [trayItem]: (prevQuantities[productId]?.[trayItem] || 0) + 1,
-      },
-    }));
+    setProductQuantities((prevQuantities) => {
+      const updatedQuantities = [...prevQuantities];
+      const productIndex = updatedQuantities.findIndex(
+        (item) => item.productId === productId
+      );
+
+      if (productIndex === -1) {
+        updatedQuantities.push({
+          productId,
+          sizes: [{ size: trayItem, qty: 1 }],
+        });
+      } else {
+        const existingSizes = updatedQuantities[productIndex].sizes;
+        const sizeIndex = existingSizes.findIndex(
+          (size) => size.size === trayItem
+        );
+
+        if (sizeIndex === -1) {
+          existingSizes.push({ size: trayItem, qty: 1 });
+        } else {
+          existingSizes[sizeIndex].qty = existingSizes[sizeIndex].qty + 1;
+        }
+      }
+
+      return updatedQuantities;
+    });
   };
 
   const fetchProductsByCateringMenu = async (
@@ -62,7 +100,11 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
         menuId,
         productId
       );
-      setCateringData(selectedProduct);
+      const updatedCateringData = Array.isArray(selectedProduct)
+        ? selectedProduct
+        : [selectedProduct];
+
+      setCateringData(updatedCateringData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -159,17 +201,17 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                     xs={12}
                     lg={4}
                     sx={{
-                      padding: "15px",
+                      padding: "12px",
                     }}
                   >
                     <TableContainer>
-                      <Table aria-label="simple table" sx={{ minWidth: 320 }}>
+                      <Table aria-label="simple table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center" sx={{ p: "5px" }}>
+                            <TableCell align="center" >
                               <strong>Serving Size(s)</strong>
                             </TableCell>
-                            <TableCell align="center" sx={{ p: "5px" }}>
+                            <TableCell align="center">
                               <strong>Quantity</strong>
                             </TableCell>
                           </TableRow>
@@ -244,9 +286,18 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                                       }}
                                       disabled
                                     >
-                                      {productQuantities[product._id]?.[
-                                        trayItem.size
-                                      ] || 0}
+                                      {(productQuantities &&
+                                        productQuantities.length > 0 &&
+                                        productQuantities
+                                          .find(
+                                            (item) =>
+                                              item.productId === product._id
+                                          )
+                                          ?.sizes.find(
+                                            (size) =>
+                                              size.size === trayItem.size
+                                          )?.qty) ||
+                                        0}
                                     </Button>
                                     <Button
                                       onClick={() =>

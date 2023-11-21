@@ -1,6 +1,6 @@
 import { ICategoryWithProducts } from "../../interface/types";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Slider from "react-slick";
 import CommonProductCard from "./CommonProductCard";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -25,6 +25,9 @@ function Carousel(props: IProps) {
 
   const navigate = useNavigate();
 
+  const theme = useTheme();
+  const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   const settings = {
     infinite: false,
     speed: 500,
@@ -48,8 +51,9 @@ function Carousel(props: IProps) {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.1,
           slidesToScroll: 1,
+          arrows:! isBelowMediumScreen,
         },
       },
     ],
