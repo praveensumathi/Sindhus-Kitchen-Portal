@@ -25,14 +25,14 @@ function Loader() {
         axiosWithMultiPartheaderLoading) && (
         <Box className="overlay">
           <Spinner />
-          {/* <img
+          <img
             style={{
               borderRadius: "50%",
             }}
             className="spinner-image"
-            src="assets\images\Logo.jpeg"
+            src="/assets/images/sindhusloader-logo.png"
             alt=""
-          /> */}
+          />
         </Box>
       )}
     </>
