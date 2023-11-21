@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,17 +6,29 @@ import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import StoreIcon from "@mui/icons-material/Store";
 import CommonProductCard from "../../common/component/CommonProductCard";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGetFetchProductsByMenuId } from "../../customRQHooks/Hooks";
+
+import { IconButton } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function CategoryProducts() {
   const { menuId } = useParams();
+  const navigate = useNavigate();
 
   const selectedCategory = useGetFetchProductsByMenuId(menuId ?? "");
   console.log("selectedCategory", selectedCategory);
 
   return (
     <>
+      <IconButton
+        sx={{
+          float: "left",
+        }}
+        onClick={() => navigate(-1)}
+      >
+        <ArrowBackIcon fontSize="large" />
+      </IconButton>
       {selectedCategory && selectedCategory.data && (
         <Box
           sx={{
