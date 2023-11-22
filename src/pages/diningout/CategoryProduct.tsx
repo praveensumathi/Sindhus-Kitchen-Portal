@@ -81,27 +81,17 @@ function CategoryProducts() {
           </Box>
         </Box>
       )}
-      <Box>
+      <Box sx={{ paddingBottom: "24px" }}>
         {selectedCategory.data &&
         selectedCategory.data.products &&
         selectedCategory.data.products.length > 0 ? (
-          <Container sx={{ padding: "10px" }}>
-            <Grid container spacing={2}>
-              {selectedCategory.data.products.map((product, index) => (
-                <Grid
-                  item
-                  key={index}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  sx={{ display: "flex", justifyContent: "center" }}
-                >
-                  <CommonProductCard product={product} />
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
+          <Grid container spacing={2}>
+            {selectedCategory.data.products.map((product, index) => (
+              <Grid item key={index} xs={6} sm={4} lg={3}>
+                <CommonProductCard product={product} width="170px" />
+              </Grid>
+            ))}
+          </Grid>
         ) : (
           <Box
             display="flex"

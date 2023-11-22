@@ -1,4 +1,11 @@
-import { Box, Card, CardMedia } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardMedia,
+  Container,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { IProductCardList } from "../../interface/types";
@@ -6,15 +13,20 @@ import { Link } from "react-router-dom";
 
 interface IProps {
   product: IProductCardList;
+  width?: string;
+  height?: string;
   children?: React.ReactNode;
 }
 
 function CommonProductCard(props: IProps) {
   const { product } = props;
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Box>
-      <Card sx={{ width: "260px", boxShadow: 4 }}>
+      <Card sx={{ width: "14rem !important", boxShadow: 4 }}>
         <Link
           to={`/detail/${product._id}`}
           style={{
@@ -25,8 +37,8 @@ function CommonProductCard(props: IProps) {
             component="img"
             src={product.posterURL}
             sx={{
-              width: "300px",
-              height: "200px",
+              width: "250px",
+              height: "180px",
               cursor: "pointer",
               transition: "transform 2s",
               "&:hover": {
@@ -41,7 +53,7 @@ function CommonProductCard(props: IProps) {
           </Typography>
           <Box sx={{ display: "flex" }}>
             {product.price && (
-              <Typography variant="body2" color="orange" sx={{ marginLeft: 1 }}>
+              <Typography variant="body2" color={theme.palette.primary.main}>
                 ${product.price}
               </Typography>
             )}
