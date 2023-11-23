@@ -197,6 +197,9 @@ function HomePageSlicker() {
               onChange={(event, newValue) => {
                 handleMenuChange(event, newValue!);
               }}
+              isOptionEqualToValue={(option, value) =>
+                option.title == value.title
+              }
               renderInput={(params) => (
                 <TextField
                   {...params}

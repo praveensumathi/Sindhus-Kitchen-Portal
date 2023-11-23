@@ -17,7 +17,6 @@ function CategoryProducts() {
   const navigate = useNavigate();
 
   const selectedCategory = useGetFetchProductsByMenuId(menuId ?? "");
-  console.log("selectedCategory", selectedCategory);
 
   return (
     <>
@@ -35,7 +34,7 @@ function CategoryProducts() {
             display: "flex",
             alignItems: "center",
           }}
-          p={1}
+          p={2}
         >
           <Box
             sx={{
