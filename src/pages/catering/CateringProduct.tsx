@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import StoreIcon from "@mui/icons-material/Store";
+import Badge from "@mui/material/Badge";
+import LocalDiningOutlinedIcon from "@mui/icons-material/LocalDiningOutlined";
 import {
   Table,
   TableBody,
@@ -208,7 +210,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                       <Table aria-label="simple table">
                         <TableHead>
                           <TableRow>
-                            <TableCell align="center" >
+                            <TableCell align="center">
                               <strong>Serving Size(s)</strong>
                             </TableCell>
                             <TableCell align="center">
@@ -327,8 +329,35 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
           </Box>
         ))
       )}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: 2,
+          padding: "10px",
+          position: "sticky",
+          zIndex: 1,
+          bottom: 0,
+          borderTopColor: "red",
+        }}
+      >
+        <Badge badgeContent={productQuantities.length} color="primary">
+          <LocalDiningOutlinedIcon
+            fontSize="large"
+            style={{
+              color: "white",
+              borderRadius: "50%",
+              backgroundColor: "black",
+              padding: "5px",
+              borderColor: "white",
+              boxShadow: "0 0 0 2px white, 0 0 0 4px black",
+            }}
+          />
+        </Badge>
+      </Box>
     </Box>
   );
 }
+  
 
 export default CateringProduct;
