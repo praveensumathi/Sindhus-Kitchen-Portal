@@ -27,7 +27,7 @@ function CommonProductCard(props: IProps) {
             component="img"
             src={product.posterURL}
             sx={{
-              maxWidth: "250px",
+              width: "250px",
               height: "180px",
               cursor: "pointer",
               transition: "transform 2s",
