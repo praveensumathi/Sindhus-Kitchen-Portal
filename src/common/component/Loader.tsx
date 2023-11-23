@@ -18,19 +18,23 @@ function Loader() {
     axiosInstanceWithMultipartFormData
   );
 
+  const showLoading =
+    axiosWithCredentialLoading ||
+    axiosWithOutCredentialLoading ||
+    axiosWithMultiPartheaderLoading;
+  
   return (
     <>
-      {(axiosWithCredentialLoading ||
-        axiosWithOutCredentialLoading ||
-        axiosWithMultiPartheaderLoading) && (
+      {showLoading && (
         <Box className="overlay">
           <Spinner />
           <img
             style={{
               borderRadius: "50%",
+              backgroundColor: "white",
             }}
             className="spinner-image"
-            src="/assets/images/sindhusloader-logo.png"
+            src="assets/images/sindhusloader-logo.png"
             alt=""
           />
         </Box>
