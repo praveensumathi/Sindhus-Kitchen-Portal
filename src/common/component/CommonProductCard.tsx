@@ -16,7 +16,7 @@ function CommonProductCard(props: IProps) {
 
   return (
     <Box>
-      <Card sx={{ width: "100%", boxShadow: 4 }}>
+      <Card sx={{ width: "100%", maxWidth: "14rem", boxShadow: 4 }}>
         <Link
           to={`/detail/${product._id}`}
           style={{
@@ -27,6 +27,7 @@ function CommonProductCard(props: IProps) {
             component="img"
             src={product.posterURL}
             sx={{
+              maxWidth: "250px",
               height: "180px",
               cursor: "pointer",
               transition: "transform 2s",
