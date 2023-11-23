@@ -24,14 +24,15 @@ function CategoryProducts() {
       <Box>
         <IconButton
           sx={{
+            float: "left",
             display: "flex",
             height: "100px",
             width: {
               xs: "20px",
               sm: "100px",
             },
-            paddingLeft: "1px",
             position: "fixed",
+            padding: "1px",
           }}
           onClick={() => navigate(-1)}
         >
@@ -69,32 +70,28 @@ function CategoryProducts() {
                 />
               </Card>
             </Box>
-
             <Box
               sx={{
-                display: "flex",
+                padding: "6px",
                 width: "100%",
               }}
             >
-              <Box>
-                <Typography
-                  sx={{
-                    fontWeight: 600,
-                    display: "-webkit-box",
-                    WebkitLineClamp: 1,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                  variant="h5"
-                >
-                  {selectedCategory.data.title || ""}
-                </Typography>
-              </Box>
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                  display: "-webkit-box",
+                  WebkitLineClamp: 1,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+                variant="h5"
+              >
+                {selectedCategory.data.title || ""}
+              </Typography>
             </Box>
           </Box>
         )}
-
         <Box>
           {selectedCategory.data &&
           selectedCategory.data.products &&

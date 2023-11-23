@@ -1,6 +1,13 @@
 import { ICategoryWithProducts } from "../../interface/types";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Slider from "react-slick";
 import CommonProductCard from "./CommonProductCard";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -20,21 +27,23 @@ export const ProductsSliderSettings = {
 };
 
 function Carousel(props: IProps) {
-
   const { category } = props;
 
   const navigate = useNavigate();
 
+   const theme = useTheme();
+   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 4.2,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 2.5,
           slidesToScroll: 1,
         },
       },
@@ -48,8 +57,9 @@ function Carousel(props: IProps) {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.2,
           slidesToScroll: 1,
+          arrows: !isBelowMediumScreen,
         },
       },
     ],
@@ -93,20 +103,26 @@ function Carousel(props: IProps) {
               <ArrowForwardIcon sx={{ fontSize: "18px" }} />
             </Button>
           </Box>
-
-          <Slider {...settings}>
-            {category.menuDatas.products.length>0 &&
-              category.menuDatas.products.map((product, productIndex) => (
-                <Box key={productIndex} sx={{display:"flex",justifyContent:"flex-start"}}>
-                  <CommonProductCard product={product} />
-                </Box>
-              ))}
-          </Slider>
+          <Box sx={{ py: 2 }}>
+            <Slider {...settings}>
+              {category.menuDatas.products.length > 0 &&
+                category.menuDatas.products.map((product, productIndex) => (
+                  <Box
+                    key={productIndex}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <CommonProductCard product={product} />
+                  </Box>
+                ))}
+            </Slider>
+          </Box>
         </Box>
       </Container>
     )
   );
-   
 }
 
 export default Carousel;

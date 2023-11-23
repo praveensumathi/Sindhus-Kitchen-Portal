@@ -109,7 +109,7 @@ export interface IProductDinnigOut {
   posterURL: string;
   description: string;
   netWeight: number;
-  price: IPrice[];
+  price: number;
 }
 
 export interface ICommonResponse<T> {
@@ -169,4 +169,14 @@ export interface IProductAutoComplete {
   title: string;
   posterURL: string;
   label: string;
+}
+
+export interface IServingSizeWithQuantity {
+  productId: string;
+  sizes: ISize[];
+}
+
+export interface ISize {
+  size: string;
+  qty: number;
 }
