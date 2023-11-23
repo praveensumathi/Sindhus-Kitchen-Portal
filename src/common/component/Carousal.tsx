@@ -31,6 +31,9 @@ function Carousel(props: IProps) {
 
   const navigate = useNavigate();
 
+   const theme = useTheme();
+   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   const settings = {
     infinite: false,
     speed: 500,
@@ -56,6 +59,7 @@ function Carousel(props: IProps) {
         settings: {
           slidesToShow: 1.2,
           slidesToScroll: 1,
+          arrows: !isBelowMediumScreen,
         },
       },
     ],

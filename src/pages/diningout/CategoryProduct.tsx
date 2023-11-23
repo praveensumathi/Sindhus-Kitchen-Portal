@@ -2,14 +2,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import StoreIcon from "@mui/icons-material/Store";
 import CommonProductCard from "../../common/component/CommonProductCard";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetFetchProductsByMenuId } from "../../customRQHooks/Hooks";
 
-import { IconButton } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function CategoryProducts() {
@@ -19,7 +18,7 @@ function CategoryProducts() {
   const selectedCategory = useGetFetchProductsByMenuId(menuId ?? "");
 
   return (
-    <>
+    <Container>
       <IconButton
         sx={{
           float: "left",
@@ -84,10 +83,10 @@ function CategoryProducts() {
         {selectedCategory.data &&
         selectedCategory.data.products &&
         selectedCategory.data.products.length > 0 ? (
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {selectedCategory.data.products.map((product, index) => (
               <Grid item key={index} xs={6} sm={4} lg={3}>
-                <CommonProductCard product={product} width="170px" />
+                <CommonProductCard product={product} />
               </Grid>
             ))}
           </Grid>
@@ -107,7 +106,7 @@ function CategoryProducts() {
           </Box>
         )}
       </Box>
-    </>
+    </Container>
   );
 }
 

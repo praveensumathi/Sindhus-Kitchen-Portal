@@ -1,9 +1,4 @@
-import {
-  Box,
-  Card,
-  CardMedia,
-  useTheme,
-} from "@mui/material";
+import { Box, Card, CardMedia, useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { IProductCardList } from "../../interface/types";
@@ -21,7 +16,7 @@ function CommonProductCard(props: IProps) {
 
   return (
     <Box>
-      <Card sx={{ width: "14rem !important", boxShadow: 4 }}>
+      <Card sx={{ width: "100%", boxShadow: 4 }}>
         <Link
           to={`/detail/${product._id}`}
           style={{
@@ -32,7 +27,6 @@ function CommonProductCard(props: IProps) {
             component="img"
             src={product.posterURL}
             sx={{
-              width: "250px",
               height: "180px",
               cursor: "pointer",
               transition: "transform 2s",
