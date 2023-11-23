@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import Slider from "react-slick";
 import { Card, CardMedia } from "@mui/material";
 import Container from "@mui/material/Container";
@@ -20,6 +20,9 @@ function Categories() {
       setCategories([...data]);
     }
   }, [data]);
+
+  const theme = useTheme();
+  const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const settings = {
     infinite: false,
@@ -47,6 +50,7 @@ function Categories() {
         settings: {
           slidesToShow: 1.2,
           slidesToScroll: 1,
+          arrows: !isBelowMediumScreen,
         },
       },
     ],
@@ -68,41 +72,40 @@ function Categories() {
       >
         Menus
       </Typography>
-      {categories && (
+      {categories && categories.length > 0 && (
         <Slider {...settings}>
-          {categories.length > 0 &&
-            categories?.map((category, index) => (
-              <Box
-                key={index}
+          {categories?.map((category, index) => (
+            <Box
+              key={index}
+              sx={{
+                height: "9rem",
+                width: "14rem !important",
+              }}
+              onClick={() => handleClickProduct(category._id)}
+            >
+              <Card
                 sx={{
-                  height: "9rem",
-                  width: "14rem !important",
+                  boxShadow: 1,
+                  width: "100%",
+                  borderRadius: "10px",
                 }}
-                onClick={() => handleClickProduct(category._id)}
               >
-                <Card
-                  sx={{
-                    boxShadow: 1,
-                    width: "100%",
-                    borderRadius: "10px",
-                  }}
+                <CardMedia
+                  component="img"
+                  src={category.image}
+                  alt={category.title}
+                  height="100px"
+                />
+                <Typography
+                  gutterBottom
+                  component="div"
+                  sx={{ padding: 1, fontWeight: 600 }}
                 >
-                  <CardMedia
-                    component="img"
-                    src={category.image}
-                    alt={category.title}
-                    height="100px"
-                  />
-                  <Typography
-                    gutterBottom
-                    component="div"
-                    sx={{ padding: 1, fontWeight: 600 }}
-                  >
-                    {category.title}
-                  </Typography>
-                </Card>
-              </Box>
-            ))}
+                  {category.title}
+                </Typography>
+              </Card>
+            </Box>
+          ))}
         </Slider>
       )}
     </Container>
