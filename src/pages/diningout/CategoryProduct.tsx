@@ -21,103 +21,120 @@ function CategoryProducts() {
 
   return (
     <>
-      <IconButton
-        sx={{
-          float: "left",
-        }}
-        onClick={() => navigate(-1)}
-      >
-        <ArrowBackIcon fontSize="large" />
-      </IconButton>
-      {selectedCategory && selectedCategory.data && (
-        <Box
+      <Box>
+        <IconButton
           sx={{
             display: "flex",
-            alignItems: "center",
+            height: "100px",
+            width: {
+              xs: "20px",
+              sm: "100px",
+            },
+            paddingLeft: "1px",
+            position: "fixed",
           }}
-          p={1}
+          onClick={() => navigate(-1)}
         >
+          <ArrowBackIcon fontSize="medium" />
+        </IconButton>
+      </Box>
+      <Container>
+        {selectedCategory && selectedCategory.data && (
           <Box
             sx={{
-              paddingRight: 2,
+              display: "flex",
+              alignItems: "center",
             }}
+            p={1}
           >
-            <Card
+            <Box
               sx={{
-                height: "80px",
-                width: "80px",
-                boxShadow: 3,
-                borderRadius: "50%",
+                paddingRight: 2,
               }}
             >
-              <CardMedia
-                image={selectedCategory.data.image || ""}
-                component={"img"}
+              <Card
                 sx={{
-                  height: "100%",
+                  height: "80px",
+                  width: "80px",
+                  boxShadow: 3,
+                  borderRadius: "50%",
                 }}
-              />
-            </Card>
-          </Box>
-          <Box
-            sx={{
-              padding: "6px",
-              width: "100%",
-            }}
-          >
-            <Typography
+              >
+                <CardMedia
+                  image={selectedCategory.data.image || ""}
+                  component={"img"}
+                  sx={{
+                    height: "100%",
+                  }}
+                />
+              </Card>
+            </Box>
+
+            <Box
               sx={{
-                fontWeight: 600,
-                display: "-webkit-box",
-                WebkitLineClamp: 1,
-                WebkitBoxOrient: "vertical",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
+                display: "flex",
+                width: "100%",
               }}
-              variant="h5"
             >
-              {selectedCategory.data.title || ""}
-            </Typography>
-          </Box>
-        </Box>
-      )}
-      <Box>
-        {selectedCategory.data &&
-        selectedCategory.data.products &&
-        selectedCategory.data.products.length > 0 ? (
-          <Container sx={{ padding: "10px" }}>
-            <Grid container spacing={2}>
-              {selectedCategory.data.products.map((product, index) => (
-                <Grid
-                  item
-                  key={index}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  sx={{ display: "flex", justifyContent: "center" }}
+              <Box>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                    display: "-webkit-box",
+                    WebkitLineClamp: 1,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                  variant="h5"
                 >
-                  <CommonProductCard product={product} />
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        ) : (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-            sx={{
-              height: "60vh",
-              overflow: "hidden",
-            }}
-          >
-            <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
-            <Typography sx={{ opacity: 0.5 }}>No products available</Typography>
+                  {selectedCategory.data.title || ""}
+                </Typography>
+              </Box>
+            </Box>
           </Box>
         )}
-      </Box>
+
+        <Box>
+          {selectedCategory.data &&
+          selectedCategory.data.products &&
+          selectedCategory.data.products.length > 0 ? (
+            <Container sx={{ padding: "10px" }}>
+              <Grid container spacing={2}>
+                {selectedCategory.data.products.map((product, index) => (
+                  <Grid
+                    item
+                    key={index}
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={3}
+                    sx={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <CommonProductCard product={product} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Container>
+          ) : (
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+              sx={{
+                height: "60vh",
+                overflow: "hidden",
+              }}
+            >
+              <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
+              <Typography sx={{ opacity: 0.5 }}>
+                No products available
+              </Typography>
+            </Box>
+          )}
+        </Box>
+      </Container>
     </>
   );
 }

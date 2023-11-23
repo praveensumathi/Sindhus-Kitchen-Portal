@@ -12,6 +12,7 @@ import { useGetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
 import { useState, useEffect } from "react";
 import Rotate from "react-reveal/Rotate";
 import Fade from "react-reveal/Fade";
+import StoreIcon from "@mui/icons-material/Store";
 
 function SnacksPage() {
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<string>("");
@@ -127,11 +128,11 @@ function SnacksPage() {
           selectedSubMenuId={selectedSubMenuId}
         ></SnacksMenuItem>
         <Box sx={{ mt: 5 }}>
-          <Grid container spacing={3}>
-            {snacksPageData &&
-              snacksPageData.products &&
-              snacksPageData.products.length > 0 &&
-              snacksPageData.products.map((product) => (
+          {snacksPageData &&
+          snacksPageData.products &&
+          snacksPageData.products.length > 0 ? (
+            <Grid container spacing={3}>
+              {snacksPageData.products.map((product) => (
                 <Grid
                   item
                   xs={12}
@@ -144,7 +145,24 @@ function SnacksPage() {
                   <CommonProductCard product={product} />
                 </Grid>
               ))}
-          </Grid>
+            </Grid>
+          ) : (
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+              sx={{
+                height: "60vh",
+                overflow: "hidden",
+              }}
+            >
+              <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
+              <Typography sx={{ opacity: 0.5 }}>
+                No products available
+              </Typography>
+            </Box>
+          )}
         </Box>
       </Container>
       {/* <Box
