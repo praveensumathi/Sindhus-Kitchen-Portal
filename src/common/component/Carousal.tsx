@@ -36,7 +36,6 @@ function Carousel(props: IProps) {
     speed: 500,
     slidesToShow: 4.2,
     slidesToScroll: 1,
-    arrows: false,
     responsive: [
       {
         breakpoint: 1024,

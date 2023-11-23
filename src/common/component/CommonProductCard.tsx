@@ -2,8 +2,6 @@ import {
   Box,
   Card,
   CardMedia,
-  Container,
-  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -13,8 +11,6 @@ import { Link } from "react-router-dom";
 
 interface IProps {
   product: IProductCardList;
-  width?: string;
-  height?: string;
   children?: React.ReactNode;
 }
 
@@ -22,7 +18,6 @@ function CommonProductCard(props: IProps) {
   const { product } = props;
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box>
