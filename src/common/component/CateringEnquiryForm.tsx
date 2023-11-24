@@ -90,7 +90,6 @@ function CateringEnquiryForm() {
                 Catering Request Form
               </Typography>
             </Grid>
-
             <Grid item lg={6} xs={12}>
               <TextField
                 label="Full Name *"
@@ -131,6 +130,7 @@ function CateringEnquiryForm() {
                 {...register("typeOfEvent")}
               />
             </Grid>
+
             <Grid item lg={3} xs={12}>
               <FormControl fullWidth>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -139,11 +139,14 @@ function CateringEnquiryForm() {
                     control={control}
                     render={({ field }) => (
                       <DatePicker
-                        {...field}
                         label="Event Date *"
+                        slotProps={{
+                          textField: {
+                            error: !!errors.eventDate,
+                          },
+                        }}
+                        value={field.value || null}
                         onChange={(date) => field.onChange(date)}
-                        sx={{ width: "100%", backgroundColor: "white" }}
-                        format="DD-MM-YYYY"
                       />
                     )}
                   />
@@ -155,6 +158,7 @@ function CateringEnquiryForm() {
                 )}
               </FormControl>
             </Grid>
+
             <Grid item lg={3} xs={12}>
               <TextField
                 label="Guest Count"
