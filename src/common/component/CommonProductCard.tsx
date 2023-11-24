@@ -15,8 +15,8 @@ function CommonProductCard(props: IProps) {
   const theme = useTheme();
 
   return (
-    <Box>
-      <Card sx={{ width: "100%", maxWidth: "14rem", boxShadow: 4 }}>
+    <div>
+      <Card sx={{ width: "14rem", height: "16rem", boxShadow: 2 }}>
         <Link
           to={`/detail/${product._id}`}
           style={{
@@ -27,17 +27,20 @@ function CommonProductCard(props: IProps) {
             component="img"
             src={product.posterURL}
             sx={{
-              width: "250px",
-              height: "180px",
+              objectFit: "cover",
+              width: "100%",
+              height: "12rem",
               cursor: "pointer",
-              transition: "transform 2s",
-              "&:hover": {
-                transform: "scale(1.1)",
-              },
+              position: "center",
             }}
           />
         </Link>
-        <CardContent>
+        <CardContent
+          sx={{
+            height: "4rem",
+            padding : 1
+          }}
+        >
           <Typography variant="body1" sx={{ fontWeight: 600 }} component="div">
             {product.title}
           </Typography>
@@ -50,7 +53,7 @@ function CommonProductCard(props: IProps) {
           </Box>
         </CardContent>
       </Card>
-    </Box>
+    </div>
   );
 }
 
