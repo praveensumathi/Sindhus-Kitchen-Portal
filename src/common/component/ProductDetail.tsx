@@ -19,37 +19,26 @@ import { useSnackBar } from "../../context/SnackBarContext";
 import { IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const CustomPrevArrow = (props) => (
-  <div {...props} className="custom-prev-arrow">
-    &#11164;
-  </div>
-);
-
-const CustomNextArrow = (props) => (
-  <div {...props} className="custom-next-arrow">
-    &#11166;
-  </div>
-);
 
 function ProductDetail() {
+
   const settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
   };
 
   const navigate = useNavigate();
   const theme = useTheme();
   const { productId } = useParams();
   const { updateSnackBarState } = useSnackBar();
+    const [menuDetail, setMenuDetail] = useState<IProduct>();
+
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [menuDetail, setMenuDetail] = useState<IProduct>();
+ 
 
   const fetchProductDetail = async () => {
     try {
@@ -85,30 +74,32 @@ function ProductDetail() {
           container
           mt={4}
           sx={{ maxWidth: isBelowMediumSize ? "100%" : "80%" }}
+          spacing={5}
         >
           <Grid item md={5} xs={12}>
             <Slider {...settings}>
-              {menuDetail?.images &&
-                menuDetail.images.length > 0 &&
-                menuDetail.images.map((image, index) => (
-                  <Box>
-                    <Card
-                      key={index}
-                      sx={{
-                        height: isBelowMediumSize ? "50vh" : "70vh",
-                        marginRight: "20px",
-                      }}
-                    >
-                      <CardMedia
-                        component="img"
-                        alt="sindhus-menu"
-                        height="100%"
-                        width="100%"
-                        src={image}
-                      />
-                    </Card>
-                  </Box>
-                ))}
+              {menuDetail?.posterURL &&
+                [menuDetail.posterURL]
+                  .concat(menuDetail.images)
+                  .map((image, index) => (
+                    <Box>
+                      <Card
+                        key={index}
+                        sx={{
+                          height: isBelowMediumSize ? "50vh" : "70vh",
+                          marginRight: "20px",
+                        }}
+                      >
+                        <CardMedia
+                          component="img"
+                          alt="sindhus-menu"
+                          height="100%"
+                          width="100%"
+                          src={image}
+                        />
+                      </Card>
+                    </Box>
+                  ))}
             </Slider>
           </Grid>
           <Grid item md={7} xs={12}>

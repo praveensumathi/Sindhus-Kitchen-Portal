@@ -15,8 +15,13 @@ import {
   TableRow,
   Container,
 } from "@mui/material";
-import { fetchProductByCateringMenu } from "../../services/api";
-import { ICateringMenu, IServingSizeWithQuantity } from "../../interface/types";
+import { fetchProductByCateringMenu, getProductInfo } from "../../services/api";
+import {
+  ICateringMenu,
+  ISelectedCateringProduct,
+  IServingSizeWithQuantity,
+} from "../../interface/types";
+import CateringSelectedProductDrawer from "../../common/component/CateringSelectedProductDrawer";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 
@@ -30,6 +35,10 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   const [productQuantities, setProductQuantities] = useState<
     IServingSizeWithQuantity[]
   >([]);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [productInfo, setProductInfo] = useState<ISelectedCateringProduct[]>(
+    []
+  );
   const [badgeContent, setBadgeContent] = useState(0);
 
   useEffect(() => {
@@ -127,13 +136,23 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     }
   };
 
+  const handleSubmit = async () => {
+    try {
+      const product = productQuantities.map((item) => item.productId);
+      const response = await getProductInfo(product);
+      setProductInfo(response);
+      setDrawerOpen(true);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const handleCloseModal = () => {
+    setDrawerOpen(false);
+  };
+
   return (
     <>
-      <Container
-        sx={{
-          position: "relative",
-        }}
-      >
+      <Container>
         {cateringData.length === 0 ? (
           <Box
             display="flex"
@@ -385,6 +404,12 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
           </Fade>
         </Box>
       )}
+
+      <CateringSelectedProductDrawer
+        isOpen={isDrawerOpen}
+        handleClose={handleCloseModal}
+        productInfo={productInfo}
+      />
     </>
   );
 }
