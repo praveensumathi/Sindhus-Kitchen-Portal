@@ -145,6 +145,8 @@ function CateringEnquiryForm() {
                             error: !!errors.eventDate,
                           },
                         }}
+                        disablePast
+                        format="DD-MM-YYYY"
                         value={field.value || null}
                         onChange={(date) => field.onChange(date)}
                       />
