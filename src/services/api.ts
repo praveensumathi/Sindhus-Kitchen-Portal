@@ -1,6 +1,8 @@
 import {
   ICateringEnquiry,
   ICateringMenu,
+  ISelectedCateringProduct,
+  IServingSizeWithQuantity,
   ISnacksPage,
 } from "./../interface/types";
 import {
@@ -62,7 +64,7 @@ const getAllDiningOutMenuDatas = async () => {
   }
 };
 
-const createCateringEnquiry = async (data: ICateringEnquiry) => {
+const createCateringEnquiry = async (data: IServingSizeWithQuantity) => {
   try {
     const response = await httpWithoutCredentials.post(
       "enquiry/createEnquiry",
@@ -148,6 +150,17 @@ const fetchProductByCateringMenu = async (
   }
 };
 
+const getMyBag = async (selectedProductIds: string[]) => {
+  try {
+    const response = await httpWithoutCredentials.post<
+      ISelectedCateringProduct[]
+    >("product/getMyBag", selectedProductIds);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   getAllMenus,
   fetchProductById,
@@ -159,4 +172,5 @@ export {
   getProductsByMenuIdWithSearchTerm,
   getAllSnacksProductsWithSubMenu,
   fetchProductByCateringMenu,
+  getMyBag as getProductInfo,
 };

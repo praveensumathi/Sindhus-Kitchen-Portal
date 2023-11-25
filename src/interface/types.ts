@@ -180,3 +180,10 @@ export interface ISize {
   size: string;
   qty: number;
 }
+
+export interface ISelectedCateringProduct {
+  id: string;
+  title: string;
+  posterURL: string;
+}
+

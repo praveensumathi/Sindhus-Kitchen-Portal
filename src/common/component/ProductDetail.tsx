@@ -1,5 +1,7 @@
 import {
   Box,
+  Card,
+  CardMedia,
   Container,
   Divider,
   Grid,
@@ -17,27 +19,15 @@ import { useSnackBar } from "../../context/SnackBarContext";
 import { IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const CustomPrevArrow = (props) => (
-  <div {...props} className="custom-prev-arrow">
-    &#11164;
-  </div>
-);
-
-const CustomNextArrow = (props) => (
-  <div {...props} className="custom-next-arrow">
-    &#11166;
-  </div>
-);
 
 function ProductDetail() {
+  
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 1.1,
     slidesToScroll: 1,
-    arrows: false,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
+    arrows:false 
   };
 
   const navigate = useNavigate();
@@ -89,18 +79,22 @@ function ProductDetail() {
               {menuDetail?.images &&
                 menuDetail.images.length > 0 &&
                 menuDetail.images.map((image, index) => (
-                  <Box
-                    sx={{
-                      height: isBelowMediumSize ? "50vh" : "75vh",
-                    }}
-                    key={index}
-                  >
-                    <img
-                      src={image}
-                      alt="sindhus-menu"
-                      height="100%"
-                      width="100%"
-                    />
+                  <Box>
+                    <Card
+                      key={index}
+                      sx={{
+                        height: isBelowMediumSize ? "50vh" : "70vh",
+                        marginRight: "20px", 
+                      }}
+                    >
+                      <CardMedia
+                        component="img"
+                        alt="sindhus-menu"
+                        height="100%"
+                        width="100%"
+                        src={image}
+                      />
+                    </Card>
                   </Box>
                 ))}
             </Slider>
