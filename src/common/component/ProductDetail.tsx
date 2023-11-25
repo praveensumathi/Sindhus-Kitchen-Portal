@@ -44,9 +44,9 @@ function ProductDetail() {
     try {
       const response = await fetchProductById(productId);
       setMenuDetail(response.data.data);
+      document.title = response.data.data.title ?? "Sindhu's";
     } catch (error: any) {
       if (error.response && error.response.data) {
-        console.log(error.response.data);
         updateSnackBarState(true, error.response.data.message, "error");
       }
     }
@@ -102,45 +102,50 @@ function ProductDetail() {
                   ))}
             </Slider>
           </Grid>
-          <Grid
-            item
-            md={7}
-            xs={12}
-            sx={{ display: "flex", alignItems: "center" }}
-          >
+          <Grid item md={7} xs={12}>
             <Container>
               {menuDetail && (
                 <>
                   <Typography sx={{ fontWeight: "bolder", fontSize: "34px" }}>
                     {menuDetail.title}
                   </Typography>
-                  <Typography
-                    sx={{
-                      fontWeight: "500",
-                      fontSize: "20px",
-                      margin: "5px 0",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    $ {menuDetail.price} &nbsp;
-                    <span style={{ fontSize: "12px" }}>
-                      (Per Piece / Plate)
-                    </span>
-                  </Typography>
-                  <Typography>
+                  {!!menuDetail.price && (
+                    <Typography
+                      sx={{
+                        fontWeight: "500",
+                        fontSize: "25px",
+                        margin: "5px 0",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      $ {menuDetail.price}
+                      <span style={{ fontSize: "12px" }}>
+                        (Per Piece / Plate)
+                      </span>
+                    </Typography>
+                  )}
+                  <Typography sx={{ mt: 2 }}>
                     By &nbsp;
                     <span style={{ textDecoration: "underline" }}>
                       Shindhu's Kitchen
                     </span>
                   </Typography>
-                  <Typography sx={{ fontSize: "small" }}>
-                    {menuDetail.description}
-                  </Typography>
                   <Divider sx={{ margin: "10px 0" }} />
                   <Typography
                     sx={{
-                      fontSize: "15px",
+                      fontSize: "18px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Description
+                    <Typography sx={{ fontSize: "small", my: 1 }}>
+                      {menuDetail.description}
+                    </Typography>
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
                       fontWeight: "500",
                       margin: "5px 0",
                     }}
@@ -149,35 +154,59 @@ function ProductDetail() {
                   </Typography>
                   <Box
                     sx={{
-                      border: "1.5px solid",
+                      border: "1.5px solid #57ccb5",
                       borderRadius: "5px",
                       maxWidth: "70px",
                       textAlign: "center",
+                      p: 1.2,
+                      mt: 1,
                     }}
                   >
                     {menuDetail.netWeight} lb
                   </Box>
-                  <Typography
-                    sx={{
-                      fontSize: "15px",
-                      fontWeight: "500",
-                      margin: "5px 0",
-                    }}
-                  >
-                    Serving Sizes
-                  </Typography>
+
+                  {menuDetail.servingSizeDescription && (
+                    <Typography
+                      sx={{
+                        fontSize: "18px",
+                        fontWeight: "500",
+                        margin: "5px 0",
+                      }}
+                    >
+                      servingSizeDescription
+                      <Typography
+                        sx={{
+                          whiteSpace: "pre-line",
+                        }}
+                      >
+                        {menuDetail.servingSizeDescription}
+                      </Typography>
+                    </Typography>
+                  )}
+
                   {menuDetail.servingSizesWithPrice &&
                     menuDetail.servingSizesWithPrice.length > 0 &&
                     menuDetail.servingSizesWithPrice.map((size, index) => (
-                      <Typography
-                        sx={{ fontSize: "small", display: "flex" }}
-                        key={index}
-                      >
-                        {size.size} -
-                        <span style={{ fontWeight: "bolder" }}>
-                          &nbsp; [${size.price}]
-                        </span>
-                      </Typography>
+                      <>
+                        <Typography
+                          sx={{
+                            fontSize: "18px",
+                            fontWeight: "500",
+                            margin: "8px 0",
+                          }}
+                        >
+                          Serving Sizes
+                        </Typography>
+                        <Typography
+                          sx={{ fontSize: "small", display: "flex" }}
+                          key={index}
+                        >
+                          {size.size} -
+                          <span style={{ fontWeight: "bolder" }}>
+                            &nbsp; [${size.price}]
+                          </span>
+                        </Typography>
+                      </>
                     ))}
                 </>
               )}

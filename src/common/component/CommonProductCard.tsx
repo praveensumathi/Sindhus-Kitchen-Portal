@@ -44,7 +44,7 @@ function CommonProductCard(props: IProps) {
             {product.title}
           </Typography>
           <Typography variant="body2" color={theme.palette.primary.main}>
-            {product.price}
+            ${product.price}
           </Typography>
         </CardContent>
       </Card>
