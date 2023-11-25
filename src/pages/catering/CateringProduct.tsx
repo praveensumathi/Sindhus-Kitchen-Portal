@@ -20,7 +20,7 @@ import {
   ISelectedCateringProduct,
   IServingSizeWithQuantity,
 } from "../../interface/types";
-import CateringSelectedProductModel from "../../common/component/CateringSelectedProductDrawer";
+import CateringSelectedProductDrawer from "../../common/component/CateringSelectedProductDrawer";
 
 interface IProps {
   selectedMenuId: string;
@@ -391,7 +391,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
           </Badge>
         </Box>
       </>
-      <CateringSelectedProductModel
+      <CateringSelectedProductDrawer
         isOpen={isDrawerOpen}
         handleClose={handleCloseModal}
         productInfo={productInfo}

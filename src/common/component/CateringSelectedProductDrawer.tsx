@@ -20,11 +20,9 @@ interface IProps {
   handleClose: () => void;
   productInfo: ISelectedCateringProduct[];
 }
-   
+
 function CateringSelectedProductDrawer(props: IProps) {
-
-    const { isOpen, handleClose, productInfo } = props;
-
+  const { isOpen, handleClose, productInfo } = props;
 
   return (
     <Drawer
@@ -34,17 +32,25 @@ function CateringSelectedProductDrawer(props: IProps) {
         position: "relative",
         "& .MuiDrawer-paper": {
           boxSizing: "border-box",
-          width: "25vw",
+          width: "30vw",
+        },
+        "@media (max-width: 600px)": {
+          "& .MuiDrawer-paper": {
+            width: "100vw",
+            height: "100%",
+          },
         },
       }}
     >
       <Box>
         <Box
           sx={{
+            zIndex: -1,
+            padding: 2,
+            height: "50px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: 1,
           }}
         >
           <Typography variant="h5" sx={{ fontWeight: 700 }}>
@@ -57,34 +63,47 @@ function CateringSelectedProductDrawer(props: IProps) {
         <Divider />
         <Container>
           {productInfo.map((product, index) => (
-            <Box my={1} key={index}>
+            <Box
+              my={1}
+              key={index}
+              sx={{
+                borderBottom:
+                  index === productInfo.length - 1
+                    ? "none"
+                    : "1px solid #eeeeee",
+              }}
+            >
               <Card
                 sx={{
-                  height: "10rem",
+                  height: "8rem",
                 }}
                 elevation={0}
               >
-                <Grid container spacing={2} sx={{display:"flex",justifyContent:"space-between"}}>
+                <Grid
+                  container
+                  spacing={2}
+                  sx={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <Grid
                     item
-                    xs={8}
+                    xs={6}
                     sx={{
                       padding: "15px",
                     }}
                   >
                     <CardMedia
                       sx={{
-                        width: "150px",
-                        height: "150px",
+                        width: "100px",
+                        height: "100px",
                       }}
                       image={product.posterURL}
                       component={"img"}
                     />
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={6}>
                     <Typography
                       sx={{
-                        fontSize: "small",
+                        fontSize: "large",
                         fontWeight: 600,
                       }}
                     >
@@ -99,6 +118,6 @@ function CateringSelectedProductDrawer(props: IProps) {
       </Box>
     </Drawer>
   );
-};
+}
 
 export default CateringSelectedProductDrawer;
