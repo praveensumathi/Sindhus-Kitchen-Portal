@@ -115,8 +115,11 @@ const getProductsByMenuIdWithSearchTerm = async (
 
 const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
   try {
+    if (subMenuId) {
+      subMenuId = `/${subMenuId}`;
+    }
     const response = await httpWithoutCredentials.get<ISnacksPage>(
-      `/product/getAllSnacksMenu/${subMenuId}`
+      `/product/getAllSnacksMenu${subMenuId}`
     );
     return response.data;
   } catch (error) {

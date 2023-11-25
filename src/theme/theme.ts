@@ -32,6 +32,15 @@ const theme = createTheme({
         },
       },
     },
+    MuiBadge: {
+      styleOverrides: {
+        badge: {
+          width: "30px",
+          height: "30px",
+          color:"white"
+        },
+      },
+    },
   },
 });
 

@@ -17,6 +17,8 @@ import {
 } from "@mui/material";
 import { fetchProductByCateringMenu } from "../../services/api";
 import { ICateringMenu, IServingSizeWithQuantity } from "../../interface/types";
+import { Link } from "react-router-dom";
+import Fade from "react-reveal/Fade";
 
 interface IProps {
   selectedMenuId: string;
@@ -127,7 +129,11 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
 
   return (
     <>
-      <Container>
+      <Container
+        sx={{
+          position: "relative",
+        }}
+      >
         {cateringData.length === 0 ? (
           <Box
             display="flex"
@@ -159,16 +165,20 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                 {data.menuTitle}
               </Typography>
 
-              <Grid
-                container
-                spacing={3}
-                sx={{
-                  borderBottom: "1px solid #FFD580",
-                  padding: "15px",
-                }}
-              >
-                {data.products.map((product) => (
-                  <Grid container item key={product._id}>
+              <Grid container spacing={3}>
+                {data.products.map((product, index) => (
+                  <Grid
+                    container
+                    item
+                    key={product._id}
+                    sx={{
+                      borderBottom:
+                        index === data.products.length - 1
+                          ? "none"
+                          : "1px solid #FFD580",
+                      padding: "15px",
+                    }}
+                  >
                     <Grid
                       item
                       xs={12}
@@ -177,49 +187,48 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                         padding: "15px",
                       }}
                     >
-                      <img
-                        src={product.posterURL}
-                        width={150}
-                        height={150}
-                        alt={product.title}
-                      />
+                      <Link
+                        to={`/detail/${product._id}`}
+                        style={{
+                          textDecoration: "none",
+                        }}
+                      >
+                        <img
+                          src={product.posterURL}
+                          width={150}
+                          height={150}
+                          alt={product.title}
+                        />
+                      </Link>
                     </Grid>
                     <Grid
                       item
                       xs={12}
                       lg={5}
                       sx={{
-                        padding: "15px",
+                        padding: "20px",
                       }}
                     >
                       <Typography sx={{ fontWeight: "600" }}>
                         {product.title}
                       </Typography>
-                      <Typography
-                        sx={{
-                          whiteSpace: "pre-line",
-                        }}
-                      >
-                        {product.description}
-                        <br />
-                        <br />
-                        Serving sizes:
-                        <br />
-                        Small Tray - can eat 10 members,
-                        <br />
-                        Medium Tray - can eat 20 members,
-                        <br />
-                        Large Tray - can eat 30 members
-                      </Typography>
+
+                      <Typography>{product.description}</Typography>
+
+                      {product.servingSizeDescription && (
+                        <Typography sx={{ mt: 2 }}>
+                          <b>servingSizeDescription</b>
+                          <Typography
+                            sx={{
+                              whiteSpace: "pre-line",
+                            }}
+                          >
+                            {product.servingSizeDescription}
+                          </Typography>
+                        </Typography>
+                      )}
                     </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      lg={4}
-                      sx={{
-                        padding: "12px",
-                      }}
-                    >
+                    <Grid item xs={12} lg={4}>
                       <TableContainer>
                         <Table aria-label="simple table">
                           <TableHead>
@@ -344,30 +353,38 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
           ))
         )}
       </Container>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "10px",
-          zIndex: 1,
-          bottom: 0,
-          position: "sticky",
-        }}
-      >
-        <Badge badgeContent={badgeContent} color="primary">
-          <LocalDiningOutlinedIcon
-            style={{
-              fontSize: "45px",
-              color: "white",
-              borderRadius: "50%",
-              backgroundColor: "black",
-              padding: "5px",
-              borderColor: "white",
-              boxShadow: "0 0 0 2px white, 0 0 0 4px black",
-            }}
-          />
-        </Badge>
-      </Box>
+
+      {badgeContent && (
+        <Box
+          sx={{
+            zIndex: 1,
+            bottom: 20,
+            left: "20px",
+            position: "sticky",
+            display: "flex",
+            justifyContent: "flex-end",
+            mx: 4,
+            my: 5,
+            transform: "all 0.2s",
+          }}
+        >
+          <Fade bottom>
+            <Badge badgeContent={badgeContent} color="primary">
+              <LocalDiningOutlinedIcon
+                sx={{
+                  color: "white",
+                  borderRadius: "50%",
+                  backgroundColor: "black",
+                  padding: "5px",
+                  borderColor: "white",
+                  boxShadow: "0 0 0 2px white, 0 0 0 4px black",
+                  fontSize: "3rem",
+                }}
+              />
+            </Badge>
+          </Fade>
+        </Box>
+      )}
     </>
   );
 }

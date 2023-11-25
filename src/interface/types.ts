@@ -50,8 +50,9 @@ export interface IProductDetail {
 export interface IProduct {
   _id: string;
   title: string;
-  price: null;
+  price: number;
   images: string[];
+  servingSizeDescription: string;
   servingSizesWithPrice: IPrice[];
   description: string;
   netWeight: number;
@@ -146,6 +147,7 @@ export interface Product {
   _id: string;
   title: string;
   description: string;
+  servingSizeDescription: string;
   servingSizesWithPrice: ServingSizesWithPrice[];
   posterURL?: string;
 }
