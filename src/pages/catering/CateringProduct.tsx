@@ -13,10 +13,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Container,
 } from "@mui/material";
-import { fetchProductByCateringMenu } from "../../services/api";
-import { ICateringMenu, IServingSizeWithQuantity } from "../../interface/types";
+import { fetchProductByCateringMenu, getProductInfo } from "../../services/api";
+import {
+  ICateringMenu,
+  ISelectedCateringProduct,
+  IServingSizeWithQuantity,
+} from "../../interface/types";
+import CateringSelectedProductDrawer from "../../common/component/CateringSelectedProductDrawer";
 
 interface IProps {
   selectedMenuId: string;
@@ -28,6 +32,10 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   const [productQuantities, setProductQuantities] = useState<
     IServingSizeWithQuantity[]
   >([]);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [productInfo, setProductInfo] = useState<ISelectedCateringProduct[]>(
+    []
+  );
   const [badgeContent, setBadgeContent] = useState(0);
 
   useEffect(() => {
@@ -125,9 +133,23 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     }
   };
 
+  const handleSubmit = async () => {
+    try {
+      const product = productQuantities.map((item) => item.productId);
+      const response = await getProductInfo(product);
+      setProductInfo(response);
+      setDrawerOpen(true);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const handleCloseModal = () => {
+    setDrawerOpen(false);
+  };
+
   return (
     <>
-      <Container>
+      <>
         {cateringData.length === 0 ? (
           <Box
             display="flex"
@@ -343,31 +365,37 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
             </Box>
           ))
         )}
-      </Container>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "10px",
-          zIndex: 1,
-          bottom: 0,
-          position: "sticky",
-        }}
-      >
-        <Badge badgeContent={badgeContent} color="primary">
-          <LocalDiningOutlinedIcon
-            style={{
-              fontSize: "45px",
-              color: "white",
-              borderRadius: "50%",
-              backgroundColor: "black",
-              padding: "5px",
-              borderColor: "white",
-              boxShadow: "0 0 0 2px white, 0 0 0 4px black",
-            }}
-          />
-        </Badge>
-      </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "10px",
+            zIndex: 1,
+            bottom: 5,
+            position: "sticky",
+          }}
+        >
+          <Badge badgeContent={badgeContent} color="primary">
+            <LocalDiningOutlinedIcon
+              onClick={handleSubmit}
+              style={{
+                fontSize: "45px",
+                color: "white",
+                borderRadius: "50%",
+                backgroundColor: "black",
+                padding: "5px",
+                borderColor: "white",
+                boxShadow: "0 0 0 2px white, 0 0 0 4px black",
+              }}
+            />
+          </Badge>
+        </Box>
+      </>
+      <CateringSelectedProductDrawer
+        isOpen={isDrawerOpen}
+        handleClose={handleCloseModal}
+        productInfo={productInfo}
+      />
     </>
   );
 }

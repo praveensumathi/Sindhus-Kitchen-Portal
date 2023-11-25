@@ -52,6 +52,7 @@ export interface IProduct {
   title: string;
   price: null;
   images: string[];
+  posterURL: string,
   servingSizesWithPrice: IPrice[];
   description: string;
   netWeight: number;
@@ -180,3 +181,10 @@ export interface ISize {
   size: string;
   qty: number;
 }
+
+export interface ISelectedCateringProduct {
+  id: string;
+  title: string;
+  posterURL: string;
+}
+
