@@ -50,11 +50,11 @@ function CateringPage() {
             setSelectedProductId(productId)
           }
         />
-        <CateringProduct
-          selectedMenuId={selectedMenuId}
-          selectedProductId={selectedProductId}
-        />
       </Container>
+      <CateringProduct
+        selectedMenuId={selectedMenuId}
+        selectedProductId={selectedProductId}
+      />
     </>
   );
 }

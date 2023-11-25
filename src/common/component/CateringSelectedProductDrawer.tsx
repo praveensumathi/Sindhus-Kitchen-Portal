@@ -45,7 +45,6 @@ function CateringSelectedProductDrawer(props: IProps) {
             justifyContent: "space-between",
             alignItems: "center",
             padding: 1,
-            mt:6
           }}
         >
           <Typography variant="h5" sx={{ fontWeight: 700 }}>

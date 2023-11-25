@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import StoreIcon from "@mui/icons-material/Store";
+import Badge from "@mui/material/Badge";
+import LocalDiningOutlinedIcon from "@mui/icons-material/LocalDiningOutlined";
 import {
   Table,
   TableBody,
@@ -34,10 +36,22 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   const [productInfo, setProductInfo] = useState<ISelectedCateringProduct[]>(
     []
   );
+  const [badgeContent, setBadgeContent] = useState(0);
 
   useEffect(() => {
     fetchProductsByCateringMenu(selectedMenuId, selectedProductId);
   }, [selectedMenuId, selectedProductId]);
+
+  useEffect(() => {
+    const ProductIds = new Set<string>();
+    productQuantities.forEach((item) => {
+      if (item.sizes.some((size) => size.qty > 0)) {
+        ProductIds.add(item.productId);
+      }
+    });
+
+    setBadgeContent(ProductIds.size);
+  }, [productQuantities]);
 
   const handleDecrement = (productId, trayItem) => {
     setProductQuantities((prevQuantities) => {
@@ -136,9 +150,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   return (
     <>
       <>
-        <Box>
-          <Button onClick={handleSubmit}>Submit</Button>
-        </Box>
         {cateringData.length === 0 ? (
           <Box
             display="flex"
@@ -354,8 +365,32 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
             </Box>
           ))
         )}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "10px",
+            zIndex: 1,
+            bottom: 5,
+            position: "sticky",
+          }}
+        >
+          <Badge badgeContent={badgeContent} color="primary">
+            <LocalDiningOutlinedIcon
+              onClick={handleSubmit}
+              style={{
+                fontSize: "45px",
+                color: "white",
+                borderRadius: "50%",
+                backgroundColor: "black",
+                padding: "5px",
+                borderColor: "white",
+                boxShadow: "0 0 0 2px white, 0 0 0 4px black",
+              }}
+            />
+          </Badge>
+        </Box>
       </>
-
       <CateringSelectedProductModel
         isOpen={isDrawerOpen}
         handleClose={handleCloseModal}

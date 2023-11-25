@@ -52,6 +52,7 @@ export interface IProduct {
   title: string;
   price: null;
   images: string[];
+  posterURL: string,
   servingSizesWithPrice: IPrice[];
   description: string;
   netWeight: number;
