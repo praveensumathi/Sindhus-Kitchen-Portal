@@ -13,8 +13,6 @@ import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ISelectedCateringProduct } from "../../interface/types";
 
-// Corrected component name and removed the equal sign
-
 interface IProps {
   isOpen: boolean;
   handleClose: () => void;
