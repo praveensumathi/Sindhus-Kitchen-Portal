@@ -93,7 +93,7 @@ function NavBar() {
           borderStyle: "solid",
           borderWidth: 0,
           backgroundColor: "rgba(255,255,255,0.7)",
-          position: appBarPosition,
+          position: isBelowSMScreen ? "fixed" : appBarPosition,
         }}
         component="nav"
       >
