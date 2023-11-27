@@ -15,6 +15,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import * as React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { paths } from "../routes/path";
+import { ListItemButton, ListItem } from "@mui/material";
 
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
@@ -196,36 +197,28 @@ function NavBar() {
         PaperProps={{ elevation: 5 }}
       >
         <Toolbar />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 1,
-            width: "100%",
-          }}
-        >
-          <List
-            sx={{
-              width: "inherit",
-            }}
-          >
-            {navMenus.map((menu, index) => (
-              <Box
-                key={menu.name}
-                borderBottom={navMenus.length - 1 === index ? 0 : 0.1}
-                borderColor={"lightgrey"}
+
+        <List sx={{ width: "inherit" }}>
+          {navMenus.map((menu, index) => (
+            <ListItem
+              key={menu.name}
+              sx={{
+                borderBottom:
+                  index < navMenus.length - 1 ? "1px solid lightgrey" : "none",
+              }}
+            >
+              <Link
+                to={menu.linkurl}
+                style={{ textDecoration: "none", width: "100%" }}
               >
-                <Button
+                <ListItemButton
                   onClick={() => handleMenuClick(menu.name)}
                   sx={{
                     color: "black",
-                    borderRadius: "50px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
                     fontSize: "medium",
+                    fontWeight: "500",
                     textTransform: "none",
+                    padding: 0,
                   }}
                 >
                   <Box
@@ -237,11 +230,11 @@ function NavBar() {
                   >
                     {menu.name}
                   </Box>
-                </Button>
-              </Box>
-            ))}
-          </List>
-        </Box>
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
     </Box>
   );
