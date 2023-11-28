@@ -54,8 +54,8 @@ function SnacksMenuItem({
 
   return (
     <Container>
-      <Slider {...settings}>
-        {snacksSubMenus.length > 0 && (
+      {snacksSubMenus && snacksSubMenus.length > 0 && (
+        <Slider {...settings}>
           <Box>
             <Button
               onClick={() => onSubMenuClick("")}
@@ -69,26 +69,27 @@ function SnacksMenuItem({
               All
             </Button>
           </Box>
-        )}
-        {snacksSubMenus.length > 0 &&
-          snacksSubMenus.map((subMenu, index) => (
-            <Box key={index} sx={{ display: "flex" }}>
-              <Button
-                onClick={() => onSubMenuClick(subMenu._id)}
-                sx={{
-                  border: "1px dashed",
-                  borderRadius: "15px",
-                  width: "130px",
-                }}
-                variant={
-                  selectedSubMenuId == subMenu._id ? "contained" : "outlined"
-                }
-              >
-                {subMenu.title}
-              </Button>
-            </Box>
-          ))}
-      </Slider>
+
+          {snacksSubMenus.length > 0 &&
+            snacksSubMenus.map((subMenu, index) => (
+              <Box key={index} sx={{ display: "flex" }}>
+                <Button
+                  onClick={() => onSubMenuClick(subMenu._id)}
+                  sx={{
+                    border: "1px dashed",
+                    borderRadius: "15px",
+                    width: "130px",
+                  }}
+                  variant={
+                    selectedSubMenuId == subMenu._id ? "contained" : "outlined"
+                  }
+                >
+                  {subMenu.title}
+                </Button>
+              </Box>
+            ))}
+        </Slider>
+      )}
     </Container>
   );
 }
