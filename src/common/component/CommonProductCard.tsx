@@ -17,12 +17,13 @@ function CommonProductCard(props: IProps) {
         sx={{
           boxShadow: 4,
           mr: 2,
+          width: "250px",
         }}
       >
         <Box
           sx={{
-            width: "250px",
             height: "180px",
+            width: "100%",
             overflow: "hidden",
           }}
         >
