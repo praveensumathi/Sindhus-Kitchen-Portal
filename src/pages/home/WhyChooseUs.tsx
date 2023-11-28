@@ -1,9 +1,12 @@
-import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import { IWhyChooseUs } from "../../interface/types";
 import { whyChooseUsSytle } from "../../styles/WhyChooseUsStyle";
-import { useTheme } from "@mui/material/styles";
 import Fade from "react-reveal/Fade";
 import Bounce from "react-reveal/Bounce";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
 
 interface Iprops {
   whyChooseUs: IWhyChooseUs[];

@@ -1,5 +1,5 @@
-import { Theme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Theme } from "@mui/material/styles/createTheme";
+import makeStyles from "@mui/styles/makeStyles";
 
 export const whyChooseUsSytle = makeStyles((theme: Theme) => ({
   centerImage: {

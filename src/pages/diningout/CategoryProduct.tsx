@@ -2,15 +2,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import { Container } from "@mui/material";
+import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import StoreIcon from "@mui/icons-material/Store";
 import CommonProductCard from "../../common/component/CommonProductCard";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetFetchProductsByMenuId } from "../../customRQHooks/Hooks";
-
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import NoProductsAvailable from "../../common/component/NoProductsAvailable";
 
 function CategoryProducts() {
   const { menuId } = useParams();
@@ -114,21 +113,7 @@ function CategoryProducts() {
               </Grid>
             </Container>
           ) : (
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection="column"
-              sx={{
-                height: "60vh",
-                overflow: "hidden",
-              }}
-            >
-              <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
-              <Typography sx={{ opacity: 0.5 }}>
-                No products available
-              </Typography>
-            </Box>
+            <NoProductsAvailable />
           )}
         </Box>
       </Container>

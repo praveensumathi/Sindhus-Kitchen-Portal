@@ -1,18 +1,16 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
 import CommonProductCard from "../../common/component/CommonProductCard";
 import SnacksMenuItem from "./SnacksMenuItem";
 import { useGetSnacksProductsBySubMenuId } from "../../customRQHooks/Hooks";
 import { useState, useEffect } from "react";
 import Rotate from "react-reveal/Rotate";
 import Fade from "react-reveal/Fade";
-import StoreIcon from "@mui/icons-material/Store";
+import NoProductsAvailable from "../../common/component/NoProductsAvailable";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
 
 function SnacksPage() {
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<string>("");
@@ -151,33 +149,10 @@ function SnacksPage() {
               ))}
             </Grid>
           ) : (
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection="column"
-              sx={{
-                height: "60vh",
-                overflow: "hidden",
-              }}
-            >
-              <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
-              <Typography sx={{ opacity: 0.5 }}>
-                No products available
-              </Typography>
-            </Box>
+            <NoProductsAvailable />
           )}
         </Box>
       </Container>
-      {/* <Box
-        sx={{
-          width: "100%",
-          height: "140px",
-          backgroundImage: "url(assets/images/wave4.png)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      ></Box> */}
     </>
   );
 }

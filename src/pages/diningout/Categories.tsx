@@ -1,13 +1,16 @@
 import Box from "@mui/material/Box";
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
 import Slider from "react-slick";
-import { Card, CardMedia } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
 import Container from "@mui/material/Container";
 import { useGetAllDiningOutMenuDatas } from "../../customRQHooks/Hooks";
 import { useEffect, useState } from "react";
 import { ICategory } from "../../interface/types";
 import { useNavigate } from "react-router-dom";
-import StoreIcon from "@mui/icons-material/Store";
+import NoProductsAvailable from "../../common/component/NoProductsAvailable";
 
 function Categories() {
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -111,19 +114,7 @@ function Categories() {
           </Slider>
         </>
       ) : (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          flexDirection="column"
-          sx={{
-            height: "60vh",
-            overflow: "hidden",
-          }}
-        >
-          <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
-          <Typography sx={{ opacity: 0.5 }}>No products available</Typography>
-        </Box>
+        <NoProductsAvailable />
       )}
     </Container>
   );

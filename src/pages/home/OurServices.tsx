@@ -1,4 +1,3 @@
-import { Grid, Box, Typography, Container } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SoupKitchenIcon from "@mui/icons-material/SoupKitchen";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
@@ -8,6 +7,10 @@ import { IOurServices } from "../../interface/types";
 import { useOurServicesStyles } from "../../styles/OurServicesStyles";
 import Fade from "react-reveal/Fade";
 import Bounce from "react-reveal/Bounce";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 
 interface Iprops {
   OurServices: IOurServices[];
