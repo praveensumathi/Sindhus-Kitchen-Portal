@@ -109,12 +109,12 @@ function NavBar() {
               }}
             >
               <img
-                src="assets\sindhus-logo.png"
+                src="assets/images/sindhus-logo.png"
                 alt="Logo"
                 style={{
                   height: "auto",
-                  width: isBelowSMScreen ? "3rem" : "4rem",
-                  marginTop: "10px",
+                  width: isBelowSMScreen ? "3rem" : "3rem",
+                  marginRight: "10px",
                 }}
                 loading="lazy"
                 onClick={handleNavigateToHome}
