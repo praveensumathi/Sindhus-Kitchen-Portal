@@ -11,11 +11,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import { ICateringEnquiry } from "../../interface/types";
-import { EnquiryFormInitialValue } from "../../constants/InitialValues";
 import { createCateringEnquiry } from "../../services/api";
 import { SnackbarSeverityEnum } from "../../enums/SnackbarSeverityEnum";
 import { useSnackBar } from "../../context/SnackBarContext";
 import Zoom from "react-reveal/Zoom";
+
+const EnquiryFormInitialValue: ICateringEnquiry = {
+  fullName: "",
+  email: "",
+  typeOfEvent: "",
+  guestCount: 0,
+  mobileNumber: "",
+  message: "",
+  eventDate: "",
+};
 
 const schema = yup.object().shape({
   fullName: yup.string().required("Name is required"),

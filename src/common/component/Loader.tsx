@@ -7,7 +7,11 @@ import { Box } from "@mui/material";
 
 const Spinner = () => <div className="spinner"></div>;
 
-function Loader() {
+type Props = {
+  showSuspendLoading?: boolean;
+};
+
+function Loader(props: Props) {
   const [axiosWithCredentialLoading] = useAxiosLoader(
     axiosInstanceWithCredential
   );
@@ -21,8 +25,9 @@ function Loader() {
   const showLoading =
     axiosWithCredentialLoading ||
     axiosWithOutCredentialLoading ||
-    axiosWithMultiPartheaderLoading;
-  
+    axiosWithMultiPartheaderLoading ||
+    props.showSuspendLoading;
+
   return (
     <>
       {showLoading && (
