@@ -8,19 +8,26 @@ import {
   Typography,
   IconButton,
   Container,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
 } from "@mui/material";
-import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { ISelectedCateringProduct } from "../../interface/types";
+import { ISelectedCateringProduct, IServingSizeWithQuantity } from "../../interface/types";
 
 interface IProps {
   isOpen: boolean;
   handleClose: () => void;
   productInfo: ISelectedCateringProduct[];
+  productQuantities: IServingSizeWithQuantity[]; 
 }
 
 function CateringSelectedProductDrawer(props: IProps) {
-  const { isOpen, handleClose, productInfo } = props;
+  const { isOpen, handleClose, productInfo, productQuantities } = props;
+  console.log("productQuantities", productQuantities);
 
   return (
     <Drawer
@@ -84,7 +91,7 @@ function CateringSelectedProductDrawer(props: IProps) {
                 >
                   <Grid
                     item
-                    xs={6}
+                    xs={4}
                     sx={{
                       padding: "15px",
                     }}
@@ -98,15 +105,49 @@ function CateringSelectedProductDrawer(props: IProps) {
                       component={"img"}
                     />
                   </Grid>
-                  <Grid item xs={6}>
-                    <Typography
-                      sx={{
-                        fontSize: "large",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {product.title}
-                    </Typography>
+                  <Grid item xs={8}>
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: "large",
+                          fontWeight: 600,
+                        }}
+                      >
+                        {product.title}
+                      </Typography>
+                      {productQuantities
+                        .filter((item) => item.productId === product._id)
+                        .map((filteredItem) => (
+                          <div key={filteredItem.productId}>
+                            <TableContainer>
+                              <Table sx={{ width: "50%" }}>
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell style={{ padding: 1 }}>
+                                      Size
+                                    </TableCell>
+                                    <TableCell style={{ padding: 1 }}>
+                                      Quantity
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {filteredItem.sizes.map((sizeInfo) => (
+                                    <TableRow key={sizeInfo.size}>
+                                      <TableCell style={{ padding: 1 }}>
+                                        {sizeInfo.size}
+                                      </TableCell>
+                                      <TableCell style={{ padding: 1 }}>
+                                        {sizeInfo.qty}
+                                      </TableCell>
+                                    </TableRow>
+                                  ))}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </div>
+                        ))}
+                    </Box>
                   </Grid>
                 </Grid>
               </Card>

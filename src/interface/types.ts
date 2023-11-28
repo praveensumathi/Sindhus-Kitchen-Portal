@@ -185,8 +185,9 @@ export interface ISize {
 }
 
 export interface ISelectedCateringProduct {
-  id: string;
+  _id: string;
   title: string;
   posterURL: string;
+  sizes: ISize[];
 }
 
