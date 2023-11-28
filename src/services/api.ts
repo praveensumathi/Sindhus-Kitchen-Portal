@@ -64,7 +64,7 @@ const getAllDiningOutMenuDatas = async () => {
   }
 };
 
-const createCateringEnquiry = async (data: IServingSizeWithQuantity) => {
+const createCateringEnquiry = async (data: ICateringEnquiry) => {
   try {
     const response = await httpWithoutCredentials.post(
       "enquiry/createEnquiry",
