@@ -9,7 +9,6 @@ import ProductDetail from "./common/component/ProductDetail";
 import CategoryProducts from "./pages/diningout/CategoryProduct";
 import Specials from "./pages/specials/Specials";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const queryClient = new QueryClient();
 
@@ -34,7 +33,6 @@ function App() {
             </Route>
           </Routes>
         </HashRouter>
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );
