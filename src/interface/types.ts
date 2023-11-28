@@ -50,8 +50,10 @@ export interface IProductDetail {
 export interface IProduct {
   _id: string;
   title: string;
-  price: null;
+  price: number;
   images: string[];
+  servingSizeDescription: string;
+  posterURL: string,
   servingSizesWithPrice: IPrice[];
   description: string;
   netWeight: number;
@@ -109,7 +111,7 @@ export interface IProductDinnigOut {
   posterURL: string;
   description: string;
   netWeight: number;
-  price: IPrice[];
+  price: number;
 }
 
 export interface ICommonResponse<T> {
@@ -146,6 +148,7 @@ export interface Product {
   _id: string;
   title: string;
   description: string;
+  servingSizeDescription: string;
   servingSizesWithPrice: ServingSizesWithPrice[];
   posterURL?: string;
 }
@@ -170,3 +173,20 @@ export interface IProductAutoComplete {
   posterURL: string;
   label: string;
 }
+
+export interface IServingSizeWithQuantity {
+  productId: string;
+  sizes: ISize[];
+}
+
+export interface ISize {
+  size: string;
+  qty: number;
+}
+
+export interface ISelectedCateringProduct {
+  id: string;
+  title: string;
+  posterURL: string;
+}
+

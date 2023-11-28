@@ -1,8 +1,12 @@
-import { Box, Container, Typography, CardMedia, Grid } from "@mui/material";
 import Card from "@mui/material/Card";
 import Fade from "react-reveal/Fade";
 import Bounce from "react-reveal/Bounce";
 import { ISpecials } from "../../interface/types";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
 
 interface Iprops {
   specials: ISpecials[];

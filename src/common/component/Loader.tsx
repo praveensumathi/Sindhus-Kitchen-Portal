@@ -3,11 +3,15 @@ import useAxiosLoader, {
   axiosInstanceWithMultipartFormData,
   axiosInstanceWithOutCredential,
 } from "../../services/http";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 
 const Spinner = () => <div className="spinner"></div>;
 
-function Loader() {
+type Props = {
+  showSuspendLoading?: boolean;
+};
+
+function Loader(props: Props) {
   const [axiosWithCredentialLoading] = useAxiosLoader(
     axiosInstanceWithCredential
   );
@@ -18,21 +22,26 @@ function Loader() {
     axiosInstanceWithMultipartFormData
   );
 
+  const showLoading =
+    axiosWithCredentialLoading ||
+    axiosWithOutCredentialLoading ||
+    axiosWithMultiPartheaderLoading ||
+    props.showSuspendLoading;
+
   return (
     <>
-      {(axiosWithCredentialLoading ||
-        axiosWithOutCredentialLoading ||
-        axiosWithMultiPartheaderLoading) && (
+      {showLoading && (
         <Box className="overlay">
           <Spinner />
-          {/* <img
+          <img
             style={{
               borderRadius: "50%",
+              backgroundColor: "white",
             }}
             className="spinner-image"
-            src="assets\images\Logo.jpeg"
+            src="assets/images/sindhus-logo.png"
             alt=""
-          /> */}
+          />
         </Box>
       )}
     </>

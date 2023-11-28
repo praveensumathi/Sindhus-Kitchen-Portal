@@ -1,6 +1,5 @@
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import { CssBaseline } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,11 +9,14 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
+import useTheme from "@mui/material/styles/useTheme";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import * as React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { paths } from "../routes/path";
+import CssBaseline from "@mui/material/CssBaseline";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import React from "react";
 
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
@@ -93,7 +95,7 @@ function NavBar() {
           borderStyle: "solid",
           borderWidth: 0,
           backgroundColor: "rgba(255,255,255,0.7)",
-          position: appBarPosition,
+          position: isBelowSMScreen ? "fixed" : appBarPosition,
         }}
         component="nav"
       >
@@ -107,12 +109,12 @@ function NavBar() {
               }}
             >
               <img
-                src="assets\sindhus-logo.png"
+                src="assets/images/sindhus-logo.png"
                 alt="Logo"
                 style={{
                   height: "auto",
-                  width: isBelowSMScreen ? "3rem" : "4rem",
-                  marginTop: "10px",
+                  width: isBelowSMScreen ? "3rem" : "3rem",
+                  marginRight: "10px",
                 }}
                 loading="lazy"
                 onClick={handleNavigateToHome}
@@ -188,61 +190,58 @@ function NavBar() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Drawer
-        anchor="top"
-        open={drawerOpen}
-        onClose={handleDrawerClose}
-        variant="persistent"
-        PaperProps={{ elevation: 5 }}
-      >
-        <Toolbar />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 1,
-            width: "100%",
-          }}
+
+      {drawerOpen && (
+        <Drawer
+          anchor="top"
+          open={drawerOpen}
+          onClose={handleDrawerClose}
+          variant="persistent"
+          PaperProps={{ elevation: 5 }}
         >
-          <List
-            sx={{
-              width: "inherit",
-            }}
-          >
+          <Toolbar />
+
+          <List sx={{ width: "inherit" }}>
             {navMenus.map((menu, index) => (
-              <Box
+              <ListItem
                 key={menu.name}
-                borderBottom={navMenus.length - 1 === index ? 0 : 0.1}
-                borderColor={"lightgrey"}
+                sx={{
+                  borderBottom:
+                    index < navMenus.length - 1
+                      ? "1px solid lightgrey"
+                      : "none",
+                }}
               >
-                <Button
-                  onClick={() => handleMenuClick(menu.name)}
-                  sx={{
-                    color: "black",
-                    borderRadius: "50px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "medium",
-                    textTransform: "none",
-                  }}
+                <Link
+                  to={menu.linkurl}
+                  style={{ textDecoration: "none", width: "100%" }}
                 >
-                  <Box
+                  <ListItemButton
+                    onClick={() => handleMenuClick(menu.name)}
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
+                      color: "black",
+                      fontSize: "medium",
+                      fontWeight: "500",
+                      textTransform: "none",
+                      padding: 0,
                     }}
-                    px={2}
                   >
-                    {menu.name}
-                  </Box>
-                </Button>
-              </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                      px={2}
+                    >
+                      {menu.name}
+                    </Box>
+                  </ListItemButton>
+                </Link>
+              </ListItem>
             ))}
           </List>
-        </Box>
-      </Drawer>
+        </Drawer>
+      )}
     </Box>
   );
 }

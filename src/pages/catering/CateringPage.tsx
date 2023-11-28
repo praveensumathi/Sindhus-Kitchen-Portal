@@ -1,4 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CateringProduct from "./CateringProduct";
 import SearchBar from "./SearchBar";
@@ -50,11 +51,11 @@ function CateringPage() {
             setSelectedProductId(productId)
           }
         />
-        <CateringProduct
-          selectedMenuId={selectedMenuId}
-          selectedProductId={selectedProductId}
-        />
       </Container>
+      <CateringProduct
+        selectedMenuId={selectedMenuId}
+        selectedProductId={selectedProductId}
+      />
     </>
   );
 }

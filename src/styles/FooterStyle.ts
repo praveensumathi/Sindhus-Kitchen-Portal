@@ -1,4 +1,4 @@
-import { makeStyles } from "@mui/styles";
+import makeStyles from "@mui/styles/makeStyles";
 
 export const useCommonGridStyle = makeStyles(() => ({
   commonGridStyle: {
@@ -9,7 +9,7 @@ export const useCommonGridStyle = makeStyles(() => ({
     zIndex: 1,
   },
   footerContainer: {
-    backgroundImage: `url("https://th.bing.com/th/id/OIP.s2ZLXwMZ3JjRPraZJfIxRQHaEK?w=334&h=187&c=7&r=0&o=5&dpr=1.5&pid=1.7")`,
+    backgroundImage: `url("/assets/footer-background-home.png")`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",

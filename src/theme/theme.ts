@@ -1,5 +1,5 @@
-import { createTheme } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
+import createTheme from "@mui/material/styles/createTheme";
+import red from "@mui/material/colors/red";
 
 const theme = createTheme({
   palette: {
@@ -28,6 +28,15 @@ const theme = createTheme({
           color: "#57ccb5",
         },
         contained: {
+          color: "white",
+        },
+      },
+    },
+    MuiBadge: {
+      styleOverrides: {
+        badge: {
+          width: "30px",
+          height: "30px",
           color: "white",
         },
       },

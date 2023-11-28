@@ -1,9 +1,8 @@
 import {
   ICateringEnquiry,
   ICateringMenu,
+  ISelectedCateringProduct,
   ISnacksPage,
-} from "./../interface/types";
-import {
   ICategory,
   ICategoryWithProducts,
   ICommonResponse,
@@ -11,7 +10,7 @@ import {
   IMenuList,
   IProduct,
   IProductDropDownData,
-} from "../interface/types";
+} from "./../interface/types";
 import { httpWithoutCredentials } from "./http";
 
 const getAllMenus = async () => {
@@ -115,8 +114,11 @@ const getProductsByMenuIdWithSearchTerm = async (
 
 const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
   try {
+    if (subMenuId) {
+      subMenuId = `/${subMenuId}`;
+    }
     const response = await httpWithoutCredentials.get<ISnacksPage>(
-      `/product/getAllSnacksMenu/${subMenuId}`
+      `/product/getAllSnacksMenu${subMenuId}`
     );
     return response.data;
   } catch (error) {
@@ -148,6 +150,17 @@ const fetchProductByCateringMenu = async (
   }
 };
 
+const getMyBag = async (selectedProductIds: string[]) => {
+  try {
+    const response = await httpWithoutCredentials.post<
+      ISelectedCateringProduct[]
+    >("product/getMyBag", selectedProductIds);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   getAllMenus,
   fetchProductById,
@@ -159,4 +172,5 @@ export {
   getProductsByMenuIdWithSearchTerm,
   getAllSnacksProductsWithSubMenu,
   fetchProductByCateringMenu,
+  getMyBag as getProductInfo,
 };

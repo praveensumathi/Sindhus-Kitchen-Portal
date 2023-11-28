@@ -1,5 +1,5 @@
-import { withStyles } from "@mui/styles";
-import { TextField } from "@mui/material";
+import withStyles from "@mui/styles/withStyles";
+import TextField from "@mui/material/TextField";
 
 const CssTextField = withStyles({
   root: {
