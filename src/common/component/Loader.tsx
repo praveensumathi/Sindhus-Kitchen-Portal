@@ -3,7 +3,7 @@ import useAxiosLoader, {
   axiosInstanceWithMultipartFormData,
   axiosInstanceWithOutCredential,
 } from "../../services/http";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 
 const Spinner = () => <div className="spinner"></div>;
 

@@ -2,10 +2,7 @@ import {
   ICateringEnquiry,
   ICateringMenu,
   ISelectedCateringProduct,
-  IServingSizeWithQuantity,
   ISnacksPage,
-} from "./../interface/types";
-import {
   ICategory,
   ICategoryWithProducts,
   ICommonResponse,
@@ -13,7 +10,7 @@ import {
   IMenuList,
   IProduct,
   IProductDropDownData,
-} from "../interface/types";
+} from "./../interface/types";
 import { httpWithoutCredentials } from "./http";
 
 const getAllMenus = async () => {

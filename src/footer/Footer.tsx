@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Button, Container, Divider, Typography } from "@mui/material";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -13,6 +12,10 @@ import Fade from "react-reveal/Fade";
 import CateringEnquiryForm from "../common/component/CateringEnquiryForm";
 import { useLocation } from "react-router";
 import { paths } from "../routes/path";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 
 function Footer() {
   const location = useLocation();

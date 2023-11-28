@@ -2,19 +2,17 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
-import { Button, ButtonGroup } from "@mui/material";
-import StoreIcon from "@mui/icons-material/Store";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
 import Badge from "@mui/material/Badge";
 import LocalDiningOutlinedIcon from "@mui/icons-material/LocalDiningOutlined";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Container,
-} from "@mui/material";
+import Container from "@mui/material/Container";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import { fetchProductByCateringMenu, getProductInfo } from "../../services/api";
 import {
   ICateringMenu,
@@ -24,6 +22,7 @@ import {
 import CateringSelectedProductDrawer from "../../common/component/CateringSelectedProductDrawer";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
+import NoProductsAvailable from "../../common/component/NoProductsAvailable";
 
 interface IProps {
   selectedMenuId: string;
@@ -154,19 +153,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     <>
       <Container>
         {cateringData.length === 0 ? (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-            sx={{
-              height: "60vh",
-              overflow: "hidden",
-            }}
-          >
-            <StoreIcon sx={{ fontSize: "5rem", opacity: 0.5 }}></StoreIcon>
-            <Typography sx={{ opacity: 0.5 }}>No products available</Typography>
-          </Box>
+          <NoProductsAvailable />
         ) : (
           cateringData &&
           cateringData.length > 0 &&

@@ -1,7 +1,10 @@
-import { Button, Container, useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Slider from "react-slick";
 import { ISubMenu } from "../../interface/types";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
 
 interface IProps {
   onSubMenuClick(submenuId: string): void;
