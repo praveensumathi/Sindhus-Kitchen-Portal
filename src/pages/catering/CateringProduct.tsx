@@ -373,7 +373,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
         )}
       </Container>
 
-      {badgeContent && (
+      {!!badgeContent && (
         <Box
           sx={{
             zIndex: 1,
