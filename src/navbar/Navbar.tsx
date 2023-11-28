@@ -191,53 +191,57 @@ function NavBar() {
         </Container>
       </AppBar>
 
-      <Drawer
-        anchor="top"
-        open={drawerOpen}
-        onClose={handleDrawerClose}
-        variant="persistent"
-        PaperProps={{ elevation: 5 }}
-      >
-        <Toolbar />
+      {drawerOpen && (
+        <Drawer
+          anchor="top"
+          open={drawerOpen}
+          onClose={handleDrawerClose}
+          variant="persistent"
+          PaperProps={{ elevation: 5 }}
+        >
+          <Toolbar />
 
-        <List sx={{ width: "inherit" }}>
-          {navMenus.map((menu, index) => (
-            <ListItem
-              key={menu.name}
-              sx={{
-                borderBottom:
-                  index < navMenus.length - 1 ? "1px solid lightgrey" : "none",
-              }}
-            >
-              <Link
-                to={menu.linkurl}
-                style={{ textDecoration: "none", width: "100%" }}
+          <List sx={{ width: "inherit" }}>
+            {navMenus.map((menu, index) => (
+              <ListItem
+                key={menu.name}
+                sx={{
+                  borderBottom:
+                    index < navMenus.length - 1
+                      ? "1px solid lightgrey"
+                      : "none",
+                }}
               >
-                <ListItemButton
-                  onClick={() => handleMenuClick(menu.name)}
-                  sx={{
-                    color: "black",
-                    fontSize: "medium",
-                    fontWeight: "500",
-                    textTransform: "none",
-                    padding: 0,
-                  }}
+                <Link
+                  to={menu.linkurl}
+                  style={{ textDecoration: "none", width: "100%" }}
                 >
-                  <Box
+                  <ListItemButton
+                    onClick={() => handleMenuClick(menu.name)}
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
+                      color: "black",
+                      fontSize: "medium",
+                      fontWeight: "500",
+                      textTransform: "none",
+                      padding: 0,
                     }}
-                    px={2}
                   >
-                    {menu.name}
-                  </Box>
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                      px={2}
+                    >
+                      {menu.name}
+                    </Box>
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+      )}
     </Box>
   );
 }
