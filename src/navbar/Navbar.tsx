@@ -189,6 +189,7 @@ function NavBar() {
           </Toolbar>
         </Container>
       </AppBar>
+
       <Drawer
         anchor="top"
         open={drawerOpen}
