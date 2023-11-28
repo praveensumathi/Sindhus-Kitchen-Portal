@@ -33,6 +33,7 @@ function CategoryProducts() {
             },
             position: "fixed",
             padding: "1px",
+            margin:"5px"
           }}
           onClick={() => navigate(-1)}
         >
@@ -45,6 +46,10 @@ function CategoryProducts() {
             sx={{
               display: "flex",
               alignItems: "center",
+
+              "@media (max-width: 600px)": {
+                marginLeft: "20px",
+              },
             }}
             p={1}
           >

@@ -78,7 +78,8 @@ function CateringEnquiryForm() {
             sx={{
               backgroundColor: "white",
               borderRadius: 5,
-              p: 2,
+              p: 1,
+              paddingRight:3
             }}
           >
             <Grid item xs={12}>
