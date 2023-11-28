@@ -60,7 +60,7 @@ function ProductDetail() {
       </IconButton>
 
       <Container
-        sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+        sx={{ width: "100%", display: "flex", justifyContent: "center", mb: 2 }}
       >
         <Grid
           container
@@ -78,7 +78,7 @@ function ProductDetail() {
                       <Card
                         key={index}
                         sx={{
-                          height: isBelowMediumSize ? "50vh" : "70vh",
+                          height: isBelowMediumSize ? "50vh" : "60vh",
                           marginRight: "20px",
                         }}
                       >
