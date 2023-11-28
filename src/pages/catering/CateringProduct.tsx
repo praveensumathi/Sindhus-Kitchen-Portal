@@ -15,13 +15,13 @@ import {
   TableRow,
   Container,
 } from "@mui/material";
-import { fetchProductByCateringMenu, getCateringBag} from "../../services/api";
+import { fetchProductByCateringMenu, getCateringBag } from "../../services/api";
 import {
   ICateringMenu,
   ISelectedCateringProduct,
   IServingSizeWithQuantity,
 } from "../../interface/types";
-import CateringSelectedProductDrawer from "../../common/component/CateringSelectedProductDrawer";
+import CateringSelectedProductDrawer from "../../pageDrawer/CateringSelectedProductDrawer";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 
@@ -138,8 +138,8 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
 
   const handleSubmit = async () => {
     try {
-    const productIds = productQuantities.map((item) => item.productId);
-      
+      const productIds = productQuantities.map((item) => item.productId);
+
       const response = await getCateringBag(productIds);
       setProductInfo(response);
       setDrawerOpen(true);
@@ -411,8 +411,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
         isOpen={isDrawerOpen}
         handleClose={handleCloseModal}
         productInfo={productInfo}
-                productQuantities={productQuantities} 
-
+        productQuantities={productQuantities}
       />
     </>
   );

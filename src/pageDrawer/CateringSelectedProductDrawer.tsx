@@ -16,18 +16,20 @@ import {
   TableBody,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { ISelectedCateringProduct, IServingSizeWithQuantity } from "../../interface/types";
+import {
+  ISelectedCateringProduct,
+  IServingSizeWithQuantity,
+} from "../interface/types";
 
 interface IProps {
   isOpen: boolean;
   handleClose: () => void;
   productInfo: ISelectedCateringProduct[];
-  productQuantities: IServingSizeWithQuantity[]; 
+  productQuantities: IServingSizeWithQuantity[];
 }
 
 function CateringSelectedProductDrawer(props: IProps) {
   const { isOpen, handleClose, productInfo, productQuantities } = props;
-  console.log("productQuantities", productQuantities);
 
   return (
     <Drawer
@@ -59,7 +61,7 @@ function CateringSelectedProductDrawer(props: IProps) {
           }}
         >
           <Typography variant="h5" sx={{ fontWeight: 700 }}>
-            Catering Products
+            Catering Request List
           </Typography>
           <IconButton onClick={handleClose}>
             <CloseIcon />
@@ -115,38 +117,61 @@ function CateringSelectedProductDrawer(props: IProps) {
                       >
                         {product.title}
                       </Typography>
-                      {productQuantities
-                        .filter((item) => item.productId === product._id)
-                        .map((filteredItem) => (
-                          <div key={filteredItem.productId}>
-                            <TableContainer>
-                              <Table sx={{ width: "50%" }}>
-                                <TableHead>
-                                  <TableRow>
-                                    <TableCell style={{ padding: 1 }}>
-                                      Size
-                                    </TableCell>
-                                    <TableCell style={{ padding: 1 }}>
-                                      Quantity
-                                    </TableCell>
-                                  </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                  {filteredItem.sizes.map((sizeInfo) => (
-                                    <TableRow key={sizeInfo.size}>
-                                      <TableCell style={{ padding: 1 }}>
-                                        {sizeInfo.size}
+                      {productQuantities.map((item) => {
+                        if (item.productId === product._id) {
+                          return (
+                            <div key={item.productId}>
+                              <TableContainer>
+                                <Table sx={{ width: "80%" }}>
+                                  <TableHead>
+                                    <TableRow>
+                                      <TableCell
+                                        style={{
+                                          padding: 1,
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        Size
                                       </TableCell>
-                                      <TableCell style={{ padding: 1 }}>
-                                        {sizeInfo.qty}
+                                      <TableCell
+                                        style={{
+                                          padding: 1,
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        Quantity
                                       </TableCell>
                                     </TableRow>
-                                  ))}
-                                </TableBody>
-                              </Table>
-                            </TableContainer>
-                          </div>
-                        ))}
+                                  </TableHead>
+                                  <TableBody>
+                                    {item.sizes.map((sizeInfo) => (
+                                      <TableRow key={sizeInfo.size}>
+                                        <TableCell
+                                          style={{
+                                            padding: 1,
+                                            textAlign: "center",
+                                          }}
+                                        >
+                                          {sizeInfo.size}
+                                        </TableCell>
+                                        <TableCell
+                                          style={{
+                                            padding: 1,
+                                            textAlign: "center",
+                                          }}
+                                        >
+                                          {sizeInfo.qty}
+                                        </TableCell>
+                                      </TableRow>
+                                    ))}
+                                  </TableBody>
+                                </Table>
+                              </TableContainer>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
                     </Box>
                   </Grid>
                 </Grid>
