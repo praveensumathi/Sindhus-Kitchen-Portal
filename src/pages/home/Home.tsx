@@ -1,6 +1,6 @@
 import OurServices from "./OurServices";
 import HomePageSlicker from "./HomePageSlicker";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import { WhyChooseUsData, ourServicesData } from "../../seed-data/seed-data";
 import WhyChooseUs from "./WhyChooseUs";
 

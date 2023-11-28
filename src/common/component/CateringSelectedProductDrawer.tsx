@@ -1,17 +1,14 @@
-import {
-  Box,
-  Card,
-  Drawer,
-  CardMedia,
-  Divider,
-  Grid,
-  Typography,
-  IconButton,
-  Container,
-} from "@mui/material";
-import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ISelectedCateringProduct } from "../../interface/types";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
 
 interface IProps {
   isOpen: boolean;
