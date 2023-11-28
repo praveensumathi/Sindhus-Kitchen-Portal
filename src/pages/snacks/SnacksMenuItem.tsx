@@ -1,7 +1,10 @@
-import { Button, Container, useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Slider from "react-slick";
 import { ISubMenu } from "../../interface/types";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
 
 interface IProps {
   onSubMenuClick(submenuId: string): void;
@@ -51,8 +54,8 @@ function SnacksMenuItem({
 
   return (
     <Container>
-      <Slider {...settings}>
-        {snacksSubMenus.length > 0 && (
+      {snacksSubMenus && snacksSubMenus.length > 0 && (
+        <Slider {...settings}>
           <Box>
             <Button
               onClick={() => onSubMenuClick("")}
@@ -66,26 +69,27 @@ function SnacksMenuItem({
               All
             </Button>
           </Box>
-        )}
-        {snacksSubMenus.length > 0 &&
-          snacksSubMenus.map((subMenu, index) => (
-            <Box key={index} sx={{ display: "flex" }}>
-              <Button
-                onClick={() => onSubMenuClick(subMenu._id)}
-                sx={{
-                  border: "1px dashed",
-                  borderRadius: "15px",
-                  width: "130px",
-                }}
-                variant={
-                  selectedSubMenuId == subMenu._id ? "contained" : "outlined"
-                }
-              >
-                {subMenu.title}
-              </Button>
-            </Box>
-          ))}
-      </Slider>
+
+          {snacksSubMenus.length > 0 &&
+            snacksSubMenus.map((subMenu, index) => (
+              <Box key={index} sx={{ display: "flex" }}>
+                <Button
+                  onClick={() => onSubMenuClick(subMenu._id)}
+                  sx={{
+                    border: "1px dashed",
+                    borderRadius: "15px",
+                    width: "130px",
+                  }}
+                  variant={
+                    selectedSubMenuId == subMenu._id ? "contained" : "outlined"
+                  }
+                >
+                  {subMenu.title}
+                </Button>
+              </Box>
+            ))}
+        </Slider>
+      )}
     </Container>
   );
 }

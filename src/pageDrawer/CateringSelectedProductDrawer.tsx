@@ -1,21 +1,19 @@
-import {
-  Box,
-  Card,
-  Drawer,
-  CardMedia,
-  Divider,
-  Grid,
-  Typography,
-  IconButton,
-  Container,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import CloseIcon from "@mui/icons-material/Close";
+import Grid from "@mui/material/Grid";
 import {
   ISelectedCateringProduct,
   IServingSizeWithQuantity,

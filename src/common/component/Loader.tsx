@@ -3,11 +3,15 @@ import useAxiosLoader, {
   axiosInstanceWithMultipartFormData,
   axiosInstanceWithOutCredential,
 } from "../../services/http";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 
 const Spinner = () => <div className="spinner"></div>;
 
-function Loader() {
+type Props = {
+  showSuspendLoading?: boolean;
+};
+
+function Loader(props: Props) {
   const [axiosWithCredentialLoading] = useAxiosLoader(
     axiosInstanceWithCredential
   );
@@ -21,8 +25,9 @@ function Loader() {
   const showLoading =
     axiosWithCredentialLoading ||
     axiosWithOutCredentialLoading ||
-    axiosWithMultiPartheaderLoading;
-  
+    axiosWithMultiPartheaderLoading ||
+    props.showSuspendLoading;
+
   return (
     <>
       {showLoading && (
@@ -34,7 +39,7 @@ function Loader() {
               backgroundColor: "white",
             }}
             className="spinner-image"
-            src="assets/images/sindhusloader-logo.png"
+            src="assets/images/sindhus-logo.png"
             alt=""
           />
         </Box>

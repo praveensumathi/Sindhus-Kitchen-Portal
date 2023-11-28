@@ -1,27 +1,22 @@
-import {
-  Box,
-  Card,
-  CardMedia,
-  Container,
-  Divider,
-  Grid,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
 import Slider from "react-slick";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchProductById } from "../../services/api";
 import { IProduct } from "../../interface/types";
 import { useSnackBar } from "../../context/SnackBarContext";
-
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import useTheme from "@mui/material/styles/useTheme";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container";
 
 function ProductDetail() {
-
   const settings = {
     infinite: true,
     speed: 500,
@@ -33,12 +28,9 @@ function ProductDetail() {
   const theme = useTheme();
   const { productId } = useParams();
   const { updateSnackBarState } = useSnackBar();
-    const [menuDetail, setMenuDetail] = useState<IProduct>();
-
+  const [menuDetail, setMenuDetail] = useState<IProduct>();
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
-
- 
 
   const fetchProductDetail = async () => {
     try {
@@ -68,7 +60,7 @@ function ProductDetail() {
       </IconButton>
 
       <Container
-        sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+        sx={{ width: "100%", display: "flex", justifyContent: "center", mb: 2 }}
       >
         <Grid
           container
@@ -86,7 +78,7 @@ function ProductDetail() {
                       <Card
                         key={index}
                         sx={{
-                          height: isBelowMediumSize ? "50vh" : "70vh",
+                          height: isBelowMediumSize ? "50vh" : "60vh",
                           marginRight: "20px",
                         }}
                       >

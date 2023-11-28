@@ -1,7 +1,11 @@
-import { Box, Card, CardMedia, Typography, useTheme } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import { IProductCardList } from "../../interface/types";
 import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import useTheme from "@mui/material/styles/useTheme";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
 
 interface IProps {
   product: IProductCardList;
@@ -17,12 +21,13 @@ function CommonProductCard(props: IProps) {
         sx={{
           boxShadow: 4,
           mr: 2,
+          width: "250px",
         }}
       >
         <Box
           sx={{
-            width: "250px",
             height: "180px",
+            width: "100%",
             overflow: "hidden",
           }}
         >

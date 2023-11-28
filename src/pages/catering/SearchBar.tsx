@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import {
   IMenuAutoComplete,
@@ -167,7 +167,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
             gap: "1rem",
           }}
         >
-          <Button variant="contained" fullWidth onClick={clearSearch} >
+          <Button variant="contained" fullWidth onClick={clearSearch}>
             Clear Search
           </Button>
         </Grid>

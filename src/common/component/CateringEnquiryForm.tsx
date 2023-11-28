@@ -1,7 +1,8 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { Button, Typography } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "@mui/material/TextField";
@@ -11,11 +12,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import { ICateringEnquiry } from "../../interface/types";
-import { EnquiryFormInitialValue } from "../../constants/InitialValues";
 import { createCateringEnquiry } from "../../services/api";
 import { SnackbarSeverityEnum } from "../../enums/SnackbarSeverityEnum";
 import { useSnackBar } from "../../context/SnackBarContext";
 import Zoom from "react-reveal/Zoom";
+
+const EnquiryFormInitialValue: ICateringEnquiry = {
+  fullName: "",
+  email: "",
+  typeOfEvent: "",
+  guestCount: 0,
+  mobileNumber: "",
+  message: "",
+  eventDate: "",
+};
 
 const schema = yup.object().shape({
   fullName: yup.string().required("Name is required"),
