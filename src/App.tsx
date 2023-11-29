@@ -3,8 +3,9 @@ import Layout from "./layout/Layout";
 import { paths } from "./routes/path";
 import Home from "./pages/home/Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React, { Suspense } from "react";
 import SnackBarProvider from "./context/SnackBarContext";
+import CustomSnackBar from "./common/CustomSnackBar";
+import React, { Suspense } from "react";
 import Loader from "./common/component/Loader";
 
 export const queryClient = new QueryClient();
@@ -65,6 +66,7 @@ function App() {
               </Routes>
             </Suspense>
           </HashRouter>
+          <CustomSnackBar />
         </SnackBarProvider>
       </QueryClientProvider>
     </>
