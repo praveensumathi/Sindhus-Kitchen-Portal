@@ -3,29 +3,28 @@ import Layout from "./layout/Layout";
 import { paths } from "./routes/path";
 import Home from "./pages/home/Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React, { Suspense } from "react";
 import SnackBarProvider from "./context/SnackBarContext";
+import CustomSnackBar from "./common/CustomSnackBar";
+import { Suspense, lazy } from "react";
 import Loader from "./common/component/Loader";
 
 export const queryClient = new QueryClient();
 
-const SpecialsComponent = React.lazy(() => import("./pages/specials/Specials"));
+const SpecialsComponent = lazy(() => import("./pages/specials/Specials"));
 
-const SnacksComponent = React.lazy(() => import("./pages/snacks/SnacksPage"));
+const SnacksComponent = lazy(() => import("./pages/snacks/SnacksPage"));
 
-const CateringComponent = React.lazy(
-  () => import("./pages/catering/CateringPage")
-);
+const CateringComponent = lazy(() => import("./pages/catering/CateringPage"));
 
-const DiningOutComponent = React.lazy(
+const DiningOutComponent = lazy(
   () => import("./pages/diningout/DiningOutPage")
 );
 
-const ProductDetailComponent = React.lazy(
+const ProductDetailComponent = lazy(
   () => import("./common/component/ProductDetail")
 );
 
-const CategoryProductComponent = React.lazy(
+const CategoryProductComponent = lazy(
   () => import("./pages/diningout/CategoryProduct")
 );
 
@@ -65,6 +64,7 @@ function App() {
               </Routes>
             </Suspense>
           </HashRouter>
+          <CustomSnackBar />
         </SnackBarProvider>
       </QueryClientProvider>
     </>

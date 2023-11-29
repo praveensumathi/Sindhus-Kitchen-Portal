@@ -23,6 +23,8 @@ import CateringSelectedProductDrawer from "../../common/component/CateringSelect
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import NoProductsAvailable from "../../common/component/NoProductsAvailable";
+import Placeholder from "../../common/component/Placeholder";
+import LazyLoad from "react-lazyload";
 
 interface IProps {
   selectedMenuId: string;
@@ -172,188 +174,206 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
               </Typography>
 
               <Grid container spacing={3}>
-                {data.products.map((product, index) => (
-                  <Grid
-                    container
-                    item
-                    key={product._id}
-                    sx={{
-                      borderBottom:
-                        index === data.products.length - 1
-                          ? "none"
-                          : "1px solid #FFD580",
-                      padding: "15px",
-                    }}
-                  >
+                {data.products &&
+                  data.products.length > 0 &&
+                  data.products.map((product, index) => (
                     <Grid
+                      container
                       item
-                      xs={12}
-                      lg={3}
+                      key={product._id}
                       sx={{
+                        borderBottom:
+                          index === data.products.length - 1
+                            ? "none"
+                            : "1px solid #FFD580",
                         padding: "15px",
                       }}
                     >
-                      <Link
-                        to={`/detail/${product._id}`}
-                        style={{
-                          textDecoration: "none",
+                      <Grid
+                        item
+                        xs={12}
+                        lg={3}
+                        sx={{
+                          padding: "15px",
                         }}
                       >
-                        <img
-                          src={product.posterURL}
-                          width={150}
+                        <LazyLoad
+                          once
+                          key={product._id}
                           height={150}
-                          alt={product.title}
-                        />
-                      </Link>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      lg={5}
-                      sx={{
-                        padding: "20px",
-                      }}
-                    >
-                      <Typography sx={{ fontWeight: "600" }}>
-                        {product.title}
-                      </Typography>
-
-                      <Typography>{product.description}</Typography>
-
-                      {product.servingSizeDescription && (
-                        <Typography sx={{ mt: 2 }}>
-                          <b>servingSizeDescription</b>
-                          <Typography
-                            sx={{
-                              whiteSpace: "pre-line",
+                          placeholder={<Placeholder />}
+                          debounce={100}
+                        >
+                          <Link
+                            to={`/detail/${product._id}`}
+                            style={{
+                              textDecoration: "none",
                             }}
                           >
-                            {product.servingSizeDescription}
-                          </Typography>
+                            <img
+                              src={product.posterURL}
+                              width={150}
+                              height={150}
+                              alt={product.title}
+                            />
+                          </Link>
+                        </LazyLoad>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        lg={5}
+                        sx={{
+                          padding: "20px",
+                        }}
+                      >
+                        <Typography sx={{ fontWeight: "600" }}>
+                          {product.title}
                         </Typography>
-                      )}
-                    </Grid>
-                    <Grid item xs={12} lg={4}>
-                      <TableContainer>
-                        <Table aria-label="simple table">
-                          <TableHead>
-                            <TableRow>
-                              <TableCell align="center">
-                                <strong>Serving Size(s)</strong>
-                              </TableCell>
-                              <TableCell align="center">
-                                <strong>Quantity</strong>
-                              </TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {product.servingSizesWithPrice.map((trayItem) => (
-                              <TableRow
-                                key={trayItem.size}
-                                sx={{
-                                  "&:last-child td, &:last-child th": {
-                                    border: 0,
-                                  },
-                                }}
-                              >
-                                <TableCell
-                                  component="th"
-                                  scope="row"
-                                  align="center"
-                                  sx={{
-                                    whiteSpace: "pre-line",
-                                  }}
-                                >
-                                  {trayItem.size}&nbsp;
-                                  <b>[${trayItem.price}]</b>
-                                </TableCell>
 
-                                <TableCell>
-                                  <Box
-                                    sx={{
-                                      display: "flex",
-                                      justifyContent: "center",
-                                    }}
-                                  >
-                                    <ButtonGroup
-                                      className="test"
-                                      sx={{
-                                        lineHeight: 1,
-                                        padding: 0,
-                                        "& .MuiButtonGroup-grouped": {
-                                          minWidth: "32px",
-                                        },
-                                        marginLeft: "8px",
-                                      }}
-                                      size="small"
-                                      aria-label="small outlined button group"
-                                    >
-                                      <Button
-                                        color="primary"
+                        <Typography>{product.description}</Typography>
+
+                        {product.servingSizeDescription && (
+                          <Typography sx={{ mt: 2 }}>
+                            <b>servingSizeDescription</b>
+                            <Typography
+                              sx={{
+                                whiteSpace: "pre-line",
+                              }}
+                            >
+                              {product.servingSizeDescription}
+                            </Typography>
+                          </Typography>
+                        )}
+                      </Grid>
+                      <Grid item xs={12} lg={4}>
+                        {product.servingSizesWithPrice &&
+                          product.servingSizesWithPrice.length > 0 && (
+                            <TableContainer>
+                              <Table aria-label="simple table">
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell align="center">
+                                      <strong>Serving Size(s)</strong>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                      <strong>Quantity</strong>
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {product.servingSizesWithPrice.map(
+                                    (trayItem) => (
+                                      <TableRow
+                                        key={trayItem.size}
                                         sx={{
-                                          lineHeight: 1,
-                                          padding: 0,
-                                          "& .MuiButtonGroup-grouped": {
-                                            minWidth: "32px !important",
+                                          "&:last-child td, &:last-child th": {
+                                            border: 0,
                                           },
                                         }}
-                                        size="small"
-                                        aria-label="small outlined button group"
-                                        onClick={() =>
-                                          handleDecrement(
-                                            product._id,
-                                            trayItem.size
-                                          )
-                                        }
                                       >
-                                        -
-                                      </Button>
-                                      <Button
-                                        sx={{
-                                          lineHeight: 1.3,
-                                          fontWeight: 600,
-                                          color: "black !important",
-                                        }}
-                                        disabled
-                                      >
-                                        {(productQuantities &&
-                                          productQuantities.length > 0 &&
-                                          productQuantities
-                                            .find(
-                                              (item) =>
-                                                item.productId === product._id
-                                            )
-                                            ?.sizes.find(
-                                              (size) =>
-                                                size.size === trayItem.size
-                                            )?.qty) ||
-                                          0}
-                                      </Button>
-                                      <Button
-                                        onClick={() =>
-                                          handleIncrement(
-                                            product._id,
-                                            trayItem.size
-                                          )
-                                        }
-                                        sx={{
-                                          lineHeight: 1.3,
-                                        }}
-                                      >
-                                        +
-                                      </Button>
-                                    </ButtonGroup>
-                                  </Box>
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
+                                        <TableCell
+                                          component="th"
+                                          scope="row"
+                                          align="center"
+                                          sx={{
+                                            whiteSpace: "pre-line",
+                                          }}
+                                        >
+                                          {trayItem.size}&nbsp;
+                                          <b>[${trayItem.price}]</b>
+                                        </TableCell>
+
+                                        <TableCell>
+                                          <Box
+                                            sx={{
+                                              display: "flex",
+                                              justifyContent: "center",
+                                            }}
+                                          >
+                                            <ButtonGroup
+                                              className="test"
+                                              sx={{
+                                                lineHeight: 1,
+                                                padding: 0,
+                                                "& .MuiButtonGroup-grouped": {
+                                                  minWidth: "32px",
+                                                },
+                                                marginLeft: "8px",
+                                              }}
+                                              size="small"
+                                              aria-label="small outlined button group"
+                                            >
+                                              <Button
+                                                color="primary"
+                                                sx={{
+                                                  lineHeight: 1,
+                                                  padding: 0,
+                                                  "& .MuiButtonGroup-grouped": {
+                                                    minWidth: "32px !important",
+                                                  },
+                                                }}
+                                                size="small"
+                                                aria-label="small outlined button group"
+                                                onClick={() =>
+                                                  handleDecrement(
+                                                    product._id,
+                                                    trayItem.size
+                                                  )
+                                                }
+                                              >
+                                                -
+                                              </Button>
+                                              <Button
+                                                sx={{
+                                                  lineHeight: 1.3,
+                                                  fontWeight: 600,
+                                                  color: "black !important",
+                                                }}
+                                                disabled
+                                              >
+                                                {(productQuantities &&
+                                                  productQuantities.length >
+                                                    0 &&
+                                                  productQuantities
+                                                    .find(
+                                                      (item) =>
+                                                        item.productId ===
+                                                        product._id
+                                                    )
+                                                    ?.sizes.find(
+                                                      (size) =>
+                                                        size.size ===
+                                                        trayItem.size
+                                                    )?.qty) ||
+                                                  0}
+                                              </Button>
+                                              <Button
+                                                onClick={() =>
+                                                  handleIncrement(
+                                                    product._id,
+                                                    trayItem.size
+                                                  )
+                                                }
+                                                sx={{
+                                                  lineHeight: 1.3,
+                                                }}
+                                              >
+                                                +
+                                              </Button>
+                                            </ButtonGroup>
+                                          </Box>
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  )}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          )}
+                      </Grid>
                     </Grid>
-                  </Grid>
-                ))}
+                  ))}
               </Grid>
             </Box>
           ))
