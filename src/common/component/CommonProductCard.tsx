@@ -22,7 +22,7 @@ function CommonProductCard(props: IProps) {
       once
       key={product._id}
       height={200}
-      offset={[-200, 0]}
+      offset={[-100, -100]}
       placeholder={<Placeholder />}
       debounce={100}
     >
