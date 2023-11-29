@@ -11,6 +11,7 @@ import Placeholder from "./Placeholder";
 
 interface IProps {
   product: IProductCardList;
+  menuType: number;
 }
 
 function CommonProductCard(props: IProps) {
@@ -22,7 +23,6 @@ function CommonProductCard(props: IProps) {
       once
       key={product._id}
       height={200}
-      offset={[-100, -100]}
       placeholder={<Placeholder />}
       debounce={100}
     >
@@ -64,9 +64,15 @@ function CommonProductCard(props: IProps) {
             >
               {product.title}
             </Typography>
-            <Typography variant="body2" color={theme.palette.primary.main}>
-              ${product.price}
-            </Typography>
+            {props.menuType == 3 ? (
+              <Typography variant="body2" color={theme.palette.primary.main}>
+                ${product.price}
+              </Typography>
+            ) : (
+              <Typography variant="body2" color={theme.palette.primary.main}>
+                ${product.servingSizeFirstPrice}
+              </Typography>
+            )}
           </CardContent>
         </Card>
       </Link>
