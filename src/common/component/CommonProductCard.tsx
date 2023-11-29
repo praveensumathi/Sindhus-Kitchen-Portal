@@ -6,8 +6,6 @@ import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import LazyLoad from "react-lazyload";
-import Placeholder from "./Placeholder";
 import { MenuType } from "../../enums/MenuTypesEnum";
 
 interface IProps {
@@ -20,65 +18,52 @@ function CommonProductCard(props: IProps) {
   const theme = useTheme();
 
   return (
-    <LazyLoad
-      once
-      key={product._id}
-      height={200}
-      placeholder={<Placeholder />}
-      debounce={100}
-      resize={true}
-    >
-      <Link to={`/detail/${product._id}`} style={{ textDecoration: "none" }}>
-        <Card
+    <Link to={`/detail/${product._id}`} style={{ textDecoration: "none" }}>
+      <Card
+        sx={{
+          boxShadow: 4,
+          mr: 2,
+          width: "250px",
+          height: "280px",
+        }}
+      >
+        <Box
           sx={{
-            boxShadow: 4,
-            mr: 2,
-            width: "250px",
-            height: "280px",
+            height: "180px",
+            width: "100%",
+            overflow: "hidden",
           }}
         >
-          <Box
+          <CardMedia
+            component="img"
+            src={product.posterURL}
             sx={{
-              height: "180px",
               width: "100%",
-              overflow: "hidden",
+              height: "100%",
+              transition: "transform 400ms",
+              "&:hover": {
+                transform: "scale(1.2)",
+              },
             }}
-          >
-            <CardMedia
-              component="img"
-              src={product.posterURL}
-              sx={{
-                width: "100%",
-                height: "100%",
-                transition: "transform 400ms",
-                "&:hover": {
-                  transform: "scale(1.2)",
-                },
-              }}
-              loading="lazy"
-            />
-          </Box>
-          <CardContent>
-            <Typography
-              variant="body1"
-              sx={{ fontWeight: 600 }}
-              component="div"
-            >
-              {product.title}
+            loading="lazy"
+          />
+        </Box>
+        <CardContent>
+          <Typography variant="body1" sx={{ fontWeight: 600 }} component="div">
+            {product.title}
+          </Typography>
+          {props.menuType == MenuType.OTHERS ? (
+            <Typography variant="body2" color={theme.palette.primary.main}>
+              ${product.servingSizeFirstPrice}
             </Typography>
-            {props.menuType == MenuType.OTHERS ? (
-              <Typography variant="body2" color={theme.palette.primary.main}>
-                ${product.servingSizeFirstPrice}
-              </Typography>
-            ) : (
-              <Typography variant="body2" color={theme.palette.primary.main}>
-                ${product.price}
-              </Typography>
-            )}
-          </CardContent>
-        </Card>
-      </Link>
-    </LazyLoad>
+          ) : (
+            <Typography variant="body2" color={theme.palette.primary.main}>
+              ${product.price}
+            </Typography>
+          )}
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 

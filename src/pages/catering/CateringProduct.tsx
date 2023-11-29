@@ -23,8 +23,6 @@ import CateringSelectedProductDrawer from "../../common/component/CateringSelect
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import NoProductsAvailable from "../../common/component/NoProductsAvailable";
-import Placeholder from "../../common/component/Placeholder";
-import LazyLoad from "react-lazyload";
 
 interface IProps {
   selectedMenuId: string;
@@ -197,28 +195,20 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                           padding: "15px",
                         }}
                       >
-                        <LazyLoad
-                          once
-                          key={product._id}
-                          height={150}
-                          placeholder={<Placeholder />}
-                          debounce={100}
-                          resize={true}
+                        <Link
+                          to={`/detail/${product._id}`}
+                          style={{
+                            textDecoration: "none",
+                          }}
                         >
-                          <Link
-                            to={`/detail/${product._id}`}
-                            style={{
-                              textDecoration: "none",
-                            }}
-                          >
-                            <img
-                              src={product.posterURL}
-                              width={150}
-                              height={150}
-                              alt={product.title}
-                            />
-                          </Link>
-                        </LazyLoad>
+                          <img
+                            src={product.posterURL}
+                            width={150}
+                            height={150}
+                            alt={product.title}
+                            loading="lazy"
+                          />
+                        </Link>
                       </Grid>
                       <Grid
                         item
