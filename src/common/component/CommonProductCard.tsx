@@ -24,7 +24,7 @@ function CommonProductCard(props: IProps) {
       height={200}
       offset={[-200, 0]}
       placeholder={<Placeholder />}
-      debounce={200}
+      debounce={100}
     >
       <Link to={`/detail/${product._id}`} style={{ textDecoration: "none" }}>
         <Card
