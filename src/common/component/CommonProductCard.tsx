@@ -10,7 +10,7 @@ import { MenuType } from "../../enums/MenuTypesEnum";
 
 interface IProps {
   product: IProductCardList;
-  menuType: number;
+  menuType?: number;
 }
 
 function CommonProductCard(props: IProps) {
@@ -52,7 +52,7 @@ function CommonProductCard(props: IProps) {
           <Typography variant="body1" sx={{ fontWeight: 600 }} component="div">
             {product.title}
           </Typography>
-          {props.menuType == MenuType.OTHERS ? (
+          {props.menuType && props.menuType == MenuType.OTHERS ? (
             <Typography variant="body2" color={theme.palette.primary.main}>
               ${product.servingSizeFirstPrice}
             </Typography>
