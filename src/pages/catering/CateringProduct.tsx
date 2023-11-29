@@ -203,6 +203,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                           height={150}
                           placeholder={<Placeholder />}
                           debounce={100}
+                          resize={true}
                         >
                           <Link
                             to={`/detail/${product._id}`}
