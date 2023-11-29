@@ -53,6 +53,7 @@ function SpecialCard(props: Iprops) {
                     }}
                     image={special.image}
                     title="green iguana"
+                    loading="lazy"
                   />
                 </Card>
               </Bounce>
