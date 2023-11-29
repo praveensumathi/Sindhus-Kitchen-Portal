@@ -112,7 +112,10 @@ function Carousel(props: IProps) {
                       justifyContent: "flex-start",
                     }}
                   >
-                    <CommonProductCard product={product} />
+                    <CommonProductCard
+                      product={product}
+                      menuType={category.menuDatas.menuType}
+                    />
                   </Box>
                 ))}
             </Slider>

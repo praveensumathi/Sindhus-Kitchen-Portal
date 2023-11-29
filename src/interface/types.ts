@@ -21,6 +21,7 @@ export interface IProductCardList {
   description?: string;
   netWeight?: number;
   price: number | null;
+  servingSizeFirstPrice: number | null;
 }
 
 export interface IMenuList {
@@ -53,7 +54,7 @@ export interface IProduct {
   price: number;
   images: string[];
   servingSizeDescription: string;
-  posterURL: string,
+  posterURL: string;
   servingSizesWithPrice: IPrice[];
   description: string;
   netWeight: number;
@@ -102,6 +103,7 @@ export interface IMenuDatas {
   _id: string;
   title: string;
   image: string;
+  menuType: number;
   products: IProductDinnigOut[];
 }
 
@@ -111,7 +113,8 @@ export interface IProductDinnigOut {
   posterURL: string;
   description: string;
   netWeight: number;
-  price: number;
+  price: number | null;
+  servingSizeFirstPrice: number | null;
 }
 
 export interface ICommonResponse<T> {
@@ -189,4 +192,3 @@ export interface ISelectedCateringProduct {
   title: string;
   posterURL: string;
 }
-
