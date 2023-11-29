@@ -154,31 +154,32 @@ function ProductDetail() {
                       </Typography>
                     </Typography>
                   )}
-                  <Typography
-                    sx={{
-                      fontSize: "18px",
-                      fontWeight: "500",
-                      margin: "8px 0",
-                    }}
-                  >
-                    Serving Sizes
-                  </Typography>
 
                   {menuDetail.servingSizesWithPrice &&
-                    menuDetail.servingSizesWithPrice.length > 0 &&
-                    menuDetail.servingSizesWithPrice.map((size, index) => (
+                    menuDetail.servingSizesWithPrice.length > 0 && (
                       <>
                         <Typography
-                          sx={{ fontSize: "small", display: "flex" }}
-                          key={index}
+                          sx={{
+                            fontSize: "18px",
+                            fontWeight: "500",
+                            margin: "8px 0",
+                          }}
                         >
-                          {size.size} -
-                          <span style={{ fontWeight: "bolder" }}>
-                            &nbsp; [${size.price}]
-                          </span>
+                          Serving Sizes
                         </Typography>
+                        {menuDetail.servingSizesWithPrice.map((size, index) => (
+                          <Typography
+                            sx={{ fontSize: "small", display: "flex" }}
+                            key={index}
+                          >
+                            {size.size} -
+                            <span style={{ fontWeight: "bolder" }}>
+                              &nbsp; [${size.price}]
+                            </span>
+                          </Typography>
+                        ))}
                       </>
-                    ))}
+                    )}
                 </>
               )}
             </Container>
