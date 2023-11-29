@@ -8,6 +8,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import LazyLoad from "react-lazyload";
 import Placeholder from "./Placeholder";
+import { MenuType } from "../../enums/MenuTypesEnum";
 
 interface IProps {
   product: IProductCardList;
@@ -64,13 +65,13 @@ function CommonProductCard(props: IProps) {
             >
               {product.title}
             </Typography>
-            {props.menuType == 3 ? (
+            {props.menuType == MenuType.OTHERS ? (
               <Typography variant="body2" color={theme.palette.primary.main}>
-                ${product.price}
+                ${product.servingSizeFirstPrice}
               </Typography>
             ) : (
               <Typography variant="body2" color={theme.palette.primary.main}>
-                ${product.servingSizeFirstPrice}
+                ${product.price}
               </Typography>
             )}
           </CardContent>
