@@ -16,6 +16,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const location = useLocation();
@@ -82,34 +83,45 @@ function Footer() {
                       alignItems: "center",
                     }}
                   >
-                    <Button
-                      startIcon={<EmailIcon />}
-                      variant="contained"
-                      fullWidth
-                      sx={{
-                        lineHeight: 0,
-                        backgroundColor: "#f44336",
-                        "&:hover": {
+                    <a
+                      href="mailto:skvbalaji@gmail.com"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      <Button
+                        startIcon={<EmailIcon />}
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                          lineHeight: 0,
                           backgroundColor: "#f44336",
-                        },
-                      }}
+                          "&:hover": {
+                            backgroundColor: "#f44336",
+                          },
+                        }}
+                      >
+                        Send mail
+                      </Button>
+                    </a>
+
+                    <Link
+                      to={`${import.meta.env.VITE_SINDHUS_WHATSAPP}`}
+                      target="_blank"
                     >
-                      Send mail
-                    </Button>
-                    <Button
-                      startIcon={<WhatsAppIcon />}
-                      variant="contained"
-                      fullWidth
-                      sx={{
-                        lineHeight: 0,
-                        backgroundColor: "#4caf50",
-                        "&:hover": {
+                      <Button
+                        startIcon={<WhatsAppIcon />}
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                          lineHeight: 0,
                           backgroundColor: "#4caf50",
-                        },
-                      }}
-                    >
-                      chat on Whatsapp
-                    </Button>
+                          "&:hover": {
+                            backgroundColor: "#4caf50",
+                          },
+                        }}
+                      >
+                        Chat on Whatsapp
+                      </Button>
+                    </Link>
                   </Box>
                 </Box>
               </Fade>
@@ -126,8 +138,7 @@ function Footer() {
                     sx={{ color: theme.palette.secondary.main }}
                   ></PhoneIcon>
                   <Typography variant="h5">Call us</Typography>
-                  <Typography>+1.9402792536</Typography>
-                  <Typography>1234567890</Typography>
+                  <Typography>+1 940-279-2536</Typography>
                 </Box>
               </Fade>
             </Grid>
