@@ -201,7 +201,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                           once
                           key={product._id}
                           height={150}
-                          offset={[-100, 0]}
                           placeholder={<Placeholder />}
                           debounce={100}
                         >
