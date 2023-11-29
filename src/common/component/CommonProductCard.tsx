@@ -22,6 +22,7 @@ function CommonProductCard(props: IProps) {
           boxShadow: 4,
           mr: 2,
           width: "250px",
+          height: "280px",
         }}
       >
         <Box

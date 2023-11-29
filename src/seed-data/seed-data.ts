@@ -30,21 +30,21 @@ export const ourServicesData: IOurServices[] = [
 
 export const homePageSlicker = [
   {
-    image: "assets/Poster-1.jpg",
+    image: "assets/Poster-1.webp",
     heading: "Sindhu's Kitchen",
     subHeading: "CATERING TO YOUR NEEDS",
     content:
       "Authentic South Inidan Food and Snacks prepered to give you the Best in Town",
   },
   {
-    image: "assets/food-img.jpg",
+    image: "assets/food-img.webp",
     heading: "Sindhu's Kitchen",
     subHeading: "A TASTE OF TRADITION",
     content:
       "Experience the rich and time-honored flavors of South India with our authentic dishes",
   },
   {
-    image: "/assets/Poster-2.jpg",
+    image: "/assets/Poster-2.webp",
     heading: "Sindhu's Kitchen",
     subHeading: "FLAVORS THAT DANCE ON YOUR PLATE",
     content: "Creating a memorable taste sensation with every bite",

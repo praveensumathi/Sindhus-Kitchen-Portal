@@ -13,6 +13,7 @@ export const useGetAllMenus = () => {
     queryKey: ["menus"],
     queryFn: getAllMenus,
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
 
@@ -29,6 +30,7 @@ export const useGetAllDiningOutMenuDatas = () => {
     queryKey: ["diningOutMenuDatas"],
     queryFn: getAllDiningOutMenuDatas,
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
 
@@ -37,6 +39,7 @@ export const useGetAllDiningOutProducts = () => {
     queryKey: ["diningOutProduct"],
     queryFn: getAllDiningOutProducts,
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
 
