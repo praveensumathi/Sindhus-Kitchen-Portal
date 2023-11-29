@@ -134,6 +134,7 @@ export interface ISnackProduct {
   posterURL: string;
   price: number | null;
   subMenuId: string;
+  servingSizeFirstPrice: number | null;
 }
 
 export interface ISubMenu {
