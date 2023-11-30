@@ -76,13 +76,10 @@ function HomePageSlicker() {
     };
 
     if (isLoading || isError) {
-      // Fetch products with only searchTerm when loading or error
       fetchProducts("", searchTerm);
     } else if (selectedMenuId) {
-      // Fetch products with both selectedMenuId and searchTerm
       fetchProducts(selectedMenuId, searchTerm);
     } else {
-      // Fetch products with only searchTerm when selectedMenuId is empty
       fetchProducts("", searchTerm);
     }
   }, [selectedMenuId, searchTerm, isLoading, isError]);
