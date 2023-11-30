@@ -28,7 +28,8 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   const [selectedMenuId, setSelectedMenuId] = useState("");
 
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
-  const { data: cateringProducts = [], refetch: refetchProductData } =
+
+  const { data: cateringProducts, refetch: refetchProductData } =
     useCateringfetchProductData(selectedMenuId, productValue?.title ?? "");
 
   const clearSearch = async () => {
@@ -60,10 +61,13 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   };
 
   useEffect(() => {
-    if (selectedMenuId) {
+    if (
+      (selectedMenuId && !productValue?.title) ||
+      (!selectedMenuId && productValue?.title && productValue.title.length >= 3)
+    ) {
       refetchProductData();
     }
-  }, [selectedMenuId]);
+  }, [selectedMenuId, productValue?.title]);
 
   const handleProductSearch = (
     selectedProduct: IProductAutoComplete | null
@@ -125,13 +129,17 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
               option.title == value.title
             }
             onChange={(_event, value) => handleProductSearch(value)}
-            options={cateringProducts.map(
-              (item) =>
-                ({
-                  ...item,
-                  label: item.title,
-                } as IProductAutoComplete)
-            )}
+            options={
+              cateringProducts
+                ? cateringProducts.map(
+                    (item) =>
+                      ({
+                        ...item,
+                        label: item.title,
+                      } as IProductAutoComplete)
+                  )
+                : []
+            }
             onInputChange={(_event, newInputValue) => {
               if (!newInputValue.trim()) {
                 setProductValue(null);
@@ -153,7 +161,25 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
               </li>
             )}
             renderInput={(params) => (
-              <TextField {...params} label="Select Food" variant="outlined" />
+              <TextField
+                {...params}
+                label="Select Food"
+                variant="outlined"
+                InputProps={{
+                  ...params.InputProps,
+                  disableUnderline: true,
+                  onChange: (event) => {
+                    const newSearchTerm = event.target.value;
+
+                    setProductValue({
+                      _id: "",
+                      title: newSearchTerm,
+                      posterURL: "",
+                      label: newSearchTerm,
+                    });
+                  },
+                }}
+              />
             )}
           />
         </Grid>

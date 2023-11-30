@@ -50,39 +50,40 @@ function HomePageSlicker() {
   }, [menuData, isLoading, isError]);
 
   useEffect(() => {
-    const fetchProducts = async (menuId: string, searchTerm: string) => {
-      try {
-        const response = await getProductsByMenuIdWithSearchTerm(
-          menuId,
-          searchTerm
+    fetchProducts(selectedMenuId, searchTerm);
+  }, [selectedMenuId, searchTerm]);
+
+  const fetchProducts = async (
+    menuId: string | undefined,
+    searchTerm: string
+  ) => {
+    try {
+      let response;
+
+      if (searchTerm.length < 3 && !menuId) {
+        response = await getProductsByMenuIdWithSearchTerm(undefined, "");
+      } else {
+        response = await getProductsByMenuIdWithSearchTerm(menuId, searchTerm);
+      }
+
+      if (response && response.data) {
+        const products: IProductDropDownData[] = response.data.map(
+          (product) => ({
+            _id: product._id,
+            title: product.title,
+            posterURL: product.posterURL,
+          })
         );
 
-        if (response && response.data.length > 0) {
-          const products: IProductDropDownData[] = response.data.map(
-            (product) => ({
-              _id: product._id,
-              title: product.title,
-              posterURL: product.posterURL,
-            })
-          );
-
-          setProducts(products);
-        } else {
-          setProducts([]);
-        }
-      } catch (error) {
-        console.error("Error fetching products:", error);
+        setProducts(products);
+      } else {
+        setProducts([]);
+        setSearchTerm("");
       }
-    };
-
-    if (isLoading || isError) {
-      fetchProducts("", searchTerm);
-    } else if (selectedMenuId) {
-      fetchProducts(selectedMenuId, searchTerm);
-    } else {
-      fetchProducts("", searchTerm);
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
-  }, [selectedMenuId, searchTerm, isLoading, isError]);
+  };
 
   const handleProductSearch = (_event) => {
     const newSearchTerm = _event.target.value;
@@ -312,6 +313,10 @@ function HomePageSlicker() {
                   InputProps={{
                     ...params.InputProps,
                     disableUnderline: true,
+                    onChange: (event) => {
+                      const newSearchTerm = event.target.value;
+                      setSearchTerm(newSearchTerm || "");
+                    },
                   }}
                   fullWidth
                   variant="standard"

@@ -24,18 +24,33 @@ const getAllMenus = async () => {
   }
 };
 
-const cateringfetchProductData = async (menuId = "", searchterm = "") => {
+const cateringfetchProductData = async (
+  menuId: string | undefined,
+  searchTerm: string
+) => {
   try {
+    let cateringPageProduct = `/product/searchProduct`;
+
     if (menuId) {
-      const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
-        `/product/searchProduct/${menuId}?searchTerm=${searchterm}`
-      );
-      return response.data;
+      cateringPageProduct += `/${menuId}`;
+    }
+    if (!searchTerm && !menuId) {
+      return [];
     }
 
+    if (searchTerm) {
+      cateringPageProduct += `?searchTerm=${searchTerm}`;
+    }
+
+    const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
+      cateringPageProduct
+    );
+    if (response.data) {
+      return response.data;
+    }
     return [];
   } catch (error) {
-    console.error("Error:", error);
+    throw error;
   }
 };
 
@@ -67,7 +82,7 @@ const createCateringEnquiry = async (data: ICateringEnquiry) => {
       "enquiry/createEnquiry",
       data
     );
-    console.log("this is response", response.data);
+
     return response.data;
   } catch (error) {
     throw error;
@@ -98,7 +113,7 @@ const getfetchProductsByMenuId = async (menuId: string) => {
 };
 
 const getProductsByMenuIdWithSearchTerm = async (
-  selectedMenuId: string | undefined, 
+  selectedMenuId: string | undefined,
   searchTerm: string
 ) => {
   try {
@@ -107,19 +122,22 @@ const getProductsByMenuIdWithSearchTerm = async (
     if (selectedMenuId) {
       homePageProduct += `/${selectedMenuId}`;
     }
+    if (!searchTerm && !selectedMenuId) {
+      return [];
+    }
 
-    homePageProduct += `?searchTerm=${searchTerm}`;
-
+    if (searchTerm && searchTerm.length >= 3) {
+      homePageProduct += `?searchTerm=${searchTerm}`;
+    }
     const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
       homePageProduct
     );
 
     return response;
   } catch (error) {
-    console.error("Error:", error);
+    throw error;
   }
 };
-
 
 const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
   try {
