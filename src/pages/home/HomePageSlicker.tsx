@@ -50,36 +50,53 @@ function HomePageSlicker() {
   }, [menuData, isLoading, isError]);
 
   useEffect(() => {
-    if (selectedMenuId) {
-      getProductsByMenuIdWithSearchTerm(selectedMenuId, searchTerm).then(
-        (response) => {
-          if (response && response.data.length > 0) {
-            const products: IProductDropDownData[] = response.data.map(
-              (product) => ({
-                _id: product._id,
-                title: product.title,
-                posterURL: product.posterURL,
-              })
-            );
+    const fetchProducts = async (menuId: string, searchTerm: string) => {
+      try {
+        const response = await getProductsByMenuIdWithSearchTerm(
+          menuId,
+          searchTerm
+        );
 
-            setProducts(products);
-          } else {
-            setProducts([]);
-          }
+        if (response && response.data.length > 0) {
+          const products: IProductDropDownData[] = response.data.map(
+            (product) => ({
+              _id: product._id,
+              title: product.title,
+              posterURL: product.posterURL,
+            })
+          );
+
+          setProducts(products);
+        } else {
+          setProducts([]);
         }
-      );
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    if (isLoading || isError) {
+      // Fetch products with only searchTerm when loading or error
+      fetchProducts("", searchTerm);
+    } else if (selectedMenuId) {
+      // Fetch products with both selectedMenuId and searchTerm
+      fetchProducts(selectedMenuId, searchTerm);
+    } else {
+      // Fetch products with only searchTerm when selectedMenuId is empty
+      fetchProducts("", searchTerm);
     }
-  }, [selectedMenuId]);
+  }, [selectedMenuId, searchTerm, isLoading, isError]);
 
   const handleProductSearch = (_event) => {
     const newSearchTerm = _event.target.value;
     setSearchTerm(newSearchTerm || "");
   };
 
-  const handleMenuChange = (_event, newValue: IMenuList) => {
-    const selectedMenu = menus.find((menu) => menu._id === newValue._id);
-    if (selectedMenu) {
-      setSelectedMenuId(selectedMenu._id);
+  const handleMenuChange = (_event, newValue: IMenuList | null) => {
+    if (newValue) {
+      setSelectedMenuId(newValue._id);
+    } else {
+      setSelectedMenuId("");
     }
   };
 

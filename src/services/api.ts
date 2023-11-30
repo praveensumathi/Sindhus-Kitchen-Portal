@@ -98,12 +98,20 @@ const getfetchProductsByMenuId = async (menuId: string) => {
 };
 
 const getProductsByMenuIdWithSearchTerm = async (
-  selectedMenuId: string,
+  selectedMenuId: string | undefined, 
   searchTerm: string
 ) => {
   try {
+    let homePageProduct = `/product/searchProduct`;
+
+    if (selectedMenuId) {
+      homePageProduct += `/${selectedMenuId}`;
+    }
+
+    homePageProduct += `?searchTerm=${searchTerm}`;
+
     const response = await httpWithoutCredentials.get<IProductDropDownData[]>(
-      `/product/searchProduct/${selectedMenuId}?searchTerm=${searchTerm}`
+      homePageProduct
     );
 
     return response;
@@ -111,6 +119,7 @@ const getProductsByMenuIdWithSearchTerm = async (
     console.error("Error:", error);
   }
 };
+
 
 const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
   try {
