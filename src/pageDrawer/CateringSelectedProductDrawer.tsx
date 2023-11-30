@@ -35,14 +35,16 @@ function CateringSelectedProductDrawer(props: IProps) {
       open={isOpen}
       sx={{
         position: "relative",
+        zIndex: 10,
         "& .MuiDrawer-paper": {
           boxSizing: "border-box",
           width: "30vw",
+          height: "100vh",
         },
         "@media (max-width: 600px)": {
           "& .MuiDrawer-paper": {
             width: "100vw",
-            height: "100%",
+            height: "100vh",
           },
         },
       }}
@@ -50,7 +52,7 @@ function CateringSelectedProductDrawer(props: IProps) {
       <Box>
         <Box
           sx={{
-            zIndex: -1,
+            zIndex: 1,
             padding: 2,
             height: "50px",
             display: "flex",
