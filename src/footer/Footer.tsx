@@ -153,15 +153,23 @@ function Footer() {
                   <AccessTimeFilledIcon
                     sx={{ color: theme.palette.secondary.main }}
                   ></AccessTimeFilledIcon>
-                  <Typography variant="h5">Our Timing</Typography>
-                  <Typography>
-                    Monday 11AM-9PM
-                    <br /> Tuesday Closed
-                    <br /> Wednesday 11AM-9PM
-                    <br /> Thursday 11AM-10PM
-                    <br /> Friday 11AM-10PM
-                    <br /> Saturday 11AM-10PM
-                    <br /> Sunday 11AM-9PM
+                  <Typography variant="h5" my={1}>
+                    Our Timing
+                  </Typography>
+                  <Typography
+                    sx={{
+                      lineHeight: "2",
+                      textAlign: "left",
+                      marginTop: "20px",
+                    }}
+                  >
+                    Monday &nbsp;11AM -&nbsp;9PM
+                    <br /> Tuesday &nbsp;Closed
+                    <br /> Wednesday &nbsp;11AM -&nbsp;9PM
+                    <br /> Thursday &nbsp;11AM -&nbsp;10PM
+                    <br /> Friday &nbsp;11AM -&nbsp;10PM
+                    <br /> Saturday &nbsp;11AM -&nbsp;10PM
+                    <br /> Sunday &nbsp;11AM -&nbsp;9PM
                   </Typography>
                 </Fade>
               </Box>
