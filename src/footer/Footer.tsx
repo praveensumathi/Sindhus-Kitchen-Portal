@@ -54,7 +54,7 @@ function Footer() {
                   <LocationOnIcon
                     sx={{ color: theme.palette.secondary.main }}
                   ></LocationOnIcon>
-                  <Typography variant="h5">Our Office Address</Typography>
+                  <Typography variant="h5"> Store Address</Typography>
                   <Typography>
                     2700 E Eldorado Pkwy, #203,
                     <br /> Little Elm, Texas - 75068
