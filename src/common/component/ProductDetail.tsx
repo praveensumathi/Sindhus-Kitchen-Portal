@@ -49,26 +49,26 @@ function ProductDetail() {
   }, []);
 
   return (
-    <>
+    <Container>
       <IconButton
         sx={{
           float: "left",
+          pl:0
         }}
         onClick={() => navigate(-1)}
       >
         <ArrowBackIcon fontSize="large" />
       </IconButton>
-
-      <Container
-        sx={{ width: "100%", display: "flex", justifyContent: "center", mb: 2 }}
-      >
+      <Box sx={{ my: 2 }}>
         <Grid
           container
-          mt={4}
-          sx={{ maxWidth: isBelowMediumSize ? "100%" : "80%" }}
-          spacing={5}
+          spacing={isBelowMediumSize ? 0 : 6}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
-          <Grid item md={5} xs={12}>
+          <Grid item md={6} xs={9}>
             <Slider {...settings}>
               {menuDetail?.posterURL &&
                 [menuDetail.posterURL]
@@ -78,8 +78,7 @@ function ProductDetail() {
                       <Card
                         key={index}
                         sx={{
-                          height: isBelowMediumSize ? "50vh" : "60vh",
-                          marginRight: "20px",
+                          maxHeight: "60%",
                         }}
                       >
                         <CardMedia
@@ -94,11 +93,11 @@ function ProductDetail() {
                   ))}
             </Slider>
           </Grid>
-          <Grid item md={7} xs={12}>
-            <Container>
+          <Grid item md={5} xs={12}>
+            <>
               {menuDetail && (
                 <>
-                  <Typography sx={{ fontWeight: "bolder", fontSize: "34px" }}>
+                  <Typography sx={{ fontWeight: "bolder", fontSize: "28px" }}>
                     {menuDetail.title}
                   </Typography>
                   {!!menuDetail.price && (
@@ -182,11 +181,11 @@ function ProductDetail() {
                     )}
                 </>
               )}
-            </Container>
+            </>
           </Grid>
         </Grid>
-      </Container>
-    </>
+      </Box>
+    </Container>
   );
 }
 
