@@ -44,7 +44,7 @@ function CateringPage() {
           </Fade>
         </Box>
       </Box>
-      <Container sx={{ mt: 1 }}>
+      <Container>
         <SearchBar
           onSelectMenu={(menuId: string) => setSelectedMenuId(menuId)}
           onSelectProduct={(productId: string) =>
