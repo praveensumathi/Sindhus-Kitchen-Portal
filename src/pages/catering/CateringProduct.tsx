@@ -164,7 +164,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                   textAlign: "center",
                   color: "white",
                   backgroundColor: "orange",
-                  m: 2,
+                  my: 2,
                   fontSize: "2rem",
                 }}
               >
@@ -184,17 +184,9 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                           index === data.products.length - 1
                             ? "none"
                             : "1px solid #FFD580",
-                        padding: "15px",
                       }}
                     >
-                      <Grid
-                        item
-                        xs={12}
-                        lg={3}
-                        sx={{
-                          padding: "15px",
-                        }}
-                      >
+                      <Grid item xs={12} lg={3}>
                         <Link
                           to={`/detail/${product._id}`}
                           style={{
@@ -203,8 +195,8 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                         >
                           <img
                             src={product.posterURL}
-                            width={150}
-                            height={150}
+                            width={"100%"}
+                            height={"80%"}
                             alt={product.title}
                             loading="lazy"
                           />

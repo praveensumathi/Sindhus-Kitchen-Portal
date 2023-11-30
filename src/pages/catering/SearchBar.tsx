@@ -2,7 +2,6 @@ import Grid from "@mui/material/Grid";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import {
   IMenuAutoComplete,
   IMenuList,
@@ -91,7 +90,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   };
 
   return (
-    <Container>
+    <>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={4}>
           <Autocomplete
@@ -198,7 +197,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
           </Button>
         </Grid>
       </Grid>
-    </Container>
+    </>
   );
 }
 
