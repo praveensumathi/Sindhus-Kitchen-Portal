@@ -50,36 +50,52 @@ function HomePageSlicker() {
   }, [menuData, isLoading, isError]);
 
   useEffect(() => {
-    if (selectedMenuId) {
-      getProductsByMenuIdWithSearchTerm(selectedMenuId, searchTerm).then(
-        (response) => {
-          if (response && response.data.length > 0) {
-            const products: IProductDropDownData[] = response.data.map(
-              (product) => ({
-                _id: product._id,
-                title: product.title,
-                posterURL: product.posterURL,
-              })
-            );
+    fetchProducts(selectedMenuId, searchTerm);
+  }, [selectedMenuId, searchTerm]);
 
-            setProducts(products);
-          } else {
-            setProducts([]);
-          }
-        }
-      );
+  const fetchProducts = async (
+    menuId: string = "",
+    searchTerm: string = ""
+  ) => {
+    try {
+      let response;
+
+      if (searchTerm.length < 3 && !menuId) {
+        response = await getProductsByMenuIdWithSearchTerm("", "");
+      } else {
+        response = await getProductsByMenuIdWithSearchTerm(menuId, searchTerm);
+      }
+
+      if (response && response.data) {
+        const products: IProductDropDownData[] = response.data.map(
+          (product) => ({
+            _id: product._id,
+            title: product.title,
+            posterURL: product.posterURL,
+          })
+        );
+
+        setProducts(products);
+      } else {
+        setProducts([]);
+        setSearchTerm("");
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
-  }, [selectedMenuId]);
+  };
 
   const handleProductSearch = (_event) => {
     const newSearchTerm = _event.target.value;
     setSearchTerm(newSearchTerm || "");
   };
 
-  const handleMenuChange = (_event, newValue: IMenuList) => {
-    const selectedMenu = menus.find((menu) => menu._id === newValue._id);
-    if (selectedMenu) {
-      setSelectedMenuId(selectedMenu._id);
+  const handleMenuChange = (_event, newValue: IMenuList | null) => {
+    setSearchTerm("");
+    if (newValue) {
+      setSelectedMenuId(newValue._id);
+    } else {
+      setSelectedMenuId("");
     }
   };
 
@@ -298,6 +314,10 @@ function HomePageSlicker() {
                   InputProps={{
                     ...params.InputProps,
                     disableUnderline: true,
+                    onChange: (event) => {
+                      const newSearchTerm = event.target.value;
+                      setSearchTerm(newSearchTerm || "");
+                    },
                   }}
                   fullWidth
                   variant="standard"
