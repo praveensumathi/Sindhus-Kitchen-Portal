@@ -51,7 +51,6 @@ function HomePageSlicker() {
 
   useEffect(() => {
     fetchProducts(selectedMenuId, searchTerm);
-    setSearchTerm("");
   }, [selectedMenuId, searchTerm]);
 
   const fetchProducts = async (
@@ -79,6 +78,7 @@ function HomePageSlicker() {
         setProducts(products);
       } else {
         setProducts([]);
+        setSearchTerm("");
       }
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -91,6 +91,7 @@ function HomePageSlicker() {
   };
 
   const handleMenuChange = (_event, newValue: IMenuList | null) => {
+    setSearchTerm("");
     if (newValue) {
       setSelectedMenuId(newValue._id);
     } else {
