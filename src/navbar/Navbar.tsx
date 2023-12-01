@@ -95,6 +95,7 @@ function NavBar() {
           backdropFilter: "blur(15px)",
           borderStyle: "solid",
           borderWidth: 0,
+          height: isBelowSMScreen ? "60px" : "70px",
           backgroundColor: "rgba(255,255,255,0.7)",
           position: isBelowSMScreen ? "fixed" : appBarPosition,
         }}
@@ -107,6 +108,7 @@ function NavBar() {
                 display: "flex",
                 alignItems: "center",
                 flexGrow: 1,
+                
               }}
             >
               <img
@@ -114,16 +116,18 @@ function NavBar() {
                 alt="Logo"
                 style={{
                   height: "auto",
-                  width: isBelowSMScreen ? "3rem" : "3rem",
+                  width: isBelowSMScreen ? "3.5rem" : "4rem",
                   marginRight: "10px",
+                  paddingTop: "10px",
+                  paddingBottom:"5px"
                 }}
                 loading="lazy"
                 onClick={handleNavigateToHome}
               />
               <Typography
-                sx={{ fontWeight: 500, color: "red", fontSize: "25px" }}
+                sx={{ fontWeight: 600, color: "red", fontSize: "25px" }}
               >
-                sindhu's
+                SINDHU's
               </Typography>
             </Box>
             {isMobile ? (

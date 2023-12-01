@@ -16,6 +16,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const location = useLocation();
@@ -53,7 +54,7 @@ function Footer() {
                   <LocationOnIcon
                     sx={{ color: theme.palette.secondary.main }}
                   ></LocationOnIcon>
-                  <Typography variant="h5">Our Office Address</Typography>
+                  <Typography variant="h5"> Store Address</Typography>
                   <Typography>
                     2700 E Eldorado Pkwy, #203,
                     <br /> Little Elm, Texas - 75068
@@ -82,34 +83,45 @@ function Footer() {
                       alignItems: "center",
                     }}
                   >
-                    <Button
-                      startIcon={<EmailIcon />}
-                      variant="contained"
-                      fullWidth
-                      sx={{
-                        lineHeight: 0,
-                        backgroundColor: "#f44336",
-                        "&:hover": {
+                    <a
+                      href="mailto:skvbalaji@gmail.com"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      <Button
+                        startIcon={<EmailIcon />}
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                          lineHeight: 0,
                           backgroundColor: "#f44336",
-                        },
-                      }}
+                          "&:hover": {
+                            backgroundColor: "#f44336",
+                          },
+                        }}
+                      >
+                        Send mail
+                      </Button>
+                    </a>
+
+                    <Link
+                      to={`${import.meta.env.VITE_SINDHUS_WHATSAPP}`}
+                      target="_blank"
                     >
-                      Send mail
-                    </Button>
-                    <Button
-                      startIcon={<WhatsAppIcon />}
-                      variant="contained"
-                      fullWidth
-                      sx={{
-                        lineHeight: 0,
-                        backgroundColor: "#4caf50",
-                        "&:hover": {
+                      <Button
+                        startIcon={<WhatsAppIcon />}
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                          lineHeight: 0,
                           backgroundColor: "#4caf50",
-                        },
-                      }}
-                    >
-                      chat on Whatsapp
-                    </Button>
+                          "&:hover": {
+                            backgroundColor: "#4caf50",
+                          },
+                        }}
+                      >
+                        Chat on Whatsapp
+                      </Button>
+                    </Link>
                   </Box>
                 </Box>
               </Fade>
@@ -126,8 +138,7 @@ function Footer() {
                     sx={{ color: theme.palette.secondary.main }}
                   ></PhoneIcon>
                   <Typography variant="h5">Call us</Typography>
-                  <Typography>+1.9402792536</Typography>
-                  <Typography>1234567890</Typography>
+                  <Typography>+1 940-279-2536</Typography>
                 </Box>
               </Fade>
             </Grid>
@@ -142,15 +153,23 @@ function Footer() {
                   <AccessTimeFilledIcon
                     sx={{ color: theme.palette.secondary.main }}
                   ></AccessTimeFilledIcon>
-                  <Typography variant="h5">Our Timing</Typography>
-                  <Typography>
-                    Monday 11AM-9PM
-                    <br /> Tuesday Closed
-                    <br /> Wednesday 11AM-9PM
-                    <br /> Thursday 11AM-10PM
-                    <br /> Friday 11AM-10PM
-                    <br /> Saturday 11AM-10PM
-                    <br /> Sunday 11AM-9PM
+                  <Typography variant="h5" my={1}>
+                    Our Timing
+                  </Typography>
+                  <Typography
+                    sx={{
+                      lineHeight: "2",
+                      textAlign: "left",
+                      marginTop: "20px",
+                    }}
+                  >
+                    Monday &nbsp;11AM -&nbsp;9PM
+                    <br /> Tuesday &nbsp;Closed
+                    <br /> Wednesday &nbsp;11AM -&nbsp;9PM
+                    <br /> Thursday &nbsp;11AM -&nbsp;10PM
+                    <br /> Friday &nbsp;11AM -&nbsp;10PM
+                    <br /> Saturday &nbsp;11AM -&nbsp;10PM
+                    <br /> Sunday &nbsp;11AM -&nbsp;9PM
                   </Typography>
                 </Fade>
               </Box>

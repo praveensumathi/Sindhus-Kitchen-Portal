@@ -6,9 +6,11 @@ import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import { MenuType } from "../../enums/MenuTypesEnum";
 
 interface IProps {
   product: IProductCardList;
+  menuType?: number;
 }
 
 function CommonProductCard(props: IProps) {
@@ -22,6 +24,7 @@ function CommonProductCard(props: IProps) {
           boxShadow: 4,
           mr: 2,
           width: "250px",
+          height: "280px",
         }}
       >
         <Box
@@ -42,15 +45,22 @@ function CommonProductCard(props: IProps) {
                 transform: "scale(1.2)",
               },
             }}
+            loading="lazy"
           />
         </Box>
         <CardContent>
           <Typography variant="body1" sx={{ fontWeight: 600 }} component="div">
             {product.title}
           </Typography>
-          <Typography variant="body2" color={theme.palette.primary.main}>
-            ${product.price}
-          </Typography>
+          {props.menuType && props.menuType == MenuType.OTHERS ? (
+            <Typography variant="body2" color={theme.palette.primary.main}>
+              ${product.servingSizeFirstPrice}
+            </Typography>
+          ) : (
+            <Typography variant="body2" color={theme.palette.primary.main}>
+              ${product.price}
+            </Typography>
+          )}
         </CardContent>
       </Card>
     </Link>

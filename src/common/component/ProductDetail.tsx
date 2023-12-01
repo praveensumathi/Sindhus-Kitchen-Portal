@@ -49,26 +49,26 @@ function ProductDetail() {
   }, []);
 
   return (
-    <>
+    <Container>
       <IconButton
         sx={{
           float: "left",
+          pl: 0,
         }}
         onClick={() => navigate(-1)}
       >
         <ArrowBackIcon fontSize="large" />
       </IconButton>
-
-      <Container
-        sx={{ width: "100%", display: "flex", justifyContent: "center", mb: 2 }}
-      >
+      <Box sx={{ my: 2 }}>
         <Grid
           container
-          mt={4}
-          sx={{ maxWidth: isBelowMediumSize ? "100%" : "80%" }}
-          spacing={5}
+          spacing={isBelowMediumSize ? 0 : 6}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
-          <Grid item md={5} xs={12}>
+          <Grid item md={6} xs={9}>
             <Slider {...settings}>
               {menuDetail?.posterURL &&
                 [menuDetail.posterURL]
@@ -78,8 +78,7 @@ function ProductDetail() {
                       <Card
                         key={index}
                         sx={{
-                          height: isBelowMediumSize ? "50vh" : "60vh",
-                          marginRight: "20px",
+                          maxHeight: "60%",
                         }}
                       >
                         <CardMedia
@@ -94,11 +93,11 @@ function ProductDetail() {
                   ))}
             </Slider>
           </Grid>
-          <Grid item md={7} xs={12}>
-            <Container>
+          <Grid item md={5} xs={12}>
+            <>
               {menuDetail && (
                 <>
-                  <Typography sx={{ fontWeight: "bolder", fontSize: "34px" }}>
+                  <Typography sx={{ fontWeight: "bolder", fontSize: "28px" }}>
                     {menuDetail.title}
                   </Typography>
                   {!!menuDetail.price && (
@@ -120,7 +119,7 @@ function ProductDetail() {
                   <Typography sx={{ mt: 2 }}>
                     By &nbsp;
                     <span style={{ textDecoration: "underline" }}>
-                      Shindhu's Kitchen
+                      Sindhu's Kitchen
                     </span>
                   </Typography>
                   <Divider sx={{ margin: "10px 0" }} />
@@ -135,27 +134,6 @@ function ProductDetail() {
                       {menuDetail.description}
                     </Typography>
                   </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: "18px",
-                      fontWeight: "500",
-                      margin: "5px 0",
-                    }}
-                  >
-                    Net Weight
-                  </Typography>
-                  <Box
-                    sx={{
-                      border: "1.5px solid #57ccb5",
-                      borderRadius: "5px",
-                      maxWidth: "70px",
-                      textAlign: "center",
-                      p: 1.2,
-                      mt: 1,
-                    }}
-                  >
-                    {menuDetail.netWeight} lb
-                  </Box>
 
                   {menuDetail.servingSizeDescription && (
                     <Typography
@@ -177,8 +155,7 @@ function ProductDetail() {
                   )}
 
                   {menuDetail.servingSizesWithPrice &&
-                    menuDetail.servingSizesWithPrice.length > 0 &&
-                    menuDetail.servingSizesWithPrice.map((size, index) => (
+                    menuDetail.servingSizesWithPrice.length > 0 && (
                       <>
                         <Typography
                           sx={{
@@ -189,24 +166,26 @@ function ProductDetail() {
                         >
                           Serving Sizes
                         </Typography>
-                        <Typography
-                          sx={{ fontSize: "small", display: "flex" }}
-                          key={index}
-                        >
-                          {size.size} -
-                          <span style={{ fontWeight: "bolder" }}>
-                            &nbsp; [${size.price}]
-                          </span>
-                        </Typography>
+                        {menuDetail.servingSizesWithPrice.map((size, index) => (
+                          <Typography
+                            sx={{ fontSize: "small", display: "flex" }}
+                            key={index}
+                          >
+                            {size.size} -
+                            <span style={{ fontWeight: "bolder" }}>
+                              &nbsp; [${size.price}]
+                            </span>
+                          </Typography>
+                        ))}
                       </>
-                    ))}
+                    )}
                 </>
               )}
-            </Container>
+            </>
           </Grid>
         </Grid>
-      </Container>
-    </>
+      </Box>
+    </Container>
   );
 }
 
