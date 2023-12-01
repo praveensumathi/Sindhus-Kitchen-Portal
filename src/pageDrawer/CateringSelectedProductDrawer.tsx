@@ -35,7 +35,6 @@ function CateringSelectedProductDrawer(props: IProps) {
       open={isOpen}
       sx={{
         position: "relative",
-        zIndex: 10,
         "& .MuiDrawer-paper": {
           boxSizing: "border-box",
           width: "30vw",

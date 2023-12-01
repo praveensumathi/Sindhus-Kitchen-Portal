@@ -90,7 +90,8 @@ function NavBar() {
       <CssBaseline />
       <AppBar
         sx={{
-          zIndex: (theme) => theme.zIndex.drawer + 1,
+          // zIndex: (theme) => theme.zIndex.drawer + 1,
+          zIndex: 1100,
           backdropFilter: "blur(15px)",
           borderStyle: "solid",
           borderWidth: 0,
