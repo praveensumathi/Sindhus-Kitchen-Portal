@@ -5,43 +5,109 @@ import CateringProduct from "./CateringProduct";
 import SearchBar from "./SearchBar";
 import Fade from "react-reveal/Fade";
 import { useState } from "react";
+import Rotate from "react-reveal/Rotate";
+import Grid from "@mui/material/Grid";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
 
 function CateringPage() {
+    const theme = useTheme();
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [selectedProductId, setSelectedProductId] = useState("");
+    const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>
-      <Box sx={{ height: "200px", position: "relative" }}>
+      <Box sx={{ position: "relative", height: "200px" }}>
         <Box
-          style={{
-            backgroundImage: "url('assets/images/sssurf7.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            transform: "rotate(180deg)",
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            zIndex: -1,
-            top: 0,
+          sx={{
+            mt: 3,
           }}
-        ></Box>
-        <Box>
-          <Fade top>
-            <Typography
+        >
+          <div
+            style={{
+              backgroundImage: "url('assets/images/sssurf7.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              transform: "rotate(180deg)",
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              zIndex: -1,
+              top: 0,
+            }}
+          ></div>
+
+          <Grid container spacing={3} sx={{ overflow: "hidden" }}>
+            {!isBelowMediumScreen && (
+              <Grid
+                item
+                xs={3}
+                sx={{
+                  position: "relative",
+                  display: "block",
+                }}
+              >
+                <Rotate top left>
+                  <img
+                    src="/assets/images/wave-vegetables.png"
+                    alt="sweets"
+                    height={"140px"}
+                    style={{
+                      borderRadius: "50px",
+                      position: "absolute",
+                      left: "-35px",
+                      top: 5,
+                    }}
+                  />
+                </Rotate>
+              </Grid>
+            )}
+            <Grid
+              item
+              xs={12}
+              lg={6}
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "flex-start",
-                color: "white",
-                fontWeight: 600,
-                fontSize: "2rem",
-                pt: 3,
+                height: "150px",
               }}
             >
-              Catering Menu
-            </Typography>
-          </Fade>
+              <Fade top>
+                <Typography
+                  variant="h4"
+                  sx={{ color: "white", fontWeight: 600 }}
+                >
+                  Catering Menu
+                </Typography>
+              </Fade>
+            </Grid>
+            {!isBelowMediumScreen && (
+              <Grid
+                item
+                xs={3}
+                sx={{
+                  position: "relative",
+                  display: "block",
+                }}
+              >
+                <Rotate top right>
+                  <img
+                    src="/assets/images/wave-spices.png"
+                    alt="savouries"
+                    height={"150px"}
+                    style={{
+                      borderRadius: "50px",
+                      position: "absolute",
+                      right: "-60px",
+                      top: 4,
+                    }}
+                  />
+                </Rotate>
+              </Grid>
+            )}
+          </Grid>
         </Box>
       </Box>
       <Container>
