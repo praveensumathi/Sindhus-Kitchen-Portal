@@ -97,14 +97,14 @@ function CateringSelectedProductDrawer(props: IProps) {
                       padding: "15px",
                     }}
                   >
-                    <CardMedia
-                      sx={{
-                        width: "100px",
-                        height: "100px",
-                      }}
-                      image={product.posterURL}
-                      component={"img"}
-                    />
+                      <CardMedia
+                        sx={{
+                          width: "100px",
+                          height: "100px",
+                        }}
+                        image={product.posterURL}
+                        component={"img"}
+                      />
                   </Grid>
                   <Grid item xs={8}>
                     <Box>
@@ -112,6 +112,9 @@ function CateringSelectedProductDrawer(props: IProps) {
                         sx={{
                           fontSize: "large",
                           fontWeight: 600,
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {product.title}
@@ -127,7 +130,6 @@ function CateringSelectedProductDrawer(props: IProps) {
                                       <TableCell
                                         style={{
                                           padding: 1,
-                                          textAlign: "center",
                                         }}
                                       >
                                         Size
@@ -135,7 +137,6 @@ function CateringSelectedProductDrawer(props: IProps) {
                                       <TableCell
                                         style={{
                                           padding: 1,
-                                          textAlign: "center",
                                         }}
                                       >
                                         Quantity
@@ -148,7 +149,6 @@ function CateringSelectedProductDrawer(props: IProps) {
                                         <TableCell
                                           style={{
                                             padding: 1,
-                                            textAlign: "center",
                                           }}
                                         >
                                           {sizeInfo.size}
@@ -156,7 +156,6 @@ function CateringSelectedProductDrawer(props: IProps) {
                                         <TableCell
                                           style={{
                                             padding: 1,
-                                            textAlign: "center",
                                           }}
                                         >
                                           {sizeInfo.qty}

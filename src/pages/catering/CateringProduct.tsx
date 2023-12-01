@@ -382,6 +382,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
             <Badge badgeContent={badgeContent} color="primary">
               <LocalDiningOutlinedIcon
                 sx={{
+                  cursor: "pointer",
                   color: "white",
                   borderRadius: "50%",
                   backgroundColor: "black",
