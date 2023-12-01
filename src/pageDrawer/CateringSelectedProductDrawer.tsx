@@ -18,6 +18,8 @@ import {
   ISelectedCateringProduct,
   IServingSizeWithQuantity,
 } from "../interface/types";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
 
 interface IProps {
   isOpen: boolean;
@@ -27,31 +29,28 @@ interface IProps {
 }
 
 function CateringSelectedProductDrawer(props: IProps) {
+  const theme = useTheme();
   const { isOpen, handleClose, productInfo, productQuantities } = props;
+
+  const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Drawer
       anchor="right"
       open={isOpen}
-      sx={{
-        position: "relative",
-        "& .MuiDrawer-paper": {
-          boxSizing: "border-box",
-          width: "30vw",
+      PaperProps={{
+        sx: {
+          width: isBelowMediumSize ? "100vw" : "30vw",
           height: "100vh",
         },
-        "@media (max-width: 600px)": {
-          "& .MuiDrawer-paper": {
-            width: "100vw",
-            height: "100vh",
-          },
-        },
+      }}
+      sx={{
+        position: "relative",
       }}
     >
-      <Box>
+      <>
         <Box
           sx={{
-            zIndex: 1,
             padding: 2,
             height: "50px",
             display: "flex",
@@ -68,35 +67,36 @@ function CateringSelectedProductDrawer(props: IProps) {
         </Box>
         <Divider />
         <Container>
-          {productInfo.map((product, index) => (
-            <Box
-              my={1}
-              key={index}
-              sx={{
-                borderBottom:
-                  index === productInfo.length - 1
-                    ? "none"
-                    : "1px solid #eeeeee",
-              }}
-            >
-              <Card
+          {productInfo.length > 0 &&
+            productInfo.map((product, index) => (
+              <Box
+                my={1}
+                key={index}
                 sx={{
-                  height: "8rem",
+                  borderBottom:
+                    index === productInfo.length - 1
+                      ? "none"
+                      : "1px solid #eeeeee",
                 }}
-                elevation={0}
               >
-                <Grid
-                  container
-                  spacing={2}
-                  sx={{ display: "flex", justifyContent: "space-between" }}
+                <Card
+                  sx={{
+                    height: "8rem",
+                  }}
+                  elevation={0}
                 >
                   <Grid
-                    item
-                    xs={4}
-                    sx={{
-                      padding: "15px",
-                    }}
+                    container
+                    spacing={2}
+                    sx={{ display: "flex", justifyContent: "space-between" }}
                   >
+                    <Grid
+                      item
+                      xs={4}
+                      sx={{
+                        padding: "15px",
+                      }}
+                    >
                       <CardMedia
                         sx={{
                           width: "100px",
@@ -105,79 +105,78 @@ function CateringSelectedProductDrawer(props: IProps) {
                         image={product.posterURL}
                         component={"img"}
                       />
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontSize: "large",
+                            fontWeight: 600,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {product.title}
+                        </Typography>
+                        {productQuantities.length > 0 &&
+                          productQuantities.map(
+                            (item) =>
+                              item.productId === product._id && (
+                                <Box key={item.productId}>
+                                  <TableContainer>
+                                    <Table sx={{ width: "80%" }}>
+                                      <TableHead>
+                                        <TableRow>
+                                          <TableCell
+                                            style={{
+                                              padding: 1,
+                                            }}
+                                          >
+                                            Size
+                                          </TableCell>
+                                          <TableCell
+                                            style={{
+                                              padding: 1,
+                                            }}
+                                          >
+                                            Quantity
+                                          </TableCell>
+                                        </TableRow>
+                                      </TableHead>
+                                      <TableBody>
+                                        {item.sizes.map((sizeInfo) => (
+                                          <TableRow key={sizeInfo.size}>
+                                            <TableCell
+                                              style={{
+                                                padding: 1,
+                                              }}
+                                            >
+                                              {sizeInfo.size}
+                                            </TableCell>
+                                            <TableCell
+                                              style={{
+                                                padding: 1,
+                                              }}
+                                            >
+                                              {sizeInfo.qty}
+                                            </TableCell>
+                                          </TableRow>
+                                        ))}
+                                      </TableBody>
+                                    </Table>
+                                  </TableContainer>
+                                </Box>
+                              )
+                          )}
+                      </Box>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={8}>
-                    <Box>
-                      <Typography
-                        sx={{
-                          fontSize: "large",
-                          fontWeight: 600,
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {product.title}
-                      </Typography>
-                      {productQuantities.map((item) => {
-                        if (item.productId === product._id) {
-                          return (
-                            <div key={item.productId}>
-                              <TableContainer>
-                                <Table sx={{ width: "80%" }}>
-                                  <TableHead>
-                                    <TableRow>
-                                      <TableCell
-                                        style={{
-                                          padding: 1,
-                                        }}
-                                      >
-                                        Size
-                                      </TableCell>
-                                      <TableCell
-                                        style={{
-                                          padding: 1,
-                                        }}
-                                      >
-                                        Quantity
-                                      </TableCell>
-                                    </TableRow>
-                                  </TableHead>
-                                  <TableBody>
-                                    {item.sizes.map((sizeInfo) => (
-                                      <TableRow key={sizeInfo.size}>
-                                        <TableCell
-                                          style={{
-                                            padding: 1,
-                                          }}
-                                        >
-                                          {sizeInfo.size}
-                                        </TableCell>
-                                        <TableCell
-                                          style={{
-                                            padding: 1,
-                                          }}
-                                        >
-                                          {sizeInfo.qty}
-                                        </TableCell>
-                                      </TableRow>
-                                    ))}
-                                  </TableBody>
-                                </Table>
-                              </TableContainer>
-                            </div>
-                          );
-                        }
-                        return null;
-                      })}
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Card>
-            </Box>
-          ))}
+                </Card>
+              </Box>
+            ))}
         </Container>
-      </Box>
+      </>
     </Drawer>
   );
 }
