@@ -63,13 +63,13 @@ function SnacksPage() {
               >
                 <Rotate top left>
                   <img
-                    src="assets/images/sweets.png"
+                    src="/assets/images/wave-sweets.png"
                     alt="sweets"
                     height={"140px"}
                     style={{
                       borderRadius: "50px",
                       position: "absolute",
-                      left: "-40px",
+                      left: "-5px",
                       top: 5,
                     }}
                   />
@@ -107,13 +107,13 @@ function SnacksPage() {
               >
                 <Rotate top right>
                   <img
-                    src="assets/images/butter-cookies.png"
+                    src="/assets/images/wave-karam.png"
                     alt="savouries"
                     height={"150px"}
                     style={{
                       borderRadius: "50px",
                       position: "absolute",
-                      right: "-80px",
+                      right: "-25px",
                       top: 4,
                     }}
                   />

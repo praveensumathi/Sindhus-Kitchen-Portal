@@ -49,7 +49,17 @@ function CommonProductCard(props: IProps) {
           />
         </Box>
         <CardContent>
-          <Typography variant="body1" sx={{ fontWeight: 600 }} component="div">
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: 600,
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              WebkitLineClamp: 2,
+            }}
+            component="div"
+          >
             {product.title}
           </Typography>
           {props.menuType && props.menuType == MenuType.OTHERS ? (
