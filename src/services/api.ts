@@ -126,9 +126,20 @@ const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
   }
 };
 
+type PaginationInfo<T> = {
+  items: T[];
+  pageInfo: {
+    page: number;
+    pageSize: number;
+    totalItems: number;
+    totalPages: number;
+  };
+};
+
 const fetchProductByCateringMenu = async (
   menuId?: string,
-  productId?: string
+  productId?: string,
+  page?: number
 ) => {
   try {
     var cateringMenus = "/product/fetchProductsByCateringMenu";
@@ -139,9 +150,13 @@ const fetchProductByCateringMenu = async (
       cateringMenus += `/${menuId}`;
     }
 
-    const response = await httpWithoutCredentials.get<ICateringMenu>(
-      cateringMenus
-    );
+    const response = await httpWithoutCredentials.get<
+      PaginationInfo<ICateringMenu>
+    >(cateringMenus, {
+      params: {
+        page,
+      },
+    });
 
     return response.data;
   } catch (error) {

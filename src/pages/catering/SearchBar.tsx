@@ -28,7 +28,10 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
 
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
   const { data: cateringProducts = [], refetch: refetchProductData } =
-    useCateringfetchProductData(selectedMenuId, productValue?.title ?? "");
+    useCateringfetchProductData(
+      selectedMenuId,
+      productValue?.title ?? ""
+    );
 
   const clearSearch = async () => {
     onSelectMenu("");
