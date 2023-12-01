@@ -25,8 +25,8 @@ const getAllMenus = async () => {
 };
 
 const cateringfetchProductData = async (
-  menuId: string | undefined,
-  searchTerm: string
+  menuId: string = "",
+  searchTerm: string = ""
 ) => {
   try {
     let cateringPageProduct = `/product/searchProduct`;
@@ -113,8 +113,8 @@ const getfetchProductsByMenuId = async (menuId: string) => {
 };
 
 const getProductsByMenuIdWithSearchTerm = async (
-  selectedMenuId: string | undefined,
-  searchTerm: string
+  selectedMenuId: string = "",
+  searchTerm: string = ""
 ) => {
   try {
     let homePageProduct = `/product/searchProduct`;

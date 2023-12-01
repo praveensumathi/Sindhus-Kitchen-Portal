@@ -25,11 +25,12 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   );
   const [menuValue, setMenuValue] = useState<IMenuAutoComplete | null>(null);
   const [selectedMenuId, setSelectedMenuId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
 
   const { data: cateringProducts, refetch: refetchProductData } =
-    useCateringfetchProductData(selectedMenuId, productValue?.title ?? "");
+    useCateringfetchProductData(selectedMenuId, searchTerm);
 
   const clearSearch = async () => {
     onSelectMenu("");
@@ -61,12 +62,12 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
 
   useEffect(() => {
     if (
-      (selectedMenuId && !productValue?.title) ||
-      (!selectedMenuId && productValue?.title && productValue.title.length >= 3)
+      (selectedMenuId && !searchTerm) ||
+      (!selectedMenuId && searchTerm && searchTerm.length >= 3)
     ) {
       refetchProductData();
     }
-  }, [selectedMenuId, productValue?.title]);
+  }, [selectedMenuId, , searchTerm]);
 
   const handleProductSearch = (
     selectedProduct: IProductAutoComplete | null
@@ -78,6 +79,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   };
 
   const handleMenuChange = (selectedMenu: IMenuAutoComplete | null) => {
+    setSearchTerm("");
     if (selectedMenu) {
       if (menuValue?._id != selectedMenu._id) {
         setProductValue(null);
@@ -169,13 +171,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                   disableUnderline: true,
                   onChange: (event) => {
                     const newSearchTerm = event.target.value;
-
-                    setProductValue({
-                      _id: "",
-                      title: newSearchTerm,
-                      posterURL: "",
-                      label: newSearchTerm,
-                    });
+                    setSearchTerm(newSearchTerm);
                   },
                 }}
               />

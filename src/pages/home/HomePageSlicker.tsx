@@ -55,14 +55,14 @@ function HomePageSlicker() {
   }, [selectedMenuId, searchTerm]);
 
   const fetchProducts = async (
-    menuId: string | undefined,
-    searchTerm: string
+    menuId: string = "",
+    searchTerm: string = ""
   ) => {
     try {
       let response;
 
       if (searchTerm.length < 3 && !menuId) {
-        response = await getProductsByMenuIdWithSearchTerm(undefined, "");
+        response = await getProductsByMenuIdWithSearchTerm("", "");
       } else {
         response = await getProductsByMenuIdWithSearchTerm(menuId, searchTerm);
       }
@@ -79,7 +79,6 @@ function HomePageSlicker() {
         setProducts(products);
       } else {
         setProducts([]);
-        // setSearchTerm("");
       }
     } catch (error) {
       console.error("Error fetching products:", error);
