@@ -25,10 +25,12 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   );
   const [menuValue, setMenuValue] = useState<IMenuAutoComplete | null>(null);
   const [selectedMenuId, setSelectedMenuId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
-  const { data: cateringProducts = [], refetch: refetchProductData } =
-    useCateringfetchProductData(selectedMenuId, productValue?.title ?? "");
+
+  const { data: cateringProducts, refetch: refetchProductData } =
+    useCateringfetchProductData(selectedMenuId, searchTerm);
 
   const clearSearch = async () => {
     onSelectMenu("");
@@ -59,10 +61,13 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   };
 
   useEffect(() => {
-    if (selectedMenuId) {
+    if (
+      (selectedMenuId && !searchTerm) ||
+      (!selectedMenuId && searchTerm && searchTerm.length >= 3)
+    ) {
       refetchProductData();
     }
-  }, [selectedMenuId]);
+  }, [selectedMenuId, , searchTerm]);
 
   const handleProductSearch = (
     selectedProduct: IProductAutoComplete | null
@@ -74,6 +79,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   };
 
   const handleMenuChange = (selectedMenu: IMenuAutoComplete | null) => {
+    setSearchTerm("");
     if (selectedMenu) {
       if (menuValue?._id != selectedMenu._id) {
         setProductValue(null);
@@ -124,13 +130,17 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
               option.title == value.title
             }
             onChange={(_event, value) => handleProductSearch(value)}
-            options={cateringProducts.map(
-              (item) =>
-                ({
-                  ...item,
-                  label: item.title,
-                } as IProductAutoComplete)
-            )}
+            options={
+              cateringProducts
+                ? cateringProducts.map(
+                    (item) =>
+                      ({
+                        ...item,
+                        label: item.title,
+                      } as IProductAutoComplete)
+                  )
+                : []
+            }
             onInputChange={(_event, newInputValue) => {
               if (!newInputValue.trim()) {
                 setProductValue(null);
@@ -152,7 +162,19 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
               </li>
             )}
             renderInput={(params) => (
-              <TextField {...params} label="Select Food" variant="outlined" />
+              <TextField
+                {...params}
+                label="Select Food"
+                variant="outlined"
+                InputProps={{
+                  ...params.InputProps,
+                  disableUnderline: true,
+                  onChange: (event) => {
+                    const newSearchTerm = event.target.value;
+                    setSearchTerm(newSearchTerm);
+                  },
+                }}
+              />
             )}
           />
         </Grid>
