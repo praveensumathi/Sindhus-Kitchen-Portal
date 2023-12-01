@@ -150,11 +150,11 @@ const fetchProductByCateringMenu = async (
   }
 };
 
-const getMyBag = async (selectedProductIds: string[]) => {
+const getCateringBag = async (selectedProductIds: string[]) => {
   try {
     const response = await httpWithoutCredentials.post<
       ISelectedCateringProduct[]
-    >("product/getMyBag", selectedProductIds);
+    >("product/getCateringBag", selectedProductIds);
     return response.data;
   } catch (error) {
     throw error;
@@ -172,5 +172,5 @@ export {
   getProductsByMenuIdWithSearchTerm,
   getAllSnacksProductsWithSubMenu,
   fetchProductByCateringMenu,
-  getMyBag as getProductInfo,
+  getCateringBag,
 };
