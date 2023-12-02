@@ -66,7 +66,7 @@ export const useGetProductByCateringMenu = (
   page: number
 ) => {
   return useQuery({
-    queryKey: ["product"],
+    queryKey: ["productsByPagination"],
     queryFn: () =>
       fetchProductByCateringMenu(selectedMenuId, selectedProductId, page),
     refetchOnWindowFocus: false,
