@@ -17,6 +17,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { sendCateringRequest } from "../../services/api";
+import { format } from 'date-fns';
+
 
 
 
@@ -30,7 +32,6 @@ interface IProps {
 interface ICombinedProduct {
   productId: string;
   title: string;
-  image: string;
   quantities: {
     size: string[];
     quantity: number[];
@@ -60,7 +61,6 @@ function CateringRequestModel(props: IProps) {
       return {
         productId: product._id,
         title: product.title,
-        image: product.posterURL,
         quantities: matchingQuantities.map((item) => ({
           size: item.sizes.map((sizeInfo) => sizeInfo.size),
           quantity: item.sizes.map((sizeInfo) => sizeInfo.qty),
@@ -72,12 +72,13 @@ function CateringRequestModel(props: IProps) {
   }, [productInfo, productQuantities]);
 
 
-  const handleSubmit = () => {
-     sendCateringRequest(userData, combinedProducts);
-     console.log("Submitted Data:", userData);
-         console.log("Combined Products:", combinedProducts);
-  };
-  
+ const handleSubmit = async () => {
+   try {
+     await sendCateringRequest(userData, combinedProducts);
+   } catch (error) {
+     console.error("Error submitting data:", error);
+   }
+ };
 
   
   return (
@@ -104,14 +105,12 @@ function CateringRequestModel(props: IProps) {
             label="Name"
             variant="outlined"
             fullWidth
-            required
             onChange={(e) => handleChange("name", e.target.value)}
           />
           <TextField
             label="phoneNumber"
             variant="outlined"
             fullWidth
-            required
             onChange={(e) => handleChange("phoneNumber", e.target.value)}
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>

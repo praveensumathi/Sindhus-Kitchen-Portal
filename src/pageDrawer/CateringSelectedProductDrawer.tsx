@@ -32,7 +32,7 @@ interface IProps {
 }
 
 function CateringSelectedProductDrawer(props: IProps) {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const theme = useTheme();
   const { isOpen, handleClose, productInfo, productQuantities } = props;
@@ -192,6 +192,9 @@ function CateringSelectedProductDrawer(props: IProps) {
       </>
       <Box
         sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
           position: "fixed",
           bottom: 10,
         }}
