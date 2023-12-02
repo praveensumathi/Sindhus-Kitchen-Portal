@@ -10,6 +10,7 @@ import {
   IMenuList,
   IProduct,
   IProductDropDownData,
+  PaginationInfo,
 } from "./../interface/types";
 import { httpWithoutCredentials } from "./http";
 
@@ -153,15 +154,7 @@ const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
   }
 };
 
-type PaginationInfo<T> = {
-  items: T[];
-  pageInfo: {
-    page: number;
-    pageSize: number;
-    totalItems: number;
-    totalPages: number;
-  };
-};
+
 
 const fetchProductByCateringMenu = async (
   menuId?: string,
