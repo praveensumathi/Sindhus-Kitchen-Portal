@@ -13,7 +13,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { getCateringBag, } from "../../services/api";
+import { getCateringBag } from "../../services/api";
 import {
   ICateringMenu,
   ISelectedCateringProduct,
@@ -63,7 +63,6 @@ function CateringProduct({
       } else {
         setCateringData([...cateringResponse.items]);
       }
-
       setHasMore(menuLength > cateringResponse.pageInfo.page);
     }
   }, [cateringResponse?.items]);
@@ -80,7 +79,6 @@ function CateringProduct({
 
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          console.log("hello");
           setPageNum((prev) => prev + 1);
         }
       });
@@ -166,24 +164,6 @@ function CateringProduct({
       return updatedQuantities;
     });
   };
-
-  // const fetchProductsByCateringMenu = async (
-  //   menuId: string,
-  //   productId: string
-  // ) => {
-  //   try {
-  //     const selectedProduct = await fetchProductByCateringMenu(
-  //       menuId,
-  //       productId
-  //     );
-  //     const updatedCateringData = Array.isArray(selectedProduct)
-  //       ? selectedProduct
-  //       : [selectedProduct];
-  //     setCateringData(updatedCateringData[0].items);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
 
   const handleSubmit = async () => {
     try {
