@@ -9,6 +9,7 @@ import { useState } from "react";
 function CateringPage() {
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [selectedProductId, setSelectedProductId] = useState("");
+  const [menuLength, setMenuLength] = useState(0);
 
   return (
     <>
@@ -50,11 +51,15 @@ function CateringPage() {
           onSelectProduct={(productId: string) =>
             setSelectedProductId(productId)
           }
+          onCateringMenusLength={(menuLength: number) =>
+            setMenuLength(menuLength)
+          }
         />
       </Container>
       <CateringProduct
         selectedMenuId={selectedMenuId}
         selectedProductId={selectedProductId}
+        menuLength={menuLength}
       />
     </>
   );

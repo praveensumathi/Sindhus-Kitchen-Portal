@@ -13,7 +13,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { fetchProductByCateringMenu, getProductInfo } from "../../services/api";
+import { getProductInfo } from "../../services/api";
 import {
   ICateringMenu,
   ISelectedCateringProduct,
@@ -24,14 +24,18 @@ import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import NoProductsAvailable from "../../common/component/NoProductsAvailable";
 import { useGetProductByCateringMenu } from "../../customRQHooks/Hooks";
-import { useInView } from "react-intersection-observer";
 
 interface IProps {
   selectedMenuId: string;
   selectedProductId: string;
+  menuLength: number;
 }
 
-function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
+function CateringProduct({
+  selectedMenuId,
+  selectedProductId,
+  menuLength,
+}: IProps) {
   const [cateringData, setCateringData] = useState<ICateringMenu[]>([]);
   const [productQuantities, setProductQuantities] = useState<
     IServingSizeWithQuantity[]
@@ -49,7 +53,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
 
   useEffect(() => {
     if (cateringResponse && cateringResponse.items) {
-      debugger;
       if (!selectedMenuId && !selectedProductId && pageNum >= 1) {
         if (pageNum == 1) {
           setCateringData([...cateringResponse.items]);
@@ -61,9 +64,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
         setCateringData([...cateringResponse.items]);
       }
 
-      setHasMore(
-        cateringResponse.pageInfo.totalPages > cateringResponse.pageInfo.page
-      );
+      setHasMore(menuLength > cateringResponse.pageInfo.page);
     }
   }, [cateringResponse?.items]);
 
@@ -414,8 +415,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
         {!selectedMenuId && !selectedProductId && (
           <Box
             ref={
-              cateringResponse?.pageInfo.page ??
-              0 < (cateringResponse?.pageInfo?.totalPages ?? 0)
+              cateringResponse?.pageInfo.page ?? 0 < (menuLength ?? 0)
                 ? lastElementRef
                 : null
             }
