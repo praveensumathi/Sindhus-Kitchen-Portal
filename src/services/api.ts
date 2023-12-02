@@ -154,8 +154,6 @@ const getAllSnacksProductsWithSubMenu = async (subMenuId: string) => {
   }
 };
 
-
-
 const fetchProductByCateringMenu = async (
   menuId?: string,
   productId?: string,
@@ -164,17 +162,13 @@ const fetchProductByCateringMenu = async (
   try {
     var cateringMenus = "/product/fetchProductsByCateringMenu";
 
-    if (menuId && productId) {
-      cateringMenus += `/${menuId}/${productId}`;
-    } else if (menuId) {
-      cateringMenus += `/${menuId}`;
-    }
-
     const response = await httpWithoutCredentials.get<
       PaginationInfo<ICateringMenu>
     >(cateringMenus, {
       params: {
         page,
+        menuId,
+        productId,
       },
     });
 
