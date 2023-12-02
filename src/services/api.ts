@@ -188,6 +188,19 @@ const getCateringBag = async (selectedProductIds: string[]) => {
   }
 };
 
+
+const sendCateringRequest = async (userData, combinedProducts) => {
+  try {
+    const response = await httpWithoutCredentials.post(
+      "cateringUser/createCateringUser",
+      { userData, combinedProducts }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   getAllMenus,
   fetchProductById,
@@ -200,4 +213,5 @@ export {
   getAllSnacksProductsWithSubMenu,
   fetchProductByCateringMenu,
   getCateringBag,
+  sendCateringRequest,
 };

@@ -196,11 +196,14 @@ function CateringSelectedProductDrawer(props: IProps) {
           bottom: 10,
         }}
       >
-        <Button  onClick={handleSendNowClick}>
-          Send Now
-        </Button>
+        <Button onClick={handleSendNowClick}>Send Now</Button>
       </Box>
-      <CateringRequestModel open={isPopupOpen} onClose={handlePopupClose} />
+      <CateringRequestModel
+        open={isPopupOpen}
+        onClose={handlePopupClose}
+        productInfo={productInfo}
+        productQuantities={productQuantities}
+      />
     </Drawer>
   );
 }
