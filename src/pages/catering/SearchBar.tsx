@@ -30,16 +30,22 @@ function SearchBar({
   );
   const [menuValue, setMenuValue] = useState<IMenuAutoComplete | null>(null);
   const [selectedMenuId, setSelectedMenuId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isMenuClear, setIsMenuClear] = useState(false);
 
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
-  const { data: cateringProducts = [], refetch: refetchProductData } =
-    useCateringfetchProductData(selectedMenuId, productValue?.title ?? "");
+
+  const { data: cateringProducts, refetch: refetchProductData } =
+    useCateringfetchProductData(selectedMenuId, searchTerm);
 
   const clearSearch = async () => {
     onSelectMenu("");
     onSelectProduct("");
     setMenuValue(null);
     setProductValue(null);
+    setSelectedMenuId("");
+    setSearchTerm("");
+    setIsMenuClear(true);
   };
 
   useEffect(() => {
@@ -64,10 +70,16 @@ function SearchBar({
   };
 
   useEffect(() => {
-    if (selectedMenuId) {
+    if (
+      (selectedMenuId && !searchTerm) ||
+      (!selectedMenuId && searchTerm && searchTerm.length >= 3)
+    ) {
       refetchProductData();
     }
-  }, [selectedMenuId]);
+    if (isMenuClear && !selectedMenuId) {
+      refetchProductData();
+    }
+  }, [selectedMenuId, searchTerm, isMenuClear]);
 
   const handleProductSearch = (
     selectedProduct: IProductAutoComplete | null
@@ -75,18 +87,25 @@ function SearchBar({
     if (selectedProduct) {
       onSelectProduct(selectedProduct._id);
       setProductValue(selectedProduct);
+    } else {
+      setSelectedMenuId("");
     }
   };
 
   const handleMenuChange = (selectedMenu: IMenuAutoComplete | null) => {
+    setSearchTerm("");
+
     if (selectedMenu) {
-      if (menuValue?._id != selectedMenu._id) {
+      if (menuValue?._id !== selectedMenu._id) {
         setProductValue(null);
         onSelectProduct("");
       }
       setSelectedMenuId(selectedMenu._id);
       onSelectMenu(selectedMenu._id);
       setMenuValue(selectedMenu);
+    } else {
+      setSelectedMenuId("");
+      setProductValue(null);
     }
   };
 
@@ -110,10 +129,13 @@ function SearchBar({
                 } as IMenuAutoComplete)
             )}
             onChange={(_event, value) => handleMenuChange(value)}
-            onInputChange={(_event, newInputValue) => {
+            onInputChange={(_event, newInputValue, reason) => {
               if (!newInputValue.trim()) {
                 setMenuValue(null);
                 onSelectMenu("");
+              }
+              if (reason == "clear") {
+                setIsMenuClear(true);
               }
             }}
             isOptionEqualToValue={(option, value) =>
@@ -133,13 +155,17 @@ function SearchBar({
               option.title == value.title
             }
             onChange={(_event, value) => handleProductSearch(value)}
-            options={cateringProducts.map(
-              (item) =>
-                ({
-                  ...item,
-                  label: item.title,
-                } as IProductAutoComplete)
-            )}
+            options={
+              cateringProducts
+                ? cateringProducts.map(
+                    (item) =>
+                      ({
+                        ...item,
+                        label: item.title,
+                      } as IProductAutoComplete)
+                  )
+                : []
+            }
             onInputChange={(_event, newInputValue) => {
               if (!newInputValue.trim()) {
                 setProductValue(null);
@@ -161,7 +187,19 @@ function SearchBar({
               </li>
             )}
             renderInput={(params) => (
-              <TextField {...params} label="Select Food" variant="outlined" />
+              <TextField
+                {...params}
+                label="Select Food"
+                variant="outlined"
+                InputProps={{
+                  ...params.InputProps,
+                  disableUnderline: true,
+                  onChange: (event) => {
+                    const newSearchTerm = event.target.value;
+                    setSearchTerm(newSearchTerm || "");
+                  },
+                }}
+              />
             )}
           />
         </Grid>

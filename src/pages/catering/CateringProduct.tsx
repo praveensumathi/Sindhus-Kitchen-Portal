@@ -13,13 +13,13 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { getProductInfo } from "../../services/api";
+import { getCateringBag, } from "../../services/api";
 import {
   ICateringMenu,
   ISelectedCateringProduct,
   IServingSizeWithQuantity,
 } from "../../interface/types";
-import CateringSelectedProductDrawer from "../../common/component/CateringSelectedProductDrawer";
+import CateringSelectedProductDrawer from "../../pageDrawer/CateringSelectedProductDrawer";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import NoProductsAvailable from "../../common/component/NoProductsAvailable";
@@ -187,8 +187,9 @@ function CateringProduct({
 
   const handleSubmit = async () => {
     try {
-      const product = productQuantities.map((item) => item.productId);
-      const response = await getProductInfo(product);
+      const productIds = productQuantities.map((item) => item.productId);
+
+      const response = await getCateringBag(productIds);
       setProductInfo(response);
       setDrawerOpen(true);
     } catch (error) {
@@ -441,6 +442,7 @@ function CateringProduct({
             <Badge badgeContent={badgeContent} color="primary">
               <LocalDiningOutlinedIcon
                 sx={{
+                  cursor: "pointer",
                   color: "white",
                   borderRadius: "50%",
                   backgroundColor: "black",
@@ -449,6 +451,7 @@ function CateringProduct({
                   boxShadow: "0 0 0 2px white, 0 0 0 4px black",
                   fontSize: "3rem",
                 }}
+                onClick={handleSubmit}
               />
             </Badge>
           </Fade>
@@ -459,6 +462,7 @@ function CateringProduct({
         isOpen={isDrawerOpen}
         handleClose={handleCloseModal}
         productInfo={productInfo}
+        productQuantities={productQuantities}
       />
     </>
   );
