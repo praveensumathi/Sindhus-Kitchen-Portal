@@ -11,11 +11,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
 
 function CateringPage() {
-  const theme = useTheme();
+    const theme = useTheme();
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [selectedProductId, setSelectedProductId] = useState("");
-  const [menuLength, setMenuLength] = useState(0);
-  const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+    const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>
@@ -117,15 +116,11 @@ function CateringPage() {
           onSelectProduct={(productId: string) =>
             setSelectedProductId(productId)
           }
-          onCateringMenusLength={(menuLength: number) =>
-            setMenuLength(menuLength)
-          }
         />
       </Container>
       <CateringProduct
         selectedMenuId={selectedMenuId}
         selectedProductId={selectedProductId}
-        menuLength={menuLength}
       />
     </>
   );
