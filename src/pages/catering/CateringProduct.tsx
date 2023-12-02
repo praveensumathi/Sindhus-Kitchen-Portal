@@ -28,13 +28,13 @@ import { useGetProductByCateringMenu } from "../../customRQHooks/Hooks";
 interface IProps {
   selectedMenuId: string;
   selectedProductId: string;
-  menuLength: number;
+  totalMenuCount: number;
 }
 
 function CateringProduct({
   selectedMenuId,
   selectedProductId,
-  menuLength,
+  totalMenuCount,
 }: IProps) {
   const [cateringData, setCateringData] = useState<ICateringMenu[]>([]);
   const [productQuantities, setProductQuantities] = useState<
@@ -63,7 +63,7 @@ function CateringProduct({
       } else {
         setCateringData([...cateringResponse.items]);
       }
-      setHasMore(menuLength > cateringResponse.pageInfo.page);
+      setHasMore(totalMenuCount > cateringResponse.pageInfo.page);
     }
   }, [cateringResponse?.items]);
 
@@ -396,7 +396,7 @@ function CateringProduct({
         {!selectedMenuId && !selectedProductId && (
           <Box
             ref={
-              cateringResponse?.pageInfo.page ?? 0 < (menuLength ?? 0)
+              cateringResponse?.pageInfo.page ?? 0 < (totalMenuCount ?? 0)
                 ? lastElementRef
                 : null
             }

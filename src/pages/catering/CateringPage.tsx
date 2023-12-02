@@ -117,7 +117,7 @@ function CateringPage() {
           onSelectProduct={(productId: string) =>
             setSelectedProductId(productId)
           }
-          onCateringMenusLength={(menuLength: number) =>
+          onSetCateringMenusLength={(menuLength: number) =>
             setMenuLength(menuLength)
           }
         />
@@ -125,7 +125,7 @@ function CateringPage() {
       <CateringProduct
         selectedMenuId={selectedMenuId}
         selectedProductId={selectedProductId}
-        menuLength={menuLength}
+        totalMenuCount={menuLength}
       />
     </>
   );
