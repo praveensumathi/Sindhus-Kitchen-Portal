@@ -20,9 +20,10 @@ import {
 } from "../interface/types";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
-import { Button } from "@mui/base";
 import { useState } from "react";
 import CateringRequestModel from "../common/component/CateringRequestModel";
+import Button from "@mui/material/Button";
+
 
 interface IProps {
   isOpen: boolean;
@@ -195,11 +196,13 @@ function CateringSelectedProductDrawer(props: IProps) {
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          position: "fixed",
-          bottom: 10,
+          position:"absolute",
+          bottom: 20,
         }}
       >
-        <Button onClick={handleSendNowClick}>Send Now</Button>
+        <Button variant="contained" onClick={handleSendNowClick}>
+          Send Now
+        </Button>
       </Box>
       <CateringRequestModel
         open={isPopupOpen}

@@ -14,10 +14,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ISelectedCateringProduct, IServingSizeWithQuantity } from "../../interface/types";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import dayjs from "dayjs";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { sendCateringRequest } from "../../services/api";
-import { format } from 'date-fns';
+import { SnackbarSeverityEnum } from "../../enums/SnackbarSeverityEnum";
+import { useSnackBar } from "../../context/SnackBarContext";
+import { Container } from "@mui/system";
+
 
 
 
@@ -40,6 +42,8 @@ interface ICombinedProduct {
 
 function CateringRequestModel(props: IProps) {
   const { open, onClose, productInfo, productQuantities } = props;
+    const { updateSnackBarState } = useSnackBar();
+
 
    const [userData, setUserData] = useState({
      name: "",
@@ -75,8 +79,18 @@ function CateringRequestModel(props: IProps) {
  const handleSubmit = async () => {
    try {
      await sendCateringRequest(userData, combinedProducts);
+      updateSnackBarState(
+        true,
+        "Request Send successfully",
+        SnackbarSeverityEnum.SUCCESS
+     );
+     onClose();
    } catch (error) {
-     console.error("Error submitting data:", error);
+     updateSnackBarState(
+       true,
+       "Error while submitting the catering Reuest",
+       SnackbarSeverityEnum.ERROR
+     );
    }
  };
 
@@ -105,16 +119,19 @@ function CateringRequestModel(props: IProps) {
             label="Name"
             variant="outlined"
             fullWidth
+            sx={{ mt: 1 }}
             onChange={(e) => handleChange("name", e.target.value)}
           />
           <TextField
             label="phoneNumber"
             variant="outlined"
             fullWidth
+            sx={{ mt: 1 }}
             onChange={(e) => handleChange("phoneNumber", e.target.value)}
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
+              sx={{ width: "100%", mt: 1 }}
               format="dd-MM-yyyy"
               value={userData.eventDate}
               onChange={(date) => handleChange("eventDate", date)}
@@ -122,10 +139,16 @@ function CateringRequestModel(props: IProps) {
           </LocalizationProvider>
         </Box>
       </DialogContent>
+      <Container sx={{padding:0,mb:2}}>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSubmit}>Submit</Button>
-      </DialogActions>
+          <Button variant="outlined" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            confirm
+          </Button>
+    </DialogActions>
+    </Container>
     </Dialog>
   );
 }
