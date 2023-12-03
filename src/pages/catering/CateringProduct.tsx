@@ -241,7 +241,7 @@ function CateringProduct({
                           padding: "20px",
                         }}
                       >
-                        <Typography sx={{ fontWeight: "600" }}>
+                        <Typography sx={{ fontWeight: "600",fontSize:"1.5rem",marginBottom:"8px" }}>
                           {product.title}
                         </Typography>
 
