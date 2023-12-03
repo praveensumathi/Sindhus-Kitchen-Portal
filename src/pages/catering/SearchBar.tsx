@@ -16,13 +16,11 @@ import { useCateringfetchProductData } from "../../customRQHooks/Hooks";
 interface IProps {
   onSelectMenu(menuId: string): void;
   onSelectProduct(productId: string): void;
-  onSetCateringMenusLength(menuLength: number): void;
 }
 
 function SearchBar({
   onSelectMenu,
   onSelectProduct,
-  onSetCateringMenusLength,
 }: IProps) {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
   const [productValue, setProductValue] = useState<IProductAutoComplete | null>(
@@ -67,7 +65,6 @@ function SearchBar({
     );
 
     setCateringMenus([...filteredMenus]);
-    onSetCateringMenusLength(cateringMenus.length);
   };
 
   useEffect(() => {
