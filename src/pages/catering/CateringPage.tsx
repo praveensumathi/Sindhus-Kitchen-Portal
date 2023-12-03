@@ -11,10 +11,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
 
 function CateringPage() {
-    const theme = useTheme();
+  const theme = useTheme();
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [selectedProductId, setSelectedProductId] = useState("");
-    const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>

@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import Badge from "@mui/material/Badge";
@@ -13,7 +13,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { fetchProductByCateringMenu, getCateringBag, } from "../../services/api";
+import { getCateringBag } from "../../services/api";
 import {
   ICateringMenu,
   ISelectedCateringProduct,
@@ -23,6 +23,7 @@ import CateringSelectedProductDrawer from "../../pageDrawer/CateringSelectedProd
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import NoProductsAvailable from "../../common/component/NoProductsAvailable";
+import { useGetProductByCateringMenu } from "../../customRQHooks/Hooks";
 
 interface IProps {
   selectedMenuId: string;
@@ -39,9 +40,54 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     []
   );
   const [badgeContent, setBadgeContent] = useState(0);
+  const [pageNum, setPageNum] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+
+  const { data: cateringResponse, refetch: refetchProducts } =
+    useGetProductByCateringMenu(selectedMenuId, selectedProductId, pageNum);
 
   useEffect(() => {
-    fetchProductsByCateringMenu(selectedMenuId, selectedProductId);
+    if (cateringResponse && cateringResponse.items) {
+      if (!selectedMenuId && !selectedProductId && pageNum >= 1) {
+        if (pageNum == 1) {
+          setCateringData([...cateringResponse.items]);
+        } else if (pageNum > 1) {
+          var result = [...cateringData, ...cateringResponse.items];
+          setCateringData([...result]);
+        }
+      } else {
+        setCateringData([...cateringResponse.items]);
+      }
+      setHasMore(
+        cateringResponse.pageInfo.totalPages > cateringResponse.pageInfo.page
+      );
+    }
+  }, [cateringResponse?.items]);
+
+  useEffect(() => {
+    refetchProducts();
+  }, [pageNum]);
+
+  const observer: any = useRef();
+
+  const lastElementRef = useCallback(
+    (node: any) => {
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPageNum((prev) => prev + 1);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [hasMore]
+  );
+
+  useEffect(() => {
+    if (!selectedMenuId || !selectedProductId) setPageNum(1);
+    refetchProducts();
   }, [selectedMenuId, selectedProductId]);
 
   useEffect(() => {
@@ -114,25 +160,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
 
       return updatedQuantities;
     });
-  };
-
-  const fetchProductsByCateringMenu = async (
-    menuId: string,
-    productId: string
-  ) => {
-    try {
-      const selectedProduct = await fetchProductByCateringMenu(
-        menuId,
-        productId
-      );
-      const updatedCateringData = Array.isArray(selectedProduct)
-        ? selectedProduct
-        : [selectedProduct];
-
-      setCateringData(updatedCateringData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
   };
 
   const handleSubmit = async () => {
@@ -211,7 +238,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                           padding: "20px",
                         }}
                       >
-                        <Typography sx={{ fontWeight: "600" }}>
+                        <Typography sx={{ fontWeight: "600",fontSize:"1.5rem",marginBottom:"8px" }}>
                           {product.title}
                         </Typography>
 
@@ -361,6 +388,17 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
               </Grid>
             </Box>
           ))
+        )}
+
+        {!selectedMenuId && !selectedProductId && (
+          <Box
+            ref={
+              cateringResponse?.pageInfo.page ??
+              0 < (cateringResponse?.pageInfo.totalPages ?? 0)
+                ? lastElementRef
+                : null
+            }
+          ></Box>
         )}
       </Container>
 
