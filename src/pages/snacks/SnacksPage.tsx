@@ -124,7 +124,7 @@ function SnacksPage() {
         </Box>
       </Box>
       <Container sx={{ mb: 2 }}>
-       
+      
           <SnacksMenuItem
             onSubMenuClick={handleSubMenuClick}
             snacksSubMenus={snacksPageData?.subMenus ?? []}

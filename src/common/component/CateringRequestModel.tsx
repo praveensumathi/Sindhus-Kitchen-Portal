@@ -22,8 +22,6 @@ import { Container } from "@mui/system";
 
 
 
-
-
 interface IProps {
   open: boolean;
   onClose: () => void;
@@ -35,8 +33,8 @@ interface ICombinedProduct {
   productId: string;
   title: string;
   quantities: {
-    size: string[];
-    quantity: number[];
+    size: string;
+    quantity: number;
   }[];
 }
 
@@ -57,18 +55,24 @@ function CateringRequestModel(props: IProps) {
   };
   
   useEffect(() => {
-    const combined: ICombinedProduct[] = productInfo.map((product) => {
+    const combined = productInfo.map((product) => {
       const matchingQuantities = productQuantities.filter(
         (item) => item.productId === product._id
       );
 
+      const quantities = matchingQuantities
+        .map((item) =>
+          item.sizes.map((sizeInfo) => ({
+            size: sizeInfo.size,
+            quantity: sizeInfo.qty,
+          }))
+        )
+        .flat();
+
       return {
         productId: product._id,
         title: product.title,
-        quantities: matchingQuantities.map((item) => ({
-          size: item.sizes.map((sizeInfo) => sizeInfo.size),
-          quantity: item.sizes.map((sizeInfo) => sizeInfo.qty),
-        })),
+        quantities: quantities,
       };
     });
 

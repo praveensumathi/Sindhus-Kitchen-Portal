@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
-import { useEffect, useState } from "react";
 
 interface IProps {
   onSubMenuClick(submenuId: string): void;
@@ -20,20 +19,6 @@ function SnacksMenuItem({
 }: IProps) {
   const theme = useTheme();
   const isBelowMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
-
-    const [isSticky, setIsSticky] = useState(false);
-
-    useEffect(() => {
-      const handleScroll = () => {
-        setIsSticky(window.scrollY > 70);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }, []);
-
 
   const settings = {
     infinite: false,
@@ -67,19 +52,8 @@ function SnacksMenuItem({
     ],
   };
 
-  
   return (
-    <Container
-      sx={{
-        position: "sticky",
-        top: "70px",
-        zIndex: "1000",
-        backgroundColor: isSticky ? theme.palette.primary.main : "white",
-        borderBottomLeftRadius: 50,
-        borderBottomRightRadius: 50,
-        py: 2,
-      }}
-    >
+    <Container>
       {snacksSubMenus && snacksSubMenus.length > 0 && (
         <Slider {...settings}>
           <Box>
@@ -89,7 +63,6 @@ function SnacksMenuItem({
                 border: "1px dashed",
                 borderRadius: "15px",
                 width: "120px",
-                color: isSticky ? "white" : "black",
               }}
               variant={!selectedSubMenuId ? "contained" : "outlined"}
             >
@@ -106,7 +79,6 @@ function SnacksMenuItem({
                     border: "1px dashed",
                     borderRadius: "15px",
                     width: "130px",
-                    color: isSticky ? "white" : "black",
                   }}
                   variant={
                     selectedSubMenuId == subMenu._id ? "contained" : "outlined"
