@@ -63,11 +63,19 @@ function CommonProductCard(props: IProps) {
             {product.title}
           </Typography>
           {props.menuType && props.menuType == MenuType.OTHERS ? (
-            <Typography variant="body2" color={theme.palette.primary.main}>
+            <Typography
+              variant="body2"
+              fontSize={"1.2rem"}
+              color={theme.palette.primary.main}
+            >
               ${product.servingSizeFirstPrice}
             </Typography>
           ) : (
-            <Typography variant="body2" color={theme.palette.primary.main}>
+            <Typography
+              variant="body2"
+              fontSize={"1.2rem"}
+              color={theme.palette.primary.main}
+            >
               ${product.price}
             </Typography>
           )}
