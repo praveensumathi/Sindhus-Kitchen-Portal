@@ -58,8 +58,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     description:
       "Our culinary creations start with the purest water in all our food and snacks preparation.",
     imageicon: "🌊",
-    image:
-      "https://img.freepik.com/free-photo/woman-holding-glass-filled-with-water_23-2148728797.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+    image: "/assets/images/purewatwer.png",
   },
   {
     id: 2,
@@ -67,8 +66,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     description:
       "Exclusively cold-pressed Sesame and Peanut oils enhance our dishes.",
     imageicon: "🥜",
-    image:
-      "https://img.freepik.com/premium-photo/peanut-oil-with-peanuts-isolated-white-surface_252965-909.jpg?w=996",
+    image: "assets/images/premiumOils.png",
   },
   {
     id: 3,
@@ -76,8 +74,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     description:
       "We curate our dishes with premium ingredients, some specially sourced from the heart of Tamil Nadu, India.",
     imageicon: "🌾",
-    image:
-      "https://img.freepik.com/free-photo/grinder-wooden-spoon-with-spices_23-2148601118.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+    image: "/assets/images/1source.png",
   },
   {
     id: 4,
@@ -85,8 +82,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     description:
       "Enjoy meals prepared on the very same day, using our own freshly made masalas and freshly cut vegetables.",
     imageicon: "🌿",
-    image:
-      "https://img.freepik.com/free-photo/top-view-fresh-red-tomatoes-with-greens-bell-peppers-dark-background_140725-137152.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+    image: "/assets/images/UnmatchedFreshness.png",
   },
   {
     id: 5,
@@ -94,8 +90,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     description:
       " Our commitment to traditional cooking techniques not only preserves nutrients but also enhances flavors.",
     imageicon: "🕰️",
-    image:
-      "https://img.freepik.com/free-photo/male-hands-preparing-delicious-salad_23-2148351765.jpg?w=1060&t=st=1698917780~exp=1698918380~hmac=d96e984ab5afa02ce46aae34c43e496a0f17df5bc2564b30e95cd84c104566f0.",
+    image: "/assets/images/Time-HonoredTradition.png",
   },
   {
     id: 6,
@@ -103,8 +98,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     description:
       "Rest assured, we never recycle our cooking oil, maintaining the highest quality standards.",
     imageicon: "♻️",
-    image:
-      "https://img.freepik.com/free-vector/waste-management-concept-illustration_114360-8795.jpg?size=626&ext=jpg&ga=GA1.1.1103622480.1683545544&semt=ais",
+    image: "/assets/images/qualityAssurance.png",
   },
 ];
 
