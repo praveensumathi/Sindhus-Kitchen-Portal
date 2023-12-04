@@ -92,7 +92,7 @@ function CateringRequestModel(props: IProps) {
    } catch (error) {
      updateSnackBarState(
        true,
-       "Error while submitting the catering Reuest",
+       "Error while submitting the catering Request",
        SnackbarSeverityEnum.ERROR
      );
    }
