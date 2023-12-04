@@ -97,7 +97,15 @@ function CateringRequestModel(props: IProps) {
      );
    }
  };
+ const handleCancel = () => {
+   setUserData({
+     name: "",
+     mobileNumber: "",
+     eventDate: null,
+   });
 
+   onClose();
+ };
   
   return (
     <Dialog open={open}>
@@ -143,16 +151,16 @@ function CateringRequestModel(props: IProps) {
           </LocalizationProvider>
         </Box>
       </DialogContent>
-      <Container sx={{padding:0,mb:2}}>
-      <DialogActions>
-          <Button variant="outlined" onClick={onClose}>
+      <Container sx={{ padding: 0, mb: 2 }}>
+        <DialogActions>
+          <Button variant="outlined" onClick={handleCancel}>
             Cancel
           </Button>
           <Button variant="contained" onClick={handleSubmit}>
             confirm
           </Button>
-    </DialogActions>
-    </Container>
+        </DialogActions>
+      </Container>
     </Dialog>
   );
 }
