@@ -215,6 +215,7 @@ function CateringProduct({
                           index === data.products.length - 1
                             ? "none"
                             : "1px solid #FFD580",
+                        mt: 2,
                       }}
                     >
                       <Grid item xs={12} lg={3}>
@@ -238,7 +239,8 @@ function CateringProduct({
                         xs={12}
                         lg={5}
                         sx={{
-                          padding: "20px",
+                          paddingLeft: "20px",
+                          mt: { xs: -2, md: 0 },
                         }}
                       >
                         <Typography sx={{ fontWeight: "600" }}>
@@ -249,7 +251,7 @@ function CateringProduct({
 
                         {product.servingSizeDescription && (
                           <Typography sx={{ mt: 2 }}>
-                            <b>servingSizeDescription</b>
+                            <b>ServingSize-Description</b>
                             <Typography
                               sx={{
                                 whiteSpace: "pre-line",

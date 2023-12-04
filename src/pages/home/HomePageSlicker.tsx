@@ -271,6 +271,11 @@ function HomePageSlicker() {
                 ...item,
                 label: item.title,
               }))}
+              onInputChange={(_event, newInputValue) => {
+                if (!newInputValue.trim()) {
+                  setSearchTerm("");
+                }
+              }}
               renderOption={(props, option) => (
                 <Link
                   to={`/detail/${option._id}`}

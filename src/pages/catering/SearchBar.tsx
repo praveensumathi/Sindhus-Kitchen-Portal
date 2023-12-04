@@ -101,6 +101,7 @@ function SearchBar({
         setProductValue(null);
         onSelectProduct("");
       }
+
       setSelectedMenuId(selectedMenu._id);
       onSelectMenu(selectedMenu._id);
       setMenuValue(selectedMenu);
@@ -153,17 +154,27 @@ function SearchBar({
             }
             onChange={(_event, value) => handleProductSearch(value)}
             options={
-              cateringProducts
-                ? cateringProducts.map(
+              (searchTerm && !selectedMenuId
+                ? cateringProducts?.map(
                     (item) =>
                       ({
                         ...item,
                         label: item.title,
                       } as IProductAutoComplete)
                   )
-                : []
+                : selectedMenuId
+                ? cateringProducts?.map(
+                    (item) =>
+                      ({
+                        ...item,
+                        label: item.title,
+                      } as IProductAutoComplete)
+                  )
+                : []) || []
             }
             onInputChange={(_event, newInputValue) => {
+              setSearchTerm(newInputValue.trim());
+
               if (!newInputValue.trim()) {
                 setProductValue(null);
                 onSelectProduct("");
