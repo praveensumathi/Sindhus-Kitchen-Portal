@@ -194,3 +194,13 @@ export interface ISelectedCateringProduct {
   posterURL: string;
   sizes: ISize[];
 }
+
+export interface PaginationInfo<T> {
+  items: T[];
+  pageInfo: {
+    page: number;
+    pageSize: number;
+    totalItems: number;
+    totalPages: number;
+  };
+}

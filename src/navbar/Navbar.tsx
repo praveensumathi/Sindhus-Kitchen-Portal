@@ -90,8 +90,7 @@ function NavBar() {
       <CssBaseline />
       <AppBar
         sx={{
-          // zIndex: (theme) => theme.zIndex.drawer + 1,
-          zIndex: 1100,
+          zIndex: drawerOpen ? theme.zIndex.drawer + 1 : 1100,
           backdropFilter: "blur(15px)",
           borderStyle: "solid",
           borderWidth: 0,
@@ -108,7 +107,6 @@ function NavBar() {
                 display: "flex",
                 alignItems: "center",
                 flexGrow: 1,
-                
               }}
             >
               <img
@@ -119,7 +117,7 @@ function NavBar() {
                   width: isBelowSMScreen ? "3.5rem" : "4rem",
                   marginRight: "10px",
                   paddingTop: "10px",
-                  paddingBottom:"5px"
+                  paddingBottom: "5px",
                 }}
                 loading="lazy"
                 onClick={handleNavigateToHome}

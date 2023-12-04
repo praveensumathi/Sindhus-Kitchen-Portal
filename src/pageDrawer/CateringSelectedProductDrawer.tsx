@@ -54,7 +54,7 @@ function CateringSelectedProductDrawer(props: IProps) {
       open={isOpen}
       PaperProps={{
         sx: {
-          width: isBelowMediumSize ? "100vw" : "30vw",
+          width: isBelowMediumSize ? "100vw" : "38vw",
           height: "100vh",
         },
       }}
@@ -107,14 +107,11 @@ function CateringSelectedProductDrawer(props: IProps) {
                     <Grid
                       item
                       xs={4}
-                      sx={{
-                        padding: "15px",
-                      }}
                     >
                       <CardMedia
                         sx={{
-                          width: "100px",
-                          height: "100px",
+                          width: "100%",
+                          height: "100%",
                         }}
                         image={product.posterURL}
                         component={"img"}

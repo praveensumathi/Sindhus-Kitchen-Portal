@@ -18,7 +18,10 @@ interface IProps {
   onSelectProduct(productId: string): void;
 }
 
-function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
+function SearchBar({
+  onSelectMenu,
+  onSelectProduct,
+}: IProps) {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
   const [productValue, setProductValue] = useState<IProductAutoComplete | null>(
     null
@@ -26,6 +29,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   const [menuValue, setMenuValue] = useState<IMenuAutoComplete | null>(null);
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isMenuClear, setIsMenuClear] = useState(false);
 
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
 
@@ -37,6 +41,9 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
     onSelectProduct("");
     setMenuValue(null);
     setProductValue(null);
+    setSelectedMenuId("");
+    setSearchTerm("");
+    setIsMenuClear(true);
   };
 
   useEffect(() => {
@@ -67,7 +74,10 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
     ) {
       refetchProductData();
     }
-  }, [selectedMenuId, , searchTerm]);
+    if (isMenuClear && !selectedMenuId) {
+      refetchProductData();
+    }
+  }, [selectedMenuId, searchTerm, isMenuClear]);
 
   const handleProductSearch = (
     selectedProduct: IProductAutoComplete | null
@@ -75,19 +85,25 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
     if (selectedProduct) {
       onSelectProduct(selectedProduct._id);
       setProductValue(selectedProduct);
+    } else {
+      setSelectedMenuId("");
     }
   };
 
   const handleMenuChange = (selectedMenu: IMenuAutoComplete | null) => {
     setSearchTerm("");
+
     if (selectedMenu) {
-      if (menuValue?._id != selectedMenu._id) {
+      if (menuValue?._id !== selectedMenu._id) {
         setProductValue(null);
         onSelectProduct("");
       }
       setSelectedMenuId(selectedMenu._id);
       onSelectMenu(selectedMenu._id);
       setMenuValue(selectedMenu);
+    } else {
+      setSelectedMenuId("");
+      setProductValue(null);
     }
   };
 
@@ -107,10 +123,13 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                 } as IMenuAutoComplete)
             )}
             onChange={(_event, value) => handleMenuChange(value)}
-            onInputChange={(_event, newInputValue) => {
+            onInputChange={(_event, newInputValue, reason) => {
               if (!newInputValue.trim()) {
                 setMenuValue(null);
                 onSelectMenu("");
+              }
+              if (reason == "clear") {
+                setIsMenuClear(true);
               }
             }}
             isOptionEqualToValue={(option, value) =>
@@ -171,7 +190,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                   disableUnderline: true,
                   onChange: (event) => {
                     const newSearchTerm = event.target.value;
-                    setSearchTerm(newSearchTerm);
+                    setSearchTerm(newSearchTerm || "");
                   },
                 }}
               />
