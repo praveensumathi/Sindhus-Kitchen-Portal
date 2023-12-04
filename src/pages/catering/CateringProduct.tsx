@@ -28,14 +28,9 @@ import { useGetProductByCateringMenu } from "../../customRQHooks/Hooks";
 interface IProps {
   selectedMenuId: string;
   selectedProductId: string;
-  totalMenuCount: number;
 }
 
-function CateringProduct({
-  selectedMenuId,
-  selectedProductId,
-  totalMenuCount,
-}: IProps) {
+function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   const [cateringData, setCateringData] = useState<ICateringMenu[]>([]);
   const [productQuantities, setProductQuantities] = useState<
     IServingSizeWithQuantity[]
@@ -63,7 +58,9 @@ function CateringProduct({
       } else {
         setCateringData([...cateringResponse.items]);
       }
-      setHasMore(totalMenuCount > cateringResponse.pageInfo.page);
+      setHasMore(
+        cateringResponse.pageInfo.totalPages > cateringResponse.pageInfo.page
+      );
     }
   }, [cateringResponse?.items]);
 
@@ -243,7 +240,7 @@ function CateringProduct({
                           mt: { xs: -2, md: 0 },
                         }}
                       >
-                        <Typography sx={{ fontWeight: "600" }}>
+                        <Typography sx={{ fontWeight: "600",fontSize:"1.5rem",marginBottom:"8px" }}>
                           {product.title}
                         </Typography>
 
@@ -398,7 +395,8 @@ function CateringProduct({
         {!selectedMenuId && !selectedProductId && (
           <Box
             ref={
-              cateringResponse?.pageInfo.page ?? 0 < (totalMenuCount ?? 0)
+              cateringResponse?.pageInfo.page ??
+              0 < (cateringResponse?.pageInfo.totalPages ?? 0)
                 ? lastElementRef
                 : null
             }
