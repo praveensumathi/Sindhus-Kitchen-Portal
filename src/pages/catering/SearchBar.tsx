@@ -18,10 +18,7 @@ interface IProps {
   onSelectProduct(productId: string): void;
 }
 
-function SearchBar({
-  onSelectMenu,
-  onSelectProduct,
-}: IProps) {
+function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
   const [productValue, setProductValue] = useState<IProductAutoComplete | null>(
     null
@@ -30,6 +27,7 @@ function SearchBar({
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [isMenuClear, setIsMenuClear] = useState(false);
+  const [isProductClear, setIsProductClear] = useState(false);
 
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
 
@@ -44,6 +42,7 @@ function SearchBar({
     setSelectedMenuId("");
     setSearchTerm("");
     setIsMenuClear(true);
+    setIsProductClear(true);
   };
 
   useEffect(() => {
@@ -74,19 +73,24 @@ function SearchBar({
     ) {
       refetchProductData();
     }
-    if (isMenuClear && !selectedMenuId) {
+
+    if (
+      (isMenuClear && !selectedMenuId) ||
+      (isProductClear && !selectedMenuId)
+    ) {
       refetchProductData();
     }
-  }, [selectedMenuId, searchTerm, isMenuClear]);
+  }, [selectedMenuId, searchTerm, isMenuClear, isProductClear]);
 
-  const handleProductSearch = (
+  const handleProductSearch = async (
     selectedProduct: IProductAutoComplete | null
   ) => {
     if (selectedProduct) {
       onSelectProduct(selectedProduct._id);
       setProductValue(selectedProduct);
     } else {
-      setSelectedMenuId("");
+      onSelectProduct("");
+      setProductValue(null);
     }
   };
 
@@ -151,30 +155,23 @@ function SearchBar({
             }
             onChange={(_event, value) => handleProductSearch(value)}
             options={
-              (searchTerm && !selectedMenuId
-                ? cateringProducts?.map(
+              cateringProducts
+                ? cateringProducts.map(
                     (item) =>
                       ({
                         ...item,
                         label: item.title,
                       } as IProductAutoComplete)
                   )
-                : selectedMenuId
-                ? cateringProducts?.map(
-                    (item) =>
-                      ({
-                        ...item,
-                        label: item.title,
-                      } as IProductAutoComplete)
-                  )
-                : []) || []
+                : []
             }
-            onInputChange={(_event, newInputValue) => {
-              setSearchTerm(newInputValue.trim());
-
+            onInputChange={(_event, newInputValue, reason) => {
               if (!newInputValue.trim()) {
                 setProductValue(null);
                 onSelectProduct("");
+              }
+              if (reason == "clear") {
+                setIsProductClear(true);
               }
             }}
             renderOption={(props, option) => (
