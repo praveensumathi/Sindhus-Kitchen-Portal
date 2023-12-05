@@ -50,7 +50,17 @@ function HomePageSlicker() {
   }, [menuData, isLoading, isError]);
 
   useEffect(() => {
-    fetchProducts(selectedMenuId, searchTerm);
+    let timeoutId = 0;
+
+    if (!selectedMenuId && !!searchTerm) {
+      timeoutId = setTimeout(() => {
+        fetchProducts(selectedMenuId, searchTerm);
+      }, 1000);
+    } else {
+      fetchProducts(selectedMenuId, searchTerm);
+    }
+
+    return () => clearTimeout(timeoutId);
   }, [selectedMenuId, searchTerm]);
 
   const fetchProducts = async (
@@ -271,6 +281,11 @@ function HomePageSlicker() {
                 ...item,
                 label: item.title,
               }))}
+              onInputChange={(_event, newInputValue) => {
+                if (!newInputValue.trim()) {
+                  setSearchTerm("");
+                }
+              }}
               renderOption={(props, option) => (
                 <Link
                   to={`/detail/${option._id}`}

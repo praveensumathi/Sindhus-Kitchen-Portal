@@ -65,7 +65,11 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   }, [cateringResponse?.items]);
 
   useEffect(() => {
-    refetchProducts();
+    if (pageNum > 0) refetchProducts();
+
+    if (pageNum <= 0 && (selectedMenuId != "" || selectedProductId != "")) {
+      refetchProducts();
+    }
   }, [pageNum]);
 
   const observer: any = useRef();
@@ -86,8 +90,13 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
   );
 
   useEffect(() => {
-    if (!selectedMenuId || !selectedProductId) setPageNum(1);
-    refetchProducts();
+    if (selectedProductId != "") {
+      setPageNum(0);
+    } else if (selectedMenuId != "") {
+      setPageNum(-1);
+    } else {
+      setPageNum(1);
+    }
   }, [selectedMenuId, selectedProductId]);
 
   useEffect(() => {
@@ -212,6 +221,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                           index === data.products.length - 1
                             ? "none"
                             : "1px solid #FFD580",
+                        mt: 2,
                       }}
                     >
                       <Grid item xs={12} lg={3}>
@@ -235,10 +245,17 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                         xs={12}
                         lg={5}
                         sx={{
-                          padding: "20px",
+                          paddingLeft: "20px",
+                          mt: { xs: -2, md: 0 },
                         }}
                       >
-                        <Typography sx={{ fontWeight: "600",fontSize:"1.5rem",marginBottom:"8px" }}>
+                        <Typography
+                          sx={{
+                            fontWeight: "600",
+                            fontSize: "1.5rem",
+                            marginBottom: "8px",
+                          }}
+                        >
                           {product.title}
                         </Typography>
 
@@ -246,7 +263,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
 
                         {product.servingSizeDescription && (
                           <Typography sx={{ mt: 2 }}>
-                            <b>servingSizeDescription</b>
+                            <b>ServingSize-Description</b>
                             <Typography
                               sx={{
                                 whiteSpace: "pre-line",
