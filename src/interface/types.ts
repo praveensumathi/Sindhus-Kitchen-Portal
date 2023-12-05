@@ -204,3 +204,8 @@ export interface PaginationInfo<T> {
     totalPages: number;
   };
 }
+export interface ICateringRequest {
+  name: string;
+  mobileNumber: string;
+  eventDate: string;
+}

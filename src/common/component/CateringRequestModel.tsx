@@ -1,26 +1,30 @@
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  TextField,
-  IconButton,
-  Typography,
-  Box,
-} from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
 import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { ISelectedCateringProduct, IServingSizeWithQuantity } from "../../interface/types";
+import {
+  ICateringRequest,
+  ISelectedCateringProduct,
+  IServingSizeWithQuantity,
+} from "../../interface/types";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { sendCateringRequest } from "../../services/api";
 import { SnackbarSeverityEnum } from "../../enums/SnackbarSeverityEnum";
 import { useSnackBar } from "../../context/SnackBarContext";
 import { Container } from "@mui/system";
-
-
+import * as yup from "yup";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
+import FormControl from "@mui/material/FormControl";
 
 interface IProps {
   open: boolean;
@@ -37,23 +41,42 @@ interface ICombinedProduct {
     quantity: number;
   }[];
 }
+const RequestFormInitialValue: ICateringRequest = {
+  name: "",
+  mobileNumber: "",
+  eventDate: "",
+};
+
+const schema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  mobileNumber: yup
+    .string()
+    .required()
+    .typeError("Please enter the MobileNumber")
+    .matches(/^[0-9]{10}$/, "Please enter a valid MobileNumber"),
+  eventDate: yup.string().required("Event date is required"),
+});
 
 function CateringRequestModel(props: IProps) {
   const { open, onClose, productInfo, productQuantities } = props;
-    const { updateSnackBarState } = useSnackBar();
+  const { updateSnackBarState } = useSnackBar();
 
+  const {
+    handleSubmit,
+    formState: { errors },
+    register,
+    control,
+    reset,
+  } = useForm<ICateringRequest>({
+    resolver: yupResolver(schema),
+    mode: "all",
+    defaultValues: RequestFormInitialValue,
+  });
 
-   const [userData, setUserData] = useState({
-     name: "",
-     mobileNumber: "",
-     eventDate: null, 
-   });
-    const [combinedProducts, setCombinedProducts] = useState<ICombinedProduct[]>([]);
+  const [combinedProducts, setCombinedProducts] = useState<ICombinedProduct[]>(
+    []
+  );
 
-  const handleChange = (field, value) => {
-      setUserData((prevData) => ({ ...prevData, [field]: value }));
-  };
-  
   useEffect(() => {
     const combined = productInfo.map((product) => {
       const matchingQuantities = productQuantities.filter(
@@ -79,34 +102,28 @@ function CateringRequestModel(props: IProps) {
     setCombinedProducts(combined);
   }, [productInfo, productQuantities]);
 
-
- const handleSubmit = async () => {
-   try {
-     await sendCateringRequest(userData, combinedProducts);
+  const onSubmitCateringRequest = async (data) => {
+    try {
+      await sendCateringRequest(data, combinedProducts);
       updateSnackBarState(
         true,
         "Request Send successfully",
         SnackbarSeverityEnum.SUCCESS
-     );
-     onClose();
-   } catch (error) {
-     updateSnackBarState(
-       true,
-       "Error while submitting the catering Request",
-       SnackbarSeverityEnum.ERROR
-     );
-   }
- };
- const handleCancel = () => {
-   setUserData({
-     name: "",
-     mobileNumber: "",
-     eventDate: null,
-   });
+      );
+      onClose();
+      reset();
+    } catch (error) {
+      updateSnackBarState(
+        true,
+        "Error while submitting the catering Request",
+        SnackbarSeverityEnum.ERROR
+      );
+    }
+  };
+  const handleCancel = () => {
+    reset(), onClose();
+  };
 
-   onClose();
- };
-  
   return (
     <Dialog open={open}>
       <DialogTitle>
@@ -125,42 +142,64 @@ function CateringRequestModel(props: IProps) {
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent>
-        <Box>
-          <TextField
-            label="Name"
-            variant="outlined"
-            fullWidth
-            sx={{ mt: 1 }}
-            onChange={(e) => handleChange("name", e.target.value)}
-          />
-          <TextField
-            label="phoneNumber"
-            variant="outlined"
-            fullWidth
-            sx={{ mt: 1 }}
-            onChange={(e) => handleChange("phoneNumber", e.target.value)}
-          />
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              sx={{ width: "100%", mt: 1 }}
-              format="dd-MM-yyyy"
-              value={userData.eventDate}
-              onChange={(date) => handleChange("eventDate", date)}
+      <form onSubmit={handleSubmit(onSubmitCateringRequest)}>
+        <DialogContent>
+          <Box>
+            <TextField
+              sx={{ mb: 1 }}
+              label="name *"
+              fullWidth
+              variant="outlined"
+              {...register("name")}
+              error={!!errors.name}
+              helperText={errors.name ? errors.name.message : ""}
             />
-          </LocalizationProvider>
-        </Box>
-      </DialogContent>
-      <Container sx={{ padding: 0, mb: 2 }}>
-        <DialogActions>
-          <Button variant="outlined" onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button variant="contained" onClick={handleSubmit}>
-            confirm
-          </Button>
-        </DialogActions>
-      </Container>
+            <TextField
+              sx={{ mb: 1 }}
+              label="Mobile Number *"
+              fullWidth
+              variant="outlined"
+              {...register("mobileNumber")}
+              error={!!errors.mobileNumber}
+              helperText={
+                errors.mobileNumber ? errors.mobileNumber.message : ""
+              }
+            />
+            <FormControl sx={{ mb: 1 }} fullWidth>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Controller
+                  name="eventDate"
+                  control={control}
+                  render={({ field }) => (
+                    <DatePicker
+                      label="Event Date *"
+                      slotProps={{
+                        textField: {
+                          error: !!errors.eventDate,
+                        },
+                      }}
+                      disablePast
+                      format="DD-MM-YYYY"
+                      value={field.value || null}
+                      onChange={(date) => field.onChange(date)}
+                    />
+                  )}
+                />
+              </LocalizationProvider>
+            </FormControl>
+          </Box>
+        </DialogContent>
+        <Container sx={{ padding: 0, mb: 2 }}>
+          <DialogActions>
+            <Button variant="outlined" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button type="submit" variant="contained">
+              confirm
+            </Button>
+          </DialogActions>
+        </Container>
+      </form>
     </Dialog>
   );
 }
