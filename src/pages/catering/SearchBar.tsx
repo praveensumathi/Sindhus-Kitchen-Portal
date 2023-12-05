@@ -6,12 +6,14 @@ import {
   IMenuAutoComplete,
   IMenuList,
   IProductAutoComplete,
+  IProductDropDownData,
 } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { MenuType } from "../../enums/MenuTypesEnum";
 import { queryClient } from "../../App";
 import { getAllMenus } from "../../services/api";
 import { useCateringfetchProductData } from "../../customRQHooks/Hooks";
+import Typography from "@mui/material/Typography";
 
 interface IProps {
   onSelectMenu(menuId: string): void;
@@ -28,21 +30,22 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isMenuClear, setIsMenuClear] = useState(false);
   const [isProductClear, setIsProductClear] = useState(false);
-
+  const [isClearSearchButtonClick, setIsClearButtonClick] = useState(false);
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
 
   const { data: cateringProducts, refetch: refetchProductData } =
     useCateringfetchProductData(selectedMenuId, searchTerm);
 
   const clearSearch = async () => {
+    setIsClearButtonClick(true);
     onSelectMenu("");
     onSelectProduct("");
     setMenuValue(null);
     setProductValue(null);
     setSelectedMenuId("");
     setSearchTerm("");
-    setIsMenuClear(true);
-    setIsProductClear(true);
+    setIsMenuClear(false);
+    setIsProductClear(false);
   };
 
   useEffect(() => {
@@ -67,20 +70,32 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   };
 
   useEffect(() => {
-    if (
-      (selectedMenuId && !searchTerm) ||
-      (!selectedMenuId && searchTerm && searchTerm.length >= 3)
-    ) {
+    if (selectedMenuId || (!selectedMenuId && !!searchTerm)) {
+      debugger;
       refetchProductData();
     }
 
-    if (
-      (isMenuClear && !selectedMenuId) ||
-      (isProductClear && !selectedMenuId)
-    ) {
+    if (!selectedMenuId && !searchTerm) {
       refetchProductData();
     }
-  }, [selectedMenuId, searchTerm, isMenuClear, isProductClear]);
+
+    if (isMenuClear || isProductClear) {
+      refetchProductData();
+      setIsMenuClear(false);
+      setIsProductClear(false);
+    }
+
+    if (isClearSearchButtonClick) {
+      refetchProductData();
+      setIsClearButtonClick(false);
+    }
+  }, [
+    selectedMenuId,
+    searchTerm,
+    isMenuClear,
+    isProductClear,
+    isClearSearchButtonClick,
+  ]);
 
   const handleProductSearch = async (
     selectedProduct: IProductAutoComplete | null
@@ -170,7 +185,9 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                 setProductValue(null);
                 onSelectProduct("");
               }
+
               if (reason == "clear") {
+                setSearchTerm("");
                 setIsProductClear(true);
               }
             }}
@@ -199,6 +216,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                   onChange: (event) => {
                     const newSearchTerm = event.target.value;
                     setSearchTerm(newSearchTerm || "");
+                    //refetchProductData();
                   },
                 }}
               />
