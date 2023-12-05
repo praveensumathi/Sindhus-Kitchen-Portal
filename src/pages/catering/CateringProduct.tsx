@@ -97,9 +97,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     } else {
       setPageNum(1);
     }
-
-    console.log(selectedMenuId);
-    console.log(selectedProductId);
   }, [selectedMenuId, selectedProductId]);
 
   useEffect(() => {
