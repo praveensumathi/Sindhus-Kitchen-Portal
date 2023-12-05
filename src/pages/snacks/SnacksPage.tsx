@@ -124,11 +124,12 @@ function SnacksPage() {
         </Box>
       </Box>
       <Container sx={{ mb: 2 }}>
-        <SnacksMenuItem
-          onSubMenuClick={handleSubMenuClick}
-          snacksSubMenus={snacksPageData?.subMenus ?? []}
-          selectedSubMenuId={selectedSubMenuId}
-        ></SnacksMenuItem>
+      
+          <SnacksMenuItem
+            onSubMenuClick={handleSubMenuClick}
+            snacksSubMenus={snacksPageData?.subMenus ?? []}
+            selectedSubMenuId={selectedSubMenuId}
+          ></SnacksMenuItem>
         <Box sx={{ mt: 5 }}>
           {snacksPageData &&
           snacksPageData.products &&

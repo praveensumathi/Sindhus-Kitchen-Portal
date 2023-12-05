@@ -112,7 +112,9 @@ function CateringPage() {
       </Box>
       <Container>
         <SearchBar
-          onSelectMenu={(menuId: string) => setSelectedMenuId(menuId)}
+          onSelectMenu={(menuId: string) => {
+            setSelectedMenuId(menuId);
+          }}
           onSelectProduct={(productId: string) =>
             setSelectedProductId(productId)
           }

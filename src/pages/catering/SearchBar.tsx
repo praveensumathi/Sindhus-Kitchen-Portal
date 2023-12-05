@@ -18,10 +18,7 @@ interface IProps {
   onSelectProduct(productId: string): void;
 }
 
-function SearchBar({
-  onSelectMenu,
-  onSelectProduct,
-}: IProps) {
+function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   const [cateringMenus, setCateringMenus] = useState<IMenuList[]>([]);
   const [productValue, setProductValue] = useState<IProductAutoComplete | null>(
     null
@@ -30,20 +27,23 @@ function SearchBar({
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [isMenuClear, setIsMenuClear] = useState(false);
-
+  const [isProductClear, setIsProductClear] = useState(false);
+  const [isClearSearchButtonClick, setIsClearButtonClick] = useState(false);
   const menuList = queryClient.getQueryData<IMenuList[]>(["menus"]);
 
   const { data: cateringProducts, refetch: refetchProductData } =
     useCateringfetchProductData(selectedMenuId, searchTerm);
 
   const clearSearch = async () => {
+    setIsClearButtonClick(true);
     onSelectMenu("");
     onSelectProduct("");
     setMenuValue(null);
     setProductValue(null);
     setSelectedMenuId("");
     setSearchTerm("");
-    setIsMenuClear(true);
+    setIsMenuClear(false);
+    setIsProductClear(false);
   };
 
   useEffect(() => {
@@ -68,25 +68,49 @@ function SearchBar({
   };
 
   useEffect(() => {
-    if (
-      (selectedMenuId && !searchTerm) ||
-      (!selectedMenuId && searchTerm && searchTerm.length >= 3)
-    ) {
+    if (selectedMenuId) {
       refetchProductData();
     }
-    if (isMenuClear && !selectedMenuId) {
-      refetchProductData();
-    }
-  }, [selectedMenuId, searchTerm, isMenuClear]);
 
-  const handleProductSearch = (
+    var timeoutId = 0;
+
+    if (!selectedMenuId && !!searchTerm) {
+      timeoutId = setTimeout(() => {
+        refetchProductData();
+      }, 1000);
+    }
+    if (!selectedMenuId && !searchTerm) {
+      refetchProductData();
+    }
+
+    if (isMenuClear || isProductClear) {
+      refetchProductData();
+      setIsMenuClear(false);
+      setIsProductClear(false);
+    }
+
+    if (isClearSearchButtonClick) {
+      refetchProductData();
+      setIsClearButtonClick(false);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [
+    selectedMenuId,
+    searchTerm,
+    isMenuClear,
+    isProductClear,
+    isClearSearchButtonClick,
+  ]);
+
+  const handleProductSearch = async (
     selectedProduct: IProductAutoComplete | null
   ) => {
     if (selectedProduct) {
       onSelectProduct(selectedProduct._id);
       setProductValue(selectedProduct);
     } else {
-      setSelectedMenuId("");
+      onSelectProduct("");
+      setProductValue(null);
     }
   };
 
@@ -98,6 +122,7 @@ function SearchBar({
         setProductValue(null);
         onSelectProduct("");
       }
+
       setSelectedMenuId(selectedMenu._id);
       onSelectMenu(selectedMenu._id);
       setMenuValue(selectedMenu);
@@ -160,10 +185,15 @@ function SearchBar({
                   )
                 : []
             }
-            onInputChange={(_event, newInputValue) => {
+            onInputChange={(_event, newInputValue, reason) => {
               if (!newInputValue.trim()) {
                 setProductValue(null);
                 onSelectProduct("");
+              }
+
+              if (reason == "clear") {
+                setSearchTerm("");
+                setIsProductClear(true);
               }
             }}
             renderOption={(props, option) => (
@@ -187,11 +217,16 @@ function SearchBar({
                 variant="outlined"
                 InputProps={{
                   ...params.InputProps,
-                  disableUnderline: true,
-                  onChange: (event) => {
-                    const newSearchTerm = event.target.value;
-                    setSearchTerm(newSearchTerm || "");
-                  },
+                }}
+                onChange={(event) => {
+                  const newSearchTerm = event.target.value;
+                  setSearchTerm(newSearchTerm || "");
+                  setProductValue({
+                    _id: "",
+                    label: newSearchTerm,
+                    title: newSearchTerm,
+                    posterURL: "",
+                  });
                 }}
               />
             )}
