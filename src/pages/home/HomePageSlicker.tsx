@@ -50,7 +50,17 @@ function HomePageSlicker() {
   }, [menuData, isLoading, isError]);
 
   useEffect(() => {
-    fetchProducts(selectedMenuId, searchTerm);
+    let timeoutId = 0;
+
+    if (!selectedMenuId && !!searchTerm) {
+      timeoutId = setTimeout(() => {
+        fetchProducts(selectedMenuId, searchTerm);
+      }, 1000);
+    } else {
+      fetchProducts(selectedMenuId, searchTerm);
+    }
+
+    return () => clearTimeout(timeoutId);
   }, [selectedMenuId, searchTerm]);
 
   const fetchProducts = async (

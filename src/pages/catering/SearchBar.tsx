@@ -68,11 +68,17 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
   };
 
   useEffect(() => {
-    if (selectedMenuId || (!selectedMenuId && !!searchTerm)) {
-      debugger;
+    if (selectedMenuId) {
       refetchProductData();
     }
 
+    var timeoutId = 0;
+
+    if (!selectedMenuId && !!searchTerm) {
+      timeoutId = setTimeout(() => {
+        refetchProductData();
+      }, 1000);
+    }
     if (!selectedMenuId && !searchTerm) {
       refetchProductData();
     }
@@ -87,6 +93,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
       refetchProductData();
       setIsClearButtonClick(false);
     }
+    return () => clearTimeout(timeoutId);
   }, [
     selectedMenuId,
     searchTerm,
@@ -210,12 +217,16 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                 variant="outlined"
                 InputProps={{
                   ...params.InputProps,
-                  disableUnderline: true,
-                  onChange: (event) => {
-                    const newSearchTerm = event.target.value;
-                    setSearchTerm(newSearchTerm || "");
-                    //refetchProductData();
-                  },
+                }}
+                onChange={(event) => {
+                  const newSearchTerm = event.target.value;
+                  setSearchTerm(newSearchTerm || "");
+                  setProductValue({
+                    _id: "",
+                    label: newSearchTerm,
+                    title: newSearchTerm,
+                    posterURL: "",
+                  });
                 }}
               />
             )}
