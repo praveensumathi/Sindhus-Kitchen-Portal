@@ -20,6 +20,10 @@ import {
 } from "../interface/types";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
+import { useState } from "react";
+import CateringRequestModel from "../common/component/CateringRequestModel";
+import Button from "@mui/material/Button";
+
 
 interface IProps {
   isOpen: boolean;
@@ -29,10 +33,20 @@ interface IProps {
 }
 
 function CateringSelectedProductDrawer(props: IProps) {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const theme = useTheme();
   const { isOpen, handleClose, productInfo, productQuantities } = props;
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleSendNowClick = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+  };
 
   return (
     <Drawer
@@ -174,6 +188,25 @@ function CateringSelectedProductDrawer(props: IProps) {
             ))}
         </Container>
       </>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          position:"absolute",
+          bottom: 20,
+        }}
+      >
+        <Button variant="contained" onClick={handleSendNowClick}>
+          Send Now
+        </Button>
+      </Box>
+      <CateringRequestModel
+        open={isPopupOpen}
+        onClose={handlePopupClose}
+        productInfo={productInfo}
+        productQuantities={productQuantities}
+      />
     </Drawer>
   );
 }
