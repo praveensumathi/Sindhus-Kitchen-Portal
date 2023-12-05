@@ -137,7 +137,7 @@ function CateringRequestModel(props: IProps) {
           <Typography sx={{ fontWeight: 600, fontSize: "large" }}>
             Enter Your Details
           </Typography>
-          <IconButton onClick={onClose}>
+          <IconButton onClick={handleCancel}>
             <CloseIcon />
           </IconButton>
         </Box>
