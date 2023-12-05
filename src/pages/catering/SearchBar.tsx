@@ -6,14 +6,12 @@ import {
   IMenuAutoComplete,
   IMenuList,
   IProductAutoComplete,
-  IProductDropDownData,
 } from "../../interface/types";
 import { useEffect, useState } from "react";
 import { MenuType } from "../../enums/MenuTypesEnum";
 import { queryClient } from "../../App";
 import { getAllMenus } from "../../services/api";
 import { useCateringfetchProductData } from "../../customRQHooks/Hooks";
-import Typography from "@mui/material/Typography";
 
 interface IProps {
   onSelectMenu(menuId: string): void;
