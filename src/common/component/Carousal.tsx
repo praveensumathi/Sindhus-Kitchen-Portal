@@ -71,7 +71,7 @@ function Carousel(props: IProps) {
     category &&
     category.menuDatas && (
       <Container>
-        <Box marginTop={1.8}>
+        <Box>
           <Box
             display={"flex"}
             justifyContent={"space-between"}

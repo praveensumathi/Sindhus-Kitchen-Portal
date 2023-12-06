@@ -14,6 +14,9 @@ const theme = createTheme({
     },
   },
   typography: {
+    body1: {
+      fontFamily: "clearface LT Bold",
+    },
     button: {
       textTransform: "none",
       fontWeight: 500,
@@ -21,6 +24,7 @@ const theme = createTheme({
       color: "#fff",
     },
   },
+
   components: {
     MuiButton: {
       styleOverrides: {

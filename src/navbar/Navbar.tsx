@@ -21,7 +21,7 @@ import React from "react";
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
   { name: "Specials", linkurl: paths.SPECIALS },
-  { name: "Dining Out", linkurl: paths.DININGOUT },
+  { name: "Daily Menu", linkurl: paths.DININGOUT },
   { name: "Snacks", linkurl: paths.SNACKS },
   { name: "Catering", linkurl: paths.CATERING },
 ];
@@ -123,9 +123,14 @@ function NavBar() {
                 onClick={handleNavigateToHome}
               />
               <Typography
-                sx={{ fontWeight: 600, color: "red", fontSize: "25px" }}
+                className={theme.typography.body1.fontFamily}
+                sx={{
+                  fontWeight: 600,
+                  color: "red",
+                  fontSize: "25px",
+                }}
               >
-                SINDHU's
+                SINDHU'S
               </Typography>
             </Box>
             {isMobile ? (

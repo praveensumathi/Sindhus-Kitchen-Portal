@@ -1,7 +1,5 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import CommonProductCard from "../../common/component/CommonProductCard";
@@ -20,82 +18,80 @@ function CategoryProducts() {
 
   return (
     <>
-      <Box>
-        <IconButton
-          sx={{
-            float: "left",
-            display: "flex",
-            height: "100px",
-            width: {
-              xs: "20px",
-              sm: "100px",
-            },
-            position: "fixed",
-            padding: "1px",
-          }}
-          onClick={() => navigate(-1)}
-        >
-          <ArrowBackIcon fontSize="medium" />
-        </IconButton>
-      </Box>
       <Container>
         {selectedCategory && selectedCategory.data && (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
-            p={1}
-          >
+          <>
             <Box
               sx={{
-                paddingRight: 2,
-              }}
-            >
-              <Card
-                sx={{
-                  height: "80px",
-                  width: "80px",
-                  boxShadow: 3,
-                  borderRadius: "50%",
-                }}
-              >
-                <CardMedia
-                  image={selectedCategory.data.image || ""}
-                  component={"img"}
-                  sx={{
-                    height: "100%",
-                  }}
-                />
-              </Card>
-            </Box>
-            <Box
-              sx={{
-                padding: "6px",
+                display: "flex",
+                position: "sticky",
+                top: {
+                  xs: "60px",
+                  sm: "75px",
+                },
+                left: {
+                  xs: "20px",
+                  sm: "130px",
+                },
+                zIndex: 1000,
+                right: 0,
                 width: "100%",
+                backgroundColor: "white",
+                height: "80px",
               }}
             >
-              <Typography
+              <Box
                 sx={{
-                  fontWeight: 600,
-                  display: "-webkit-box",
-                  WebkitLineClamp: 1,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
+                  paddingRight: 2,
+                  width: "100px",
                 }}
-                variant="h5"
               >
-                {selectedCategory.data.title || ""}
-              </Typography>
+                <IconButton
+                  sx={{
+                    float: "left",
+                    display: "flex",
+                    height: "100px",
+                    width: {
+                      xs: "20px",
+                      sm: "100px",
+                    },
+                    padding: "3px",
+                  }}
+                  onClick={() => navigate(-1)}
+                >
+                  <ArrowBackIcon fontSize="medium" />
+                </IconButton>
+              </Box>
+
+              <Box
+                sx={{
+                  padding: "30px",
+                  width: "100%",
+                  height: "70px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                    display: "-webkit-box",
+                    WebkitLineClamp: 1,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                  variant="h5"
+                >
+                  {selectedCategory.data.title || ""}
+                </Typography>
+              </Box>
             </Box>
-          </Box>
+          </>
         )}
         <Box>
           {selectedCategory.data &&
           selectedCategory.data.products &&
           selectedCategory.data.products.length > 0 ? (
-            <Container sx={{ padding: "10px" }}>
+            <Container sx={{ padding: "20px", mt: 2, zIndex: -1 }}>
               <Grid container spacing={2}>
                 {selectedCategory.data.products.map((product, index) => (
                   <Grid

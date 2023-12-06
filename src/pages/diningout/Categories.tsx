@@ -31,7 +31,7 @@ function Categories() {
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 4.2,
+    slidesToShow: 5.7,
     slidesToScroll: 1,
 
     responsive: [
@@ -52,7 +52,7 @@ function Categories() {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1.2,
+          slidesToShow: 1.5,
           slidesToScroll: 1,
           arrows: !isBelowMediumScreen,
         },
@@ -73,38 +73,48 @@ function Categories() {
               fontWeight: 800,
               color: "black",
               lineHeight: 2,
+              mt: 2,
             }}
             variant="h5"
           >
             Menus
           </Typography>
+
           <Slider {...settings}>
             {categories?.map((category, index) => (
               <Box
                 key={index}
                 sx={{
-                  height: "9rem",
-                  width: "14rem !important",
+                  height: "7rem",
+                  width: "9rem !important",
                 }}
                 onClick={() => handleClickProduct(category._id)}
               >
                 <Card
                   sx={{
-                    boxShadow: 1,
-                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    color: "black",
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                      color: "white",
+                    },
+                    boxShadow: 2,
                     borderRadius: "10px",
+
+                    mt: 2,
                   }}
                 >
-                  <CardMedia
-                    component="img"
-                    src={category.image}
-                    alt={category.title}
-                    height="100px"
-                  />
                   <Typography
                     gutterBottom
                     component="div"
-                    sx={{ padding: 1, fontWeight: 600 }}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      p: 1,
+                      fontWeight: 500,
+                    }}
                   >
                     {category.title}
                   </Typography>

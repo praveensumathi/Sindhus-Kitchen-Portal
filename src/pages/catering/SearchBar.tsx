@@ -12,6 +12,7 @@ import { MenuType } from "../../enums/MenuTypesEnum";
 import { queryClient } from "../../App";
 import { getAllMenus } from "../../services/api";
 import { useCateringfetchProductData } from "../../customRQHooks/Hooks";
+import { Typography } from "@mui/material";
 
 interface IProps {
   onSelectMenu(menuId: string): void;
@@ -163,6 +164,13 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
             renderInput={(params) => (
               <TextField {...params} label="Select Menu" variant="outlined" />
             )}
+            renderOption={(props, option) => (
+              <li {...props}>
+                <Typography style={{ fontWeight: "bold" }}>
+                  {option.title}
+                </Typography>
+              </li>
+            )}
           />
         </Grid>
         <Grid item xs={12} lg={5}>
@@ -207,7 +215,13 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                     marginRight: "10px",
                   }}
                 />
-                {option.title}
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  {option.title}
+                </Typography>
               </li>
             )}
             renderInput={(params) => (
