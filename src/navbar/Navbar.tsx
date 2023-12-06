@@ -123,11 +123,11 @@ function NavBar() {
                 onClick={handleNavigateToHome}
               />
               <Typography
-                className={theme.typography.body1.fontFamily}
                 sx={{
                   fontWeight: 600,
                   color: "red",
                   fontSize: "25px",
+                  fontFamily: "clearface LT Bold",
                 }}
               >
                 SINDHU'S
