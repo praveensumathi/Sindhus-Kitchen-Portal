@@ -28,8 +28,6 @@ import FormControl from "@mui/material/FormControl";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 
-
-
 interface IProps {
   open: boolean;
   onClose: () => void;
@@ -49,7 +47,7 @@ const RequestFormInitialValue: ICateringRequest = {
   name: "",
   mobileNumber: "",
   eventDate: "",
-  eventTime:""
+  eventTime: "",
 };
 
 const schema = yup.object().shape({
@@ -60,7 +58,7 @@ const schema = yup.object().shape({
     .typeError("Please enter the MobileNumber")
     .matches(/^[0-9]{10}$/, "Please enter a valid MobileNumber"),
   eventDate: yup.string().required("Event date is required"),
-  eventTime: yup.string().required("Event time is required"), 
+  eventTime: yup.string().required("Event time is required"),
 });
 
 function CateringRequestModel(props: IProps) {
@@ -109,7 +107,6 @@ function CateringRequestModel(props: IProps) {
   }, [productInfo, productQuantities]);
 
   const onSubmitCateringRequest = async (data) => {
-    console.log("data",data)
     try {
       await sendCateringRequest(data, combinedProducts);
       updateSnackBarState(
@@ -154,7 +151,7 @@ function CateringRequestModel(props: IProps) {
           <Box>
             <TextField
               sx={{ mb: 1 }}
-              label="name *"
+              label="Name *"
               fullWidth
               variant="outlined"
               {...register("name")}
