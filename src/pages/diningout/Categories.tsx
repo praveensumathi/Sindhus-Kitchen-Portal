@@ -103,6 +103,7 @@ function Categories() {
                     },
                     boxShadow: 2,
                     borderRadius: "10px",
+                    cursor: "pointer",
                   }}
                 >
                   <Typography
@@ -111,6 +112,7 @@ function Categories() {
                     sx={{
                       display: "flex",
                       alignItems: "center",
+                      textAlign: "center",
                       p: 1,
                       fontWeight: 500,
                     }}
