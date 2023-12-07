@@ -25,6 +25,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import FormControl from "@mui/material/FormControl";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+
+
 
 interface IProps {
   open: boolean;
@@ -45,6 +49,7 @@ const RequestFormInitialValue: ICateringRequest = {
   name: "",
   mobileNumber: "",
   eventDate: "",
+  eventTime:""
 };
 
 const schema = yup.object().shape({
@@ -55,6 +60,7 @@ const schema = yup.object().shape({
     .typeError("Please enter the MobileNumber")
     .matches(/^[0-9]{10}$/, "Please enter a valid MobileNumber"),
   eventDate: yup.string().required("Event date is required"),
+  eventTime: yup.string().required("Event time is required"), 
 });
 
 function CateringRequestModel(props: IProps) {
@@ -103,6 +109,7 @@ function CateringRequestModel(props: IProps) {
   }, [productInfo, productQuantities]);
 
   const onSubmitCateringRequest = async (data) => {
+    console.log("data",data)
     try {
       await sendCateringRequest(data, combinedProducts);
       updateSnackBarState(
@@ -185,6 +192,29 @@ function CateringRequestModel(props: IProps) {
                     />
                   )}
                 />
+              </LocalizationProvider>
+            </FormControl>
+            <FormControl fullWidth>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["TimePicker"]}>
+                  <Controller
+                    name="eventTime"
+                    control={control}
+                    render={({ field }) => (
+                      <TimePicker
+                        label="Event Time *"
+                        value={field.value || null}
+                        onChange={(time) => field.onChange(time)}
+                        sx={{ width: "100%" }}
+                        slotProps={{
+                          textField: {
+                            error: !!errors.eventTime,
+                          },
+                        }}
+                      />
+                    )}
+                  />
+                </DemoContainer>
               </LocalizationProvider>
             </FormControl>
           </Box>

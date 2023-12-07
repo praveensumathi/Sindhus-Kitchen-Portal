@@ -117,69 +117,51 @@ function HomePageSlicker() {
 
   return (
     <Box sx={{ position: "relative" }}>
-      <Slider {...settings}>
-        {homePageSlicker.map((content, index) => (
-          <Box style={{ display: "flex", flexDirection: "column" }} key={index}>
-            <Box className="page-banner" style={{ position: "relative" }}>
-              <img
-                src={content.image}
-                alt={content.heading}
-                height={isBelowMediumSize ? "300px" : "500px"}
-                width="100%"
-                className="home-slicker-image"
-              />
-              <Box
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  background: "rgba(0, 0, 0, 0.5)",
-                  zIndex: 1,
-                }}
-              />
-              <Container
-                sx={{
-                  position: "absolute",
-                  top: isBelowMediumSize ? "30%" : "40%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  textAlign: "center",
-                  color: "white",
-                  zIndex: 2,
-                  width: "100%",
-                }}
-              >
-                <Fade top>
-                  <Typography
-                    variant="h1"
-                    sx={{
-                      fontWeight: "bolder",
-                      fontSize: isBelowMediumSize ? "45px" : "70px",
-                    }}
-                  >
-                    {content.heading}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontWeight: "bolder",
-                      fontSize: isBelowMediumSize ? "20px" : "25px",
-                    }}
-                  >
-                    {content.subHeading}
-                  </Typography>
-                  <Typography
-                    sx={{ fontSize: isBelowMediumSize ? "18px" : "20px" }}
-                  >
-                    {content.content}
-                  </Typography>
-                </Fade>
-              </Container>
-            </Box>
-          </Box>
-        ))}
-      </Slider>
+      <Box className="page-banner" style={{ position: "relative" }}>
+        <img
+          src={homePageSlicker.image}
+          alt={homePageSlicker.heading}
+          height={isBelowMediumSize ? "300px" : "500px"}
+          width="100%"
+          className="home-slicker-image"
+        />
+        <Container
+          sx={{
+            position: "absolute",
+            top: isBelowMediumSize ? "30%" : "40%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            textAlign: "center",
+            color: "white",
+            zIndex: 2,
+            width: "100%",
+          }}
+        >
+          <Fade top>
+            <Typography
+              variant="h1"
+              sx={{
+                fontWeight: "bolder",
+                fontSize: isBelowMediumSize ? "45px" : "70px",
+              }}
+            >
+              {homePageSlicker.heading}
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: "bolder",
+                fontSize: isBelowMediumSize ? "20px" : "25px",
+              }}
+            >
+              {homePageSlicker.subHeading}
+            </Typography>
+            <Typography sx={{ fontSize: isBelowMediumSize ? "18px" : "20px" }}>
+              {homePageSlicker.content}
+            </Typography>
+          </Fade>
+        </Container>
+      </Box>
+
       <Box
         sx={{
           position: "absolute",

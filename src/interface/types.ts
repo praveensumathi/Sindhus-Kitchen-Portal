@@ -208,4 +208,5 @@ export interface ICateringRequest {
   name: string;
   mobileNumber: string;
   eventDate: string;
+  eventTime: string;
 }
