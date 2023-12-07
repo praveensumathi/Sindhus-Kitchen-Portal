@@ -92,9 +92,6 @@ function Carousel(props: IProps) {
             <Button
               variant="contained"
               size="small"
-              sx={{
-                padding: 0.5,
-              }}
               onClick={() => handleClickViewAll(category.menuDatas._id)}
             >
               View All

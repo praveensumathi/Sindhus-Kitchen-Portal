@@ -166,7 +166,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
             )}
             renderOption={(props, option) => (
               <li {...props}>
-                <Typography style={{ fontWeight: "bold" }}>
+                <Typography style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
                   {option.title}
                 </Typography>
               </li>
@@ -218,6 +218,7 @@ function SearchBar({ onSelectMenu, onSelectProduct }: IProps) {
                 <Typography
                   sx={{
                     fontWeight: "bold",
+                    fontSize: "1.1rem",
                   }}
                 >
                   {option.title}

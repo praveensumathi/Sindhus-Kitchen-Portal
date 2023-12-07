@@ -126,11 +126,11 @@ function NavBar() {
                 sx={{
                   fontWeight: 600,
                   color: "red",
-                  fontSize: "25px",
-                  fontFamily: "clearface LT Bold",
+                  fontSize: "2rem",
+                  fontFamily: "Sindhus-Logo-Font",
                 }}
               >
-                SINDHU'S
+                SINDHU&#8217;S
               </Typography>
             </Box>
             {isMobile ? (

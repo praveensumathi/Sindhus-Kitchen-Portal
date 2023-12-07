@@ -249,9 +249,9 @@ function HomePageSlicker() {
                     <Typography
                       sx={{
                         fontWeight: "bold",
+                        fontSize: "1.1rem",
                       }}
                     >
-                      
                       {option.title}
                     </Typography>
                   </ListItemText>
@@ -324,6 +324,7 @@ function HomePageSlicker() {
                     <Typography
                       sx={{
                         fontWeight: "bold",
+                        fontSize: "1.1rem",
                       }}
                     >
                       {option.title}

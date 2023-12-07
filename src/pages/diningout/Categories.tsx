@@ -86,7 +86,8 @@ function Categories() {
                 key={index}
                 sx={{
                   height: "7rem",
-                  width: "9rem !important",
+                  width: "10rem !important",
+                  py: 2,
                 }}
                 onClick={() => handleClickProduct(category._id)}
               >
@@ -102,8 +103,6 @@ function Categories() {
                     },
                     boxShadow: 2,
                     borderRadius: "10px",
-
-                    mt: 2,
                   }}
                 >
                   <Typography

@@ -45,7 +45,7 @@ function SnacksMenuItem({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2.3,
+          slidesToShow: 2.1,
           slidesToScroll: 1,
           arrows: !isBelowMediumScreen,
         },
