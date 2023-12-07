@@ -17,6 +17,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
+import DirectionsIcon from "@mui/icons-material/Directions";
 
 function Footer() {
   const location = useLocation();
@@ -53,12 +54,27 @@ function Footer() {
                 <Box sx={{ my: 1 }}>
                   <LocationOnIcon
                     sx={{ color: theme.palette.secondary.main }}
-                  ></LocationOnIcon>
+                  />
+
                   <Typography variant="h5"> Store Address</Typography>
+
                   <Typography>
                     2700 E Eldorado Pkwy, #203,
                     <br /> Little Elm, Texas - 75068
                   </Typography>
+                  <a
+                    href={import.meta.env.VITE_ADDRESS_LOCATION}
+                    target="_blank"
+                  >
+                    <Button
+                      startIcon={<DirectionsIcon />}
+                      variant="contained"
+                      size="small"
+                      sx={{ m: 1 }}
+                    >
+                      Get Direction
+                    </Button>
+                  </a>
                 </Box>
               </Fade>
             </Grid>
