@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
+import { Typography } from "@mui/material";
 
 interface IProps {
   onSubMenuClick(submenuId: string): void;
@@ -44,7 +45,7 @@ function SnacksMenuItem({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2.3,
+          slidesToShow: 2.1,
           slidesToScroll: 1,
           arrows: !isBelowMediumScreen,
         },
@@ -62,11 +63,12 @@ function SnacksMenuItem({
               sx={{
                 border: "1px dashed",
                 borderRadius: "15px",
-                width: "120px",
+                width: "140px",
+                p: 1,
               }}
               variant={!selectedSubMenuId ? "contained" : "outlined"}
             >
-              All
+              <Typography sx={{ fontWeight: 500 }}> All</Typography>
             </Button>
           </Box>
 
@@ -78,13 +80,16 @@ function SnacksMenuItem({
                   sx={{
                     border: "1px dashed",
                     borderRadius: "15px",
-                    width: "130px",
+                    width: "140px",
+                    p: 1,
                   }}
                   variant={
                     selectedSubMenuId == subMenu._id ? "contained" : "outlined"
                   }
                 >
-                  {subMenu.title}
+                  <Typography sx={{ fontWeight: 500 }}>
+                    {subMenu.title}
+                  </Typography>
                 </Button>
               </Box>
             ))}

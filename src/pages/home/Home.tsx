@@ -12,14 +12,14 @@ function Home() {
       </Box>
       <Box
         sx={{
-          mb: 2,
+          mb: 3,
         }}
       >
         <WhyChooseUs whyChooseUs={WhyChooseUsData} />
       </Box>
-      <Box sx={{ backgroundColor: "#e6e7ee", py: 4 }}>
+      {/* <Box sx={{ backgroundColor: "#e6e7ee", py: 4 }}>
         <OurServices OurServices={ourServicesData} />
-      </Box>
+      </Box> */}
     </>
   );
 }

@@ -71,7 +71,7 @@ function Carousel(props: IProps) {
     category &&
     category.menuDatas && (
       <Container>
-        <Box marginTop={1.8}>
+        <Box>
           <Box
             display={"flex"}
             justifyContent={"space-between"}
@@ -92,9 +92,6 @@ function Carousel(props: IProps) {
             <Button
               variant="contained"
               size="small"
-              sx={{
-                padding: 0.5,
-              }}
               onClick={() => handleClickViewAll(category.menuDatas._id)}
             >
               View All

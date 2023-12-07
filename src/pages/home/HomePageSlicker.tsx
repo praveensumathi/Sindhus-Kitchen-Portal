@@ -245,7 +245,16 @@ function HomePageSlicker() {
                   {...props}
                   key={option._id}
                 >
-                  <ListItemText>{option.title}</ListItemText>
+                  <ListItemText>
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                        fontSize: "1.1rem",
+                      }}
+                    >
+                      {option.title}
+                    </Typography>
+                  </ListItemText>
                 </ListItem>
               )}
             />
@@ -315,6 +324,7 @@ function HomePageSlicker() {
                     <Typography
                       sx={{
                         fontWeight: "bold",
+                        fontSize: "1.1rem",
                       }}
                     >
                       {option.title}
