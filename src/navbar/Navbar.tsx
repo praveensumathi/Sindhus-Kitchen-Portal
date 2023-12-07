@@ -17,6 +17,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import React from "react";
+import CallIcon from "@mui/icons-material/Call";
 
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
@@ -94,7 +95,7 @@ function NavBar() {
           backdropFilter: "blur(15px)",
           borderStyle: "solid",
           borderWidth: 0,
-          height: isBelowSMScreen ? "60px" : "70px",
+          height: isBelowSMScreen ? "70px" : "70px",
           backgroundColor: "rgba(255,255,255,0.7)",
           position: isBelowSMScreen ? "fixed" : appBarPosition,
         }}
@@ -122,11 +123,45 @@ function NavBar() {
                 loading="lazy"
                 onClick={handleNavigateToHome}
               />
-              <Typography
-                sx={{ fontWeight: 600, color: "red", fontSize: "25px" }}
-              >
-                SINDHU's
-              </Typography>
+              <Box>
+                <Typography
+                  sx={{ fontWeight: 600, color: "red", fontSize: "25px" }}
+                >
+                  SINDHU's
+                </Typography>
+                {isBelowSMScreen && (
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <CallIcon sx={{ color: theme.palette.primary.main }} />
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        color: theme.palette.primary.main,
+                      }}
+                    >
+                      &nbsp; Call us:+1 940-279-2536
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+              {!isBelowSMScreen && (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginLeft: "20px",
+                  }}
+                >
+                  <CallIcon sx={{ color: theme.palette.primary.main }} />
+                  <Typography
+                    sx={{
+                      fontSize: "16px",
+                      color: theme.palette.primary.main,
+                    }}
+                  >
+                    &nbsp; Call us : +1 940-279-2536
+                  </Typography>
+                </Box>
+              )}
             </Box>
             {isMobile ? (
               <IconButton
