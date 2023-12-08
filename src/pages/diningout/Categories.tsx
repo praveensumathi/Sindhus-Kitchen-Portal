@@ -4,7 +4,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
 import Slider from "react-slick";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import Container from "@mui/material/Container";
 import { useGetAllDiningOutMenuDatas } from "../../customRQHooks/Hooks";
 import { useEffect, useState } from "react";
@@ -52,7 +51,7 @@ function Categories() {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1.5,
+          slidesToShow: 1.6,
           slidesToScroll: 1,
           arrows: !isBelowMediumScreen,
         },
@@ -85,13 +84,12 @@ function Categories() {
               <Box
                 key={index}
                 sx={{
-                  height: "7rem",
                   width: "10rem !important",
                   py: 2,
                 }}
-                onClick={() => handleClickProduct(category._id)}
               >
                 <Card
+                  onClick={() => handleClickProduct(category._id)}
                   sx={{
                     display: "flex",
                     justifyContent: "center",
@@ -115,6 +113,7 @@ function Categories() {
                       textAlign: "center",
                       p: 1,
                       fontWeight: 500,
+                      m: 0,
                     }}
                   >
                     {category.title}

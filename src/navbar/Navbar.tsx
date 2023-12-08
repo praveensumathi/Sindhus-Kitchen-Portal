@@ -92,11 +92,12 @@ function NavBar() {
       <AppBar
         sx={{
           zIndex: drawerOpen ? theme.zIndex.drawer + 1 : 1100,
-          backdropFilter: "blur(15px)",
+          //backdropFilter: "blur(20px)",
           borderStyle: "solid",
           borderWidth: 0,
-          height: isBelowSMScreen ? "70px" : "70px",
-          backgroundColor: "rgba(255,255,255,0.7)",
+          height: "70px",
+          //backgroundColor: "rgba(255,255,255,0.7)",
+          backgroundColor: "white",
           position: isBelowSMScreen ? "fixed" : appBarPosition,
         }}
         component="nav"
