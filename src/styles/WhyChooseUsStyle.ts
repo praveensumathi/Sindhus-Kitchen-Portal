@@ -11,7 +11,7 @@ export const whyChooseUsSytle = makeStyles((theme: Theme) => ({
   },
   imageWithBorder: {
     borderRadius: "50%",
-    backgroundColor: "white",
+    // backgroundColor: "white",
     width: "10rem",
     height: "10rem",
     display: "flex",
@@ -58,8 +58,8 @@ export const whyChooseUsSytle = makeStyles((theme: Theme) => ({
     fontWeight: "bolder",
   },
   flipcard: {
-    minWidth: 250,
-    height: 300,
+    width: 300,
+    height: 250,
     position: "relative",
     borderRadius: "20px !important",
     perspective: "1000px",
@@ -76,6 +76,6 @@ export const whyChooseUsSytle = makeStyles((theme: Theme) => ({
     left: 0,
     width: "100%",
     height: "100%",
-    background: "rgba(0, 0, 0, 0.64)",
+    background: "rgba(0, 0, 0, 0.4)",
   },
 }));

@@ -25,12 +25,16 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import FormControl from "@mui/material/FormControl";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 
 interface IProps {
   open: boolean;
   onClose: () => void;
   productInfo: ISelectedCateringProduct[];
   productQuantities: IServingSizeWithQuantity[];
+  addNotes: { [productId: string]: string };
+  onRequestSubmit: () => void;
 }
 
 interface ICombinedProduct {
@@ -45,6 +49,7 @@ const RequestFormInitialValue: ICateringRequest = {
   name: "",
   mobileNumber: "",
   eventDate: "",
+  eventTime: "",
 };
 
 const schema = yup.object().shape({
@@ -55,10 +60,18 @@ const schema = yup.object().shape({
     .typeError("Please enter the MobileNumber")
     .matches(/^[0-9]{10}$/, "Please enter a valid MobileNumber"),
   eventDate: yup.string().required("Event date is required"),
+  eventTime: yup.string().required("Event time is required"),
 });
 
 function CateringRequestModel(props: IProps) {
-  const { open, onClose, productInfo, productQuantities } = props;
+  const {
+    open,
+    onClose,
+    productInfo,
+    productQuantities,
+    addNotes,
+    onRequestSubmit,
+  } = props;
   const { updateSnackBarState } = useSnackBar();
 
   const {
@@ -96,11 +109,12 @@ function CateringRequestModel(props: IProps) {
         productId: product._id,
         title: product.title,
         quantities: quantities,
+        notes: addNotes[product._id] || "",
       };
     });
 
     setCombinedProducts(combined);
-  }, [productInfo, productQuantities]);
+  }, [productInfo, productQuantities, addNotes]);
 
   const onSubmitCateringRequest = async (data) => {
     try {
@@ -112,6 +126,7 @@ function CateringRequestModel(props: IProps) {
       );
       onClose();
       reset();
+      onRequestSubmit();
     } catch (error) {
       updateSnackBarState(
         true,
@@ -125,7 +140,7 @@ function CateringRequestModel(props: IProps) {
   };
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open} maxWidth="xs">
       <DialogTitle>
         <Box
           sx={{
@@ -146,8 +161,9 @@ function CateringRequestModel(props: IProps) {
         <DialogContent>
           <Box>
             <TextField
-              sx={{ mb: 1 }}
-              label="name *"
+              sx={{ mb: 1.5 }}
+              size="small"
+              label="Name *"
               fullWidth
               variant="outlined"
               {...register("name")}
@@ -155,7 +171,8 @@ function CateringRequestModel(props: IProps) {
               helperText={errors.name ? errors.name.message : ""}
             />
             <TextField
-              sx={{ mb: 1 }}
+              sx={{ mb: 1.5 }}
+              size="small"
               label="Mobile Number *"
               fullWidth
               variant="outlined"
@@ -165,7 +182,7 @@ function CateringRequestModel(props: IProps) {
                 errors.mobileNumber ? errors.mobileNumber.message : ""
               }
             />
-            <FormControl sx={{ mb: 1 }} fullWidth>
+            <FormControl sx={{ mb: 0.5 }} fullWidth>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Controller
                   name="eventDate"
@@ -176,6 +193,7 @@ function CateringRequestModel(props: IProps) {
                       slotProps={{
                         textField: {
                           error: !!errors.eventDate,
+                          size: "small",
                         },
                       }}
                       disablePast
@@ -185,6 +203,30 @@ function CateringRequestModel(props: IProps) {
                     />
                   )}
                 />
+              </LocalizationProvider>
+            </FormControl>
+            <FormControl fullWidth>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["TimePicker"]}>
+                  <Controller
+                    name="eventTime"
+                    control={control}
+                    render={({ field }) => (
+                      <TimePicker
+                        label="Event Time *"
+                        value={field.value || null}
+                        onChange={(time) => field.onChange(time)}
+                        sx={{ width: "100%" }}
+                        slotProps={{
+                          textField: {
+                            error: !!errors.eventTime,
+                            size: "small",
+                          },
+                        }}
+                      />
+                    )}
+                  />
+                </DemoContainer>
               </LocalizationProvider>
             </FormControl>
           </Box>

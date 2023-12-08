@@ -17,11 +17,24 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
+import DirectionsIcon from "@mui/icons-material/Directions";
+import { IconButton } from "@mui/material";
+import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+import { Instagram } from "@mui/icons-material";
 
 function Footer() {
   const location = useLocation();
   const isCateringMenuPage = location.pathname === paths.CATERING;
   const classes = useCommonGridStyle();
+
+  const socialMediaIconStyles = {
+    color: `${theme.palette.primary.main}`,
+    fontSize: "2.5rem",
+    transition: " 0.2s, transform 0.2s",
+    "&:hover": {
+      transform: "scale(1.1) translateY(-2px)",
+    },
+  };
 
   return (
     <Box
@@ -53,12 +66,27 @@ function Footer() {
                 <Box sx={{ my: 1 }}>
                   <LocationOnIcon
                     sx={{ color: theme.palette.secondary.main }}
-                  ></LocationOnIcon>
+                  />
+
                   <Typography variant="h5"> Store Address</Typography>
+
                   <Typography>
                     2700 E Eldorado Pkwy, #203,
                     <br /> Little Elm, Texas - 75068
                   </Typography>
+                  <a
+                    href={import.meta.env.VITE_ADDRESS_LOCATION}
+                    target="_blank"
+                  >
+                    <Button
+                      startIcon={<DirectionsIcon />}
+                      variant="contained"
+                      size="small"
+                      sx={{ m: 1 }}
+                    >
+                      Get Direction
+                    </Button>
+                  </a>
                 </Box>
               </Fade>
             </Grid>
@@ -139,6 +167,24 @@ function Footer() {
                   ></PhoneIcon>
                   <Typography variant="h5">Call us</Typography>
                   <Typography>+1 940-279-2536</Typography>
+                  <Box mt={1}>
+                    <Link
+                      to={`${import.meta.env.VITE_SINDHUS_FACEBOOK}`}
+                      target="_blank"
+                    >
+                      <IconButton>
+                        <FacebookRoundedIcon sx={socialMediaIconStyles} />
+                      </IconButton>
+                    </Link>
+                    <Link
+                      to={`${import.meta.env.VITE_SINDHUS_INSTAGRAM}`}
+                      target="_blank"
+                    >
+                      <IconButton>
+                        <Instagram sx={socialMediaIconStyles} />
+                      </IconButton>
+                    </Link>
+                  </Box>
                 </Box>
               </Fade>
             </Grid>

@@ -28,28 +28,13 @@ export const ourServicesData: IOurServices[] = [
   },
 ];
 
-export const homePageSlicker = [
-  {
-    image: "assets/sindhuskitchen_slick_1.webp",
-    heading: "Sindhu's Kitchen",
-    subHeading: "CATERING TO YOUR NEEDS",
-    content:
-      "Authentic South Inidan Food and Snacks prepered to give you the Best in Town",
-  },
-  {
-    image: "assets/sindhuskitchen_slick_2.webp",
-    heading: "Sindhu's Kitchen",
-    subHeading: "A TASTE OF TRADITION",
-    content:
-      "Experience the rich and time-honored flavors of South India with our authentic dishes",
-  },
-  {
-    image: "/assets/sindhuskitchen_slick_3.webp",
-    heading: "Sindhu's Kitchen",
-    subHeading: "FLAVORS THAT DANCE ON YOUR PLATE",
-    content: "Creating a memorable taste sensation with every bite",
-  },
-];
+export const homePageSlicker = {
+  image: "assets/sindhuskitchen_slick_1.webp",
+  heading: "Sindhu's Kitchen",
+  subHeading: "CATERING TO YOUR NEEDS",
+  content:
+    "Authentic South Inidan Food and Snacks prepered to give you the Best in Town",
+};
 
 export const WhyChooseUsData: IWhyChooseUs[] = [
   {
@@ -58,8 +43,7 @@ export const WhyChooseUsData: IWhyChooseUs[] = [
     description:
       "Our culinary creations start with the purest water in all our food and snacks preparation.",
     imageicon: "🌊",
-    image:
-      "/assets/images/water.webp",
+    image: "/assets/images/water.webp",
   },
   {
     id: 2,

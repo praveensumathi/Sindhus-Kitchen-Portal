@@ -75,19 +75,22 @@ function ProductDetail() {
                   .concat(menuDetail.images)
                   .map((image, index) => (
                     <Box>
-                      <Card
-                        key={index}
-                        sx={{
-                          maxHeight: "60%",
-                        }}
-                      >
-                        <CardMedia
-                          component="img"
-                          alt="sindhus-menu"
-                          height="100%"
-                          width="100%"
-                          src={image}
-                        />
+                      <Card key={index}>
+                        <Box
+                          sx={{
+                            height: "350px",
+                            width: "100%",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <CardMedia
+                            component="img"
+                            alt="sindhus-menu"
+                            height="100%"
+                            width="100%"
+                            src={image}
+                          ></CardMedia>
+                        </Box>
                       </Card>
                     </Box>
                   ))}

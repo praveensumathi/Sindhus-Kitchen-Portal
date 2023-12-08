@@ -48,7 +48,15 @@ function WhyChooseUs(props: Iprops) {
       <Grid container spacing={6} justifyContent="center" alignItems="center">
         {whyChooseUs.map((whychoose, index) => {
           return (
-            <Grid item key={index} xs={12} sm={6} md={4} py={1}>
+            <Grid
+              item
+              key={index}
+              xs={12}
+              sm={6}
+              md={4}
+              py={1}
+              className={classes.centerImage}
+            >
               <Bounce bottom>
                 <Card className={classes.flipcard} elevation={0}>
                   <Box className={classes.flipCardInner}>
@@ -70,7 +78,7 @@ function WhyChooseUs(props: Iprops) {
                           {whychoose.imageicon}
                         </Box>
 
-                        <Typography gutterBottom variant="h5" fontWeight={500}>
+                        <Typography gutterBottom variant="h5" fontWeight={600}>
                           {whychoose.title}
                         </Typography>
                       </Box>

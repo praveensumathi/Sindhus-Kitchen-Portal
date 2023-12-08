@@ -17,11 +17,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import React from "react";
+import CallIcon from "@mui/icons-material/Call";
 
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
   { name: "Specials", linkurl: paths.SPECIALS },
-  { name: "Dining Out", linkurl: paths.DININGOUT },
+  { name: "Daily Menu", linkurl: paths.DININGOUT },
   { name: "Snacks", linkurl: paths.SNACKS },
   { name: "Catering", linkurl: paths.CATERING },
 ];
@@ -91,11 +92,12 @@ function NavBar() {
       <AppBar
         sx={{
           zIndex: drawerOpen ? theme.zIndex.drawer + 1 : 1100,
-          backdropFilter: "blur(15px)",
+          //backdropFilter: "blur(20px)",
           borderStyle: "solid",
           borderWidth: 0,
-          height: isBelowSMScreen ? "60px" : "70px",
-          backgroundColor: "rgba(255,255,255,0.7)",
+          height: "70px",
+          //backgroundColor: "rgba(255,255,255,0.7)",
+          backgroundColor: "white",
           position: isBelowSMScreen ? "fixed" : appBarPosition,
         }}
         component="nav"
@@ -122,11 +124,52 @@ function NavBar() {
                 loading="lazy"
                 onClick={handleNavigateToHome}
               />
-              <Typography
-                sx={{ fontWeight: 600, color: "red", fontSize: "25px" }}
-              >
-                SINDHU's
-              </Typography>
+              <Box>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                    color: "red",
+                    fontSize: isBelowSMScreen ? "1.5rem" : "2rem",
+                    fontFamily: "Sindhus-Logo-Font",
+                  }}
+                >
+                  SINDHU&#8217;S
+                </Typography>
+                {isBelowSMScreen && (
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <CallIcon sx={{ color: theme.palette.primary.main }} />
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: 500,
+                        color: theme.palette.primary.main,
+                      }}
+                    >
+                      &nbsp; Call us:+1 940-279-2536
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+              {!isBelowSMScreen && (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginLeft: "20px",
+                  }}
+                >
+                  <CallIcon sx={{ color: theme.palette.primary.main }} />
+                  <Typography
+                    sx={{
+                      fontSize: "16px",
+                      fontWeight: 500,
+                      color: theme.palette.primary.main,
+                    }}
+                  >
+                    &nbsp; Call us : +1 940-279-2536
+                  </Typography>
+                </Box>
+              )}
             </Box>
             {isMobile ? (
               <IconButton

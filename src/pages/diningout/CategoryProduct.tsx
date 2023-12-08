@@ -1,7 +1,5 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import CommonProductCard from "../../common/component/CommonProductCard";
@@ -16,62 +14,29 @@ function CategoryProducts() {
   const navigate = useNavigate();
 
   const selectedCategory = useGetFetchProductsByMenuId(menuId ?? "");
-  console.log("selectedCategory", selectedCategory);
 
   return (
     <>
-      <Box>
-        <IconButton
+      {selectedCategory && selectedCategory.data && (
+        <Container
           sx={{
-            float: "left",
-            display: "flex",
-            height: "100px",
-            width: {
-              xs: "20px",
-              sm: "100px",
+            position: "sticky",
+            top: {
+              xs: "71px",
             },
-            position: "fixed",
-            padding: "1px",
+            zIndex: 1020,
+            backgroundColor: "white",
+            pt: 2,
+            pl: 2,
           }}
-          onClick={() => navigate(-1)}
         >
-          <ArrowBackIcon fontSize="medium" />
-        </IconButton>
-      </Box>
-      <Container>
-        {selectedCategory && selectedCategory.data && (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
-            p={1}
-          >
+          <Box display={"flex"} alignItems={"center"}>
+            <IconButton onClick={() => navigate(-1)}sx={{ mr:1 }}>
+              <ArrowBackIcon fontSize="medium" />
+            </IconButton>
+
             <Box
               sx={{
-                paddingRight: 2,
-              }}
-            >
-              <Card
-                sx={{
-                  height: "80px",
-                  width: "80px",
-                  boxShadow: 3,
-                  borderRadius: "50%",
-                }}
-              >
-                <CardMedia
-                  image={selectedCategory.data.image || ""}
-                  component={"img"}
-                  sx={{
-                    height: "100%",
-                  }}
-                />
-              </Card>
-            </Box>
-            <Box
-              sx={{
-                padding: "6px",
                 width: "100%",
               }}
             >
@@ -90,33 +55,33 @@ function CategoryProducts() {
               </Typography>
             </Box>
           </Box>
+        </Container>
+      )}
+      <Box>
+        {selectedCategory.data &&
+        selectedCategory.data.products &&
+        selectedCategory.data.products.length > 0 ? (
+          <Container sx={{ padding: "20px", mt: 2, zIndex: -1 }}>
+            <Grid container spacing={2}>
+              {selectedCategory.data.products.map((product, index) => (
+                <Grid
+                  item
+                  key={index}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  <CommonProductCard product={product} />
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        ) : (
+          <NoProductsAvailable />
         )}
-        <Box>
-          {selectedCategory.data &&
-          selectedCategory.data.products &&
-          selectedCategory.data.products.length > 0 ? (
-            <Container sx={{ padding: "10px" }}>
-              <Grid container spacing={2}>
-                {selectedCategory.data.products.map((product, index) => (
-                  <Grid
-                    item
-                    key={index}
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                    sx={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <CommonProductCard product={product} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
-          ) : (
-            <NoProductsAvailable />
-          )}
-        </Box>
-      </Container>
+      </Box>
     </>
   );
 }
