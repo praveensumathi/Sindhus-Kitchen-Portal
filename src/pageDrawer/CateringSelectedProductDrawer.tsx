@@ -245,6 +245,8 @@ function CateringSelectedProductDrawer(props: IProps) {
       </Drawer>
 
       <DeleteConfirmationDialog
+        title="Remove Product"
+        content="Are you sure you want to remove this product?"
         deleteConfirmationOpen={deleteConfirmationOpen}
         handleDeleteConfirmationClose={handleDeleteConfirmationClose}
         handleDeleteConfirmation={handleDeleteConfirmation}
