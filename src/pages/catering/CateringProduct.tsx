@@ -200,7 +200,6 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     setProductQuantities([]);
   };
 
-
   return (
     <>
       <Container>
