@@ -128,7 +128,7 @@ function NavBar() {
                   sx={{
                     fontWeight: 600,
                     color: "red",
-                    fontSize: "2rem",
+                    fontSize: isBelowSMScreen ? "1.5rem" : "2rem",
                     fontFamily: "Sindhus-Logo-Font",
                   }}
                 >
