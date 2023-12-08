@@ -186,6 +186,16 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     setDrawerOpen(false);
   };
 
+  const removeCateringProduct = (productId: string) => {
+    setProductInfo((prevProductInfo) =>
+      prevProductInfo.filter((product) => product._id !== productId)
+    );
+
+    setProductQuantities((prevQuantities) =>
+      prevQuantities.filter((item) => item.productId !== productId)
+    );
+  };
+
   return (
     <>
       <Container>
@@ -458,6 +468,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
         handleClose={handleCloseModal}
         productInfo={productInfo}
         productQuantities={productQuantities}
+        removeCateringProduct={removeCateringProduct}
       />
     </>
   );
