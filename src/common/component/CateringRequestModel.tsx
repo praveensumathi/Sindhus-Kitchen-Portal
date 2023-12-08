@@ -34,6 +34,7 @@ interface IProps {
   productInfo: ISelectedCateringProduct[];
   productQuantities: IServingSizeWithQuantity[];
   addNotes: { [productId: string]: string };
+  onRequestSubmit: () => void;
 }
 
 interface ICombinedProduct {
@@ -63,7 +64,14 @@ const schema = yup.object().shape({
 });
 
 function CateringRequestModel(props: IProps) {
-  const { open, onClose, productInfo, productQuantities, addNotes } = props;
+  const {
+    open,
+    onClose,
+    productInfo,
+    productQuantities,
+    addNotes,
+    onRequestSubmit,
+  } = props;
   const { updateSnackBarState } = useSnackBar();
 
   const {
@@ -82,32 +90,31 @@ function CateringRequestModel(props: IProps) {
     []
   );
 
-useEffect(() => {
-  const combined = productInfo.map((product) => {
-    const matchingQuantities = productQuantities.filter(
-      (item) => item.productId === product._id
-    );
+  useEffect(() => {
+    const combined = productInfo.map((product) => {
+      const matchingQuantities = productQuantities.filter(
+        (item) => item.productId === product._id
+      );
 
-    const quantities = matchingQuantities
-      .map((item) =>
-        item.sizes.map((sizeInfo) => ({
-          size: sizeInfo.size,
-          quantity: sizeInfo.qty,
-        }))
-      )
-      .flat();
+      const quantities = matchingQuantities
+        .map((item) =>
+          item.sizes.map((sizeInfo) => ({
+            size: sizeInfo.size,
+            quantity: sizeInfo.qty,
+          }))
+        )
+        .flat();
 
-    return {
-      productId: product._id,
-      title: product.title,
-      quantities: quantities,
-      notes: addNotes[product._id] || "", // Add this line to include notes
-    };
-  });
+      return {
+        productId: product._id,
+        title: product.title,
+        quantities: quantities,
+        notes: addNotes[product._id] || "",
+      };
+    });
 
-  setCombinedProducts(combined);
-}, [productInfo, productQuantities, addNotes]);
-
+    setCombinedProducts(combined);
+  }, [productInfo, productQuantities, addNotes]);
 
   const onSubmitCateringRequest = async (data) => {
     try {
@@ -119,6 +126,7 @@ useEffect(() => {
       );
       onClose();
       reset();
+      onRequestSubmit();
     } catch (error) {
       updateSnackBarState(
         true,
@@ -132,7 +140,7 @@ useEffect(() => {
   };
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open} maxWidth="xs">
       <DialogTitle>
         <Box
           sx={{
@@ -153,7 +161,7 @@ useEffect(() => {
         <DialogContent>
           <Box>
             <TextField
-              sx={{ mb: 1 }}
+              sx={{ mb: 1.5 }}
               label="Name *"
               fullWidth
               variant="outlined"
@@ -162,7 +170,7 @@ useEffect(() => {
               helperText={errors.name ? errors.name.message : ""}
             />
             <TextField
-              sx={{ mb: 1 }}
+              sx={{ mb: 1.5 }}
               label="Mobile Number *"
               fullWidth
               variant="outlined"
@@ -172,7 +180,7 @@ useEffect(() => {
                 errors.mobileNumber ? errors.mobileNumber.message : ""
               }
             />
-            <FormControl sx={{ mb: 1 }} fullWidth>
+            <FormControl sx={{ mb: 0.5 }} fullWidth>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Controller
                   name="eventDate"

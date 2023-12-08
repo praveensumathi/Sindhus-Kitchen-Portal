@@ -196,6 +196,11 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
     );
   };
 
+  const resetQuantityState = () => {
+    setProductQuantities([]);
+  };
+
+
   return (
     <>
       <Container>
@@ -469,6 +474,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
         productInfo={productInfo}
         productQuantities={productQuantities}
         removeCateringProduct={removeCateringProduct}
+        resetQuantityState={resetQuantityState}
       />
     </>
   );

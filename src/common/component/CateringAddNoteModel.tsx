@@ -40,7 +40,7 @@ function CateringAddNoteModel(props: IAddNoteProps) {
 
   return (
     <>
-      <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
         <DialogTitle sx={{ backgroundColor: "#ece7ee" }}>
           <Box
             display={"flex"}
@@ -57,12 +57,12 @@ function CateringAddNoteModel(props: IAddNoteProps) {
         <DialogContent>
           {selectedProduct && (
             <>
-              <Typography>
+              <Typography sx={{ mb: 1, fontSize: "1.2rem" }}>
                 <b>{`${selectedProduct.title}`}</b>
               </Typography>
             </>
           )}
-          <Typography variant="subtitle1">Description</Typography>
+          <Typography variant="subtitle1">Note:</Typography>
           <TextField
             fullWidth
             multiline

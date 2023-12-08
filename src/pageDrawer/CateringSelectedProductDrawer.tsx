@@ -34,6 +34,7 @@ interface IProps {
   productInfo: ISelectedCateringProduct[];
   productQuantities: IServingSizeWithQuantity[];
   removeCateringProduct: (productId: string) => void;
+  resetQuantityState: () => void;
 }
 
 function CateringSelectedProductDrawer(props: IProps) {
@@ -47,6 +48,7 @@ function CateringSelectedProductDrawer(props: IProps) {
     productInfo,
     productQuantities,
     removeCateringProduct,
+    resetQuantityState,
   } = props;
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState<string | null>(
@@ -101,6 +103,11 @@ function CateringSelectedProductDrawer(props: IProps) {
       setProductIdToDelete(null);
     }
     setDeleteConfirmationOpen(false);
+  };
+
+  const handleCateringRequestSubmit = () => {
+    resetQuantityState();
+    handleClose();
   };
 
   return (
@@ -239,16 +246,16 @@ function CateringSelectedProductDrawer(props: IProps) {
                         <Box
                           sx={{
                             display: "flex",
-                            justifyContent: "space-evenly",
+                            justifyContent: "space-between",
                             my: 2,
                           }}
                         >
                           <NoteAddIcon
-                            sx={{ cursor: "pointer" }}
+                            sx={{ cursor: "pointer", fontSize: 30 }}
                             onClick={() => handleAddNoteIconClick(product)}
                           ></NoteAddIcon>
                           <DeleteIcon
-                            sx={{ cursor: "pointer" }}
+                            sx={{ cursor: "pointer", fontSize: 30 }}
                             onClick={() => handleDeleteProduct(product)}
                           ></DeleteIcon>
                         </Box>
@@ -288,6 +295,7 @@ function CateringSelectedProductDrawer(props: IProps) {
         productInfo={productInfo}
         productQuantities={productQuantities}
         addNotes={addNotes}
+        onRequestSubmit={handleCateringRequestSubmit}
       />
 
       <CateringAddNoteModel
