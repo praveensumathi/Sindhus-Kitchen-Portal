@@ -14,12 +14,16 @@ interface IDeleteConfirmationDialogProps {
   deleteConfirmationOpen: boolean;
   handleDeleteConfirmationClose: () => void;
   handleDeleteConfirmation: () => void;
+  title: string;
+  content: string;
 }
 function DeleteConfirmationDialog(props: IDeleteConfirmationDialogProps) {
   const {
     deleteConfirmationOpen,
     handleDeleteConfirmationClose,
     handleDeleteConfirmation,
+    title,
+    content,
   } = props;
 
   return (
@@ -35,7 +39,7 @@ function DeleteConfirmationDialog(props: IDeleteConfirmationDialogProps) {
             alignItems={"center"}
           >
             <Typography sx={{ fontWeight: 700 }} color="primary">
-              Remove Product
+              {title}
             </Typography>
             <CloseIcon
               color="primary"
@@ -45,7 +49,7 @@ function DeleteConfirmationDialog(props: IDeleteConfirmationDialogProps) {
         </DialogTitle>
         <Divider />
         <DialogContent>
-          <Typography>Are you sure you want to remove this product?</Typography>
+          <Typography>{content}</Typography>
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={handleDeleteConfirmationClose}>

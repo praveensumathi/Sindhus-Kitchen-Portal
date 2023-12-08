@@ -33,6 +33,7 @@ interface IProps {
   onClose: () => void;
   productInfo: ISelectedCateringProduct[];
   productQuantities: IServingSizeWithQuantity[];
+  addNotes: { [productId: string]: string };
 }
 
 interface ICombinedProduct {
@@ -62,7 +63,7 @@ const schema = yup.object().shape({
 });
 
 function CateringRequestModel(props: IProps) {
-  const { open, onClose, productInfo, productQuantities } = props;
+  const { open, onClose, productInfo, productQuantities, addNotes } = props;
   const { updateSnackBarState } = useSnackBar();
 
   const {
@@ -81,30 +82,32 @@ function CateringRequestModel(props: IProps) {
     []
   );
 
-  useEffect(() => {
-    const combined = productInfo.map((product) => {
-      const matchingQuantities = productQuantities.filter(
-        (item) => item.productId === product._id
-      );
+useEffect(() => {
+  const combined = productInfo.map((product) => {
+    const matchingQuantities = productQuantities.filter(
+      (item) => item.productId === product._id
+    );
 
-      const quantities = matchingQuantities
-        .map((item) =>
-          item.sizes.map((sizeInfo) => ({
-            size: sizeInfo.size,
-            quantity: sizeInfo.qty,
-          }))
-        )
-        .flat();
+    const quantities = matchingQuantities
+      .map((item) =>
+        item.sizes.map((sizeInfo) => ({
+          size: sizeInfo.size,
+          quantity: sizeInfo.qty,
+        }))
+      )
+      .flat();
 
-      return {
-        productId: product._id,
-        title: product.title,
-        quantities: quantities,
-      };
-    });
+    return {
+      productId: product._id,
+      title: product.title,
+      quantities: quantities,
+      notes: addNotes[product._id] || "", // Add this line to include notes
+    };
+  });
 
-    setCombinedProducts(combined);
-  }, [productInfo, productQuantities]);
+  setCombinedProducts(combined);
+}, [productInfo, productQuantities, addNotes]);
+
 
   const onSubmitCateringRequest = async (data) => {
     try {

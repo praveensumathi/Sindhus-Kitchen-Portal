@@ -287,6 +287,7 @@ function CateringSelectedProductDrawer(props: IProps) {
         onClose={handlePopupClose}
         productInfo={productInfo}
         productQuantities={productQuantities}
+        addNotes={addNotes}
       />
 
       <CateringAddNoteModel
@@ -297,6 +298,8 @@ function CateringSelectedProductDrawer(props: IProps) {
       />
 
       <DeleteConfirmationDialog
+        title="Remove Product"
+        content="Are you sure you want to remove this product?"
         deleteConfirmationOpen={deleteConfirmationOpen}
         handleDeleteConfirmationClose={handleDeleteConfirmationClose}
         handleDeleteConfirmation={handleDeleteConfirmation}
