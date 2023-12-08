@@ -18,6 +18,7 @@ interface IAddNoteProps {
   handleAddNotePopupClose: () => void;
   onAddNote: (note: string) => void;
   selectedProduct: ISelectedCateringProduct | null;
+  addNotes: { [productId: string]: string };
 }
 function CateringAddNoteModel(props: IAddNoteProps) {
   const {
@@ -25,18 +26,21 @@ function CateringAddNoteModel(props: IAddNoteProps) {
     handleAddNotePopupClose: onClose,
     onAddNote,
     selectedProduct,
+    addNotes,
   } = props;
 
   const [note, setNote] = useState("");
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setNote(addNotes[selectedProduct._id] || "");
+    }
+  }, [selectedProduct, addNotes]);
 
   const handleAddNote = () => {
     onAddNote(note);
     onClose();
   };
-
-  useEffect(() => {
-    setNote("");
-  }, [selectedProduct]);
 
   return (
     <>

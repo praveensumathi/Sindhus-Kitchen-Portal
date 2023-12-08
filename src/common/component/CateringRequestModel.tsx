@@ -89,6 +89,7 @@ function CateringRequestModel(props: IProps) {
   const [combinedProducts, setCombinedProducts] = useState<ICombinedProduct[]>(
     []
   );
+  
 
   useEffect(() => {
     const combined = productInfo.map((product) => {

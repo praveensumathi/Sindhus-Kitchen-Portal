@@ -263,10 +263,15 @@ function CateringSelectedProductDrawer(props: IProps) {
                     </Grid>
                     {addNotes[product._id] && (
                       <Box>
-                        <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                        <Typography
+                          variant="h6"
+                          sx={{ fontWeight: 500, fontSize: "17px" }}
+                        >
                           notes:
                         </Typography>
-                        <Typography>{addNotes[product._id]}</Typography>
+                        <Typography sx={{ fontSize: "14px" }}>
+                          {addNotes[product._id]}
+                        </Typography>
                       </Box>
                     )}
                   </Card>
@@ -303,6 +308,7 @@ function CateringSelectedProductDrawer(props: IProps) {
         handleAddNotePopupClose={handleAddNotePopupClose}
         onAddNote={handleAddNote}
         selectedProduct={selectedProduct}
+        addNotes={addNotes}
       />
 
       <DeleteConfirmationDialog
