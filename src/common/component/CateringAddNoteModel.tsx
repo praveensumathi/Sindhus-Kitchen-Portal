@@ -10,24 +10,33 @@ import {
   DialogActions,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ISelectedCateringProduct } from "../../interface/types";
 
 interface IAddNoteProps {
-  open: boolean;
-  onClose: () => void;
+  isAddNotePopupOpen: boolean;
+  handleAddNotePopupClose: () => void;
   onAddNote: (note: string) => void;
   selectedProduct: ISelectedCateringProduct | null;
 }
 function CateringAddNoteModel(props: IAddNoteProps) {
-  const { open, onClose, onAddNote, selectedProduct } = props;
+  const {
+    isAddNotePopupOpen: open,
+    handleAddNotePopupClose: onClose,
+    onAddNote,
+    selectedProduct,
+  } = props;
 
   const [note, setNote] = useState("");
 
   const handleAddNote = () => {
     onAddNote(note);
-    onClose(); 
+    onClose();
   };
+
+  useEffect(() => {
+    setNote("");
+  }, [selectedProduct]);
 
   return (
     <>

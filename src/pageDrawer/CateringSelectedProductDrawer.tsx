@@ -54,8 +54,7 @@ function CateringSelectedProductDrawer(props: IProps) {
   );
   const [selectedProduct, setSelectedProduct] =
     useState<ISelectedCateringProduct | null>(null);
-  const [note, setNote] = useState("");
-  const [notes, setNotes] = useState<{ [productId: string]: string }>({});
+  const [addNotes, setAddNotes] = useState<{ [productId: string]: string }>({});
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -68,7 +67,7 @@ function CateringSelectedProductDrawer(props: IProps) {
   };
 
   const handleAddNoteIconClick = (product: ISelectedCateringProduct) => {
-    setSelectedProduct(product); // Set the selected product
+    setSelectedProduct(product);
     setIsAddNotePopupOpen(true);
   };
 
@@ -78,7 +77,7 @@ function CateringSelectedProductDrawer(props: IProps) {
 
   const handleAddNote = (enteredNote: string) => {
     if (selectedProduct) {
-      setNotes((prevNotes) => ({
+      setAddNotes((prevNotes) => ({
         ...prevNotes,
         [selectedProduct._id]: enteredNote,
       }));
@@ -255,12 +254,12 @@ function CateringSelectedProductDrawer(props: IProps) {
                         </Box>
                       </Grid>
                     </Grid>
-                    {notes[product._id] && (
+                    {addNotes[product._id] && (
                       <Box>
                         <Typography variant="h6" sx={{ fontWeight: 500 }}>
-                          notes
+                          notes:
                         </Typography>
-                        <Typography>{notes[product._id]}</Typography>
+                        <Typography>{addNotes[product._id]}</Typography>
                       </Box>
                     )}
                   </Card>
@@ -291,8 +290,8 @@ function CateringSelectedProductDrawer(props: IProps) {
       />
 
       <CateringAddNoteModel
-        open={isAddNotePopupOpen}
-        onClose={handleAddNotePopupClose}
+        isAddNotePopupOpen={isAddNotePopupOpen}
+        handleAddNotePopupClose={handleAddNotePopupClose}
         onAddNote={handleAddNote}
         selectedProduct={selectedProduct}
       />
