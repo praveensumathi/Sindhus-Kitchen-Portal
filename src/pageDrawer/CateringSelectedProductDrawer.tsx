@@ -25,6 +25,8 @@ import CateringRequestModel from "../common/component/CateringRequestModel";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteConfirmationDialog from "../common/component/CommonDeleteConfirmationDialog";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import CateringAddNoteModel from "../common/component/CateringAddNoteModel";
 
 interface IProps {
   isOpen: boolean;
@@ -32,10 +34,12 @@ interface IProps {
   productInfo: ISelectedCateringProduct[];
   productQuantities: IServingSizeWithQuantity[];
   removeCateringProduct: (productId: string) => void;
+  resetQuantityState: () => void;
 }
 
 function CateringSelectedProductDrawer(props: IProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isAddNotePopupOpen, setIsAddNotePopupOpen] = useState(false);
 
   const theme = useTheme();
   const {
@@ -44,11 +48,15 @@ function CateringSelectedProductDrawer(props: IProps) {
     productInfo,
     productQuantities,
     removeCateringProduct,
+    resetQuantityState,
   } = props;
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState<string | null>(
     null
   );
+  const [selectedProduct, setSelectedProduct] =
+    useState<ISelectedCateringProduct | null>(null);
+  const [addNotes, setAddNotes] = useState<{ [productId: string]: string }>({});
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -58,6 +66,26 @@ function CateringSelectedProductDrawer(props: IProps) {
 
   const handlePopupClose = () => {
     setIsPopupOpen(false);
+  };
+
+  const handleAddNoteIconClick = (product: ISelectedCateringProduct) => {
+    setSelectedProduct(product);
+    setIsAddNotePopupOpen(true);
+  };
+
+  const handleAddNotePopupClose = () => {
+    setIsAddNotePopupOpen(false);
+  };
+
+  const handleAddNote = (enteredNote: string) => {
+    if (selectedProduct) {
+      setAddNotes((prevNotes) => ({
+        ...prevNotes,
+        [selectedProduct._id]: enteredNote,
+      }));
+      setSelectedProduct(null);
+    }
+    setIsAddNotePopupOpen(false);
   };
 
   const handleDeleteConfirmationClose = () => {
@@ -75,6 +103,11 @@ function CateringSelectedProductDrawer(props: IProps) {
       setProductIdToDelete(null);
     }
     setDeleteConfirmationOpen(false);
+  };
+
+  const handleCateringRequestSubmit = () => {
+    resetQuantityState();
+    handleClose();
   };
 
   return (
@@ -125,7 +158,7 @@ function CateringSelectedProductDrawer(props: IProps) {
                 >
                   <Card
                     sx={{
-                      height: "8rem",
+                      minHeight: "9rem",
                     }}
                     elevation={0}
                   >
@@ -210,14 +243,37 @@ function CateringSelectedProductDrawer(props: IProps) {
                         </Box>
                       </Grid>
                       <Grid item xs={2}>
-                        <DeleteIcon
+                        <Box
                           sx={{
-                            my: 3,
+                            display: "flex",
+                            justifyContent: "space-between",
+                            my: 2,
                           }}
-                          onClick={() => handleDeleteProduct(product)}
-                        ></DeleteIcon>
+                        >
+                          <NoteAddIcon
+                            sx={{ cursor: "pointer", fontSize: 30 }}
+                            onClick={() => handleAddNoteIconClick(product)}
+                          ></NoteAddIcon>
+                          <DeleteIcon
+                            sx={{ cursor: "pointer", fontSize: 30 }}
+                            onClick={() => handleDeleteProduct(product)}
+                          ></DeleteIcon>
+                        </Box>
                       </Grid>
                     </Grid>
+                    {addNotes[product._id] && (
+                      <Box>
+                        <Typography
+                          variant="h6"
+                          sx={{ fontWeight: 500, fontSize: "17px" }}
+                        >
+                          notes:
+                        </Typography>
+                        <Typography sx={{ fontSize: "14px" }}>
+                          {addNotes[product._id]}
+                        </Typography>
+                      </Box>
+                    )}
                   </Card>
                 </Box>
               ))}
@@ -236,13 +292,24 @@ function CateringSelectedProductDrawer(props: IProps) {
             Send Now
           </Button>
         </Box>
-        <CateringRequestModel
-          open={isPopupOpen}
-          onClose={handlePopupClose}
-          productInfo={productInfo}
-          productQuantities={productQuantities}
-        />
       </Drawer>
+
+      <CateringRequestModel
+        open={isPopupOpen}
+        onClose={handlePopupClose}
+        productInfo={productInfo}
+        productQuantities={productQuantities}
+        addNotes={addNotes}
+        onRequestSubmit={handleCateringRequestSubmit}
+      />
+
+      <CateringAddNoteModel
+        isAddNotePopupOpen={isAddNotePopupOpen}
+        handleAddNotePopupClose={handleAddNotePopupClose}
+        onAddNote={handleAddNote}
+        selectedProduct={selectedProduct}
+        addNotes={addNotes}
+      />
 
       <DeleteConfirmationDialog
         title="Remove Product"

@@ -33,6 +33,8 @@ interface IProps {
   onClose: () => void;
   productInfo: ISelectedCateringProduct[];
   productQuantities: IServingSizeWithQuantity[];
+  addNotes: { [productId: string]: string };
+  onRequestSubmit: () => void;
 }
 
 interface ICombinedProduct {
@@ -62,7 +64,14 @@ const schema = yup.object().shape({
 });
 
 function CateringRequestModel(props: IProps) {
-  const { open, onClose, productInfo, productQuantities } = props;
+  const {
+    open,
+    onClose,
+    productInfo,
+    productQuantities,
+    addNotes,
+    onRequestSubmit,
+  } = props;
   const { updateSnackBarState } = useSnackBar();
 
   const {
@@ -100,11 +109,12 @@ function CateringRequestModel(props: IProps) {
         productId: product._id,
         title: product.title,
         quantities: quantities,
+        notes: addNotes[product._id] || "",
       };
     });
 
     setCombinedProducts(combined);
-  }, [productInfo, productQuantities]);
+  }, [productInfo, productQuantities, addNotes]);
 
   const onSubmitCateringRequest = async (data) => {
     try {
@@ -116,6 +126,7 @@ function CateringRequestModel(props: IProps) {
       );
       onClose();
       reset();
+      onRequestSubmit();
     } catch (error) {
       updateSnackBarState(
         true,
@@ -129,7 +140,7 @@ function CateringRequestModel(props: IProps) {
   };
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open} maxWidth="xs">
       <DialogTitle>
         <Box
           sx={{
@@ -150,7 +161,8 @@ function CateringRequestModel(props: IProps) {
         <DialogContent>
           <Box>
             <TextField
-              sx={{ mb: 1 }}
+              sx={{ mb: 1.5 }}
+              size="small"
               label="Name *"
               fullWidth
               variant="outlined"
@@ -159,7 +171,8 @@ function CateringRequestModel(props: IProps) {
               helperText={errors.name ? errors.name.message : ""}
             />
             <TextField
-              sx={{ mb: 1 }}
+              sx={{ mb: 1.5 }}
+              size="small"
               label="Mobile Number *"
               fullWidth
               variant="outlined"
@@ -169,7 +182,7 @@ function CateringRequestModel(props: IProps) {
                 errors.mobileNumber ? errors.mobileNumber.message : ""
               }
             />
-            <FormControl sx={{ mb: 1 }} fullWidth>
+            <FormControl sx={{ mb: 0.5 }} fullWidth>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Controller
                   name="eventDate"
@@ -180,6 +193,7 @@ function CateringRequestModel(props: IProps) {
                       slotProps={{
                         textField: {
                           error: !!errors.eventDate,
+                          size: "small",
                         },
                       }}
                       disablePast
@@ -206,6 +220,7 @@ function CateringRequestModel(props: IProps) {
                         slotProps={{
                           textField: {
                             error: !!errors.eventTime,
+                            size: "small",
                           },
                         }}
                       />

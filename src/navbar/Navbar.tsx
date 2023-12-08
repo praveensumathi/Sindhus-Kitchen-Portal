@@ -141,6 +141,7 @@ function NavBar() {
                     <Typography
                       sx={{
                         fontSize: "16px",
+                        fontWeight: 500,
                         color: theme.palette.primary.main,
                       }}
                     >
@@ -161,6 +162,7 @@ function NavBar() {
                   <Typography
                     sx={{
                       fontSize: "16px",
+                      fontWeight: 500,
                       color: theme.palette.primary.main,
                     }}
                   >
