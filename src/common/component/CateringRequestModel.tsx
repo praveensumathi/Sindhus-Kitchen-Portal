@@ -162,6 +162,7 @@ function CateringRequestModel(props: IProps) {
           <Box>
             <TextField
               sx={{ mb: 1.5 }}
+              size="small"
               label="Name *"
               fullWidth
               variant="outlined"
@@ -171,6 +172,7 @@ function CateringRequestModel(props: IProps) {
             />
             <TextField
               sx={{ mb: 1.5 }}
+              size="small"
               label="Mobile Number *"
               fullWidth
               variant="outlined"
@@ -191,6 +193,7 @@ function CateringRequestModel(props: IProps) {
                       slotProps={{
                         textField: {
                           error: !!errors.eventDate,
+                          size: "small",
                         },
                       }}
                       disablePast
@@ -217,6 +220,7 @@ function CateringRequestModel(props: IProps) {
                         slotProps={{
                           textField: {
                             error: !!errors.eventTime,
+                            size: "small",
                           },
                         }}
                       />
