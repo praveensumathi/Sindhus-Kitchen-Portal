@@ -21,7 +21,13 @@ export interface IProductCardList {
   description?: string;
   netWeight?: number;
   price: number | null;
-  servingSizeFirstPrice: number | null;
+  dailyMenuSizeWithPrice: DailyMenuSizeWithPrice[] | null;
+}
+
+export interface DailyMenuSizeWithPrice {
+  size: string;
+  price: number;
+  _id: string;
 }
 
 export interface IMenuList {
@@ -114,7 +120,13 @@ export interface IProductDinnigOut {
   description: string;
   netWeight: number;
   price: number | null;
-  servingSizeFirstPrice: number | null;
+  dailyMenuSizeWithPrice: DailyMenuSizeWithPrice[] | null;
+}
+
+export interface DailyMenuSizeWithPrice {
+  size: string;
+  price: number;
+  _id: string;
 }
 
 export interface ICommonResponse<T> {

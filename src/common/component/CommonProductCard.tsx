@@ -62,23 +62,25 @@ function CommonProductCard(props: IProps) {
           >
             {product.title}
           </Typography>
-          {props.menuType && props.menuType == MenuType.OTHERS ? (
-            <Typography
-              variant="body2"
-              fontSize={"1.2rem"}
-              color={theme.palette.primary.main}
-            >
-              ${product.servingSizeFirstPrice}
-            </Typography>
-          ) : (
-            <Typography
-              variant="body2"
-              fontSize={"1.2rem"}
-              color={theme.palette.primary.main}
-            >
-              ${product.price}
-            </Typography>
-          )}
+          <Typography
+            variant="body2"
+            fontSize={"1.2rem"}
+            color={theme.palette.primary.main}
+          >
+            {product.dailyMenuSizeWithPrice &&
+            product.dailyMenuSizeWithPrice.length > 0 ? (
+              product.dailyMenuSizeWithPrice.map((sizePrice) => (
+                <Typography key={sizePrice._id}>
+                  <span style={{ color: "black", opacity: 0.8 }}>
+                    {sizePrice.size}-
+                  </span>
+                  &nbsp;${sizePrice.price}
+                </Typography>
+              ))
+            ) : (
+              <>${product.price}</>
+            )}
+          </Typography>
         </CardContent>
       </Card>
     </Link>
