@@ -18,7 +18,10 @@ function CommonProductCard(props: IProps) {
   const theme = useTheme();
 
   return (
-    <Link to={`/detail/${product._id}`} style={{ textDecoration: "none" }}>
+    <Link
+      to={`/detail/${product._id}?sourcePage=diningOut`}
+      style={{ textDecoration: "none" }}
+    >
       <Card
         sx={{
           boxShadow: 4,

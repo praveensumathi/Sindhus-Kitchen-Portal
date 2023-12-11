@@ -61,7 +61,8 @@ export interface IProduct {
   images: string[];
   servingSizeDescription: string;
   posterURL: string;
-  servingSizesWithPrice: IPrice[];
+  cateringMenuSizeWithPrice: IPrice[];
+  dailyMenuSizeWithPrice: IPrice[];
   description: string;
   netWeight: number;
   createdAt: Date;
@@ -71,7 +72,7 @@ export interface IProduct {
 export interface IPrice {
   size: string;
   price: number;
-  quantity: number;
+  quantity?: number;
   _id: string;
 }
 
