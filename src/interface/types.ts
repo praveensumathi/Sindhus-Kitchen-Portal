@@ -166,11 +166,11 @@ export interface Product {
   title: string;
   description: string;
   servingSizeDescription: string;
-  servingSizesWithPrice: ServingSizesWithPrice[];
+  cateringMenuSizeWithPrice: CateringSizesWithPrice[];
   posterURL?: string;
 }
 
-export interface ServingSizesWithPrice {
+export interface CateringSizesWithPrice {
   size: string;
   price: number;
   quantity: number;
