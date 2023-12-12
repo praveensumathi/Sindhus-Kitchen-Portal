@@ -279,7 +279,8 @@ function HomePageSlicker() {
               }}
               renderOption={(props, option) => (
                 <Link
-                  to={`/detail/${option._id}?sourcePage=diningOut`}
+                  to={`/detail/${option._id}`}
+                  state={{ some: "/diningout" }}
                   style={{
                     textDecoration: "none",
                     color: "black",

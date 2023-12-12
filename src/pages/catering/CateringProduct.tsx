@@ -240,7 +240,8 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                     >
                       <Grid item xs={12} lg={3}>
                         <Link
-                          to={`/detail/${product._id}?sourcePage=catering`}
+                          to={`/detail/${product._id}`}
+                          state={{ some: "/catering" }}
                           style={{
                             textDecoration: "none",
                           }}

@@ -31,12 +31,10 @@ function ProductDetail() {
   const { updateSnackBarState } = useSnackBar();
   const [menuDetail, setMenuDetail] = useState<IProduct>();
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const sourcePage = queryParams.get("sourcePage");
+  const { state } = useLocation();
 
-  const isFromCatering = sourcePage === "catering";
-  const isFromDiningOut = sourcePage === "diningOut";
+  const isFromCatering = state && state.some === "/catering";
+  const isFromDiningOut = state && state.some === "/diningout";
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 

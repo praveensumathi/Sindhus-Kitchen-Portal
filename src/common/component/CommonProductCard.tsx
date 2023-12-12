@@ -19,7 +19,8 @@ function CommonProductCard(props: IProps) {
 
   return (
     <Link
-      to={`/detail/${product._id}?sourcePage=diningOut`}
+      to={`/detail/${product._id}`}
+      state={{ some: "/diningout" }}
       style={{ textDecoration: "none" }}
     >
       <Card
