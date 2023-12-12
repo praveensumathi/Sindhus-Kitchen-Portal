@@ -219,6 +219,7 @@ export interface PaginationInfo<T> {
 export interface ICateringRequest {
   name: string;
   mobileNumber: string;
+  email: string;
   eventDate: string;
   eventTime: string;
 }
