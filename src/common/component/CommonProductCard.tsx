@@ -20,7 +20,7 @@ function CommonProductCard(props: IProps) {
   return (
     <Link
       to={`/detail/${product._id}`}
-      state={{ some: "/diningout" }}
+      state={{ previousPath: "/diningout" }}
       style={{ textDecoration: "none" }}
     >
       <Card

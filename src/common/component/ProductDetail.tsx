@@ -33,8 +33,8 @@ function ProductDetail() {
 
   const { state } = useLocation();
 
-  const isFromCatering = state && state.some === "/catering";
-  const isFromDiningOut = state && state.some === "/diningout";
+  const isFromCatering = state && state.previousPath === "/catering";
+  const isFromDiningOut = state && state.previousPath === "/diningout";
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 
