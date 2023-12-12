@@ -15,6 +15,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
+import { useLocation } from "react-router-dom";
 
 function ProductDetail() {
   const settings = {
@@ -29,6 +30,11 @@ function ProductDetail() {
   const { productId } = useParams();
   const { updateSnackBarState } = useSnackBar();
   const [menuDetail, setMenuDetail] = useState<IProduct>();
+
+  const { state } = useLocation();
+
+  const isFromCatering = state && state.previousPath === "/catering";
+  const isFromDiningOut = state && state.previousPath === "/diningout";
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -157,8 +163,9 @@ function ProductDetail() {
                     </Typography>
                   )}
 
-                  {menuDetail.servingSizesWithPrice &&
-                    menuDetail.servingSizesWithPrice.length > 0 && (
+                  {isFromCatering &&
+                    menuDetail.cateringMenuSizeWithPrice &&
+                    menuDetail.cateringMenuSizeWithPrice.length > 0 && (
                       <>
                         <Typography
                           sx={{
@@ -167,21 +174,75 @@ function ProductDetail() {
                             margin: "8px 0",
                           }}
                         >
-                          Serving Sizes
+                          Catering Sizes
                         </Typography>
-                        {menuDetail.servingSizesWithPrice.map((size, index) => (
-                          <Typography
-                            sx={{ fontSize: "small", display: "flex" }}
-                            key={index}
-                          >
-                            {size.size} -
-                            <span style={{ fontWeight: "bolder" }}>
+                        {menuDetail.cateringMenuSizeWithPrice.map(
+                          (size, index) => (
+                            <Typography
+                              sx={{
+                                display: "flex",
+                                color: theme.palette.primary.main,
+                              }}
+                              key={index}
+                            >
+                              <span style={{ color: "black", opacity: 0.8 }}>
+                                {size.size}-
+                              </span>
                               &nbsp; [${size.price}]
-                            </span>
-                          </Typography>
-                        ))}
+                            </Typography>
+                          )
+                        )}
                       </>
                     )}
+
+                  {isFromDiningOut && (
+                    <>
+                      {menuDetail.dailyMenuSizeWithPrice &&
+                      menuDetail.dailyMenuSizeWithPrice.length > 0 ? (
+                        <>
+                          <Typography
+                            sx={{
+                              fontSize: "18px",
+                              fontWeight: "500",
+                              margin: "8px 0",
+                            }}
+                          >
+                            DailyMenu Sizes
+                          </Typography>
+                          {menuDetail.dailyMenuSizeWithPrice.map(
+                            (sizePrice) => (
+                              <Typography
+                                key={sizePrice._id}
+                                sx={{ color: theme.palette.primary.main }}
+                              >
+                                <span style={{ color: "black", opacity: 0.8 }}>
+                                  {sizePrice.size}-
+                                </span>
+                                &nbsp;${sizePrice.price}
+                              </Typography>
+                            )
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <Typography
+                            sx={{
+                              fontSize: "18px",
+                              fontWeight: "500",
+                              margin: "8px 0",
+                            }}
+                          >
+                            Price
+                          </Typography>
+                          <Typography
+                            sx={{ color: theme.palette.primary.main }}
+                          >
+                            &nbsp;${menuDetail.price}
+                          </Typography>
+                        </>
+                      )}
+                    </>
+                  )}
                 </>
               )}
             </>

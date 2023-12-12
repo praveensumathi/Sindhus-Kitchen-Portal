@@ -241,6 +241,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                       <Grid item xs={12} lg={3}>
                         <Link
                           to={`/detail/${product._id}`}
+                          state={{ previousPath: "/catering" }}
                           style={{
                             textDecoration: "none",
                           }}
@@ -289,8 +290,8 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                         )}
                       </Grid>
                       <Grid item xs={12} lg={4}>
-                        {product.servingSizesWithPrice &&
-                          product.servingSizesWithPrice.length > 0 && (
+                        {product.cateringMenuSizeWithPrice &&
+                          product.cateringMenuSizeWithPrice.length > 0 && (
                             <TableContainer>
                               <Table aria-label="simple table">
                                 <TableHead>
@@ -304,7 +305,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                                   </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                  {product.servingSizesWithPrice.map(
+                                  {product.cateringMenuSizeWithPrice.map(
                                     (trayItem) => (
                                       <TableRow
                                         key={trayItem.size}
