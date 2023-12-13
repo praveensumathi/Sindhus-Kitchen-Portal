@@ -7,6 +7,7 @@ import {
   getfetchProductsByMenuId,
   getAllSnacksProductsWithSubMenu,
   fetchProductByCateringMenu,
+  getAllDailyMenus,
 } from "../services/api";
 
 export const useGetAllMenus = () => {
@@ -70,5 +71,14 @@ export const useGetProductByCateringMenu = (
     queryFn: () =>
       fetchProductByCateringMenu(selectedMenuId, selectedProductId, page),
     refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetAllDailyMenus = () => {
+  return useQuery({
+    queryKey: ["dailyMenus"],
+    queryFn: getAllDailyMenus,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
