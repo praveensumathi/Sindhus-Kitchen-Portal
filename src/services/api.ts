@@ -118,7 +118,7 @@ const getProductsByMenuIdWithSearchTerm = async (
   searchTerm: string = ""
 ) => {
   try {
-    let homePageProduct = `/product/searchProduct`;
+    let homePageProduct = `/diningOut/searchDiningOutProduct`;
 
     if (selectedMenuId) {
       homePageProduct += `/${selectedMenuId}`;
@@ -190,12 +190,22 @@ const getCateringBag = async (selectedProductIds: string[]) => {
   }
 };
 
-
 const sendCateringRequest = async (userData, combinedProducts) => {
   try {
     const response = await httpWithoutCredentials.post(
       "cateringUser/createCateringUser",
       { userData, combinedProducts }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getAllDailyMenus = async () => {
+  try {
+    const response = await httpWithoutCredentials.get<IMenuList[]>(
+      "/diningOut/getDiningOutMenus"
     );
     return response.data;
   } catch (error) {
@@ -216,4 +226,5 @@ export {
   fetchProductByCateringMenu,
   getCateringBag,
   sendCateringRequest,
+  getAllDailyMenus,
 };

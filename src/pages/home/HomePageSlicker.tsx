@@ -17,7 +17,7 @@ import useTheme from "@mui/material/styles/useTheme";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { IMenuList, IProductDropDownData } from "../../interface/types";
 import { useEffect, useState } from "react";
-import { useGetAllMenus } from "../../customRQHooks/Hooks";
+import { useGetAllDailyMenus } from "../../customRQHooks/Hooks";
 import { homePageSlicker } from "../../seed-data/seed-data";
 import Fade from "react-reveal/Fade";
 import { getProductsByMenuIdWithSearchTerm } from "../../services/api";
@@ -42,7 +42,7 @@ function HomePageSlicker() {
   const [selectedMenuId, setSelectedMenuId] = useState("");
   const [products, setProducts] = useState<IProductDropDownData[]>([]);
 
-  const { data: menuData, isLoading, isError } = useGetAllMenus();
+  const { data: menuData, isLoading, isError } = useGetAllDailyMenus();
 
   useEffect(() => {
     if (!isLoading && !isError) {
