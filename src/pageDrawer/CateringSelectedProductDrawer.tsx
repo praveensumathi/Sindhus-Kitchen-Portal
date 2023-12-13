@@ -246,8 +246,9 @@ function CateringSelectedProductDrawer(props: IProps) {
                         <Box
                           sx={{
                             display: "flex",
-                            justifyContent: "space-between",
-                            my: 2,
+                            justifyContent: "space-around",
+                            my: 3,
+                            mr: 2,
                           }}
                         >
                           <NoteAddIcon

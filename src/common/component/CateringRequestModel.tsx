@@ -48,6 +48,7 @@ interface ICombinedProduct {
 const RequestFormInitialValue: ICateringRequest = {
   name: "",
   mobileNumber: "",
+  email: "",
   eventDate: "",
   eventTime: "",
 };
@@ -59,6 +60,10 @@ const schema = yup.object().shape({
     .required()
     .typeError("Please enter the MobileNumber")
     .matches(/^[0-9]{10}$/, "Please enter a valid MobileNumber"),
+  email: yup
+    .string()
+    .email("Invalid email address")
+    .required("Email is required"),
   eventDate: yup.string().required("Event date is required"),
   eventTime: yup.string().required("Event time is required"),
 });
@@ -181,6 +186,17 @@ function CateringRequestModel(props: IProps) {
               helperText={
                 errors.mobileNumber ? errors.mobileNumber.message : ""
               }
+            />
+
+            <TextField
+              sx={{ mb: 1.5 }}
+              size="small"
+              label="Email *"
+              fullWidth
+              variant="outlined"
+              {...register("email")}
+              error={!!errors.email}
+              helperText={errors.email ? errors.email.message : ""}
             />
             <FormControl sx={{ mb: 0.5 }} fullWidth>
               <LocalizationProvider dateAdapter={AdapterDayjs}>

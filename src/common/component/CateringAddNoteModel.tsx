@@ -51,7 +51,10 @@ function CateringAddNoteModel(props: IAddNoteProps) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Typography sx={{ fontWeight: 700 }} color="primary">
+            <Typography
+              sx={{ fontWeight: 700, fontSize: "1.2rem" }}
+              color="primary"
+            >
               Add Note
             </Typography>
             <CloseIcon color="primary" onClick={onClose}></CloseIcon>

@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import NoProductsAvailable from "../../common/component/NoProductsAvailable";
 import { useGetProductByCateringMenu } from "../../customRQHooks/Hooks";
+import { paths } from "../../routes/path";
 
 interface IProps {
   selectedMenuId: string;
@@ -241,6 +242,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                       <Grid item xs={12} lg={3}>
                         <Link
                           to={`/detail/${product._id}`}
+                          state={{ previousPath: paths.CATERING }}
                           style={{
                             textDecoration: "none",
                           }}
@@ -289,8 +291,8 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                         )}
                       </Grid>
                       <Grid item xs={12} lg={4}>
-                        {product.servingSizesWithPrice &&
-                          product.servingSizesWithPrice.length > 0 && (
+                        {product.cateringMenuSizeWithPrice &&
+                          product.cateringMenuSizeWithPrice.length > 0 && (
                             <TableContainer>
                               <Table aria-label="simple table">
                                 <TableHead>
@@ -304,7 +306,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                                   </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                  {product.servingSizesWithPrice.map(
+                                  {product.cateringMenuSizeWithPrice.map(
                                     (trayItem) => (
                                       <TableRow
                                         key={trayItem.size}
