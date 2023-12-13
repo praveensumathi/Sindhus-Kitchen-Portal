@@ -16,6 +16,7 @@ import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
 import { useLocation } from "react-router-dom";
+import { paths } from "../../routes/path";
 
 function ProductDetail() {
   const settings = {
@@ -33,8 +34,8 @@ function ProductDetail() {
 
   const { state } = useLocation();
 
-  const isFromCatering = state && state.previousPath === "/catering";
-  const isFromDiningOut = state && state.previousPath === "/diningout";
+  const isFromCatering = state && state.previousPath === paths.CATERING;
+  const isFromDiningOut = state && state.previousPath === paths.DININGOUT;
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 

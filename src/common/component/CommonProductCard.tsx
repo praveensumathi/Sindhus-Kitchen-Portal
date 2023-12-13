@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import { MenuType } from "../../enums/MenuTypesEnum";
+import { paths } from "../../routes/path";
 
 interface IProps {
   product: IProductCardList;
@@ -20,7 +20,7 @@ function CommonProductCard(props: IProps) {
   return (
     <Link
       to={`/detail/${product._id}`}
-      state={{ previousPath: "/diningout" }}
+      state={{ previousPath: paths.DININGOUT }}
       style={{ textDecoration: "none" }}
     >
       <Card
