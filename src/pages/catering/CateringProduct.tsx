@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 import NoProductsAvailable from "../../common/component/NoProductsAvailable";
 import { useGetProductByCateringMenu } from "../../customRQHooks/Hooks";
+import { paths } from "../../routes/path";
 
 interface IProps {
   selectedMenuId: string;
@@ -241,7 +242,7 @@ function CateringProduct({ selectedMenuId, selectedProductId }: IProps) {
                       <Grid item xs={12} lg={3}>
                         <Link
                           to={`/detail/${product._id}`}
-                          state={{ previousPath: "/catering" }}
+                          state={{ previousPath: paths.CATERING }}
                           style={{
                             textDecoration: "none",
                           }}

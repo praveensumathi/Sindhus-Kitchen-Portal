@@ -22,6 +22,7 @@ import { homePageSlicker } from "../../seed-data/seed-data";
 import Fade from "react-reveal/Fade";
 import { getProductsByMenuIdWithSearchTerm } from "../../services/api";
 import { Link } from "react-router-dom";
+import { paths } from "../../routes/path";
 
 function HomePageSlicker() {
   const settings = {
@@ -280,7 +281,7 @@ function HomePageSlicker() {
               renderOption={(props, option) => (
                 <Link
                   to={`/detail/${option._id}`}
-                  state={{ previousPath: "/diningout" }}
+                  state={{ previousPath: paths.DININGOUT }}
                   style={{
                     textDecoration: "none",
                     color: "black",
