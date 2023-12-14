@@ -75,7 +75,7 @@ function CommonProductCard(props: IProps) {
             product.dailyMenuSizeWithPrice.length > 0 ? (
               product.dailyMenuSizeWithPrice.map((sizePrice) => (
                 <Typography key={sizePrice._id}>
-                  <span style={{ color: "black", opacity: 0.8 }}>
+                  <span style={{ color: "black", opacity: 0.7,fontWeight:800 }}>
                     {sizePrice.size}-
                   </span>
                   &nbsp;${sizePrice.price}
