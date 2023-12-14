@@ -69,7 +69,7 @@ function CateringAddNoteModel(props: IAddNoteProps) {
               </Typography>
             </>
           )}
-          <Typography variant="subtitle1">Note:</Typography>
+          <Typography variant="subtitle1">Write note</Typography>
           <TextField
             fullWidth
             multiline
