@@ -128,7 +128,7 @@ function NavBar() {
                 <Typography
                   sx={{
                     fontWeight: 600,
-                    color: "red",
+                    color: theme.palette.primary.main,
                     fontSize: isBelowSMScreen ? "1.5rem" : "2rem",
                     fontFamily: "Sindhus-Logo-Font",
                   }}
@@ -137,12 +137,11 @@ function NavBar() {
                 </Typography>
                 {isBelowSMScreen && (
                   <Box sx={{ display: "flex", justifyContent: "center" }}>
-                    <CallIcon sx={{ color: theme.palette.primary.main }} />
+                    <CallIcon />
                     <Typography
                       sx={{
                         fontSize: "16px",
                         fontWeight: 500,
-                        color: theme.palette.primary.main,
                       }}
                     >
                       &nbsp; Call us:+1 940-279-2536
@@ -158,12 +157,11 @@ function NavBar() {
                     marginLeft: "20px",
                   }}
                 >
-                  <CallIcon sx={{ color: theme.palette.primary.main }} />
+                  <CallIcon />
                   <Typography
                     sx={{
                       fontSize: "16px",
                       fontWeight: 500,
-                      color: theme.palette.primary.main,
                     }}
                   >
                     &nbsp; Call us : +1 940-279-2536

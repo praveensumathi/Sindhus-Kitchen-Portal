@@ -57,14 +57,22 @@ function SnacksMenuItem({
     <Container>
       {snacksSubMenus && snacksSubMenus.length > 0 && (
         <Slider {...settings}>
-          <Box>
+          <Box sx={{ height: "50px" }}>
             <Button
               onClick={() => onSubMenuClick("")}
               sx={{
-                border: "1px dashed",
+                border: "none",
                 borderRadius: "15px",
                 width: "140px",
                 p: 1,
+                color: selectedSubMenuId ? "black" : "white",
+
+                "&:hover": {
+                  backgroundColor: theme.palette.primary.main,
+                  color: "white",
+                  border: "none",
+                },
+                boxShadow: 2,
               }}
               variant={!selectedSubMenuId ? "contained" : "outlined"}
             >
@@ -78,10 +86,18 @@ function SnacksMenuItem({
                 <Button
                   onClick={() => onSubMenuClick(subMenu._id)}
                   sx={{
-                    border: "1px dashed",
+                    border: "none",
                     borderRadius: "15px",
                     width: "140px",
                     p: 1,
+                    color:
+                      selectedSubMenuId === subMenu._id ? "white" : "black",
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                      color: "white",
+                      border: "none",
+                    },
+                    boxShadow: 2,
                   }}
                   variant={
                     selectedSubMenuId == subMenu._id ? "contained" : "outlined"

@@ -39,8 +39,9 @@ function WhyChooseUs(props: Iprops) {
             sx={{ opacity: 0.7 }}
             mt={2}
           >
-            We make our food as if we are cooking for our family because that is
-            exactly what we are doing !
+            We prepare our food with the same care and attention as we would for
+            our own family, valuing every ingredient that contributes to the
+            excellence of our dishes. Below are some of our highlights.
           </Typography>
         </Fade>
       </Box>

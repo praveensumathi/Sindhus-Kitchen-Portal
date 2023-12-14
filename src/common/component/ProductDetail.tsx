@@ -110,22 +110,7 @@ function ProductDetail() {
                   <Typography sx={{ fontWeight: "bolder", fontSize: "28px" }}>
                     {menuDetail.title}
                   </Typography>
-                  {!!menuDetail.price && (
-                    <Typography
-                      sx={{
-                        fontWeight: "500",
-                        fontSize: "25px",
-                        margin: "5px 0",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      $ {menuDetail.price}
-                      <span style={{ fontSize: "12px" }}>
-                        (Per Piece / Plate)
-                      </span>
-                    </Typography>
-                  )}
+
                   <Typography sx={{ mt: 2 }}>
                     By &nbsp;
                     <span style={{ textDecoration: "underline" }}>
