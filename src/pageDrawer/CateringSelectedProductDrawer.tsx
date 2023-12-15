@@ -280,19 +280,21 @@ function CateringSelectedProductDrawer(props: IProps) {
               ))}
           </Container>
         </>
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            position: "absolute",
-            bottom: 20,
-          }}
-        >
-          <Button variant="contained" onClick={handleSendNowClick}>
-            Send Now
-          </Button>
-        </Box>
+        {productInfo.length > 0 && (
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              position: "absolute",
+              bottom: 20,
+            }}
+          >
+            <Button variant="contained" onClick={handleSendNowClick}>
+              Send Now
+            </Button>
+          </Box>
+        )}
       </Drawer>
 
       <CateringRequestModel

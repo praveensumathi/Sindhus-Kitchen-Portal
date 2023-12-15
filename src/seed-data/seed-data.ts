@@ -29,11 +29,11 @@ export const ourServicesData: IOurServices[] = [
 ];
 
 export const homePageSlicker = {
-  image: "assets/sindhuskitchen_slick_1.webp",
+  image: "assets/Sindhus-BannerImage.webp",
   heading: "Sindhu's Kitchen",
   subHeading: "CATERING TO YOUR NEEDS",
   content:
-    "Authentic South Inidan Food and Snacks prepered to give you the Best in Town",
+    "Authentic South Indian Food and Snacks prepared to give you the very best in town",
 };
 
 export const WhyChooseUsData: IWhyChooseUs[] = [

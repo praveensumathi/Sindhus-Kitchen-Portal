@@ -18,7 +18,14 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import DirectionsIcon from "@mui/icons-material/Directions";
-import { IconButton } from "@mui/material";
+import {
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from "@mui/material";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import { Instagram } from "@mui/icons-material";
 
@@ -34,6 +41,23 @@ function Footer() {
     "&:hover": {
       transform: "scale(1.1) translateY(-2px)",
     },
+  };
+
+  const openingHours = [
+    { day: "Monday", timing: "11AM - 9PM" },
+    { day: "Tuesday", timing: "Closed" },
+    { day: "Wednesday", timing: "11AM - 9PM" },
+    { day: "Thursday", timing: "11AM - 10PM" },
+    { day: "Friday", timing: "11AM - 10PM" },
+    { day: "Saturday", timing: "11AM - 10PM" },
+    { day: "Sunday", timing: "11AM - 9PM" },
+  ];
+
+  const ourTimingStyles = {
+    borderBottom: "none",
+    p: 1,
+    color: "white",
+    fontSize: "15px",
   };
 
   return (
@@ -202,21 +226,23 @@ function Footer() {
                   <Typography variant="h5" my={1}>
                     Our Timing
                   </Typography>
-                  <Typography
-                    sx={{
-                      lineHeight: "2",
-                      textAlign: "left",
-                      marginTop: "20px",
-                    }}
-                  >
-                    Monday &nbsp;11AM -&nbsp;9PM
-                    <br /> Tuesday &nbsp;Closed
-                    <br /> Wednesday &nbsp;11AM -&nbsp;9PM
-                    <br /> Thursday &nbsp;11AM -&nbsp;10PM
-                    <br /> Friday &nbsp;11AM -&nbsp;10PM
-                    <br /> Saturday &nbsp;11AM -&nbsp;10PM
-                    <br /> Sunday &nbsp;11AM -&nbsp;9PM
-                  </Typography>
+
+                  <TableContainer>
+                    <Table>
+                      <TableBody>
+                        {openingHours.map((item) => (
+                          <TableRow key={item.day}>
+                            <TableCell sx={ourTimingStyles}>
+                              {item.day}
+                            </TableCell>
+                            <TableCell sx={ourTimingStyles}>
+                              {item.timing}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Fade>
               </Box>
             </Grid>

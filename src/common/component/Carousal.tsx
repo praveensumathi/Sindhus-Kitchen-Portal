@@ -77,6 +77,7 @@ function Carousel(props: IProps) {
             justifyContent={"space-between"}
             alignItems={"center"}
             pb={1}
+            mt={1}
           >
             <Typography
               sx={{
