@@ -224,3 +224,10 @@ export interface ICateringRequest {
   eventDate: string;
   eventTime: string;
 }
+
+export interface ICateringSpecials {
+  id: number;
+  iconkey: string;
+  title: string;
+  description: string;
+}

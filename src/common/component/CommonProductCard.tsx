@@ -7,6 +7,7 @@ import useTheme from "@mui/material/styles/useTheme";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { paths } from "../../routes/path";
+import { useState } from "react";
 
 interface IProps {
   product: IProductCardList;
@@ -15,28 +16,36 @@ interface IProps {
 
 function CommonProductCard(props: IProps) {
   const { product } = props;
+
+  const [selectedSize, setSelectedSize] = useState(
+    product.dailyMenuSizeWithPrice?.[0]?.size || ""
+  );
   const theme = useTheme();
 
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
+  };
+
   return (
-    <Link
-      to={`/detail/${product._id}`}
-      state={{ previousPath: paths.DININGOUT }}
-      style={{ textDecoration: "none" }}
+    <Card
+      sx={{
+        boxShadow: 4,
+        mr: 2,
+        width: "250px",
+        height: "300px",
+      }}
     >
-      <Card
+      <Box
         sx={{
-          boxShadow: 4,
-          mr: 2,
-          width: "250px",
-          height: "280px",
+          height: "180px",
+          width: "100%",
+          overflow: "hidden",
         }}
       >
-        <Box
-          sx={{
-            height: "180px",
-            width: "100%",
-            overflow: "hidden",
-          }}
+        <Link
+          to={`/detail/${product._id}`}
+          state={{ previousPath: paths.DININGOUT }}
+          style={{ textDecoration: "none" }}
         >
           <CardMedia
             component="img"
@@ -51,43 +60,82 @@ function CommonProductCard(props: IProps) {
             }}
             loading="lazy"
           />
+        </Link>
+      </Box>
+      <CardContent>
+        <Typography
+          variant="body1"
+          sx={{
+            fontWeight: 600,
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            WebkitLineClamp: 2,
+          }}
+          component="div"
+        >
+          {product.title}
+        </Typography>
+
+        <Box>
+          {product.dailyMenuSizeWithPrice &&
+          product.dailyMenuSizeWithPrice.length > 0 ? (
+            <>
+              <Box
+                sx={{
+                  marginBottom: "5px",
+                  display: "flex",
+                }}
+              >
+                {product.dailyMenuSizeWithPrice.map((sizePrice) => (
+                  <Typography
+                    key={sizePrice.size}
+                    onClick={() => handleSizeClick(sizePrice.size)}
+                    sx={{
+                      color:
+                        selectedSize === sizePrice.size
+                          ? theme.palette.primary.main
+                          : "gray",
+
+                      border: `1px solid ${
+                        selectedSize === sizePrice.size
+                          ? theme.palette.primary.main
+                          : ""
+                        }`,
+                      opacity:"0.8",
+                      padding: "3px",
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      fontSize: "0.6rem",
+                      fontWeight: selectedSize === sizePrice.size ? 800 : 400,
+                    }}
+                  >
+                    {sizePrice.size}
+                  </Typography>
+                ))}
+              </Box>
+              <Typography
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontWeight: 500,
+                }}
+              >
+                $
+                {product.dailyMenuSizeWithPrice.find(
+                  (sizePrice) => sizePrice.size === selectedSize
+                )?.price || product.price}
+              </Typography>
+            </>
+          ) : (
+            <Typography
+              sx={{ color: theme.palette.primary.main, fontWeight: 500 }}
+            >
+              ${product.price}
+            </Typography>
+          )}
         </Box>
-        <CardContent>
-          <Typography
-            variant="body1"
-            sx={{
-              fontWeight: 600,
-              display: "-webkit-box",
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-              WebkitLineClamp: 2,
-            }}
-            component="div"
-          >
-            {product.title}
-          </Typography>
-          <Typography
-            variant="body2"
-            fontSize={"1.2rem"}
-            color={theme.palette.primary.main}
-          >
-            {product.dailyMenuSizeWithPrice &&
-            product.dailyMenuSizeWithPrice.length > 0 ? (
-              product.dailyMenuSizeWithPrice.map((sizePrice) => (
-                <Typography key={sizePrice._id}>
-                  <span style={{ color: "black", opacity: 0.7,fontWeight:800 }}>
-                    {sizePrice.size}-
-                  </span>
-                  &nbsp;${sizePrice.price}
-                </Typography>
-              ))
-            ) : (
-              <>${product.price}</>
-            )}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Link>
+      </CardContent>
+    </Card>
   );
 }
 
