@@ -7,7 +7,7 @@ import useTheme from "@mui/material/styles/useTheme";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { paths } from "../../routes/path";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface IProps {
   product: IProductCardList;
@@ -22,9 +22,15 @@ function CommonProductCard(props: IProps) {
   );
   const theme = useTheme();
 
+   React.useEffect(() => {
+     window.scrollTo(0, 0);
+   });
+
   const handleSizeClick = (size) => {
     setSelectedSize(size);
   };
+
+   
 
   useEffect(() => {
     setSelectedSize(product.dailyMenuSizeWithPrice?.[0]?.size || "");
