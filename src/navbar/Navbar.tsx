@@ -22,7 +22,7 @@ import CallIcon from "@mui/icons-material/Call";
 const navMenus = [
   { name: "Home", linkurl: paths.HOME },
   { name: "Specials", linkurl: paths.SPECIALS },
-  { name: "Daily Menu", linkurl: paths.DININGOUT },
+  { name: "Daily Menu", linkurl: paths.DAILYMENU },
   { name: "Snacks", linkurl: paths.SNACKS },
   { name: "Catering", linkurl: paths.CATERING },
 ];
@@ -120,6 +120,7 @@ function NavBar() {
                   marginRight: "10px",
                   paddingTop: "10px",
                   paddingBottom: "5px",
+                  cursor: "pointer",
                 }}
                 loading="lazy"
                 onClick={handleNavigateToHome}
@@ -131,7 +132,9 @@ function NavBar() {
                     color: theme.palette.primary.main,
                     fontSize: isBelowSMScreen ? "1.5rem" : "2rem",
                     fontFamily: "Sindhus-Logo-Font",
+                    cursor: "pointer",
                   }}
+                  onClick={handleNavigateToHome}
                 >
                   SINDHU&#8217;S
                 </Typography>

@@ -49,7 +49,7 @@ function App() {
                     element={<CateringComponent />}
                   />
                   <Route
-                    path={paths.DININGOUT}
+                    path={paths.DAILYMENU}
                     element={<DiningOutComponent />}
                   />
                   <Route
