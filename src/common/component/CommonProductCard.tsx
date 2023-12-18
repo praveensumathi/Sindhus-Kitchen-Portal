@@ -22,15 +22,13 @@ function CommonProductCard(props: IProps) {
   );
   const theme = useTheme();
 
-   React.useEffect(() => {
-     window.scrollTo(0, 0);
-   });
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   const handleSizeClick = (size) => {
     setSelectedSize(size);
   };
-
-   
 
   useEffect(() => {
     setSelectedSize(product.dailyMenuSizeWithPrice?.[0]?.size || "");
