@@ -1,5 +1,11 @@
+import { CateringSpecialEnum } from "../enums/CateringSpecialEnum";
 import { OurServicesIconEnums } from "../enums/OurServicesIconEnum";
-import { IOurServices, ISpecials, IWhyChooseUs } from "../interface/types";
+import {
+  ICateringSpecials,
+  IOurServices,
+  ISpecials,
+  IWhyChooseUs,
+} from "../interface/types";
 
 export const ourServicesData: IOurServices[] = [
   {
@@ -99,5 +105,34 @@ export const SpeicalsData: ISpecials[] = [
   {
     id: 3,
     image: "/assets/images/diwaliposter1.png",
+  },
+];
+
+export const cateringSpecialData: ICateringSpecials[] = [
+  {
+    id: 1,
+    title: "Purified Water",
+    description:
+      "Remove impurities,Clean, filtered and contaminant-free water.",
+    iconkey: CateringSpecialEnum.WATERDROPICON,
+  },
+  {
+    id: 2,
+    title: "One time Oil use",
+    description:
+      "Ensuring premium quality and high-quality ingredients for each dish",
+    iconkey: CateringSpecialEnum.OILBARRELICON,
+  },
+  {
+    id: 3,
+    title: "Source Ingredients",
+    description: "Specially source ingredients, 100% made from scratch",
+    iconkey: CateringSpecialEnum.RESTAURANTMENUICON,
+  },
+  {
+    id: 4,
+    title: "Cooking Methods",
+    description: "No colors, no preservatives, No MCG, 100% same day cooking",
+    iconkey: CateringSpecialEnum.OUTDOORGRILLICON,
   },
 ];
