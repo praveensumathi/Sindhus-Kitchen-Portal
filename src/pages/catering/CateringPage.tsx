@@ -9,6 +9,7 @@ import Rotate from "react-reveal/Rotate";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
+import CateringSpecial from "./CateringSpecial";
 
 function CateringPage() {
   const theme = useTheme();
@@ -110,7 +111,10 @@ function CateringPage() {
           </Grid>
         </Box>
       </Box>
-      <Container>
+
+      <CateringSpecial></CateringSpecial>
+
+      <Container sx={{ mt: 2 }}>
         <SearchBar
           onSelectMenu={(menuId: string) => {
             setSelectedMenuId(menuId);
