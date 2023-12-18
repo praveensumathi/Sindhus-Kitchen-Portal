@@ -35,7 +35,7 @@ function ProductDetail() {
   const { state } = useLocation();
 
   const isFromCatering = state && state.previousPath === paths.CATERING;
-  const isFromDiningOut = state && state.previousPath === paths.DININGOUT;
+  const isFromDiningOut = state && state.previousPath === paths.DAILYMENU;
 
   const isBelowMediumSize = useMediaQuery(theme.breakpoints.down("md"));
 
