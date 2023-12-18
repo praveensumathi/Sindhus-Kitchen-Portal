@@ -4,7 +4,7 @@ export enum paths {
   SPECIALS = "/specials",
   SNACKS = "/snacks",
   CATERING = "/catering",
-  DININGOUT = "/diningout",
+  DAILYMENU = "/dailyMenu",
   PRODUCTDETAIL = "/detail/:productId",
   PRODUCTSBYCATEGORY = "/productsByCategory/:menuId",
 }
